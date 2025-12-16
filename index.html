@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Professional portfolio website showcasing web development projects and skills">
-  <meta name="keywords" content="portfolio, web developer, projects, software developer">
+  <meta name="description" content="Aspiring Web Developer Portfolio - Learning and Growing">
+  <meta name="keywords" content="portfolio, web developer, student, ITC, coding">
   <meta name="author" content="Your Name">
-  <title>Professional Portfolio | Web Developer</title>
+  <title>My Portfolio | Aspiring Web Developer</title>
   <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
   <style>
     /* General Reset */
@@ -24,8 +24,8 @@
 
     /* Body */
     body {
-      background-color: #0a0a0a;
-      color: #00FF00;
+      background-color: #0f172a;
+      color: #e2e8f0;
       font-size: 16px;
       line-height: 1.6;
       overflow-x: hidden;
@@ -36,21 +36,21 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background-color: rgba(34, 34, 34, 0.95);
+      background-color: rgba(30, 41, 59, 0.95);
       padding: 20px 40px;
       position: fixed;
       top: 0;
       width: 100%;
       z-index: 1000;
       backdrop-filter: blur(10px);
-      box-shadow: 0 2px 10px rgba(0, 255, 0, 0.1);
+      box-shadow: 0 2px 10px rgba(59, 130, 246, 0.1);
     }
 
     .navbar .logo {
-      color: #00FF00;
+      color: #3b82f6;
       font-size: 28px;
       font-weight: bold;
-      text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+      text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
       cursor: pointer;
       transition: transform 0.3s;
     }
@@ -69,7 +69,7 @@
     }
 
     .navbar nav ul li a {
-      color: #00FF00;
+      color: #94a3b8;
       text-decoration: none;
       font-size: 16px;
       text-transform: uppercase;
@@ -80,9 +80,9 @@
     }
 
     .navbar nav ul li a:hover {
-      background-color: rgba(0, 255, 0, 0.1);
-      color: #00ff00;
-      box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+      background-color: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
     }
 
     /* Mobile Menu Toggle */
@@ -95,15 +95,15 @@
     .menu-toggle span {
       width: 25px;
       height: 3px;
-      background-color: #00FF00;
+      background-color: #3b82f6;
       margin: 4px 0;
       transition: 0.3s;
     }
 
     /* Hero Section */
     .hero {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-      color: #00FF00;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #e2e8f0;
       text-align: center;
       padding: 180px 20px 120px;
       position: relative;
@@ -119,14 +119,14 @@
       right: 0;
       bottom: 0;
       background: 
-        linear-gradient(90deg, transparent 0%, rgba(0, 255, 0, 0.03) 50%, transparent 100%),
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 0, 0.03) 2px, rgba(0, 255, 0, 0.03) 4px);
-      animation: scan 8s linear infinite;
+        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+      animation: pulse 8s ease-in-out infinite;
     }
 
-    @keyframes scan {
-      0% { transform: translateY(-100%); }
-      100% { transform: translateY(100%); }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
     }
 
     .hero .hero-content {
@@ -138,62 +138,71 @@
       font-size: 64px;
       margin-bottom: 20px;
       font-weight: 700;
-      letter-spacing: 3px;
-      text-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px rgba(0, 255, 0, 0.5); }
-      to { text-shadow: 0 0 20px rgba(0, 255, 0, 0.8), 0 0 30px rgba(0, 255, 0, 0.5); }
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero .hero-content p {
       font-size: 22px;
       margin-bottom: 30px;
       letter-spacing: 1px;
-      color: #00dd00;
+      color: #94a3b8;
     }
 
     .hero .btn {
       padding: 15px 40px;
-      background: linear-gradient(135deg, #00FF00 0%, #00cc00 100%);
-      color: #000;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: #ffffff;
       text-decoration: none;
       font-size: 18px;
       font-weight: bold;
       border-radius: 50px;
-      box-shadow: 0 5px 25px rgba(0, 255, 0, 0.3);
+      box-shadow: 0 5px 25px rgba(59, 130, 246, 0.3);
       transition: all 0.3s;
       display: inline-block;
     }
 
     .hero .btn:hover {
-      background: linear-gradient(135deg, #00cc00 0%, #00aa00 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
       transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0, 255, 0, 0.5);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
     }
 
     /* About Section */
     .about {
       padding: 100px 20px;
-      background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
       text-align: center;
     }
 
     .about h2 {
       font-size: 48px;
       margin-bottom: 20px;
-      color: #00FF00;
-      text-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+      color: #3b82f6;
+      text-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
     }
 
     .about p {
       font-size: 20px;
-      color: #00cc00;
+      color: #cbd5e1;
       max-width: 900px;
       margin: 0 auto 40px;
       line-height: 1.8;
+    }
+
+    .learning-badge {
+      display: inline-block;
+      padding: 12px 30px;
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: white;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 20px 0;
+      box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3);
     }
 
     .skills {
@@ -206,25 +215,25 @@
 
     .skill-tag {
       padding: 10px 25px;
-      background-color: rgba(0, 255, 0, 0.1);
-      color: #00FF00;
-      border: 2px solid #00FF00;
+      background-color: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+      border: 2px solid #3b82f6;
       border-radius: 25px;
       font-size: 16px;
       transition: all 0.3s;
     }
 
     .skill-tag:hover {
-      background-color: #00FF00;
-      color: #000;
+      background-color: #3b82f6;
+      color: #ffffff;
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
     }
 
     /* Portfolio Section */
     .portfolio {
       padding: 100px 20px;
-      background-color: #0a0a0a;
+      background-color: #0f172a;
     }
 
     .portfolio .section-title {
@@ -234,14 +243,14 @@
 
     .portfolio .section-title h2 {
       font-size: 48px;
-      color: #00FF00;
-      text-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+      color: #3b82f6;
+      text-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
       margin-bottom: 15px;
     }
 
     .portfolio .section-title p {
       font-size: 20px;
-      color: #00cc00;
+      color: #94a3b8;
     }
 
     .portfolio-grid {
@@ -255,16 +264,16 @@
     .portfolio-item {
       border-radius: 15px;
       overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0, 255, 0, 0.1);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.1);
       transition: all 0.3s;
-      background-color: #1a1a1a;
+      background-color: #1e293b;
       border: 2px solid transparent;
     }
 
     .portfolio-item:hover {
       transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0, 255, 0, 0.3);
-      border-color: #00FF00;
+      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
+      border-color: #3b82f6;
     }
 
     .portfolio-item img {
@@ -280,33 +289,51 @@
 
     .portfolio-info {
       padding: 25px;
-      background-color: #1a1a1a;
+      background-color: #1e293b;
     }
 
     .portfolio-info h3 {
       font-size: 24px;
       margin-bottom: 12px;
-      color: #00FF00;
+      color: #3b82f6;
     }
 
     .portfolio-info p {
-      color: #00cc00;
+      color: #94a3b8;
       font-size: 16px;
       line-height: 1.6;
+    }
+
+    .project-badge {
+      display: inline-block;
+      padding: 5px 15px;
+      background-color: rgba(139, 92, 246, 0.2);
+      color: #a78bfa;
+      border-radius: 15px;
+      font-size: 14px;
+      margin-top: 10px;
     }
 
     /* Contact Section */
     .contact {
       padding: 100px 20px;
-      background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+      background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
     }
 
     .contact h2 {
       font-size: 48px;
       text-align: center;
       margin-bottom: 20px;
-      color: #00FF00;
-      text-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+      color: #3b82f6;
+      text-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .contact-intro {
+      text-align: center;
+      color: #94a3b8;
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto 40px;
     }
 
     .contact form {
@@ -319,8 +346,9 @@
 
     .contact label {
       font-size: 18px;
-      color: #00FF00;
+      color: #cbd5e1;
       margin-bottom: -12px;
+      font-weight: 500;
     }
 
     .contact input,
@@ -328,18 +356,24 @@
       width: 100%;
       padding: 15px;
       border-radius: 8px;
-      border: 2px solid #00FF00;
+      border: 2px solid #334155;
       font-size: 16px;
-      background-color: rgba(0, 255, 0, 0.05);
-      color: #00FF00;
+      background-color: rgba(30, 41, 59, 0.5);
+      color: #e2e8f0;
       transition: all 0.3s;
     }
 
     .contact input:focus,
     .contact textarea:focus {
       outline: none;
-      background-color: rgba(0, 255, 0, 0.1);
-      box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+      border-color: #3b82f6;
+      background-color: rgba(30, 41, 59, 0.8);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .contact input::placeholder,
+    .contact textarea::placeholder {
+      color: #64748b;
     }
 
     .contact textarea {
@@ -349,31 +383,35 @@
 
     .contact button {
       padding: 15px 40px;
-      background: linear-gradient(135deg, #00FF00 0%, #00cc00 100%);
-      color: #000;
+      background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+      color: #ffffff;
       font-size: 18px;
       font-weight: bold;
       border-radius: 50px;
       border: none;
       cursor: pointer;
       transition: all 0.3s;
-      box-shadow: 0 5px 25px rgba(0, 255, 0, 0.3);
+      box-shadow: 0 5px 25px rgba(59, 130, 246, 0.3);
     }
 
     .contact button:hover {
-      background: linear-gradient(135deg, #00cc00 0%, #00aa00 100%);
+      background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
       transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(0, 255, 0, 0.5);
+      box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5);
+    }
+
+    .contact button:active {
+      transform: translateY(-1px);
     }
 
     /* Footer */
     footer {
       text-align: center;
       padding: 40px 20px;
-      background-color: #0a0a0a;
-      color: #00cc00;
+      background-color: #0f172a;
+      color: #64748b;
       font-size: 16px;
-      border-top: 1px solid rgba(0, 255, 0, 0.2);
+      border-top: 1px solid rgba(59, 130, 246, 0.2);
     }
 
     footer p {
@@ -388,24 +426,25 @@
     }
 
     .social-links a {
-      color: #00FF00;
+      color: #3b82f6;
       font-size: 24px;
       transition: all 0.3s;
       padding: 10px;
       border-radius: 50%;
-      border: 2px solid #00FF00;
+      border: 2px solid #3b82f6;
       width: 50px;
       height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
+      text-decoration: none;
     }
 
     .social-links a:hover {
-      background-color: #00FF00;
-      color: #000;
+      background-color: #3b82f6;
+      color: #ffffff;
       transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+      box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
     }
 
     /* Responsive Design */
@@ -470,7 +509,7 @@
 <body>
   <header>
     <div class="navbar">
-      <div class="logo">💻 MyPortfolio</div>
+      <div class="logo">💻 My Portfolio</div>
       <div class="menu-toggle">
         <span></span>
         <span></span>
@@ -480,7 +519,7 @@
         <ul>
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#portfolio">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -490,73 +529,83 @@
   <section id="home" class="hero">
     <div class="hero-content">
       <h1>Welcome to My Portfolio</h1>
-      <p>Full-Stack Developer | Problem Solver | Tech Enthusiast</p>
-      <a href="#portfolio" class="btn">View My Work</a>
+      <p>Aspiring Developer | ITC Student | Learning & Building</p>
+      <a href="#portfolio" class="btn">View My Projects</a>
     </div>
   </section>
 
   <section id="about" class="about">
     <h2>About Me</h2>
-    <p>I'm a passionate software developer with expertise in creating modern, responsive, and user-friendly applications. With a strong foundation in both frontend and backend technologies, I bring ideas to life through clean code and innovative solutions.</p>
+    <div class="learning-badge">🎓 Currently Learning</div>
+    
+    <p>Hi! I'm an ITC student passionate about web development and coding. I'm currently learning HTML, CSS, JavaScript, and exploring various programming languages. This portfolio showcases my journey as I develop my skills through hands-on projects and continuous learning.</p>
+    
+    <p>I believe in learning by doing, and each project here represents a step forward in my development journey. I'm excited to grow as a developer and take on new challenges!</p>
     
     <div class="skills">
       <span class="skill-tag">HTML5</span>
       <span class="skill-tag">CSS3</span>
-      <span class="skill-tag">JavaScript</span>
-      <span class="skill-tag">React</span>
-      <span class="skill-tag">Node.js</span>
-      <span class="skill-tag">Python</span>
+      <span class="skill-tag">JavaScript (Learning)</span>
+      <span class="skill-tag">Visual Basic .NET</span>
       <span class="skill-tag">SQL</span>
-      <span class="skill-tag">Git</span>
+      <span class="skill-tag">Git & GitHub</span>
+      <span class="skill-tag">Problem Solving</span>
+      <span class="skill-tag">Responsive Design</span>
     </div>
   </section>
 
   <section id="portfolio" class="portfolio">
     <div class="section-title">
       <h2>My Projects</h2>
-      <p>Check out some of my recent work</p>
+      <p>Real applications I've built while learning</p>
     </div>
     <div class="portfolio-grid">
       <div class="portfolio-item">
-        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop" alt="E-Commerce Platform">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="MobileFix Manager">
         <div class="portfolio-info">
-          <h3>E-Commerce Platform</h3>
-          <p>A full-featured online shopping platform with payment integration, user authentication, and real-time inventory management.</p>
+          <h3>MobileFix Manager</h3>
+          <p>A complete cellphone repair shop management system built with Visual Basic .NET and SQL Server. Features include receipt management, customer database, and inventory tracking.</p>
+          <span class="project-badge">VB.NET + SQL</span>
+          <span class="project-badge">Desktop App</span>
         </div>
       </div>
+      
       <div class="portfolio-item">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Data Analytics Dashboard">
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop" alt="Portfolio Website">
         <div class="portfolio-info">
-          <h3>Analytics Dashboard</h3>
-          <p>Interactive data visualization dashboard with real-time updates, charts, and comprehensive reporting features.</p>
+          <h3>Portfolio Website</h3>
+          <p>This responsive portfolio website built from scratch using HTML and CSS. Deployed using GitHub Pages to showcase my projects and skills.</p>
+          <span class="project-badge">HTML + CSS</span>
+          <span class="project-badge">Responsive</span>
         </div>
       </div>
+      
       <div class="portfolio-item">
-        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop" alt="Mobile Application">
+        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=600&fit=crop" alt="Learning Projects">
         <div class="portfolio-info">
-          <h3>Mobile Task Manager</h3>
-          <p>Cross-platform mobile app for task management with cloud sync, notifications, and collaborative features.</p>
+          <h3>Practice Projects</h3>
+          <p>Collection of smaller projects and coding exercises completed during my ITC studies. Includes form validation, calculators, and interactive web components.</p>
+          <span class="project-badge">JavaScript</span>
+          <span class="project-badge">Learning</span>
         </div>
       </div>
+      
       <div class="portfolio-item">
-        <img src="https://images.unsplash.com/photo-1522542550221-31fd19575a2d?w=800&h=600&fit=crop" alt="Social Media Platform">
+        <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop" alt="Database Projects">
         <div class="portfolio-info">
-          <h3>Social Network</h3>
-          <p>Modern social platform with real-time messaging, media sharing, and advanced privacy controls.</p>
+          <h3>Database Management</h3>
+          <p>SQL database projects including CellphoneShopDB with proper table relationships, stored procedures, and data management features.</p>
+          <span class="project-badge">SQL Server</span>
+          <span class="project-badge">Database Design</span>
         </div>
       </div>
+      
       <div class="portfolio-item">
-        <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&h=600&fit=crop" alt="AI Chatbot">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=600&fit=crop" alt="Future Projects">
         <div class="portfolio-info">
-          <h3>AI-Powered Chatbot</h3>
-          <p>Intelligent customer service bot using natural language processing and machine learning algorithms.</p>
-        </div>
-      </div>
-      <div class="portfolio-item">
-        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop" alt="CMS System">
-        <div class="portfolio-info">
-          <h3>Content Management System</h3>
-          <p>Flexible CMS with drag-and-drop editor, SEO optimization, and multi-language support.</p>
+          <h3>More Coming Soon!</h3>
+          <p>Currently working on new projects as I continue learning web development. Follow my journey as I build more applications and expand my skillset!</p>
+          <span class="project-badge">In Progress</span>
         </div>
       </div>
     </div>
@@ -564,26 +613,32 @@
 
   <section id="contact" class="contact">
     <h2>Get In Touch</h2>
-    <form action="https://formspree.io/f/your_form_id" method="POST">
+    <p class="contact-intro">Have a question or want to work together? Feel free to reach out! I'm always open to learning opportunities and collaborations.</p>
+    
+    <form action="https://formspree.io/f/xblnvqpz" method="POST">
       <label for="name">Your Name</label>
       <input type="text" id="name" name="name" placeholder="John Doe" required>
       
       <label for="email">Your Email</label>
-      <input type="email" id="email" name="email" placeholder="john@example.com" required>
+      <input type="email" id="email" name="_replyto" placeholder="john@example.com" required>
 
       <label for="message">Your Message</label>
-      <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
+      <textarea id="message" name="message" placeholder="Tell me about your project or question..." required></textarea>
 
+      <!-- Hidden field for form name -->
+      <input type="hidden" name="_subject" value="New contact from portfolio!">
+      
       <button type="submit">Send Message</button>
     </form>
   </section>
 
   <footer>
-    <p>&copy; 2025 Professional Portfolio | All Rights Reserved</p>
+    <p>&copy; 2025 My Portfolio | ITC Student | Aspiring Developer</p>
+    <p>Built with HTML & CSS | Learning Every Day 🚀</p>
     <div class="social-links">
       <a href="https://github.com/yourusername" target="_blank" title="GitHub">GH</a>
       <a href="https://linkedin.com/in/yourusername" target="_blank" title="LinkedIn">LI</a>
-      <a href="https://twitter.com/yourusername" target="_blank" title="Twitter">TW</a>
+      <a href="mailto:your.email@gmail.com" title="Email">📧</a>
     </div>
   </footer>
 
@@ -599,11 +654,11 @@
       });
     });
 
-    // Form submission handling
+    // Form submission success message
     const form = document.querySelector('.contact form');
     form.addEventListener('submit', function(e) {
-      // If you're using Formspree, this will work automatically
-      // Otherwise, you can add your own form handling logic here
+      // Formspree will handle the submission
+      // You can add custom success handling here if needed
     });
 
     // Add active state to navigation
