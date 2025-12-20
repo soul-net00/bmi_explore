@@ -312,147 +312,6 @@
             display: none;
         }
 
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
-            max-width: 600px;
-            width: 90%;
-            box-shadow: var(--shadow-glow), 0 8px 32px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(255, 46, 151, 0.3);
-            animation: slideInUp 0.4s ease-out;
-        }
-
-        .category-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 20px 0;
-        }
-
-        .category-grid button {
-            padding: 20px;
-            font-size: 1rem;
-            min-width: auto;
-        }
-
-        .current-category {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: var(--neon-yellow);
-            margin-top: 20px;
-            padding: 15px;
-            background: rgba(255, 237, 0, 0.1);
-            border-radius: 10px;
-            border: 2px solid var(--neon-yellow);
-        }
-
-        .progress-tracker {
-            display: grid;
-            gap: 15px;
-        }
-
-        .progress-item {
-            background: rgba(10, 14, 39, 0.6);
-            border-radius: 10px;
-            padding: 20px;
-            border-left: 4px solid var(--neon-cyan);
-            animation: slideInLeft 0.5s ease-out;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .progress-player {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--neon-yellow);
-        }
-
-        .progress-status {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.9rem;
-        }
-
-        .status-badge {
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.85rem;
-        }
-
-        .status-waiting {
-            background: rgba(255, 107, 53, 0.3);
-            color: var(--neon-orange);
-            border: 1px solid var(--neon-orange);
-        }
-
-        .status-playing {
-            background: rgba(255, 237, 0, 0.3);
-            color: var(--neon-yellow);
-            border: 1px solid var(--neon-yellow);
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        .status-submitted {
-            background: rgba(0, 240, 100, 0.3);
-            color: #00f064;
-            border: 1px solid #00f064;
-        }
-
-        .progress-word {
-            font-size: 1.3rem;
-            color: var(--text-light);
-            font-weight: 700;
-            margin-top: 5px;
-        }
-
-        .player-turn {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 900;
-            font-family: 'Righteous', cursive;
-            color: var(--neon-yellow);
-            background: rgba(255, 237, 0, 0.1);
-            border: 2px solid var(--neon-yellow);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
         .winner-announcement {
             background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange));
             padding: 40px;
@@ -614,114 +473,35 @@
                 <div class="room-code-value" id="displayRoomCode"></div>
             </div>
 
-            <!-- Game Mode Selection -->
-            <div class="card">
-                <h2 style="text-align: center; font-family: 'Righteous', cursive; font-size: 2rem; margin-bottom: 20px; color: var(--neon-yellow);">
-                    GAME MODE
-                </h2>
-                <div class="game-controls">
-                    <button id="onlineMode" onclick="setGameMode('online')" style="background: linear-gradient(135deg, var(--neon-cyan), #00a8ff);">ONLINE MULTIPLAYER</button>
-                    <button id="localMode" onclick="setGameMode('local')" style="background: linear-gradient(135deg, var(--neon-yellow), var(--neon-orange));">2 PLAYERS - ONE DEVICE</button>
-                </div>
-            </div>
-
-            <!-- Local Two Player Section -->
-            <div id="localPlayerSection" class="card hidden">
-                <h2 style="text-align: center; font-family: 'Righteous', cursive; font-size: 2rem; margin-bottom: 20px; color: var(--neon-cyan);">
-                    LOCAL PLAYERS
-                </h2>
-                <div class="input-group">
-                    <label for="player1Name">Player 1 Name</label>
-                    <input type="text" id="player1Name" placeholder="Enter Player 1 name..." value="Player 1">
-                </div>
-                <div class="input-group">
-                    <label for="player2Name">Player 2 Name</label>
-                    <input type="text" id="player2Name" placeholder="Enter Player 2 name..." value="Player 2">
-                </div>
-                <div style="text-align: center; margin-top: 20px;">
-                    <button onclick="startLocalGame()">START LOCAL GAME</button>
-                </div>
-            </div>
-
-            <!-- Letter Generation Options -->
             <div class="card">
                 <h2 style="text-align: center; font-family: 'Righteous', cursive; font-size: 2rem; margin-bottom: 20px; color: var(--neon-cyan);">
-                    GENERATE LETTERS
+                    CURRENT LETTERS
                 </h2>
+                <div id="letterDisplay" class="letter-display"></div>
+
                 <div class="game-controls">
                     <button onclick="generateAllLetters()">ALL LETTERS (A-Z)</button>
-                    <button onclick="showCategoryModal()">ONE RANDOM LETTER + CATEGORY</button>
-                </div>
-                <div id="letterDisplay" class="letter-display"></div>
-            </div>
-
-            <!-- Category Selection Modal -->
-            <div id="categoryModal" class="modal hidden">
-                <div class="modal-content">
-                    <h3 style="font-family: 'Righteous', cursive; font-size: 1.8rem; margin-bottom: 20px; color: var(--neon-pink);">
-                        SELECT CATEGORY
-                    </h3>
-                    <div class="category-grid">
-                        <button onclick="generateOneLetterWithCategory('Name')">👤 NAME</button>
-                        <button onclick="generateOneLetterWithCategory('Animal')">🦁 ANIMAL</button>
-                        <button onclick="generateOneLetterWithCategory('Country')">🌍 COUNTRY</button>
-                        <button onclick="generateOneLetterWithCategory('City')">🏙️ CITY</button>
-                        <button onclick="generateOneLetterWithCategory('Car Brand')">🚗 CAR BRAND</button>
-                        <button onclick="generateOneLetterWithCategory('Food')">🍕 FOOD</button>
-                        <button onclick="generateOneLetterWithCategory('Sport')">⚽ SPORT</button>
-                        <button onclick="generateOneLetterWithCategory('Movie')">🎬 MOVIE</button>
-                        <button onclick="generateOneLetterWithCategory('Color')">🎨 COLOR</button>
-                        <button onclick="generateOneLetterWithCategory('Job')">💼 JOB</button>
-                    </div>
-                    <button onclick="closeModal()" style="margin-top: 20px; background: linear-gradient(135deg, #666, #888);">CANCEL</button>
-                </div>
-            </div>
-
-            <!-- Timer Controls -->
-            <div class="card">
-                <h2 style="text-align: center; font-family: 'Righteous', cursive; font-size: 2rem; margin-bottom: 20px; color: var(--neon-yellow);">
-                    TIMER SETTINGS
-                </h2>
-                <div class="input-group">
-                    <label for="timerDuration">Round Duration (seconds)</label>
-                    <input type="number" id="timerDuration" value="60" min="10" max="300" step="10">
-                </div>
-                <div class="game-controls">
-                    <button onclick="startTimer()">START ROUND</button>
+                    <button onclick="generateOneLetter()">ONE RANDOM LETTER</button>
+                    <button onclick="startTimer()">START ROUND (60s)</button>
                     <button onclick="endRound()">END ROUND</button>
                 </div>
+
                 <div class="timer" id="timer">--</div>
-                <div id="currentCategory" class="current-category hidden"></div>
-            </div>
 
-            <!-- Progress Tracker -->
-            <div class="card">
-                <h2 style="text-align: center; font-family: 'Righteous', cursive; font-size: 2rem; margin-bottom: 20px; color: var(--neon-pink);">
-                    📊 LIVE PROGRESS
-                </h2>
-                <div id="progressTracker" class="progress-tracker"></div>
-            </div>
-
-            <!-- Word Submission Section -->
-            <div class="card">
-                <h2 style="text-align: center; font-family: 'Righteous', cursive; font-size: 2rem; margin-bottom: 20px; color: var(--neon-cyan);">
-                    SUBMIT YOUR ANSWER
-                </h2>
-                <div id="localPlayerTurn" class="player-turn hidden"></div>
                 <div class="word-input-section">
                     <div class="input-group">
-                        <label for="wordInput" id="wordInputLabel">Your Word</label>
+                        <label for="wordInput">Your Word</label>
                         <input type="text" id="wordInput" placeholder="Type your word here...">
                     </div>
                     <button onclick="submitWord()">SUBMIT WORD</button>
                 </div>
+
                 <div id="wordSubmitted" class="hidden"></div>
             </div>
 
-            <!-- Scoreboard -->
             <div class="card">
                 <h2 style="text-align: center; font-family: 'Righteous', cursive; font-size: 2rem; margin-bottom: 20px; color: var(--neon-pink);">
-                    🏆 SCOREBOARD
+                    SCOREBOARD
                 </h2>
                 <div id="scoreboard" class="scoreboard"></div>
             </div>
@@ -737,12 +517,6 @@
         let currentPlayer = null;
         let timerInterval = null;
         let currentLetters = [];
-        let currentCategory = null;
-        let gameMode = 'online'; // 'online' or 'local'
-        let localPlayers = { player1: null, player2: null };
-        let currentTurn = 'player1'; // For local mode
-        let localScores = { player1: 0, player2: 0 };
-        let submittedWords = {}; // Track who submitted what
 
         // Initialize game
         function joinGame() {
@@ -788,53 +562,6 @@
             return code;
         }
 
-        function setGameMode(mode) {
-            gameMode = mode;
-            
-            if (mode === 'local') {
-                document.getElementById('localPlayerSection').classList.remove('hidden');
-                document.getElementById('onlineMode').style.opacity = '0.5';
-                document.getElementById('localMode').style.opacity = '1';
-            } else {
-                document.getElementById('localPlayerSection').classList.add('hidden');
-                document.getElementById('localPlayerTurn').classList.add('hidden');
-                document.getElementById('onlineMode').style.opacity = '1';
-                document.getElementById('localMode').style.opacity = '0.5';
-            }
-        }
-
-        function startLocalGame() {
-            const p1 = document.getElementById('player1Name').value.trim() || 'Player 1';
-            const p2 = document.getElementById('player2Name').value.trim() || 'Player 2';
-            
-            localPlayers.player1 = p1;
-            localPlayers.player2 = p2;
-            localScores.player1 = 0;
-            localScores.player2 = 0;
-            currentTurn = 'player1';
-            
-            updateLocalScoreboard();
-            showPlayerTurn();
-            alert('Local game started! ' + p1 + ' goes first!');
-        }
-
-        function showPlayerTurn() {
-            if (gameMode === 'local') {
-                const turnDiv = document.getElementById('localPlayerTurn');
-                const currentPlayerName = localPlayers[currentTurn];
-                turnDiv.textContent = `🎮 ${currentPlayerName}'s Turn!`;
-                turnDiv.classList.remove('hidden');
-                
-                const label = document.getElementById('wordInputLabel');
-                label.textContent = `${currentPlayerName}'s Answer`;
-            }
-        }
-
-        function switchTurn() {
-            currentTurn = currentTurn === 'player1' ? 'player2' : 'player1';
-            showPlayerTurn();
-        }
-
         async function addPlayerToRoom(playerName, roomCode) {
             try {
                 // Get existing players
@@ -864,50 +591,23 @@
             const letters = alphabet.split('');
 
             currentLetters = letters;
-            currentCategory = 'All Letters';
             displayLetters(letters);
-            displayCategory();
             
             // Save letters to room
-            if (gameMode === 'online') {
-                saveGameState();
-            }
+            saveGameState();
         }
 
-        function showCategoryModal() {
-            document.getElementById('categoryModal').classList.remove('hidden');
-        }
-
-        function closeModal() {
-            document.getElementById('categoryModal').classList.add('hidden');
-        }
-
-        function generateOneLetterWithCategory(category) {
+        function generateOneLetter() {
             // Generate just one random letter
             const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
             const randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
             const letters = [randomLetter];
 
             currentLetters = letters;
-            currentCategory = category;
             displayLetters(letters);
-            displayCategory();
-            closeModal();
             
             // Save letters to room
-            if (gameMode === 'online') {
-                saveGameState();
-            }
-        }
-
-        function displayCategory() {
-            const categoryDiv = document.getElementById('currentCategory');
-            if (currentCategory) {
-                categoryDiv.textContent = `📋 Category: ${currentCategory}`;
-                categoryDiv.classList.remove('hidden');
-            } else {
-                categoryDiv.classList.add('hidden');
-            }
+            saveGameState();
         }
 
         function displayLetters(letters) {
@@ -928,9 +628,7 @@
                 clearInterval(timerInterval);
             }
 
-            // Get custom duration
-            const duration = parseInt(document.getElementById('timerDuration').value) || 60;
-            let timeLeft = duration;
+            let timeLeft = 60;
             const timerDisplay = document.getElementById('timer');
             timerDisplay.textContent = `${timeLeft}s`;
 
@@ -945,9 +643,7 @@
             }, 1000);
 
             // Save timer start time
-            if (gameMode === 'online') {
-                saveTimerState(Date.now(), duration);
-            }
+            saveTimerState(Date.now(), 60);
         }
 
         async function saveTimerState(startTime, duration) {
@@ -970,30 +666,29 @@
                 return;
             }
 
-            // Validate word uses available letters (only for all letters mode)
-            if (currentCategory === 'All Letters' && !validateWord(word, currentLetters)) {
+            // Validate word uses available letters
+            if (!validateWord(word, currentLetters)) {
                 alert('Your word must only use the available letters!');
                 return;
-            }
-
-            // Validate word starts with the letter (for single letter mode)
-            if (currentCategory !== 'All Letters' && currentLetters.length === 1) {
-                if (!word.startsWith(currentLetters[0])) {
-                    alert(`Your word must start with ${currentLetters[0]}!`);
-                    return;
-                }
             }
 
             // Calculate score (word length)
             const score = word.length;
 
-            if (gameMode === 'local') {
-                // Local mode - update local scores
-                localScores[currentTurn] += score;
-                
+            // Update player score
+            try {
+                const result = await window.storage.get(`room:${currentRoom}:players`, true);
+                let players = {};
+                if (result && result.value) {
+                    players = JSON.parse(result.value);
+                }
+
+                players[currentPlayer] = (players[currentPlayer] || 0) + score;
+                await window.storage.set(`room:${currentRoom}:players`, JSON.stringify(players), true);
+
                 // Show confirmation
                 const submitted = document.getElementById('wordSubmitted');
-                submitted.textContent = `✓ ${word} submitted! +${score} points for ${localPlayers[currentTurn]}`;
+                submitted.textContent = `✓ ${word} submitted! +${score} points`;
                 submitted.className = 'word-submitted';
                 
                 wordInput.value = '';
@@ -1002,40 +697,11 @@
                     submitted.classList.add('hidden');
                 }, 3000);
 
-                updateLocalScoreboard();
-                switchTurn();
-            } else {
-                // Online mode - update player score
-                try {
-                    const result = await window.storage.get(`room:${currentRoom}:players`, true);
-                    let players = {};
-                    if (result && result.value) {
-                        players = JSON.parse(result.value);
-                    }
-
-                    players[currentPlayer] = (players[currentPlayer] || 0) + score;
-                    await window.storage.set(`room:${currentRoom}:players`, JSON.stringify(players), true);
-
-                    // Save progress (word submission)
-                    await saveProgress(currentPlayer, word, score);
-
-                    // Show confirmation
-                    const submitted = document.getElementById('wordSubmitted');
-                    submitted.textContent = `✓ ${word} submitted! +${score} points`;
-                    submitted.className = 'word-submitted';
-                    
-                    wordInput.value = '';
-
-                    setTimeout(() => {
-                        submitted.classList.add('hidden');
-                    }, 3000);
-
-                    // Refresh game state
-                    loadGameState();
-                } catch (error) {
-                    console.error('Error submitting word:', error);
-                    alert('Error submitting word. Please try again.');
-                }
+                // Refresh scoreboard
+                loadGameState();
+            } catch (error) {
+                console.error('Error submitting word:', error);
+                alert('Error submitting word. Please try again.');
             }
         }
 
@@ -1053,35 +719,15 @@
             return true;
         }
 
-        async function saveProgress(playerName, word, score) {
-            try {
-                const timestamp = Date.now();
-                const progressKey = `room:${currentRoom}:progress:${playerName}:${timestamp}`;
-                await window.storage.set(progressKey, JSON.stringify({
-                    player: playerName,
-                    word: word,
-                    score: score,
-                    timestamp: timestamp,
-                    status: 'submitted'
-                }), true);
-            } catch (error) {
-                console.error('Error saving progress:', error);
-            }
-        }
-
         async function loadGameState() {
-            if (gameMode === 'local') return; // Skip for local mode
-
             try {
                 // Load letters
                 const lettersResult = await window.storage.get(`room:${currentRoom}:letters`, true);
                 if (lettersResult && lettersResult.value) {
-                    const data = JSON.parse(lettersResult.value);
-                    if (JSON.stringify(data.letters) !== JSON.stringify(currentLetters)) {
-                        currentLetters = data.letters;
-                        currentCategory = data.category || null;
-                        displayLetters(data.letters);
-                        displayCategory();
+                    const letters = JSON.parse(lettersResult.value);
+                    if (JSON.stringify(letters) !== JSON.stringify(currentLetters)) {
+                        currentLetters = letters;
+                        displayLetters(letters);
                     }
                 }
 
@@ -1098,86 +744,9 @@
                     const timerData = JSON.parse(timerResult.value);
                     updateTimerDisplay(timerData);
                 }
-
-                // Load progress
-                await loadProgress();
             } catch (error) {
                 console.error('Error loading game state:', error);
             }
-        }
-
-        async function loadProgress() {
-            try {
-                const listResult = await window.storage.list(`room:${currentRoom}:progress:`, true);
-                if (!listResult || !listResult.keys) return;
-
-                const progressItems = [];
-                
-                for (const key of listResult.keys) {
-                    try {
-                        const result = await window.storage.get(key, true);
-                        if (result && result.value) {
-                            const progress = JSON.parse(result.value);
-                            progressItems.push(progress);
-                        }
-                    } catch (e) {
-                        console.error('Error loading progress item:', e);
-                    }
-                }
-
-                // Sort by timestamp (newest first)
-                progressItems.sort((a, b) => b.timestamp - a.timestamp);
-
-                // Display only recent items (last 10)
-                displayProgress(progressItems.slice(0, 10));
-            } catch (error) {
-                console.error('Error loading progress:', error);
-            }
-        }
-
-        function displayProgress(progressItems) {
-            const tracker = document.getElementById('progressTracker');
-            
-            if (!progressItems || progressItems.length === 0) {
-                tracker.innerHTML = '<p style="text-align: center; opacity: 0.6;">No activity yet. Start playing!</p>';
-                return;
-            }
-
-            tracker.innerHTML = '';
-
-            progressItems.forEach((item, index) => {
-                const progressDiv = document.createElement('div');
-                progressDiv.className = 'progress-item';
-                progressDiv.style.animationDelay = `${index * 0.1}s`;
-
-                const timeAgo = getTimeAgo(item.timestamp);
-                
-                progressDiv.innerHTML = `
-                    <div class="progress-header">
-                        <span class="progress-player">${item.player}</span>
-                        <div class="progress-status">
-                            <span class="status-badge status-submitted">✓ SUBMITTED</span>
-                            <span style="opacity: 0.6; font-size: 0.85rem;">${timeAgo}</span>
-                        </div>
-                    </div>
-                    <div class="progress-word">${item.word} <span style="color: var(--neon-pink);">+${item.score}</span></div>
-                `;
-                
-                tracker.appendChild(progressDiv);
-            });
-        }
-
-        function getTimeAgo(timestamp) {
-            const seconds = Math.floor((Date.now() - timestamp) / 1000);
-            
-            if (seconds < 10) return 'just now';
-            if (seconds < 60) return `${seconds}s ago`;
-            
-            const minutes = Math.floor(seconds / 60);
-            if (minutes < 60) return `${minutes}m ago`;
-            
-            const hours = Math.floor(minutes / 60);
-            return `${hours}h ago`;
         }
 
         function updateTimerDisplay(timerData) {
@@ -1196,10 +765,7 @@
 
         async function saveGameState() {
             try {
-                await window.storage.set(`room:${currentRoom}:letters`, JSON.stringify({
-                    letters: currentLetters,
-                    category: currentCategory
-                }), true);
+                await window.storage.set(`room:${currentRoom}:letters`, JSON.stringify(currentLetters), true);
             } catch (error) {
                 console.error('Error saving game state:', error);
             }
@@ -1212,29 +778,15 @@
             // Sort players by score
             const sortedPlayers = Object.entries(players).sort((a, b) => b[1] - a[1]);
 
-            sortedPlayers.forEach(([name, score], index) => {
+            sortedPlayers.forEach(([name, score]) => {
                 const entry = document.createElement('div');
                 entry.className = 'player-entry';
-                
-                let medal = '';
-                if (index === 0) medal = '🥇 ';
-                else if (index === 1) medal = '🥈 ';
-                else if (index === 2) medal = '🥉 ';
-                
                 entry.innerHTML = `
-                    <span class="player-name">${medal}${name}</span>
+                    <span class="player-name">${name}</span>
                     <span class="player-score">${score}</span>
                 `;
                 scoreboard.appendChild(entry);
             });
-        }
-
-        function updateLocalScoreboard() {
-            const players = {
-                [localPlayers.player1]: localScores.player1,
-                [localPlayers.player2]: localScores.player2
-            };
-            displayScoreboard(players);
         }
 
         function endRound() {
@@ -1245,43 +797,24 @@
         }
 
         async function resetGame() {
-            if (confirm('Are you sure you want to reset the game? This will clear all scores and progress.')) {
+            if (confirm('Are you sure you want to reset the game? This will clear all scores.')) {
                 try {
-                    if (gameMode === 'local') {
-                        localScores.player1 = 0;
-                        localScores.player2 = 0;
-                        currentTurn = 'player1';
-                        updateLocalScoreboard();
-                        showPlayerTurn();
-                    } else {
-                        // Clear online storage
-                        await window.storage.delete(`room:${currentRoom}:players`, true);
-                        await window.storage.delete(`room:${currentRoom}:letters`, true);
-                        await window.storage.delete(`room:${currentRoom}:timer`, true);
-                        
-                        // Clear progress items
-                        const listResult = await window.storage.list(`room:${currentRoom}:progress:`, true);
-                        if (listResult && listResult.keys) {
-                            for (const key of listResult.keys) {
-                                await window.storage.delete(key, true);
-                            }
-                        }
-
-                        // Re-add current player
-                        await addPlayerToRoom(currentPlayer, currentRoom);
-                        loadGameState();
-                    }
+                    await window.storage.delete(`room:${currentRoom}:players`, true);
+                    await window.storage.delete(`room:${currentRoom}:letters`, true);
+                    await window.storage.delete(`room:${currentRoom}:timer`, true);
                     
                     currentLetters = [];
-                    currentCategory = null;
                     document.getElementById('letterDisplay').innerHTML = '';
+                    document.getElementById('scoreboard').innerHTML = '';
                     document.getElementById('timer').textContent = '--';
-                    document.getElementById('currentCategory').classList.add('hidden');
-                    document.getElementById('progressTracker').innerHTML = '';
                     
                     if (timerInterval) {
                         clearInterval(timerInterval);
                     }
+
+                    // Re-add current player
+                    await addPlayerToRoom(currentPlayer, currentRoom);
+                    loadGameState();
                 } catch (error) {
                     console.error('Error resetting game:', error);
                 }
