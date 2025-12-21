@@ -1,832 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Letter Duel - Multiplayer Word Game</title>
-    <link href="https://fonts.googleapis.com/css2?family=Righteous&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio | Aspiring Web Developer</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    html { scroll-behavior: smooth; }
+    body { background: #0f172a; color: #e2e8f0; overflow-x: hidden; }
 
-        :root {
-            --neon-pink: #ff2e97;
-            --neon-cyan: #00f0ff;
-            --neon-yellow: #ffed00;
-            --neon-orange: #ff6b35;
-            --dark-bg: #0a0e27;
-            --card-bg: #151b3d;
-            --text-light: #ffffff;
-            --shadow-glow: 0 0 20px rgba(255, 46, 151, 0.4);
-        }
+    /* Navbar */
+    .navbar { display: flex; justify-content: space-between; align-items: center; background: rgba(30, 41, 59, 0.95); padding: 20px 40px; position: fixed; top: 0; width: 100%; z-index: 1000; backdrop-filter: blur(10px); box-shadow: 0 2px 10px rgba(59, 130, 246, 0.1); }
+    .logo { color: #3b82f6; font-size: 28px; font-weight: bold; cursor: pointer; }
+    nav ul { list-style: none; display: flex; }
+    nav li { margin-left: 30px; }
+    nav a { color: #94a3b8; text-decoration: none; padding: 8px 16px; border-radius: 4px; transition: 0.3s; }
+    nav a:hover { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
 
-        body {
-            font-family: 'Nunito', sans-serif;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f4d 50%, #0a0e27 100%);
-            color: var(--text-light);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+    /* Hero */
+    .hero { background: linear-gradient(135deg, #0f172a, #1e293b); text-align: center; padding: 180px 20px 120px; margin-top: 70px; }
+    .hero h1 { font-size: 64px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero .tagline { font-size: 22px; color: #94a3b8; margin: 20px 0; }
+    .btn { padding: 15px 40px; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; text-decoration: none; border-radius: 50px; display: inline-block; margin: 10px; transition: 0.3s; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5); }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 46, 151, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(0, 240, 255, 0.1) 0%, transparent 40%);
-            pointer-events: none;
-            z-index: 0;
-        }
+    /* About */
+    .about { padding: 100px 20px; text-align: center; }
+    .about h2 { font-size: 48px; color: #3b82f6; margin-bottom: 20px; }
+    .about p { font-size: 20px; color: #cbd5e1; max-width: 900px; margin: 0 auto 40px; }
+    .skills { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; margin-top: 40px; }
+    .skill-tag { padding: 10px 25px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; border: 2px solid #3b82f6; border-radius: 25px; transition: 0.3s; }
+    .skill-tag:hover { background: #3b82f6; color: white; transform: scale(1.05); }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
+    /* Portfolio */
+    .portfolio { padding: 100px 20px; }
+    .portfolio h2 { font-size: 48px; color: #3b82f6; text-align: center; margin-bottom: 60px; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+    .portfolio-item { background: #1e293b; border-radius: 15px; overflow: hidden; transition: 0.3s; border: 2px solid transparent; }
+    .portfolio-item:hover { transform: translateY(-10px); border-color: #3b82f6; box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3); }
+    .portfolio-item img { width: 100%; height: 250px; object-fit: cover; }
+    .portfolio-info { padding: 25px; }
+    .portfolio-info h3 { color: #3b82f6; margin-bottom: 12px; }
+    .portfolio-info p { color: #94a3b8; margin-bottom: 15px; }
+    .project-badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 15px 0; }
+    .project-badge { padding: 5px 15px; background: rgba(139, 92, 246, 0.2); color: #a78bfa; border-radius: 15px; font-size: 14px; }
+    .project-links { display: flex; gap: 10px; }
+    .project-link { flex: 1; padding: 10px 20px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; text-decoration: none; border-radius: 8px; text-align: center; border: 1px solid #3b82f6; transition: 0.3s; }
+    .project-link:hover { background: #3b82f6; color: white; }
 
-        header {
-            text-align: center;
-            padding: 40px 0;
-            animation: fadeInDown 0.8s ease-out;
-        }
+    /* Video Modal */
+    .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
+    .video-modal.active { display: flex; }
+    .video-container { position: relative; max-width: 900px; width: 100%; background: #1e293b; border-radius: 15px; overflow: hidden; }
+    .video-container iframe { width: 100%; height: 500px; border: none; }
+    .close-modal { position: absolute; top: -50px; right: 0; background: transparent; border: none; color: white; font-size: 36px; cursor: pointer; transition: 0.3s; }
+    .close-modal:hover { color: #3b82f6; transform: rotate(90deg); }
 
-        h1 {
-            font-family: 'Righteous', cursive;
-            font-size: 4rem;
-            background: linear-gradient(45deg, var(--neon-pink), var(--neon-cyan), var(--neon-yellow));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: 0 0 30px rgba(255, 46, 151, 0.5);
-            margin-bottom: 10px;
-            letter-spacing: 3px;
-            animation: pulse 2s ease-in-out infinite;
-        }
+    /* Contact */
+    .contact { padding: 100px 20px; }
+    .contact h2 { font-size: 48px; text-align: center; margin-bottom: 20px; color: #3b82f6; }
+    .contact form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .contact label { font-size: 18px; color: #cbd5e1; font-weight: 500; }
+    .contact input, .contact textarea { width: 100%; padding: 15px; border-radius: 8px; border: 2px solid #334155; font-size: 16px; background: rgba(30, 41, 59, 0.5); color: #e2e8f0; }
+    .contact input:focus, .contact textarea:focus { outline: none; border-color: #3b82f6; }
+    .contact textarea { min-height: 150px; resize: vertical; }
+    .contact button { padding: 15px 40px; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; font-size: 18px; font-weight: bold; border-radius: 50px; border: none; cursor: pointer; transition: 0.3s; }
+    .contact button:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5); }
 
-        .subtitle {
-            font-size: 1.2rem;
-            color: var(--neon-cyan);
-            opacity: 0.9;
-            letter-spacing: 2px;
-        }
+    /* Footer */
+    footer { text-align: center; padding: 40px 20px; background: #0f172a; color: #64748b; border-top: 1px solid rgba(59, 130, 246, 0.2); }
+    .social-links { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+    .social-links a { color: #3b82f6; padding: 10px 20px; border-radius: 25px; border: 2px solid #3b82f6; text-decoration: none; transition: 0.3s; }
+    .social-links a:hover { background: #3b82f6; color: white; transform: translateY(-3px); }
 
-        .setup-screen, .game-screen {
-            animation: fadeIn 0.6s ease-out;
-        }
+    /* 404 Page */
+    .error-page { display: none; min-height: 100vh; padding: 100px 20px; text-align: center; flex-direction: column; justify-content: center; align-items: center; }
+    .error-page.active { display: flex; }
+    .error-code { font-size: 150px; font-weight: bold; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: glitch 3s infinite; }
+    @keyframes glitch { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-5px); } 40% { transform: translateX(5px); } }
+    .error-message { font-size: 32px; color: #e2e8f0; margin: 20px 0; }
+    .error-description { font-size: 18px; color: #94a3b8; max-width: 600px; margin-bottom: 40px; }
 
-        .card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
-            margin: 30px 0;
-            box-shadow: var(--shadow-glow), 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 46, 151, 0.2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 46, 151, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shimmer 3s infinite;
-        }
-
-        .input-group {
-            margin: 20px 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: var(--neon-yellow);
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 15px 20px;
-            font-size: 1.1rem;
-            border: 2px solid var(--neon-pink);
-            border-radius: 12px;
-            background: rgba(10, 14, 39, 0.8);
-            color: var(--text-light);
-            font-family: 'Nunito', sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
-            transform: translateY(-2px);
-        }
-
-        button {
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: 900;
-            font-family: 'Righteous', cursive;
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange));
-            color: white;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 20px rgba(255, 46, 151, 0.4);
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
-        }
-
-        button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 46, 151, 0.6);
-        }
-
-        button:active {
-            transform: translateY(-1px);
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .letter-display {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin: 40px 0;
-            animation: fadeIn 0.8s ease-out;
-            max-width: 100%;
-        }
-
-        .letter-tile {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange));
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Righteous', cursive;
-            font-size: 2.5rem;
-            color: white;
-            box-shadow: 0 5px 20px rgba(255, 46, 151, 0.5);
-            animation: popIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-            flex-shrink: 0;
-        }
-
-        .letter-tile::after {
-            content: '';
-            position: absolute;
-            inset: 3px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .letter-tile span {
-            position: relative;
-            z-index: 1;
-        }
-
-        .scoreboard {
-            background: rgba(10, 14, 39, 0.6);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            border: 2px solid rgba(0, 240, 255, 0.3);
-        }
-
-        .player-entry {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px;
-            margin: 10px 0;
-            background: var(--card-bg);
-            border-radius: 10px;
-            border-left: 4px solid var(--neon-cyan);
-            animation: slideInRight 0.5s ease-out;
-        }
-
-        .player-name {
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: var(--neon-yellow);
-        }
-
-        .player-score {
-            font-weight: 900;
-            font-size: 1.5rem;
-            color: var(--neon-pink);
-        }
-
-        .word-input-section {
-            margin: 30px 0;
-            text-align: center;
-        }
-
-        .word-submitted {
-            background: rgba(0, 240, 100, 0.2);
-            border: 2px solid #00f064;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 20px 0;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #00f064;
-            animation: slideInUp 0.5s ease-out;
-        }
-
-        .timer {
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 900;
-            font-family: 'Righteous', cursive;
-            color: var(--neon-yellow);
-            margin: 20px 0;
-            text-shadow: 0 0 20px rgba(255, 237, 0, 0.5);
-        }
-
-        .game-controls {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        .game-controls button {
-            flex: 1 1 auto;
-            min-width: 180px;
-            white-space: nowrap;
-        }
-
-        .room-code {
-            background: rgba(0, 240, 255, 0.2);
-            border: 2px solid var(--neon-cyan);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            margin: 20px 0;
-        }
-
-        .room-code-label {
-            font-size: 0.9rem;
-            color: var(--neon-cyan);
-            margin-bottom: 10px;
-        }
-
-        .room-code-value {
-            font-size: 2rem;
-            font-weight: 900;
-            font-family: 'Righteous', cursive;
-            color: var(--text-light);
-            letter-spacing: 5px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .winner-announcement {
-            background: linear-gradient(135deg, var(--neon-pink), var(--neon-orange));
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            animation: bounceIn 0.8s ease-out;
-        }
-
-        .winner-announcement h2 {
-            font-family: 'Righteous', cursive;
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes popIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.5) rotate(-10deg);
-            }
-            70% {
-                transform: scale(1.1) rotate(5deg);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1) rotate(0deg);
-            }
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.8;
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
-
-        @keyframes bounceIn {
-            0% {
-                opacity: 0;
-                transform: scale(0.3);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            70% {
-                transform: scale(0.9);
-            }
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-
-            .letter-tile {
-                width: 60px;
-                height: 60px;
-                font-size: 2rem;
-            }
-
-            .card {
-                padding: 25px;
-            }
-
-            .game-controls button {
-                min-width: 140px;
-                font-size: 1rem;
-                padding: 12px 25px;
-            }
-        }
-    </style>
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 40px; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .video-container iframe { height: 300px; }
+      .error-code { font-size: 100px; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>LETTER DUEL</h1>
-            <p class="subtitle">MULTIPLAYER WORD SHOWDOWN</p>
-        </header>
-
-        <!-- Setup Screen -->
-        <div id="setupScreen" class="setup-screen">
-            <div class="card">
-                <div class="input-group">
-                    <label for="playerName">Enter Your Name</label>
-                    <input type="text" id="playerName" placeholder="Your awesome name..." maxlength="20">
-                </div>
-
-                <div class="input-group">
-                    <label for="roomCode">Room Code (leave blank to create new room)</label>
-                    <input type="text" id="roomCode" placeholder="Enter code or leave blank..." maxlength="10">
-                </div>
-
-                <div style="text-align: center; margin-top: 30px;">
-                    <button onclick="joinGame()">START GAME</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Game Screen -->
-        <div id="gameScreen" class="game-screen hidden">
-            <div class="room-code">
-                <div class="room-code-label">SHARE THIS ROOM CODE WITH FRIENDS:</div>
-                <div class="room-code-value" id="displayRoomCode"></div>
-            </div>
-
-            <div class="card">
-                <h2 style="text-align: center; font-family: 'Righteous', cursive; font-size: 2rem; margin-bottom: 20px; color: var(--neon-cyan);">
-                    CURRENT LETTERS
-                </h2>
-                <div id="letterDisplay" class="letter-display"></div>
-
-                <div class="game-controls">
-                    <button onclick="generateAllLetters()">ALL LETTERS (A-Z)</button>
-                    <button onclick="generateOneLetter()">ONE RANDOM LETTER</button>
-                    <button onclick="startTimer()">START ROUND (60s)</button>
-                    <button onclick="endRound()">END ROUND</button>
-                </div>
-
-                <div class="timer" id="timer">--</div>
-
-                <div class="word-input-section">
-                    <div class="input-group">
-                        <label for="wordInput">Your Word</label>
-                        <input type="text" id="wordInput" placeholder="Type your word here...">
-                    </div>
-                    <button onclick="submitWord()">SUBMIT WORD</button>
-                </div>
-
-                <div id="wordSubmitted" class="hidden"></div>
-            </div>
-
-            <div class="card">
-                <h2 style="text-align: center; font-family: 'Righteous', cursive; font-size: 2rem; margin-bottom: 20px; color: var(--neon-pink);">
-                    SCOREBOARD
-                </h2>
-                <div id="scoreboard" class="scoreboard"></div>
-            </div>
-
-            <div style="text-align: center; margin: 30px 0;">
-                <button onclick="resetGame()">NEW GAME</button>
-            </div>
-        </div>
+  <div id="mainContent">
+    <div class="navbar">
+      <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">💻 My Portfolio</div>
+      <nav>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#portfolio">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
     </div>
 
-    <script>
-        let currentRoom = null;
-        let currentPlayer = null;
-        let timerInterval = null;
-        let currentLetters = [];
+    <section id="home" class="hero">
+      <h1>Welcome to My Portfolio</h1>
+      <p class="tagline">Aspiring Developer | ITC Student | Learning & Building</p>
+      <div>
+        <a href="#portfolio" class="btn">View My Projects</a>
+        <a href="#contact" class="btn">Get In Touch</a>
+      </div>
+    </section>
 
-        // Initialize game
-        function joinGame() {
-            const playerName = document.getElementById('playerName').value.trim();
-            const roomCode = document.getElementById('roomCode').value.trim().toUpperCase();
+    <section id="about" class="about">
+      <h2>About Me</h2>
+      <p>Hi! I'm an ITC student passionate about web development and coding. I'm currently learning HTML, CSS, JavaScript, and exploring various programming languages.</p>
+      <div class="skills">
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">JavaScript</span>
+        <span class="skill-tag">Visual Basic .NET</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">Git & GitHub</span>
+      </div>
+    </section>
 
-            if (!playerName) {
-                alert('Please enter your name!');
-                return;
-            }
+    <section id="portfolio" class="portfolio">
+      <h2>My Projects</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="MobileFix Manager">
+          <div class="portfolio-info">
+            <h3>MobileFix Manager</h3>
+            <p>Complete cellphone repair shop management system with VB.NET and SQL Server. Features receipt management, customer database, and inventory tracking.</p>
+            <div class="project-badges">
+              <span class="project-badge">VB.NET + SQL</span>
+              <span class="project-badge">Desktop App</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
+              <button class="project-link" onclick="openVideoModal()">Watch Demo</button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=600&fit=crop" alt="BMI Calculator">
+          <div class="portfolio-info">
+            <h3>BMI Explorer</h3>
+            <p>Interactive BMI calculator web application. Users can calculate their Body Mass Index with visual feedback and health recommendations.</p>
+            <div class="project-badges">
+              <span class="project-badge">HTML + CSS + JS</span>
+              <span class="project-badge">Web App</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/soul-net00/bmi_explore" class="project-link" target="_blank">View Code</a>
+              <a href="https://soul-net00.github.io/bmi_explore/" class="project-link" target="_blank">Live Demo</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop" alt="Portfolio">
+          <div class="portfolio-info">
+            <h3>Portfolio Website</h3>
+            <p>This responsive portfolio website built from scratch using HTML and CSS. Showcases my projects and skills with modern design.</p>
+            <div class="project-badges">
+              <span class="project-badge">HTML + CSS</span>
+              <span class="project-badge">Responsive</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
+              <a href="#home" class="project-link">Live Demo</a>
+            </div>
+          </div>
+        </div>
 
-            currentPlayer = playerName;
+        <div class="portfolio-item">
+          <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop" alt="Database">
+          <div class="portfolio-info">
+            <h3>Database Management</h3>
+            <p>SQL database projects including CellphoneShopDB with proper table relationships, stored procedures, and data management features.</p>
+            <div class="project-badges">
+              <span class="project-badge">SQL Server</span>
+              <span class="project-badge">Database Design</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
+              <a href="#" class="project-link">Documentation</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            if (roomCode) {
-                // Join existing room
-                currentRoom = roomCode;
-            } else {
-                // Create new room
-                currentRoom = generateRoomCode();
-            }
+    <section id="contact" class="contact">
+      <h2>Get In Touch</h2>
+      <form id="contactForm" action="https://formspree.io/f/xblnvqpz" method="POST">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" placeholder="John Doe" required>
+        
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="_replyto" placeholder="john@example.com" required>
 
-            // Add player to room
-            addPlayerToRoom(currentPlayer, currentRoom);
+        <label for="message">Your Message</label>
+        <textarea id="message" name="message" placeholder="Tell me about your project..." required></textarea>
 
-            // Switch to game screen
-            document.getElementById('setupScreen').classList.add('hidden');
-            document.getElementById('gameScreen').classList.remove('hidden');
-            document.getElementById('displayRoomCode').textContent = currentRoom;
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
 
-            // Load game state
-            loadGameState();
-            
-            // Start polling for updates
-            setInterval(loadGameState, 2000);
+    <footer>
+      <p>&copy; 2025 My Portfolio | ITC Student | Aspiring Developer</p>
+      <div class="social-links">
+        <a href="https://github.com/soul-net00" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+        <a href="mailto:your.email@gmail.com">Email Me</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Video Modal -->
+  <div class="video-modal" id="videoModal">
+    <div class="video-container">
+      <button class="close-modal" onclick="closeVideoModal()">×</button>
+      <iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <!-- 404 Error Page -->
+  <div class="error-page" id="errorPage">
+    <div class="error-code">404</div>
+    <div class="error-message">Page Not Found</div>
+    <div class="error-description">Oops! The page you're looking for doesn't exist. It might have been moved or deleted.</div>
+    <a href="#home" class="btn" onclick="show404(false)">Go Back Home</a>
+  </div>
+
+  <script>
+    // Video Modal Functions
+    function openVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const frame = document.getElementById('videoFrame');
+      frame.src = 'https://www.youtube.com/embed/L99lApSNXuo?autoplay=1';
+      modal.classList.add('active');
+    }
+
+    function closeVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const frame = document.getElementById('videoFrame');
+      frame.src = '';
+      modal.classList.remove('active');
+    }
+
+    // Close modal on background click
+    document.getElementById('videoModal').addEventListener('click', function(e) {
+      if (e.target === this) closeVideoModal();
+    });
+
+    // 404 Page Function
+    function show404(show) {
+      const mainContent = document.getElementById('mainContent');
+      const errorPage = document.getElementById('errorPage');
+      if (show) {
+        mainContent.style.display = 'none';
+        errorPage.classList.add('active');
+      } else {
+        mainContent.style.display = 'block';
+        errorPage.classList.remove('active');
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      }
+    }
+
+    // Detect invalid routes (for demo purposes)
+    window.addEventListener('hashchange', function() {
+      const validSections = ['#home', '#about', '#portfolio', '#contact', ''];
+      if (!validSections.includes(window.location.hash)) {
+        show404(true);
+      }
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Active nav highlighting
+    window.addEventListener('scroll', () => {
+      let current = '';
+      document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute('id');
         }
+      });
 
-        function generateRoomCode() {
-            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-            let code = '';
-            for (let i = 0; i < 6; i++) {
-                code += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return code;
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+          link.classList.add('active');
         }
+      });
+    });
 
-        async function addPlayerToRoom(playerName, roomCode) {
-            try {
-                // Get existing players
-                let players = {};
-                try {
-                    const result = await window.storage.get(`room:${roomCode}:players`, true);
-                    if (result && result.value) {
-                        players = JSON.parse(result.value);
-                    }
-                } catch (e) {
-                    // Room doesn't exist yet, that's fine
-                }
-
-                // Add new player if not exists
-                if (!players[playerName]) {
-                    players[playerName] = 0;
-                    await window.storage.set(`room:${roomCode}:players`, JSON.stringify(players), true);
-                }
-            } catch (error) {
-                console.error('Error adding player:', error);
-            }
-        }
-
-        function generateAllLetters() {
-            // Generate all 26 letters A-Z
-            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            const letters = alphabet.split('');
-
-            currentLetters = letters;
-            displayLetters(letters);
-            
-            // Save letters to room
-            saveGameState();
-        }
-
-        function generateOneLetter() {
-            // Generate just one random letter
-            const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-            const randomLetter = alphabet[Math.floor(Math.random() * alphabet.length)];
-            const letters = [randomLetter];
-
-            currentLetters = letters;
-            displayLetters(letters);
-            
-            // Save letters to room
-            saveGameState();
-        }
-
-        function displayLetters(letters) {
-            const container = document.getElementById('letterDisplay');
-            container.innerHTML = '';
-
-            letters.forEach((letter, index) => {
-                const tile = document.createElement('div');
-                tile.className = 'letter-tile';
-                tile.style.animationDelay = `${index * 0.1}s`;
-                tile.innerHTML = `<span>${letter}</span>`;
-                container.appendChild(tile);
-            });
-        }
-
-        function startTimer() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-
-            let timeLeft = 60;
-            const timerDisplay = document.getElementById('timer');
-            timerDisplay.textContent = `${timeLeft}s`;
-
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                timerDisplay.textContent = `${timeLeft}s`;
-
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    timerDisplay.textContent = "TIME'S UP!";
-                }
-            }, 1000);
-
-            // Save timer start time
-            saveTimerState(Date.now(), 60);
-        }
-
-        async function saveTimerState(startTime, duration) {
-            try {
-                await window.storage.set(`room:${currentRoom}:timer`, JSON.stringify({
-                    startTime,
-                    duration
-                }), true);
-            } catch (error) {
-                console.error('Error saving timer:', error);
-            }
-        }
-
-        async function submitWord() {
-            const wordInput = document.getElementById('wordInput');
-            const word = wordInput.value.trim().toUpperCase();
-
-            if (!word) {
-                alert('Please enter a word!');
-                return;
-            }
-
-            // Validate word uses available letters
-            if (!validateWord(word, currentLetters)) {
-                alert('Your word must only use the available letters!');
-                return;
-            }
-
-            // Calculate score (word length)
-            const score = word.length;
-
-            // Update player score
-            try {
-                const result = await window.storage.get(`room:${currentRoom}:players`, true);
-                let players = {};
-                if (result && result.value) {
-                    players = JSON.parse(result.value);
-                }
-
-                players[currentPlayer] = (players[currentPlayer] || 0) + score;
-                await window.storage.set(`room:${currentRoom}:players`, JSON.stringify(players), true);
-
-                // Show confirmation
-                const submitted = document.getElementById('wordSubmitted');
-                submitted.textContent = `✓ ${word} submitted! +${score} points`;
-                submitted.className = 'word-submitted';
-                
-                wordInput.value = '';
-
-                setTimeout(() => {
-                    submitted.classList.add('hidden');
-                }, 3000);
-
-                // Refresh scoreboard
-                loadGameState();
-            } catch (error) {
-                console.error('Error submitting word:', error);
-                alert('Error submitting word. Please try again.');
-            }
-        }
-
-        function validateWord(word, letters) {
-            const lettersCopy = [...letters];
-            
-            for (let char of word) {
-                const index = lettersCopy.indexOf(char);
-                if (index === -1) {
-                    return false;
-                }
-                lettersCopy.splice(index, 1);
-            }
-            
-            return true;
-        }
-
-        async function loadGameState() {
-            try {
-                // Load letters
-                const lettersResult = await window.storage.get(`room:${currentRoom}:letters`, true);
-                if (lettersResult && lettersResult.value) {
-                    const letters = JSON.parse(lettersResult.value);
-                    if (JSON.stringify(letters) !== JSON.stringify(currentLetters)) {
-                        currentLetters = letters;
-                        displayLetters(letters);
-                    }
-                }
-
-                // Load players and scores
-                const playersResult = await window.storage.get(`room:${currentRoom}:players`, true);
-                if (playersResult && playersResult.value) {
-                    const players = JSON.parse(playersResult.value);
-                    displayScoreboard(players);
-                }
-
-                // Load timer
-                const timerResult = await window.storage.get(`room:${currentRoom}:timer`, true);
-                if (timerResult && timerResult.value) {
-                    const timerData = JSON.parse(timerResult.value);
-                    updateTimerDisplay(timerData);
-                }
-            } catch (error) {
-                console.error('Error loading game state:', error);
-            }
-        }
-
-        function updateTimerDisplay(timerData) {
-            if (!timerData || !timerData.startTime) return;
-
-            const elapsed = Math.floor((Date.now() - timerData.startTime) / 1000);
-            const remaining = timerData.duration - elapsed;
-
-            const timerDisplay = document.getElementById('timer');
-            if (remaining > 0) {
-                timerDisplay.textContent = `${remaining}s`;
-            } else {
-                timerDisplay.textContent = "TIME'S UP!";
-            }
-        }
-
-        async function saveGameState() {
-            try {
-                await window.storage.set(`room:${currentRoom}:letters`, JSON.stringify(currentLetters), true);
-            } catch (error) {
-                console.error('Error saving game state:', error);
-            }
-        }
-
-        function displayScoreboard(players) {
-            const scoreboard = document.getElementById('scoreboard');
-            scoreboard.innerHTML = '';
-
-            // Sort players by score
-            const sortedPlayers = Object.entries(players).sort((a, b) => b[1] - a[1]);
-
-            sortedPlayers.forEach(([name, score]) => {
-                const entry = document.createElement('div');
-                entry.className = 'player-entry';
-                entry.innerHTML = `
-                    <span class="player-name">${name}</span>
-                    <span class="player-score">${score}</span>
-                `;
-                scoreboard.appendChild(entry);
-            });
-        }
-
-        function endRound() {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
-            document.getElementById('timer').textContent = 'ROUND ENDED';
-        }
-
-        async function resetGame() {
-            if (confirm('Are you sure you want to reset the game? This will clear all scores.')) {
-                try {
-                    await window.storage.delete(`room:${currentRoom}:players`, true);
-                    await window.storage.delete(`room:${currentRoom}:letters`, true);
-                    await window.storage.delete(`room:${currentRoom}:timer`, true);
-                    
-                    currentLetters = [];
-                    document.getElementById('letterDisplay').innerHTML = '';
-                    document.getElementById('scoreboard').innerHTML = '';
-                    document.getElementById('timer').textContent = '--';
-                    
-                    if (timerInterval) {
-                        clearInterval(timerInterval);
-                    }
-
-                    // Re-add current player
-                    await addPlayerToRoom(currentPlayer, currentRoom);
-                    loadGameState();
-                } catch (error) {
-                    console.error('Error resetting game:', error);
-                }
-            }
-        }
-
-        // Cleanup on page unload
-        window.addEventListener('beforeunload', () => {
-            if (timerInterval) {
-                clearInterval(timerInterval);
-            }
+    // Form submission
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      
+      try {
+        const formData = new FormData(e.target);
+        const response = await fetch(e.target.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
         });
-    </script>
+        
+        if (response.ok) {
+          alert('✅ Message sent successfully!');
+          e.target.reset();
+        } else {
+          throw new Error('Failed');
+        }
+      } catch (error) {
+        alert('❌ Something went wrong. Please try again.');
+      } finally {
+        btn.textContent = 'Send Message';
+        btn.disabled = false;
+      }
+    });
+  </script>
 </body>
 </html>
