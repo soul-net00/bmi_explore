@@ -613,3 +613,202 @@
             </tr>
           </thead>
           <tbody>
+<function_calls>
+<invoke name="artifacts">
+<parameter name="command">update</parameter>
+<parameter name="id">standalone_shop</parameter>
+<parameter name="old_str">          <tbody></parameter>
+<parameter name="new_str">          <tbody>
+            ${receipt.items.map(item => `
+              <tr>
+                <td>${item.description}</td>
+                <td>${item.category}</td>
+                <td>${item.quantity}</td>
+                <td>R ${formatCurrency(item.price)}</td>
+                <td><strong>R ${formatCurrency(item.total)}</strong></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+
+        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 12px; text-align: right;">
+          <p style="font-size: 14px; opacity: 0.9; margin-bottom: 5px;">TOTAL AMOUNT</p>
+          <p style="font-size: 36px; font-weight: bold;">R ${formatCurrency(receipt.total)}</p>
+        </div>
+
+        ${receipt.notes ? `<div style="background: #fef3c7; padding: 15px; border-radius: 8px; margin-top: 20px;">
+          <p style="font-weight: bold; margin-bottom: 5px;">Notes:</p>
+          <p>${receipt.notes}</p>
+        </div>` : ''}
+
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 2px solid #e5e7eb;">
+          <p style="font-style: italic; color: #6b7280;">${settings.warranty}</p>
+          <p style="margin-top: 10px; font-weight: bold;">Thank you for your business!</p>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-top: 25px;">
+          <button class="btn btn-primary" onclick="exportReceiptAsText(${receipt.id})" style="flex: 1;">📄 Export as Text</button>
+          <button class="btn btn-secondary" onclick="closeModal()" style="flex: 1;">Close</button>
+        </div>
+      `;
+
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('receiptModal').classList.remove('active');
+    }
+
+    function exportReceiptAsText(id) {
+      const receipts = getFromStorage(STORAGE_KEYS.receipts);
+      const receipt = receipts.find(r => r.id === id);
+      if (!receipt) return;
+
+      let text = `${settings.companyName}\n`;
+      text += `${settings.phone}\n`;
+      text += `${settings.email}\n`;
+      text += `${settings.address}\n`;
+      text += `${'='.repeat(60)}\n\n`;
+      text += `SALES RECEIPT\n\n`;
+      text += `Receipt #: ${receipt.id}\n`;
+      text += `Receipt Code: ${receipt.receiptCode}\n`;
+      text += `Date: ${new Date(receipt.date).toLocaleString()}\n\n`;
+      text += `Customer: ${receipt.customerName}\n`;
+      text += `Phone: ${receipt.customerPhone}\n`;
+      if (receipt.customerEmail) text += `Email: ${receipt.customerEmail}\n`;
+      text += `\n${'-'.repeat(60)}\n`;
+      text += `Item                      Qty    Price       Total\n`;
+      text += `${'-'.repeat(60)}\n`;
+      
+      receipt.items.forEach(item => {
+        text += `${item.description.padEnd(24)} ${item.quantity.toString().padStart(4)} R${formatCurrency(item.price).padStart(9)} R${formatCurrency(item.total).padStart(9)}\n`;
+      });
+      
+      text += `${'='.repeat(60)}\n`;
+      text += `TOTAL: R ${formatCurrency(receipt.total)}\n\n`;
+      if (receipt.notes) text += `Notes: ${receipt.notes}\n\n`;
+      text += `${settings.warranty}\n\n`;
+      text += `Thank you for your business!\n`;
+      
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Receipt_${receipt.receiptCode}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function exportDatabase() {
+      const data = {
+        receipts: getFromStorage(STORAGE_KEYS.receipts),
+        customers: getFromStorage(STORAGE_KEYS.customers),
+        settings: settings,
+        exportDate: new Date().toISOString(),
+        version: '1.0'
+      };
+      
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `CellphoneShop_Backup_${Date.now()}.json`;
+      a.click();
+      URL.revokeObjectURL(url);
+      
+      alert('✅ Database exported successfully!\n\nKeep this file safe - it contains all your data.');
+    }
+
+    function importDatabase(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const data = JSON.parse(e.target.result);
+          
+          if (!confirm('⚠️ WARNING: This will replace ALL current data!\n\nAre you absolutely sure?')) {
+            return;
+          }
+
+          if (data.receipts) saveToStorage(STORAGE_KEYS.receipts, data.receipts);
+          if (data.customers) saveToStorage(STORAGE_KEYS.customers, data.customers);
+          if (data.settings) {
+            settings = data.settings;
+            saveToStorage(STORAGE_KEYS.settings, data.settings);
+          }
+          
+          alert('✅ Database imported successfully!\n\nPage will reload to show new data.');
+          location.reload();
+        } catch (error) {
+          alert('❌ Error importing database. Please check the file format.');
+        }
+      };
+      reader.readAsText(file);
+      event.target.value = '';
+    }
+
+    function unlockSettings() {
+      const password = document.getElementById('passwordInput').value;
+      if (password === settings.password) {
+        document.getElementById('settingsLocked').style.display = 'none';
+        document.getElementById('settingsUnlocked').style.display = 'block';
+        loadSettingsData();
+      } else {
+        alert('❌ Incorrect password!');
+      }
+    }
+
+    function lockSettings() {
+      document.getElementById('settingsLocked').style.display = 'block';
+      document.getElementById('settingsUnlocked').style.display = 'none';
+      document.getElementById('passwordInput').value = '';
+    }
+
+    function loadSettingsData() {
+      document.getElementById('settingCompanyName').value = settings.companyName;
+      document.getElementById('settingPhone').value = settings.phone;
+      document.getElementById('settingEmail').value = settings.email;
+      document.getElementById('settingAddress').value = settings.address;
+      document.getElementById('settingWarranty').value = settings.warranty;
+      
+      const receipts = getFromStorage(STORAGE_KEYS.receipts);
+      const customers = getFromStorage(STORAGE_KEYS.customers);
+      document.getElementById('totalReceiptsCount').textContent = receipts.length;
+      document.getElementById('totalCustomersCount').textContent = customers.length;
+    }
+
+    function saveSettings() {
+      settings.companyName = document.getElementById('settingCompanyName').value;
+      settings.phone = document.getElementById('settingPhone').value;
+      settings.email = document.getElementById('settingEmail').value;
+      settings.address = document.getElementById('settingAddress').value;
+      settings.warranty = document.getElementById('settingWarranty').value;
+      
+      saveToStorage(STORAGE_KEYS.settings, settings);
+      alert('✅ Settings saved successfully!');
+    }
+
+    function changePassword() {
+      const newPassword = prompt('Enter new password (minimum 6 characters):');
+      if (!newPassword) return;
+      
+      if (newPassword.length < 6) {
+        alert('❌ Password must be at least 6 characters!');
+        return;
+      }
+      
+      settings.password = newPassword;
+      saveToStorage(STORAGE_KEYS.settings, settings);
+      alert('✅ Password changed successfully!');
+      lockSettings();
+    }
+
+    // Initialize on load
+    window.addEventListener('DOMContentLoaded', function() {
+      console.log('Cellphone Shop System initialized');
+    });
+  </script>
+</body>
+</html></parameter>
