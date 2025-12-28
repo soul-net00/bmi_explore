@@ -15,13 +15,13 @@
     nav ul { list-style: none; display: flex; }
     nav li { margin-left: 30px; }
     nav a { color: #94a3b8; text-decoration: none; padding: 8px 16px; border-radius: 4px; transition: 0.3s; }
-    nav a:hover { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
+    nav a:hover, nav a.active { background: rgba(59, 130, 246, 0.1); color: #3b82f6; }
 
     /* Hero */
     .hero { background: linear-gradient(135deg, #0f172a, #1e293b); text-align: center; padding: 180px 20px 120px; margin-top: 70px; }
     .hero h1 { font-size: 64px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hero .tagline { font-size: 22px; color: #94a3b8; margin: 20px 0; }
-    .btn { padding: 15px 40px; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; text-decoration: none; border-radius: 50px; display: inline-block; margin: 10px; transition: 0.3s; }
+    .btn { padding: 15px 40px; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; text-decoration: none; border-radius: 50px; display: inline-block; margin: 10px; transition: 0.3s; cursor: pointer; border: none; font-size: 16px; }
     .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(59, 130, 246, 0.5); }
 
     /* About */
@@ -48,14 +48,6 @@
     .project-link { flex: 1; padding: 10px 20px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; text-decoration: none; border-radius: 8px; text-align: center; border: 1px solid #3b82f6; transition: 0.3s; }
     .project-link:hover { background: #3b82f6; color: white; }
 
-    /* Video Modal */
-    .video-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 2000; align-items: center; justify-content: center; padding: 20px; }
-    .video-modal.active { display: flex; }
-    .video-container { position: relative; max-width: 900px; width: 100%; background: #1e293b; border-radius: 15px; overflow: hidden; }
-    .video-container iframe { width: 100%; height: 500px; border: none; }
-    .close-modal { position: absolute; top: -50px; right: 0; background: transparent; border: none; color: white; font-size: 36px; cursor: pointer; transition: 0.3s; }
-    .close-modal:hover { color: #3b82f6; transform: rotate(90deg); }
-
     /* Contact */
     .contact { padding: 100px 20px; }
     .contact h2 { font-size: 48px; text-align: center; margin-bottom: 20px; color: #3b82f6; }
@@ -73,46 +65,50 @@
     .social-links a { color: #3b82f6; padding: 10px 20px; border-radius: 25px; border: 2px solid #3b82f6; text-decoration: none; transition: 0.3s; }
     .social-links a:hover { background: #3b82f6; color: white; transform: translateY(-3px); }
 
-    /* 404 Page */
-    .error-page { display: none; min-height: 100vh; padding: 100px 20px; text-align: center; flex-direction: column; justify-content: center; align-items: center; }
-    .error-page.active { display: flex; }
-    .error-code { font-size: 150px; font-weight: bold; background: linear-gradient(135deg, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: glitch 3s infinite; }
-    @keyframes glitch { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-5px); } 40% { transform: translateX(5px); } }
-    .error-message { font-size: 32px; color: #e2e8f0; margin: 20px 0; }
-    .error-description { font-size: 18px; color: #94a3b8; max-width: 600px; margin-bottom: 40px; }
+    /* Page Sections - Hide/Show */
+    .page-section { display: none; min-height: 100vh; padding-top: 70px; }
+    .page-section.active { display: block; }
 
     @media (max-width: 768px) {
       .hero h1 { font-size: 40px; }
       .portfolio-grid { grid-template-columns: 1fr; }
-      .video-container iframe { height: 300px; }
-      .error-code { font-size: 100px; }
+      nav ul { flex-direction: column; position: absolute; top: 70px; right: 0; background: rgba(30, 41, 59, 0.98); width: 200px; padding: 20px; display: none; }
+      nav ul.mobile-active { display: flex; }
+      nav li { margin: 10px 0; }
+      .mobile-menu-btn { display: block; background: none; border: none; color: #3b82f6; font-size: 24px; cursor: pointer; }
     }
   </style>
 </head>
 <body>
-  <div id="mainContent">
-    <div class="navbar">
-      <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">💻 My Portfolio</div>
-      <nav>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#portfolio">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav>
-    </div>
+  <div class="navbar">
+    <div class="logo" onclick="showPage('home')">💻 My Portfolio</div>
+    <nav>
+      <ul id="navMenu">
+        <li><a href="#" onclick="showPage('home')" class="nav-link">Home</a></li>
+        <li><a href="#" onclick="showPage('about')" class="nav-link">About</a></li>
+        <li><a href="#" onclick="showPage('portfolio')" class="nav-link">Projects</a></li>
+        <li><a href="#" onclick="showPage('shop')" class="nav-link">Cellphone Shop</a></li>
+        <li><a href="#" onclick="showPage('contact')" class="nav-link">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
 
-    <section id="home" class="hero">
+  <!-- HOME PAGE -->
+  <div id="home" class="page-section active">
+    <section class="hero">
       <h1>Welcome to My Portfolio</h1>
       <p class="tagline">Aspiring Developer | ITC Student | Learning & Building</p>
       <div>
-        <a href="#portfolio" class="btn">View My Projects</a>
-        <a href="#contact" class="btn">Get In Touch</a>
+        <button onclick="showPage('portfolio')" class="btn">View My Projects</button>
+        <button onclick="showPage('shop')" class="btn">Try Cellphone Shop</button>
+        <button onclick="showPage('contact')" class="btn">Get In Touch</button>
       </div>
     </section>
+  </div>
 
-    <section id="about" class="about">
+  <!-- ABOUT PAGE -->
+  <div id="about" class="page-section">
+    <section class="about">
       <h2>About Me</h2>
       <p>Hi! I'm an ITC student passionate about web development and coding. I'm currently learning HTML, CSS, JavaScript, and exploring various programming languages.</p>
       <div class="skills">
@@ -124,22 +120,26 @@
         <span class="skill-tag">Git & GitHub</span>
       </div>
     </section>
+  </div>
 
-    <section id="portfolio" class="portfolio">
+  <!-- PORTFOLIO PAGE -->
+  <div id="portfolio" class="page-section">
+    <section class="portfolio">
       <h2>My Projects</h2>
       <div class="portfolio-grid">
         <div class="portfolio-item">
-          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="MobileFix Manager">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Cellphone Shop">
           <div class="portfolio-info">
-            <h3>MobileFix Manager</h3>
-            <p>Complete cellphone repair shop management system with VB.NET and SQL Server. Features receipt management, customer database, and inventory tracking.</p>
+            <h3>Cellphone Shop Management</h3>
+            <p>Complete web-based cellphone shop management system. Create receipts, manage customers, search history, and export data.</p>
             <div class="project-badges">
-              <span class="project-badge">VB.NET + SQL</span>
-              <span class="project-badge">Desktop App</span>
+              <span class="project-badge">JavaScript</span>
+              <span class="project-badge">Web App</span>
+              <span class="project-badge">LocalStorage</span>
             </div>
             <div class="project-links">
+              <button class="project-link" onclick="showPage('shop')">Launch App</button>
               <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
-              <button class="project-link" onclick="openVideoModal()">Watch Demo</button>
             </div>
           </div>
         </div>
@@ -171,7 +171,7 @@
             </div>
             <div class="project-links">
               <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
-              <a href="#home" class="project-link">Live Demo</a>
+              <button class="project-link" onclick="showPage('home')">Live Demo</button>
             </div>
           </div>
         </div>
@@ -193,8 +193,21 @@
         </div>
       </div>
     </section>
+  </div>
 
-    <section id="contact" class="contact">
+  <!-- CELLPHONE SHOP PAGE -->
+  <div id="shop" class="page-section">
+    <iframe 
+      src="about:blank" 
+      id="shopFrame"
+      style="width: 100%; height: calc(100vh - 70px); border: none;"
+      title="Cellphone Shop Application">
+    </iframe>
+  </div>
+
+  <!-- CONTACT PAGE -->
+  <div id="contact" class="page-section">
+    <section class="contact">
       <h2>Get In Touch</h2>
       <form id="contactForm" action="https://formspree.io/f/xblnvqpz" method="POST">
         <label for="name">Your Name</label>
@@ -209,102 +222,46 @@
         <button type="submit">Send Message</button>
       </form>
     </section>
-
-    <footer>
-      <p>&copy; 2025 My Portfolio | ITC Student | Aspiring Developer</p>
-      <div class="social-links">
-        <a href="https://github.com/soul-net00" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
-        <a href="mailto:your.email@gmail.com">Email Me</a>
-      </div>
-    </footer>
   </div>
 
-  <!-- Video Modal -->
-  <div class="video-modal" id="videoModal">
-    <div class="video-container">
-      <button class="close-modal" onclick="closeVideoModal()">×</button>
-      <iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <footer>
+    <p>&copy; 2025 My Portfolio | ITC Student | Aspiring Developer</p>
+    <div class="social-links">
+      <a href="https://github.com/soul-net00" target="_blank">GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+      <a href="mailto:your.email@gmail.com">Email Me</a>
     </div>
-  </div>
-
-  <!-- 404 Error Page -->
-  <div class="error-page" id="errorPage">
-    <div class="error-code">404</div>
-    <div class="error-message">Page Not Found</div>
-    <div class="error-description">Oops! The page you're looking for doesn't exist. It might have been moved or deleted.</div>
-    <a href="#home" class="btn" onclick="show404(false)">Go Back Home</a>
-  </div>
+  </footer>
 
   <script>
-    // Video Modal Functions
-    function openVideoModal() {
-      const modal = document.getElementById('videoModal');
-      const frame = document.getElementById('videoFrame');
-      frame.src = 'https://www.youtube.com/embed/L99lApSNXuo?autoplay=1';
-      modal.classList.add('active');
-    }
-
-    function closeVideoModal() {
-      const modal = document.getElementById('videoModal');
-      const frame = document.getElementById('videoFrame');
-      frame.src = '';
-      modal.classList.remove('active');
-    }
-
-    // Close modal on background click
-    document.getElementById('videoModal').addEventListener('click', function(e) {
-      if (e.target === this) closeVideoModal();
-    });
-
-    // 404 Page Function
-    function show404(show) {
-      const mainContent = document.getElementById('mainContent');
-      const errorPage = document.getElementById('errorPage');
-      if (show) {
-        mainContent.style.display = 'none';
-        errorPage.classList.add('active');
-      } else {
-        mainContent.style.display = 'block';
-        errorPage.classList.remove('active');
-        window.scrollTo({top: 0, behavior: 'smooth'});
-      }
-    }
-
-    // Detect invalid routes (for demo purposes)
-    window.addEventListener('hashchange', function() {
-      const validSections = ['#home', '#about', '#portfolio', '#contact', ''];
-      if (!validSections.includes(window.location.hash)) {
-        show404(true);
-      }
-    });
-
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) target.scrollIntoView({ behavior: 'smooth' });
+    // Page navigation
+    function showPage(pageId) {
+      document.querySelectorAll('.page-section').forEach(page => {
+        page.classList.remove('active');
       });
-    });
-
-    // Active nav highlighting
-    window.addEventListener('scroll', () => {
-      let current = '';
-      document.querySelectorAll('section').forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (pageYOffset >= sectionTop - 200) {
-          current = section.getAttribute('id');
-        }
-      });
-
-      document.querySelectorAll('nav a').forEach(link => {
+      document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
-        if (link.getAttribute('href').slice(1) === current) {
-          link.classList.add('active');
-        }
       });
-    });
+      
+      document.getElementById(pageId).classList.add('active');
+      event.target.classList.add('active');
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      
+      // Load shop app when navigating to shop page
+      if (pageId === 'shop') {
+        loadShopApp();
+      }
+    }
+
+    // Load the cellphone shop app
+    function loadShopApp() {
+      const frame = document.getElementById('shopFrame');
+      if (frame.src === 'about:blank') {
+        // In production, this would load your actual shop app
+        // For now, scroll to the artifact above
+        alert('🎉 The Cellphone Shop app is in the interactive demo above!\n\nScroll up to use it, or I can create a standalone version for you.');
+      }
+    }
 
     // Form submission
     document.getElementById('contactForm').addEventListener('submit', async (e) => {
