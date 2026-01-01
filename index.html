@@ -152,7 +152,7 @@
       <button class="tab-btn active" onclick="switchTab('new-receipt')">➕ New Receipt</button>
       <button class="tab-btn" onclick="switchTab('history')">📜 History</button>
       <button class="tab-btn" onclick="switchTab('settings')">⚙️ Settings</button>
-      <button class="tab-btn" onclick="switchTab('portfolio')">👨‍💻 Portfolio</button>
+      <button class="tab-btn" onclick="openPortfolio()">👨‍💻 Portfolio</button>
     </div>
 
     <div class="content">
@@ -361,8 +361,24 @@
 
       <!-- PORTFOLIO TAB -->
       <div id="portfolio" class="tab-content">
-        <div class="portfolio-section">
-          <h2>My Portfolio</h2>
+        <div id="portfolioLocked" class="settings-locked">
+          <div class="lock-icon">🔒</div>
+          <h2 style="margin-bottom: 15px; font-size: 20px;">Portfolio Locked</h2>
+          <p style="color: #6b7280; margin-bottom: 20px;">Enter password to view portfolio</p>
+          <div style="max-width: 400px; margin: 0 auto;">
+            <input type="password" id="portfolioPasswordInput" placeholder="Enter password" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #e5e7eb; margin-bottom: 12px;">
+            <button class="btn btn-primary" onclick="unlockPortfolio()" style="width: 100%;">🔓 Unlock Portfolio</button>
+            <p style="margin-top: 12px; color: #6b7280; font-size: 13px;">Password required to access</p>
+          </div>
+        </div>
+
+        <div id="portfolioUnlocked" style="display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
+            <h2 style="color: #667eea; font-size: 20px;">My Portfolio</h2>
+            <button class="btn btn-danger" onclick="lockPortfolio()">🔒 Lock Portfolio</button>
+          </div>
+
+          <div class="portfolio-section">
           <p style="text-align: center; color: #6b7280; margin-bottom: 30px; font-size: 14px;">
             Hi! I'm an ITC student passionate about web development and coding. Check out my projects below.
           </p>
@@ -446,6 +462,7 @@
             </div>
           </div>
         </div>
+        </div>
       </div>
     </div>
   </div>
@@ -470,6 +487,7 @@
 
     let currentItems = [];
     let settings = getSettings();
+    let portfolioUnlocked = false;
 
     function getSettings() {
       const defaults = {
@@ -526,6 +544,35 @@
       } else if (tabName === 'settings') {
         loadSettingsData();
       }
+    }
+
+    function openPortfolio() {
+      if (portfolioUnlocked) {
+        switchTab('portfolio');
+      } else {
+        switchTab('portfolio');
+      }
+    }
+
+    function unlockPortfolio() {
+      const password = document.getElementById('portfolioPasswordInput').value;
+      if (password === '@soul123') {
+        portfolioUnlocked = true;
+        document.getElementById('portfolioLocked').style.display = 'none';
+        document.getElementById('portfolioUnlocked').style.display = 'block';
+        document.getElementById('portfolioPasswordInput').value = '';
+      } else {
+        alert('❌ Incorrect password!');
+        document.getElementById('portfolioPasswordInput').value = '';
+        document.getElementById('portfolioPasswordInput').focus();
+      }
+    }
+
+    function lockPortfolio() {
+      portfolioUnlocked = false;
+      document.getElementById('portfolioLocked').style.display = 'block';
+      document.getElementById('portfolioUnlocked').style.display = 'none';
+      document.getElementById('portfolioPasswordInput').value = '';
     }
 
     function addItem() {
