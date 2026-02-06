@@ -1,1194 +1,766 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cellphone Shop Management System</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-    
-    .container { max-width: 1400px; margin: 0 auto; padding: 10px; }
-    
-    .header { background: white; border-radius: 15px; padding: 20px; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-    .header h1 { color: #667eea; font-size: 24px; }
-    .header p { color: #6b7280; margin-top: 5px; font-size: 14px; }
-    .header-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-    .header-btn { padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; font-size: 13px; }
-    .btn-export { background: #10b981; color: white; }
-    .btn-import { background: #3b82f6; color: white; }
-    .btn-export:hover { background: #059669; transform: translateY(-2px); }
-    .btn-import:hover { background: #2563eb; transform: translateY(-2px); }
-    
-    .tabs { background: white; border-radius: 15px; padding: 10px; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; gap: 8px; flex-wrap: wrap; overflow-x: auto; }
-    .tab-btn { padding: 10px 15px; border: none; background: #f3f4f6; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; color: #6b7280; font-size: 13px; white-space: nowrap; }
-    .tab-btn:hover { background: #e5e7eb; }
-    .tab-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
-    
-    .content { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
-    .form-group { display: flex; flex-direction: column; }
-    .form-group label { font-weight: 600; margin-bottom: 8px; color: #374151; font-size: 14px; }
-    .form-group input, .form-group select, .form-group textarea { padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px; transition: 0.3s; width: 100%; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #667eea; }
-    
-    .btn { padding: 12px 25px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 14px; }
-    .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
-    .btn-success { background: #10b981; color: white; }
-    .btn-success:hover { background: #059669; }
-    .btn-danger { background: #ef4444; color: white; }
-    .btn-danger:hover { background: #dc2626; }
-    .btn-secondary { background: #6b7280; color: white; }
-    .btn-secondary:hover { background: #4b5563; }
-    
-    .table-container { overflow-x: auto; margin-top: 15px; }
-    table { width: 100%; border-collapse: collapse; min-width: 500px; }
-    th { background: #f9fafb; padding: 10px; text-align: left; font-weight: 600; border-bottom: 2px solid #e5e7eb; font-size: 13px; }
-    td { padding: 10px; border-bottom: 1px solid #e5e7eb; font-size: 13px; }
-    tr:hover { background: #f9fafb; }
-    
-    .summary-card { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 12px; margin-top: 20px; }
-    .summary-card h3 { margin-bottom: 15px; font-size: 18px; }
-    .summary-total { font-size: 32px; font-weight: bold; }
-    
-    .receipt-card { background: #f9fafb; padding: 15px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #667eea; cursor: pointer; transition: 0.3s; }
-    .receipt-card:hover { background: #f3f4f6; transform: translateX(5px); }
-    .receipt-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 10px; }
-    .receipt-code { font-size: 16px; font-weight: bold; color: #667eea; }
-    .receipt-amount { font-size: 20px; font-weight: bold; color: #10b981; }
-    
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 10px; }
-    .modal.active { display: flex; }
-    .modal-content { background: white; border-radius: 15px; padding: 20px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .modal-close { background: none; border: none; font-size: 30px; cursor: pointer; color: #6b7280; }
-    .modal-close:hover { color: #ef4444; }
-    
-    .settings-locked { text-align: center; padding: 30px 10px; }
-    .settings-locked .lock-icon { font-size: 60px; margin-bottom: 20px; }
-    
-    .action-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
-    .action-btns .btn { flex: 1; min-width: 120px; }
-    
-    .warning-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 8px; margin: 15px 0; }
-    .warning-box h4 { color: #92400e; margin-bottom: 5px; font-size: 14px; }
-    .warning-box p { color: #78350f; font-size: 13px; }
-    
-    .checkbox-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .checkbox-group input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
-    
-    .logo-preview-box { margin-top: 15px; padding: 15px; border: 2px dashed #e5e7eb; border-radius: 8px; text-align: center; }
-    .logo-preview-box img { max-width: 100%; max-height: 150px; border: 2px solid #e5e7eb; border-radius: 8px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine? 💕</title>
+    <link href="https://fonts.googleapis.com/css2?family=Italiana&family=Cormorant+Garamond:wght@300;400;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rose-petal: #FFE5EC;
+            --blush-pink: #FFB3C6;
+            --romantic-red: #FF6B9D;
+            --deep-magenta: #C73866;
+            --velvet-purple: #8B4789;
+            --soft-lavender: #E8D5E8;
+            --cream: #FFF8F0;
+        }
 
-    /* Portfolio Section */
-    .portfolio-section { background: white; padding: 30px 20px; border-radius: 15px; margin-bottom: 20px; }
-    .portfolio-section h2 { color: #667eea; margin-bottom: 20px; font-size: 24px; text-align: center; }
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .portfolio-item { background: #f9fafb; border-radius: 12px; overflow: hidden; border: 2px solid #e5e7eb; transition: 0.3s; }
-    .portfolio-item:hover { border-color: #667eea; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2); }
-    .portfolio-item img { width: 100%; height: 180px; object-fit: cover; }
-    .portfolio-info { padding: 15px; }
-    .portfolio-info h3 { color: #667eea; margin-bottom: 10px; font-size: 18px; }
-    .portfolio-info p { color: #6b7280; margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
-    .project-badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-    .project-badge { padding: 4px 12px; background: rgba(139, 92, 246, 0.2); color: #8b5cf6; border-radius: 15px; font-size: 12px; }
-    .project-links { display: flex; gap: 8px; flex-wrap: wrap; }
-    .project-link { flex: 1; padding: 8px 12px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; text-decoration: none; border-radius: 6px; text-align: center; border: 1px solid #3b82f6; transition: 0.3s; font-size: 12px; }
-    .project-link:hover { background: #3b82f6; color: white; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
-    .stat-card { background: #f9fafb; padding: 15px; border-radius: 8px; text-align: center; }
-    .stat-number { font-size: 28px; font-weight: bold; color: #667eea; }
-    .stat-label { color: #6b7280; font-size: 13px; margin-top: 5px; }
-    
-    @media (max-width: 768px) {
-      .container { padding: 5px; }
-      .header { padding: 15px; }
-      .header h1 { font-size: 20px; }
-      .content { padding: 15px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .tabs { gap: 5px; padding: 8px; }
-      .tab-btn { padding: 8px 12px; font-size: 12px; }
-      .receipt-header { flex-direction: column; }
-      .action-btns { flex-direction: column; }
-      .action-btns .btn { width: 100%; }
-      table { font-size: 12px; }
-      th, td { padding: 8px; }
-      .summary-total { font-size: 28px; }
-      .portfolio-grid { grid-template-columns: 1fr; }
-    }
-    
-    @media (max-width: 480px) {
-      .header h1 { font-size: 18px; }
-      .header-btn { padding: 8px 12px; font-size: 12px; }
-      .summary-card h3 { font-size: 16px; }
-    }
-  </style>
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, 
+                var(--rose-petal) 0%, 
+                var(--soft-lavender) 25%,
+                var(--blush-pink) 50%,
+                var(--romantic-red) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Floating hearts background */
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart {
+            position: absolute;
+            font-size: 20px;
+            animation: float-up 8s infinite ease-in;
+            opacity: 0;
+        }
+
+        @keyframes float-up {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 550px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            box-shadow: 
+                0 20px 60px rgba(199, 56, 102, 0.3),
+                0 0 100px rgba(255, 107, 157, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-family: 'Italiana', serif;
+            font-size: 3.5rem;
+            color: var(--deep-magenta);
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(199, 56, 102, 0.1);
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--romantic-red);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--velvet-purple);
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+
+        .input-group {
+            margin: 30px 0;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--deep-magenta);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 1.1rem;
+            font-family: 'Cormorant Garamond', serif;
+            border: 2px solid var(--blush-pink);
+            border-radius: 15px;
+            background: var(--cream);
+            color: var(--deep-magenta);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus {
+            border-color: var(--romantic-red);
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+            transform: scale(1.02);
+        }
+
+        .password-box {
+            background: linear-gradient(135deg, var(--rose-petal), var(--soft-lavender));
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid var(--romantic-red);
+            text-align: center;
+        }
+
+        .password-display {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--deep-magenta);
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: all;
+        }
+
+        .password-display:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(199, 56, 102, 0.2);
+        }
+
+        .copy-instruction {
+            font-size: 0.9rem;
+            color: var(--velvet-purple);
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        button {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--romantic-red), var(--deep-magenta));
+            color: white;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(199, 56, 102, 0.4);
+        }
+
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, var(--romantic-red), #FF1744);
+            color: white;
+            padding: 20px 50px;
+            font-size: 1.4rem;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0 20px 40px rgba(255, 23, 68, 0.5);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, var(--blush-pink), var(--soft-lavender));
+            color: var(--deep-magenta);
+            padding: 20px 50px;
+            font-size: 1.4rem;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .btn-no:hover {
+            transform: scale(0.95);
+        }
+
+        .btn-no.running {
+            position: fixed;
+            z-index: 1000;
+        }
+
+        .error-message {
+            color: var(--deep-magenta);
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1rem;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .celebration {
+            display: none;
+            text-align: center;
+        }
+
+        .celebration.active {
+            display: block;
+            animation: celebrationPop 0.6s ease;
+        }
+
+        @keyframes celebrationPop {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .celebration h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--romantic-red), var(--velvet-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .celebration p {
+            font-size: 1.3rem;
+            color: var(--deep-magenta);
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+
+        .heart-glow {
+            font-size: 4rem;
+            animation: heartbeat 1.5s ease infinite;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {
+                transform: scale(1);
+            }
+            25% {
+                transform: scale(1.2);
+            }
+            50% {
+                transform: scale(1);
+            }
+            75% {
+                transform: scale(1.1);
+            }
+        }
+
+        /* Confetti */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--romantic-red);
+            position: fixed;
+            top: -10px;
+            z-index: 1000;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .greeting-message {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5rem;
+            color: var(--romantic-red);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 25px;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .btn-yes, .btn-no {
+                padding: 15px 35px;
+                font-size: 1.2rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        .pulse-glow {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 107, 157, 0.8);
+            }
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            color: rgba(199, 56, 102, 0.8);
+            text-align: center;
+            padding: 10px 25px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            border: 1px solid rgba(255, 179, 198, 0.5);
+            box-shadow: 0 5px 15px rgba(199, 56, 102, 0.2);
+            animation: fadeInFooter 1s ease 0.5s backwards;
+        }
+
+        @keyframes fadeInFooter {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .footer span {
+            background: linear-gradient(135deg, var(--romantic-red), var(--velvet-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        @media (max-width: 600px) {
+            .footer {
+                font-size: 0.8rem;
+                padding: 8px 20px;
+                bottom: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="header-content">
-        <div>
-          <h1>📱 Cellphone Shop Management</h1>
-          <p>Professional Receipt System</p>
-        </div>
-        <div class="header-btns">
-          <button class="header-btn btn-export" onclick="exportDatabase()">📥 Export</button>
-          <label class="header-btn btn-import" style="cursor: pointer;">
-            📤 Import
-            <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importDatabase(event)">
-          </label>
-        </div>
-      </div>
-    </div>
+    <!-- Floating hearts background -->
+    <div class="hearts-background" id="heartsBackground"></div>
 
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('new-receipt')">➕ New Receipt</button>
-      <button class="tab-btn" onclick="switchTab('history')">📜 History</button>
-      <button class="tab-btn" onclick="switchTab('settings')">⚙️ Settings</button>
-      <button class="tab-btn" onclick="openPortfolio()">👨‍💻 Portfolio</button>
-    </div>
-
-    <div class="content">
-      <!-- NEW RECEIPT TAB -->
-      <div id="new-receipt" class="tab-content active">
-        <h2 style="margin-bottom: 15px; color: #667eea; font-size: 20px;">Create New Receipt</h2>
-        
-        <div class="warning-box">
-          <h4>⚠️ Important: Data Storage Notice</h4>
-          <p>Your data is saved in your browser. Export regularly to backup!</p>
-        </div>
-
-        <h3 style="margin-bottom: 12px; font-size: 16px;">Customer Information</h3>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Phone Number *</label>
-            <input type="tel" id="customerPhone" placeholder="0821234567" required>
-          </div>
-          <div class="form-group">
-            <label>Customer Name</label>
-            <input type="text" id="customerName" placeholder="John Doe">
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="customerEmail" placeholder="customer@email.com">
-          </div>
-        </div>
-
-        <h3 style="margin: 20px 0 12px; font-size: 16px;">Add Items</h3>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Description *</label>
-            <input type="text" id="itemDescription" placeholder="Screen replacement">
-          </div>
-          <div class="form-group">
-            <label>Category *</label>
-            <select id="itemCategory">
-              <option>Repair Service</option>
-              <option>Software Update</option>
-              <option>Battery</option>
-              <option>Screen Protector</option>
-              <option>Phone Case</option>
-              <option>Charger</option>
-              <option>Cable</option>
-              <option>Earphones</option>
-              <option>Memory Card</option>
-              <option>SIM Card</option>
-              <option>Other Accessories</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Quantity *</label>
-            <input type="number" id="itemQuantity" value="1" min="1">
-          </div>
-          <div class="form-group">
-            <label>Price (R) *</label>
-            <input type="number" id="itemPrice" placeholder="0.00" step="0.01" min="0">
-          </div>
-        </div>
-        
-        <div class="checkbox-group" style="margin: 12px 0;">
-          <input type="checkbox" id="applyDiscount" onchange="toggleDiscount()">
-          <label for="applyDiscount" style="margin: 0; cursor: pointer;">Apply Discount</label>
-          <input type="number" id="discountPercent" placeholder="%" min="0" max="100" style="width: 80px; padding: 8px; border-radius: 5px; border: 2px solid #e5e7eb;" disabled>
-        </div>
-
-        <button class="btn btn-primary" onclick="addItem()" style="width: 100%;">➕ Add Item to Receipt</button>
-
-        <div id="itemsTableContainer" style="display: none; margin-top: 20px;">
-          <h3 style="font-size: 16px; margin-bottom: 10px;">Items on Receipt</h3>
-          <div class="table-container">
-            <table id="itemsTable">
-              <thead>
-                <tr>
-                  <th>Description</th>
-                  <th>Category</th>
-                  <th>Qty</th>
-                  <th>Price</th>
-                  <th>Total</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="itemsTableBody"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="summary-card" id="summaryCard" style="display: none;">
-          <h3>Receipt Summary</h3>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 10px;">
-            <div>
-              <p>Total Items: <span id="totalItems">0</span></p>
-            </div>
-            <div style="text-align: right;">
-              <p style="font-size: 14px; opacity: 0.9;">TOTAL AMOUNT</p>
-              <div class="summary-total">R <span id="totalAmount">0.00</span></div>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 15px;">
-            <label style="color: white;">Notes (Optional)</label>
-            <textarea id="receiptNotes" rows="3" placeholder="Additional notes..."></textarea>
-          </div>
-
-          <div class="action-btns">
-            <button class="btn btn-success" onclick="saveReceipt()">💾 Save Receipt</button>
-            <button class="btn btn-secondary" onclick="clearReceipt()">🗑️ Clear All</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- HISTORY TAB -->
-      <div id="history" class="tab-content">
-        <h2 style="margin-bottom: 15px; color: #667eea; font-size: 20px;">Receipt History</h2>
-        
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Search by Phone / Receipt ID / Code</label>
-            <input type="text" id="searchTerm" placeholder="Enter search term...">
-          </div>
-          <div style="display: flex; align-items: flex-end;">
-            <button class="btn btn-primary" onclick="searchReceipts()" style="width: 100%;">🔍 Search</button>
-          </div>
-        </div>
-
-        <div id="searchResults"></div>
-      </div>
-
-      <!-- SETTINGS TAB -->
-      <div id="settings" class="tab-content">
-        <div id="settingsLocked" class="settings-locked">
-          <div class="lock-icon">🔒</div>
-          <h2 style="margin-bottom: 15px; font-size: 20px;">Settings Locked</h2>
-          <p style="color: #6b7280; margin-bottom: 20px;">Enter password to unlock settings</p>
-          <div style="max-width: 400px; margin: 0 auto;">
-            <input type="password" id="passwordInput" placeholder="Enter password" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #e5e7eb; margin-bottom: 12px;">
-            <button class="btn btn-primary" onclick="unlockSettings()" style="width: 100%;">🔓 Unlock Settings</button>
-            <p style="margin-top: 12px; color: #6b7280; font-size: 13px;">Default password: admin123</p>
-          </div>
-        </div>
-
-        <div id="settingsUnlocked" style="display: none;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-            <h2 style="color: #667eea; font-size: 20px;">Company Settings</h2>
-            <button class="btn btn-danger" onclick="lockSettings()">🔒 Lock Settings</button>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Company Name</label>
-              <input type="text" id="settingCompanyName" placeholder="Your Company Name">
-            </div>
-            <div class="form-group">
-              <label>Phone</label>
-              <input type="tel" id="settingPhone" placeholder="(555) 123-4567">
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" id="settingEmail" placeholder="info@company.com">
-            </div>
-            <div class="form-group">
-              <label>Address</label>
-              <input type="text" id="settingAddress" placeholder="123 Main Street, City">
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 15px;">
-            <label>Warranty Text</label>
-            <textarea id="settingWarranty" rows="2" placeholder="Warranty: 30 days on all repairs"></textarea>
-          </div>
-
-          <div class="form-group" style="margin-top: 15px;">
-            <label>Company Logo</label>
-            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px; flex-wrap: wrap;">
-              <input type="file" id="logoUpload" accept="image/*" style="display: none;" onchange="handleLogoUpload(event)">
-              <button class="btn btn-primary" onclick="document.getElementById('logoUpload').click()">📷 Upload Logo</button>
-              <span id="logoStatus" style="color: #6b7280; font-size: 13px;">No logo uploaded</span>
-            </div>
-            <div id="logoPreview" class="logo-preview-box" style="display: none;">
-              <img id="logoImage" alt="Company Logo Preview">
-              <br>
-              <button class="btn btn-danger" onclick="removeLogo()" style="margin-top: 10px; padding: 8px 15px;">Remove Logo</button>
-            </div>
-          </div>
-
-          <div style="background: #f9fafb; padding: 15px; border-radius: 12px; margin: 20px 0;">
-            <h3 style="margin-bottom: 15px; font-size: 16px;">Database Statistics</h3>
-            <div class="stats-grid">
-              <div class="stat-card">
-                <div class="stat-number" id="totalReceiptsCount">0</div>
-                <div class="stat-label">Total Receipts</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-number" id="totalCustomersCount">0</div>
-                <div class="stat-label">Total Customers</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="action-btns">
-            <button class="btn btn-success" onclick="saveSettings()">💾 Save Settings</button>
-            <button class="btn btn-secondary" onclick="changePassword()">🔑 Change Password</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PORTFOLIO TAB -->
-      <div id="portfolio" class="tab-content">
-        <div id="portfolioLocked" class="settings-locked">
-          <div class="lock-icon">🔒</div>
-          <h2 style="margin-bottom: 15px; font-size: 20px;">Portfolio Locked</h2>
-          <p style="color: #6b7280; margin-bottom: 20px;">Enter password to view portfolio</p>
-          <div style="max-width: 400px; margin: 0 auto;">
-            <input type="password" id="portfolioPasswordInput" placeholder="Enter password" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #e5e7eb; margin-bottom: 12px;">
-            <button class="btn btn-primary" onclick="unlockPortfolio()" style="width: 100%;">🔓 Unlock Portfolio</button>
-            <p style="margin-top: 12px; color: #6b7280; font-size: 13px;">Password required to access</p>
-          </div>
-        </div>
-
-        <div id="portfolioUnlocked" style="display: none;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-            <h2 style="color: #667eea; font-size: 20px;">My Portfolio</h2>
-            <button class="btn btn-danger" onclick="lockPortfolio()">🔒 Lock Portfolio</button>
-          </div>
-
-          <div class="portfolio-section">
-          <p style="text-align: center; color: #6b7280; margin-bottom: 30px; font-size: 14px;">
-            Hi! I'm an ITC student passionate about web development and coding. Check out my projects below.
-          </p>
-          
-          <div class="portfolio-grid">
-            <div class="portfolio-item">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="MobileFix Manager">
-              <div class="portfolio-info">
-                <h3>MobileFix Manager</h3>
-                <p>Complete cellphone repair shop management system with VB.NET and SQL Server. Features receipt management, customer database, and inventory tracking.</p>
-                <div class="project-badges">
-                  <span class="project-badge">VB.NET</span>
-                  <span class="project-badge">SQL Server</span>
-                  <span class="project-badge">Desktop App</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
-                  <a href="#" class="project-link" onclick="alert('Demo coming soon!')">Watch Demo</a>
-                </div>
-              </div>
+    <div class="container">
+        <!-- Screen 1: Name Input -->
+        <div class="screen active" id="screen1">
+            <h1>💕</h1>
+            <h2>Hello Beautiful</h2>
+            <p class="subtitle">Before we begin this journey...</p>
+            
+            <div class="input-group">
+                <label for="nameInput">May I know your name?</label>
+                <input type="text" id="nameInput" placeholder="Enter your name..." autocomplete="off">
             </div>
             
-            <div class="portfolio-item">
-              <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=600&fit=crop" alt="BMI Calculator">
-              <div class="portfolio-info">
-                <h3>BMI Explorer</h3>
-                <p>Interactive BMI calculator web application. Users can calculate their Body Mass Index with visual feedback and health recommendations.</p>
-                <div class="project-badges">
-                  <span class="project-badge">HTML</span>
-                  <span class="project-badge">CSS</span>
-                  <span class="project-badge">JavaScript</span>
+            <button class="btn-primary" onclick="submitName()">Continue →</button>
+        </div>
+
+        <!-- Screen 2: Password -->
+        <div class="screen" id="screen2">
+            <div class="greeting-message" id="greetingMessage"></div>
+            
+            <h2>A Little Secret...</h2>
+            <p class="subtitle">To continue, you'll need the password</p>
+            
+            <div class="password-box pulse-glow">
+                <p style="font-size: 1rem; color: var(--velvet-purple); margin-bottom: 10px;">
+                    ✨ The password is:
+                </p>
+                <div class="password-display" onclick="copyPassword()">
+                    souls wife
                 </div>
-                <div class="project-links">
-                  <a href="https://github.com/soul-net00/bmi_explore" class="project-link" target="_blank">View Code</a>
-                  <a href="https://soul-net00.github.io/bmi_explore/" class="project-link" target="_blank">Live Demo</a>
-                </div>
-              </div>
+                <p class="copy-instruction">
+                    📋 Tap to select, then copy and paste into the box below
+                </p>
             </div>
             
-            <div class="portfolio-item">
-              <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop" alt="Portfolio">
-              <div class="portfolio-info">
-                <h3>Portfolio Website</h3>
-                <p>This responsive portfolio website built from scratch using HTML and CSS. Showcases my projects and skills with modern design.</p>
-                <div class="project-badges">
-                  <span class="project-badge">HTML</span>
-                  <span class="project-badge">CSS</span>
-                  <span class="project-badge">Responsive</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
-                  <a href="#" class="project-link">You're Here!</a>
-                </div>
-              </div>
+            <div class="input-group">
+                <label for="passwordInput">Enter the password:</label>
+                <input type="password" id="passwordInput" placeholder="Paste password here..." autocomplete="off">
+                <div id="passwordError" class="error-message"></div>
             </div>
-
-            <div class="portfolio-item">
-              <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop" alt="Database">
-              <div class="portfolio-info">
-                <h3>Database Management</h3>
-                <p>SQL database projects including CellphoneShopDB with proper table relationships, stored procedures, and data management features.</p>
-                <div class="project-badges">
-                  <span class="project-badge">SQL Server</span>
-                  <span class="project-badge">Database Design</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
-                  <a href="#" class="project-link" onclick="alert('Documentation available on GitHub!')">Docs</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; text-align: center; color: white;">
-            <h3 style="margin-bottom: 10px; font-size: 18px;">Get In Touch</h3>
-            <p style="margin-bottom: 15px; font-size: 14px;">Want to collaborate or have a project in mind?</p>
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-              <a href="https://github.com/soul-net00" target="_blank" style="padding: 8px 20px; background: white; color: #667eea; text-decoration: none; border-radius: 20px; font-weight: 600; font-size: 13px;">GitHub</a>
-              <a href="mailto:your.email@gmail.com" style="padding: 8px 20px; background: white; color: #667eea; text-decoration: none; border-radius: 20px; font-weight: 600; font-size: 13px;">Email Me</a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" style="padding: 8px 20px; background: white; color: #667eea; text-decoration: none; border-radius: 20px; font-weight: 600; font-size: 13px;">LinkedIn</a>
-            </div>
-          </div>
+            
+            <button class="btn-primary" onclick="submitPassword()">Unlock My Heart →</button>
         </div>
+
+        <!-- Screen 3: Valentine Question -->
+        <div class="screen" id="screen3">
+            <h1>💖</h1>
+            <h2>The Moment of Truth</h2>
+            <p class="subtitle" id="valentineQuestion"></p>
+            
+            <div class="button-group">
+                <button class="btn-yes" onclick="handleYes()">Yes ❤️</button>
+                <button class="btn-no" id="noButton" onmouseover="handleNoHover()" onclick="handleNoClick()">No 😅</button>
+            </div>
+            <div id="errorDisplay" class="error-message"></div>
         </div>
-      </div>
+
+        <!-- Screen 4: Celebration -->
+        <div class="screen celebration" id="screen4">
+            <div class="heart-glow">💕</div>
+            <h2>I knew you would agree! 🥰</h2>
+            <p>You just made my heart smile.</p>
+            <p>Every moment with you is a blessing, and I can't wait to make this Valentine's Day unforgettable with you.</p>
+            <div class="heart-glow">✨💖✨</div>
+        </div>
     </div>
-  </div>
 
-  <!-- Receipt Details Modal -->
-  <div class="modal" id="receiptModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 style="font-size: 18px;">Receipt Details</h2>
-        <button class="modal-close" onclick="closeModal()">×</button>
-      </div>
-      <div id="modalBody"></div>
+    <script>
+        let userName = '';
+        let noClickCount = 0;
+        let isNoButtonRunning = false;
+
+        // Create floating hearts
+        function createFloatingHearts() {
+            const container = document.getElementById('heartsBackground');
+            const hearts = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'floating-heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 10000);
+            }, 800);
+        }
+
+        // Submit name
+        function submitName() {
+            const nameInput = document.getElementById('nameInput');
+            userName = nameInput.value.trim();
+            
+            if (userName === '') {
+                nameInput.style.borderColor = 'var(--romantic-red)';
+                nameInput.placeholder = 'Please enter your name 💕';
+                return;
+            }
+            
+            document.getElementById('greetingMessage').innerHTML = 
+                `Hello, my future ❤️ <strong>${userName}</strong>`;
+            
+            switchScreen('screen1', 'screen2');
+        }
+
+        // Copy password
+        function copyPassword() {
+            const passwordText = document.querySelector('.password-display');
+            const selection = window.getSelection();
+            const range = document.createRange();
+            range.selectNodeContents(passwordText);
+            selection.removeAllRanges();
+            selection.addRange(range);
+            
+            passwordText.style.background = 'var(--soft-lavender)';
+            setTimeout(() => {
+                passwordText.style.background = 'white';
+            }, 300);
+        }
+
+        // Submit password
+        function submitPassword() {
+            const passwordInput = document.getElementById('passwordInput');
+            const password = passwordInput.value.trim().toLowerCase();
+            const errorDiv = document.getElementById('passwordError');
+            
+            if (password === 'souls wife') {
+                document.getElementById('valentineQuestion').innerHTML = 
+                    `<strong>${userName}</strong>, will you be my Valentine?`;
+                switchScreen('screen2', 'screen3');
+            } else {
+                errorDiv.textContent = '❌ Incorrect password. Try copying and pasting from above!';
+                passwordInput.style.borderColor = 'var(--romantic-red)';
+                passwordInput.value = '';
+                
+                setTimeout(() => {
+                    errorDiv.textContent = '';
+                    passwordInput.style.borderColor = 'var(--blush-pink)';
+                }, 3000);
+            }
+        }
+
+        // Handle Yes
+        function handleYes() {
+            switchScreen('screen3', 'screen4');
+            createConfetti();
+            createCelebrationHearts();
+        }
+
+        // Handle No hover
+        function handleNoHover() {
+            const noButton = document.getElementById('noButton');
+            
+            if (noClickCount >= 2) {
+                return;
+            }
+            
+            if (!isNoButtonRunning) {
+                isNoButtonRunning = true;
+                noButton.classList.add('running');
+                
+                const moveButton = () => {
+                    const x = Math.random() * (window.innerWidth - noButton.offsetWidth);
+                    const y = Math.random() * (window.innerHeight - noButton.offsetHeight);
+                    
+                    noButton.style.left = x + 'px';
+                    noButton.style.top = y + 'px';
+                };
+                
+                moveButton();
+                
+                setTimeout(() => {
+                    noButton.classList.remove('running');
+                    noButton.style.left = '';
+                    noButton.style.top = '';
+                    isNoButtonRunning = false;
+                }, 2000);
+            }
+        }
+
+        // Handle No click
+        function handleNoClick() {
+            noClickCount++;
+            const errorDisplay = document.getElementById('errorDisplay');
+            const noButton = document.getElementById('noButton');
+            
+            if (noClickCount === 1) {
+                errorDisplay.textContent = '🤔 Are you sure about that?';
+            } else if (noClickCount === 2) {
+                errorDisplay.textContent = '⚠️ Error 404: "No" is not an option 😌';
+                noButton.style.opacity = '0.5';
+                noButton.style.cursor = 'not-allowed';
+            } else {
+                noButton.style.display = 'none';
+                errorDisplay.textContent = '💕 I knew you couldn\'t resist! Click "Yes" ❤️';
+            }
+            
+            setTimeout(() => {
+                errorDisplay.textContent = '';
+            }, 3000);
+        }
+
+        // Create confetti
+        function createConfetti() {
+            const colors = ['#FF6B9D', '#FFB3C6', '#C73866', '#8B4789', '#FFE5EC'];
+            
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    confetti.style.width = (Math.random() * 10 + 5) + 'px';
+                    confetti.style.height = confetti.style.width;
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }, i * 30);
+            }
+        }
+
+        // Create celebration hearts
+        function createCelebrationHearts() {
+            const hearts = ['💕', '💖', '💗', '💓', '💝', '❤️', '💘', '🎈'];
+            
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'confetti';
+                    heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 100);
+            }
+        }
+
+        // Switch screens
+        function switchScreen(fromScreen, toScreen) {
+            document.getElementById(fromScreen).classList.remove('active');
+            document.getElementById(toScreen).classList.add('active');
+        }
+
+        // Allow Enter key to submit
+        document.getElementById('nameInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitName();
+        });
+
+        document.getElementById('passwordInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitPassword();
+        });
+
+        // Initialize
+        createFloatingHearts();
+    </script>
+
+    <!-- Footer -->
+    <div class="footer">
+        Created with ❤️ by <span>Mr Soul</span>
     </div>
-  </div>
-
-  <script>
-    const STORAGE_KEYS = {
-      receipts: 'cellphone_receipts',
-      customers: 'cellphone_customers',
-      settings: 'cellphone_settings'
-    };
-
-    let currentItems = [];
-    let settings = getSettings();
-    let portfolioUnlocked = false;
-
-    function getSettings() {
-      const defaults = {
-        companyName: 'CELLPHONE REPAIR SHOP',
-        phone: '(555) 123-4567',
-        email: 'info@cellshop.com',
-        address: '123 Main Street, City, State',
-        warranty: 'Warranty: 30 days on all repairs',
-        password: 'admin123',
-        logo: ''
-      };
-      const saved = localStorage.getItem(STORAGE_KEYS.settings);
-      return saved ? JSON.parse(saved) : defaults;
-    }
-
-    function saveToStorage(key, data) {
-      localStorage.setItem(key, JSON.stringify(data));
-    }
-
-    function getFromStorage(key) {
-      const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : (key === STORAGE_KEYS.receipts || key === STORAGE_KEYS.customers ? [] : {});
-    }
-
-    function generateReceiptCode() {
-      const year = new Date().getFullYear();
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      let code = '';
-      for (let i = 0; i < 6; i++) {
-        code += chars[Math.floor(Math.random() * chars.length)];
-      }
-      return `RCP-${year}-${code}`;
-    }
-
-    function formatCurrency(amount) {
-      return parseFloat(amount).toFixed(2);
-    }
-
-    function toggleDiscount() {
-      document.getElementById('discountPercent').disabled = !document.getElementById('applyDiscount').checked;
-      if (!document.getElementById('applyDiscount').checked) {
-        document.getElementById('discountPercent').value = '';
-      }
-    }
-
-    function switchTab(tabName) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(tabName).classList.add('active');
-      event.target.classList.add('active');
-
-      if (tabName === 'history') {
-        loadAllReceipts();
-      } else if (tabName === 'settings') {
-        loadSettingsData();
-      }
-    }
-
-    function openPortfolio() {
-      if (portfolioUnlocked) {
-        switchTab('portfolio');
-      } else {
-        switchTab('portfolio');
-      }
-    }
-
-    function unlockPortfolio() {
-      const password = document.getElementById('portfolioPasswordInput').value;
-      if (password === '@soul123') {
-        portfolioUnlocked = true;
-        document.getElementById('portfolioLocked').style.display = 'none';
-        document.getElementById('portfolioUnlocked').style.display = 'block';
-        document.getElementById('portfolioPasswordInput').value = '';
-      } else {
-        alert('❌ Incorrect password!');
-        document.getElementById('portfolioPasswordInput').value = '';
-        document.getElementById('portfolioPasswordInput').focus();
-      }
-    }
-
-    function lockPortfolio() {
-      portfolioUnlocked = false;
-      document.getElementById('portfolioLocked').style.display = 'block';
-      document.getElementById('portfolioUnlocked').style.display = 'none';
-      document.getElementById('portfolioPasswordInput').value = '';
-    }
-
-    function addItem() {
-      const description = document.getElementById('itemDescription').value.trim();
-      const category = document.getElementById('itemCategory').value;
-      const quantity = parseInt(document.getElementById('itemQuantity').value);
-      const price = parseFloat(document.getElementById('itemPrice').value);
-
-      if (!description || !price || price <= 0 || quantity <= 0) {
-        alert('Please fill in all required fields correctly!');
-        return;
-      }
-
-      let total = quantity * price;
-      
-      if (document.getElementById('applyDiscount').checked) {
-        const discount = parseFloat(document.getElementById('discountPercent').value) || 0;
-        if (discount > 0 && discount <= 100) {
-          total = total * (1 - discount / 100);
-        }
-      }
-
-      const item = {
-        id: Date.now(),
-        description,
-        category,
-        quantity,
-        price,
-        total
-      };
-
-      currentItems.push(item);
-      renderItems();
-      clearItemForm();
-    }
-
-    function removeItem(id) {
-      currentItems = currentItems.filter(item => item.id !== id);
-      renderItems();
-    }
-
-    function renderItems() {
-      const tbody = document.getElementById('itemsTableBody');
-      const container = document.getElementById('itemsTableContainer');
-      const summary = document.getElementById('summaryCard');
-
-      if (currentItems.length === 0) {
-        container.style.display = 'none';
-        summary.style.display = 'none';
-        return;
-      }
-
-      container.style.display = 'block';
-      summary.style.display = 'block';
-
-      tbody.innerHTML = currentItems.map(item => `
-        <tr>
-          <td>${item.description}</td>
-          <td>${item.category}</td>
-          <td>${item.quantity}</td>
-          <td>R ${formatCurrency(item.price)}</td>
-          <td><strong>R ${formatCurrency(item.total)}</strong></td>
-          <td>
-            <button class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;" onclick="removeItem(${item.id})">Delete</button>
-          </td>
-        </tr>
-      `).join('');
-
-      const total = currentItems.reduce((sum, item) => sum + item.total, 0);
-      document.getElementById('totalItems').textContent = currentItems.length;
-      document.getElementById('totalAmount').textContent = formatCurrency(total);
-    }
-
-    function clearItemForm() {
-      document.getElementById('itemDescription').value = '';
-      document.getElementById('itemQuantity').value = '1';
-      document.getElementById('itemPrice').value = '';
-      document.getElementById('applyDiscount').checked = false;
-      document.getElementById('discountPercent').value = '';
-      document.getElementById('discountPercent').disabled = true;
-      document.getElementById('itemCategory').selectedIndex = 0;
-    }
-
-    function clearReceipt() {
-      if (currentItems.length > 0 && !confirm('Clear all items from this receipt?')) {
-        return;
-      }
-      currentItems = [];
-      renderItems();
-      document.getElementById('customerPhone').value = '';
-      document.getElementById('customerName').value = '';
-      document.getElementById('customerEmail').value = '';
-      document.getElementById('receiptNotes').value = '';
-    }
-
-    function saveReceipt() {
-      const phone = document.getElementById('customerPhone').value.trim();
-      const name = document.getElementById('customerName').value.trim();
-      const email = document.getElementById('customerEmail').value.trim();
-      const notes = document.getElementById('receiptNotes').value.trim();
-
-      if (!phone || phone.length < 10) {
-        alert('Please enter a valid phone number (at least 10 digits)!');
-        return;
-      }
-
-      if (currentItems.length === 0) {
-        alert('Please add at least one item!');
-        return;
-      }
-
-      const receiptCode = generateReceiptCode();
-      const total = currentItems.reduce((sum, item) => sum + item.total, 0);
-
-      const receipt = {
-        id: Date.now(),
-        receiptCode,
-        customerPhone: phone,
-        customerName: name || 'Walk-in Customer',
-        customerEmail: email,
-        date: new Date().toISOString(),
-        items: [...currentItems],
-        total,
-        notes
-      };
-
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      receipts.push(receipt);
-      saveToStorage(STORAGE_KEYS.receipts, receipts);
-
-      const customers = getFromStorage(STORAGE_KEYS.customers);
-      const existingCustomer = customers.find(c => c.phone === phone);
-      if (existingCustomer) {
-        existingCustomer.name = name;
-        existingCustomer.email = email;
-      } else {
-        customers.push({ phone, name, email });
-      }
-      saveToStorage(STORAGE_KEYS.customers, customers);
-
-      alert(`✅ Receipt saved successfully!\n\nReceipt Code: ${receiptCode}\nTotal: R ${formatCurrency(total)}`);
-
-      if (confirm('Would you like to print this receipt? 🖨️')) {
-        exportReceiptAsHTML(receipt.id);
-      }
-
-      clearReceipt();
-    }
-
-    function searchReceipts() {
-      const term = document.getElementById('searchTerm').value.trim();
-      if (!term) {
-        loadAllReceipts();
-        return;
-      }
-
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      const results = receipts.filter(r => 
-        r.customerPhone.includes(term) ||
-        r.receiptCode.toUpperCase().includes(term.toUpperCase()) ||
-        r.id.toString() === term
-      );
-
-      displayReceipts(results);
-    }
-
-    function loadAllReceipts() {
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      displayReceipts(receipts.reverse());
-    }
-
-    function displayReceipts(receipts) {
-      const container = document.getElementById('searchResults');
-      
-      if (receipts.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 40px;">No receipts found</p>';
-        return;
-      }
-
-      container.innerHTML = receipts.map(r => `
-        <div class="receipt-card" onclick="viewReceipt(${r.id})">
-          <div class="receipt-header">
-            <div>
-              <div class="receipt-code">${r.receiptCode}</div>
-              <p style="color: #6b7280; margin-top: 5px; font-size: 13px;">${r.customerName} • ${r.customerPhone}</p>
-              <p style="color: #9ca3af; font-size: 12px; margin-top: 3px;">${new Date(r.date).toLocaleString()}</p>
-            </div>
-            <div class="receipt-amount">R ${formatCurrency(r.total)}</div>
-          </div>
-          <p style="color: #6b7280; font-size: 12px;">${r.items.length} item(s)</p>
-        </div>
-      `).join('');
-    }
-
-    function viewReceipt(id) {
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      const receipt = receipts.find(r => r.id === id);
-      if (!receipt) return;
-
-      const modal = document.getElementById('receiptModal');
-      const body = document.getElementById('modalBody');
-
-      body.innerHTML = `
-        <div style="text-align: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 15px;">
-          <h2 style="color: #667eea; font-size: 18px;">${settings.companyName}</h2>
-          <p style="font-size: 12px;">${settings.phone} • ${settings.email}</p>
-          <p style="font-size: 12px;">${settings.address}</p>
-        </div>
-
-        <div style="background: #f9fafb; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
-          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; font-size: 13px;">
-            <div>
-              <p style="color: #6b7280;">Receipt #</p>
-              <p style="font-weight: bold;">${receipt.id}</p>
-            </div>
-            <div>
-              <p style="color: #6b7280;">Receipt Code</p>
-              <p style="font-weight: bold; color: #667eea;">${receipt.receiptCode}</p>
-            </div>
-            <div>
-              <p style="color: #6b7280;">Date</p>
-              <p style="font-weight: bold;">${new Date(receipt.date).toLocaleString()}</p>
-            </div>
-            <div>
-              <p style="color: #6b7280;">Customer</p>
-              <p style="font-weight: bold;">${receipt.customerName}</p>
-            </div>
-          </div>
-        </div>
-
-        <h3 style="margin-bottom: 12px; font-size: 16px;">Items</h3>
-        <div class="table-container">
-          <table style="margin-bottom: 15px;">
-            <thead>
-              <tr>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${receipt.items.map(item => `
-                <tr>
-                  <td>${item.description}</td>
-                  <td>${item.category}</td>
-                  <td>${item.quantity}</td>
-                  <td>R ${formatCurrency(item.price)}</td>
-                  <td><strong>R ${formatCurrency(item.total)}</strong></td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
-        </div>
-
-        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px; border-radius: 12px; text-align: right;">
-          <p style="font-size: 13px; opacity: 0.9; margin-bottom: 5px;">TOTAL AMOUNT</p>
-          <p style="font-size: 28px; font-weight: bold;">R ${formatCurrency(receipt.total)}</p>
-        </div>
-
-        ${receipt.notes ? `<div style="background: #fef3c7; padding: 12px; border-radius: 8px; margin-top: 15px;">
-          <p style="font-weight: bold; margin-bottom: 5px; font-size: 13px;">Notes:</p>
-          <p style="font-size: 13px;">${receipt.notes}</p>
-        </div>` : ''}
-
-        <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 2px solid #e5e7eb;">
-          <p style="font-style: italic; color: #6b7280; font-size: 12px;">${settings.warranty}</p>
-          <p style="margin-top: 8px; font-weight: bold; font-size: 13px;">Thank you for your business!</p>
-        </div>
-
-        <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
-          <button class="btn btn-primary" onclick="exportReceiptAsHTML(${receipt.id})" style="flex: 1;">🖨️ Print</button>
-          <button class="btn btn-secondary" onclick="closeModal()" style="flex: 1;">Close</button>
-        </div>
-      `;
-
-      modal.classList.add('active');
-    }
-
-    function closeModal() {
-      document.getElementById('receiptModal').classList.remove('active');
-    }
-
-    function exportReceiptAsHTML(id) {
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      const receipt = receipts.find(r => r.id === id);
-      if (!receipt) return;
-
-      const html = generateReceiptHTML(receipt);
-      const blob = new Blob([html], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-      window.open(url, '_blank');
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    }
-
-    function generateReceiptHTML(receipt) {
-      return `<!DOCTYPE html>
-<html><head>
-<meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<title>Receipt ${receipt.id} - ${receipt.receiptCode}</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Arial, sans-serif; padding: 20px; background: white; position: relative; }
-@media print { body { padding: 10px; } }
-.receipt-container { max-width: 100%; margin: 0; position: relative; z-index: 1; }
-
-.watermark { position: fixed; top: 50%; left: 50%; 
-              transform: translate(-50%, -50%) rotate(-45deg); 
-              font-size: 60pt; font-weight: bold; 
-              color: rgba(200, 200, 200, 0.12); 
-              pointer-events: none; z-index: 0; 
-              white-space: nowrap; user-select: none; 
-              text-transform: uppercase; letter-spacing: 8px; }
-@media print { .watermark { color: rgba(200, 200, 200, 0.12) !important; } }
-
-.header-section { display: flex; align-items: flex-start; margin-bottom: 15px; gap: 15px; flex-wrap: wrap; }
-.logo-section { flex: 0 0 120px; }
-.logo-section img { max-width: 120px; max-height: 120px; object-fit: contain; }
-.company-info-section { flex: 1; min-width: 200px; }
-
-.company-name { font-size: 16pt; font-weight: bold; margin: 0 0 8px 0; }
-.company-detail { font-size: 9pt; margin: 4px 0; }
-.separator { border-top: 2px solid black; margin: 15px 0; }
-.title { font-size: 14pt; font-weight: bold; text-align: center; margin: 15px 0; }
-
-.info-box { background: #f5f5f5; border: 1px solid black; padding: 12px; margin: 15px 0; }
-.info-row { display: flex; justify-content: space-between; margin-bottom: 8px; gap: 10px; flex-wrap: wrap; }
-.info-column { flex: 1; min-width: 150px; }
-.info-label { font-weight: bold; display: inline-block; width: 90px; font-size: 9pt; }
-.info-value { display: inline-block; font-size: 9pt; }
-.code-value { color: #00008B; font-weight: bold; font-size: 9pt; }
-
-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
-th { background: #dcdcdc; border: 1px solid black; padding: 6px; text-align: left; font-weight: bold; font-size: 9pt; }
-td { border: 1px solid #ccc; padding: 6px; font-size: 8pt; }
-tr:nth-child(even) { background: #fafafa; }
-
-.total-box { background: #e6e6e6; border: 2px solid black; padding: 10px 12px; 
-              margin: 20px 0; text-align: right; font-size: 11pt; font-weight: bold; }
-.total-label { display: inline-block; margin-right: 15px; }
-.total-value { display: inline-block; min-width: 100px; text-align: right; }
-
-.notes-section { margin: 20px 0; }
-.notes-title { font-weight: bold; margin-bottom: 8px; font-size: 9pt; }
-.notes-content { border: 1px solid #ccc; padding: 8px; font-size: 8pt; min-height: 40px; }
-
-.warranty { border-top: 1px solid gray; padding-top: 8px; margin-top: 20px; 
-             font-size: 8pt; font-style: italic; color: #666; }
-
-.disclaimer-section { border-top: 2px solid black; margin-top: 25px; padding-top: 10px; }
-.disclaimer-title { font-weight: bold; font-size: 8pt; margin-bottom: 8px; }
-.disclaimer-text { font-size: 5pt; line-height: 1.3; text-align: justify; }
-
-.footer { margin-top: 30px; border-top: 1px solid black; padding-top: 10px; }
-.signature-section { display: flex; justify-content: space-between; align-items: flex-end; margin: 15px 0; gap: 10px; flex-wrap: wrap; }
-.signature-line { flex: 1; max-width: 250px; min-width: 150px; }
-.signature-label { font-size: 8pt; margin-bottom: 4px; }
-.signature-underline { border-bottom: 1px solid black; height: 25px; }
-.fingerprint-box { width: 80px; height: 50px; border: 1px solid black; text-align: center; padding-top: 15px; font-size: 7pt; color: #999; }
-.thank-you { text-align: center; font-weight: bold; font-size: 9pt; margin: 15px 0; }
-.footer-info { text-align: center; font-size: 7pt; color: #666; }
-
-@media (max-width: 600px) {
-  .header-section { flex-direction: column; }
-  .info-row { flex-direction: column; }
-  .signature-section { flex-direction: column; }
-  table { font-size: 7pt; }
-  th, td { padding: 4px; }
-}
-</style>
-</head><body>
-
-<div class='watermark'>${settings.companyName}</div>
-
-<div class='receipt-container'>
-
-<div class='header-section'>
-${settings.logo ? `<div class='logo-section'><img src='${settings.logo}' alt='Company Logo'></div>` : ''}
-<div class='company-info-section'>
-<div class='company-name'>${settings.companyName.toUpperCase()}</div>
-<div class='company-detail'>Phone: ${settings.phone}</div>
-<div class='company-detail'>Email: ${settings.email}</div>
-<div class='company-detail'>${settings.address}</div>
-</div>
-</div>
-<div class='separator'></div>
-
-<div class='title'>SALES RECEIPT</div>
-
-<div class='info-box'>
-<div class='info-row'>
-<div class='info-column'>
-<span class='info-label'>Receipt #:</span><span class='info-value'>${receipt.id}</span><br>
-<span class='info-label'>Receipt Code:</span><span class='code-value'>${receipt.receiptCode}</span><br>
-<span class='info-label'>Date:</span><span class='info-value'>${new Date(receipt.date).toLocaleDateString()}</span><br>
-<span class='info-label'>Time:</span><span class='info-value'>${new Date(receipt.date).toLocaleTimeString()}</span>
-</div>
-<div class='info-column'>
-<span class='info-label'>Customer:</span><span class='info-value'>${receipt.customerName}</span><br>
-<span class='info-label'>Phone:</span><span class='info-value'>${receipt.customerPhone}</span><br>
-${receipt.customerEmail ? `<span class='info-label'>Email:</span><span class='info-value'>${receipt.customerEmail}</span>` : ''}
-</div>
-</div>
-</div>
-
-<table>
-<tr>
-<th style='width: 35%;'>Description</th>
-<th style='width: 20%;'>Category</th>
-<th style='width: 10%;'>Qty</th>
-<th style='width: 17%;'>Unit Price</th>
-<th style='width: 18%;'>Total</th>
-</tr>
-${receipt.items.map(item => `
-<tr>
-<td>${item.description}</td>
-<td>${item.category}</td>
-<td>${item.quantity}</td>
-<td>R ${formatCurrency(item.price)}</td>
-<td>R ${formatCurrency(item.total)}</td>
-</tr>
-`).join('')}
-</table>
-
-<div class='total-box'>
-<span class='total-label'>GRAND TOTAL:</span>
-<span class='total-value'>R ${formatCurrency(receipt.total)}</span>
-</div>
-
-${receipt.notes ? `
-<div class='notes-section'>
-<div class='notes-title'>Notes:</div>
-<div class='notes-content'>${receipt.notes}</div>
-</div>
-` : ''}
-
-<div class='warranty'>${settings.warranty}</div>
-
-<div class='disclaimer-section'>
-<div class='disclaimer-title'>GENERAL SALES & REPAIRS DISCLAIMER</div>
-<div class='disclaimer-text'>
-All devices, accessories, and electronic equipment sold or repaired by us are handled in good faith. 
-While every effort is made to ensure quality service and functional testing, we do not guarantee 
-manufacturer warranty unless explicitly stated.<br><br>
-We are not responsible for: Pre-existing faults, hidden defects, or data loss on devices; 
-Damage caused by customer misuse, liquid exposure, power surges, or third-party repairs; 
-Software issues, data corruption, or loss of personal information during repairs. 
-Customers are advised to back up all data before handing in devices.<br><br>
-All repairs are tested before release. Once the device leaves our premises, we are not liable for 
-damage due to mishandling or unauthorized alterations. Used or second-hand devices are sold as-is, 
-unless otherwise agreed in writing. No refunds or exchanges after completion of service or sale, 
-except where required by law.<br><br>
-By proceeding with a purchase or repair, the customer acknowledges and accepts these terms.
-</div>
-</div>
-
-<div class='footer'>
-<div class='signature-section'>
-<div class='signature-line'>
-<div class='signature-label'>Customer Signature:</div>
-<div class='signature-underline'></div>
-</div>
-<div>
-<div class='fingerprint-box'>Thumbprint</div>
-</div>
-</div>
-
-<div class='thank-you'>Thank you for your business!</div>
-<div class='footer-info'>All prices in South African Rand (R) | Receipt Code: ${receipt.receiptCode}</div>
-</div>
-
-</div>
-</body></html>`;
-    }
-
-    function exportDatabase() {
-      const data = {
-        receipts: getFromStorage(STORAGE_KEYS.receipts),
-        customers: getFromStorage(STORAGE_KEYS.customers),
-        settings: settings,
-        exportDate: new Date().toISOString(),
-        version: '1.0'
-      };
-      
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `CellphoneShop_Backup_${Date.now()}.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-      
-      alert('✅ Database exported successfully!');
-    }
-
-    function importDatabase(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        try {
-          const data = JSON.parse(e.target.result);
-          
-          if (!confirm('⚠️ WARNING: This will replace ALL current data!\n\nAre you sure?')) {
-            return;
-          }
-
-          if (data.receipts) saveToStorage(STORAGE_KEYS.receipts, data.receipts);
-          if (data.customers) saveToStorage(STORAGE_KEYS.customers, data.customers);
-          if (data.settings) {
-            settings = data.settings;
-            saveToStorage(STORAGE_KEYS.settings, data.settings);
-          }
-          
-          alert('✅ Database imported successfully!');
-          location.reload();
-        } catch (error) {
-          alert('❌ Error importing database.');
-        }
-      };
-      reader.readAsText(file);
-      event.target.value = '';
-    }
-
-    function handleLogoUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      if (file.size > 5000000) {
-        alert('Logo file too large! Max 5MB.');
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        settings.logo = e.target.result;
-        updateLogoPreview();
-        document.getElementById('logoStatus').textContent = file.name;
-        alert('Logo uploaded! Click "Save Settings".');
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function updateLogoPreview() {
-      const preview = document.getElementById('logoPreview');
-      const image = document.getElementById('logoImage');
-      
-      if (settings.logo) {
-        image.src = settings.logo;
-        preview.style.display = 'block';
-      } else {
-        preview.style.display = 'none';
-      }
-    }
-
-    function removeLogo() {
-      if (confirm('Remove company logo?')) {
-        settings.logo = '';
-        updateLogoPreview();
-        document.getElementById('logoStatus').textContent = 'No logo uploaded';
-        document.getElementById('logoUpload').value = '';
-      }
-    }
-
-    function unlockSettings() {
-      const password = document.getElementById('passwordInput').value;
-      if (password === settings.password) {
-        document.getElementById('settingsLocked').style.display = 'none';
-        document.getElementById('settingsUnlocked').style.display = 'block';
-        loadSettingsData();
-      } else {
-        alert('❌ Incorrect password!');
-      }
-    }
-
-    function lockSettings() {
-      document.getElementById('settingsLocked').style.display = 'block';
-      document.getElementById('settingsUnlocked').style.display = 'none';
-      document.getElementById('passwordInput').value = '';
-    }
-
-    function loadSettingsData() {
-      document.getElementById('settingCompanyName').value = settings.companyName;
-      document.getElementById('settingPhone').value = settings.phone;
-      document.getElementById('settingEmail').value = settings.email;
-      document.getElementById('settingAddress').value = settings.address;
-      document.getElementById('settingWarranty').value = settings.warranty;
-      
-      if (settings.logo) {
-        document.getElementById('logoStatus').textContent = 'Logo uploaded';
-        updateLogoPreview();
-      }
-      
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      const customers = getFromStorage(STORAGE_KEYS.customers);
-      document.getElementById('totalReceiptsCount').textContent = receipts.length;
-      document.getElementById('totalCustomersCount').textContent = customers.length;
-    }
-
-    function saveSettings() {
-      settings.companyName = document.getElementById('settingCompanyName').value;
-      settings.phone = document.getElementById('settingPhone').value;
-      settings.email = document.getElementById('settingEmail').value;
-      settings.address = document.getElementById('settingAddress').value;
-      settings.warranty = document.getElementById('settingWarranty').value;
-      
-      saveToStorage(STORAGE_KEYS.settings, settings);
-      alert('✅ Settings saved!');
-    }
-
-    window.addEventListener('DOMContentLoaded', function() {
-      console.log('Cellphone Shop System initialized');
-    });
-  </script>
 </body>
 </html>
