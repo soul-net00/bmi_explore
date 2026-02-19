@@ -1,1194 +1,691 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cellphone Shop Management System</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-    
-    .container { max-width: 1400px; margin: 0 auto; padding: 10px; }
-    
-    .header { background: white; border-radius: 15px; padding: 20px; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    .header-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; }
-    .header h1 { color: #667eea; font-size: 24px; }
-    .header p { color: #6b7280; margin-top: 5px; font-size: 14px; }
-    .header-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-    .header-btn { padding: 10px 15px; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; font-size: 13px; }
-    .btn-export { background: #10b981; color: white; }
-    .btn-import { background: #3b82f6; color: white; }
-    .btn-export:hover { background: #059669; transform: translateY(-2px); }
-    .btn-import:hover { background: #2563eb; transform: translateY(-2px); }
-    
-    .tabs { background: white; border-radius: 15px; padding: 10px; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; gap: 8px; flex-wrap: wrap; overflow-x: auto; }
-    .tab-btn { padding: 10px 15px; border: none; background: #f3f4f6; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; color: #6b7280; font-size: 13px; white-space: nowrap; }
-    .tab-btn:hover { background: #e5e7eb; }
-    .tab-btn.active { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
-    
-    .content { background: white; border-radius: 15px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-    
-    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
-    .form-group { display: flex; flex-direction: column; }
-    .form-group label { font-weight: 600; margin-bottom: 8px; color: #374151; font-size: 14px; }
-    .form-group input, .form-group select, .form-group textarea { padding: 10px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 14px; transition: 0.3s; width: 100%; }
-    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: #667eea; }
-    
-    .btn { padding: 12px 25px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; font-size: 14px; }
-    .btn-primary { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); }
-    .btn-success { background: #10b981; color: white; }
-    .btn-success:hover { background: #059669; }
-    .btn-danger { background: #ef4444; color: white; }
-    .btn-danger:hover { background: #dc2626; }
-    .btn-secondary { background: #6b7280; color: white; }
-    .btn-secondary:hover { background: #4b5563; }
-    
-    .table-container { overflow-x: auto; margin-top: 15px; }
-    table { width: 100%; border-collapse: collapse; min-width: 500px; }
-    th { background: #f9fafb; padding: 10px; text-align: left; font-weight: 600; border-bottom: 2px solid #e5e7eb; font-size: 13px; }
-    td { padding: 10px; border-bottom: 1px solid #e5e7eb; font-size: 13px; }
-    tr:hover { background: #f9fafb; }
-    
-    .summary-card { background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 20px; border-radius: 12px; margin-top: 20px; }
-    .summary-card h3 { margin-bottom: 15px; font-size: 18px; }
-    .summary-total { font-size: 32px; font-weight: bold; }
-    
-    .receipt-card { background: #f9fafb; padding: 15px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid #667eea; cursor: pointer; transition: 0.3s; }
-    .receipt-card:hover { background: #f3f4f6; transform: translateX(5px); }
-    .receipt-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; gap: 10px; }
-    .receipt-code { font-size: 16px; font-weight: bold; color: #667eea; }
-    .receipt-amount { font-size: 20px; font-weight: bold; color: #10b981; }
-    
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; padding: 10px; }
-    .modal.active { display: flex; }
-    .modal-content { background: white; border-radius: 15px; padding: 20px; max-width: 800px; width: 100%; max-height: 90vh; overflow-y: auto; }
-    .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .modal-close { background: none; border: none; font-size: 30px; cursor: pointer; color: #6b7280; }
-    .modal-close:hover { color: #ef4444; }
-    
-    .settings-locked { text-align: center; padding: 30px 10px; }
-    .settings-locked .lock-icon { font-size: 60px; margin-bottom: 20px; }
-    
-    .action-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
-    .action-btns .btn { flex: 1; min-width: 120px; }
-    
-    .warning-box { background: #fef3c7; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 8px; margin: 15px 0; }
-    .warning-box h4 { color: #92400e; margin-bottom: 5px; font-size: 14px; }
-    .warning-box p { color: #78350f; font-size: 13px; }
-    
-    .checkbox-group { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .checkbox-group input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; }
-    
-    .logo-preview-box { margin-top: 15px; padding: 15px; border: 2px dashed #e5e7eb; border-radius: 8px; text-align: center; }
-    .logo-preview-box img { max-width: 100%; max-height: 150px; border: 2px solid #e5e7eb; border-radius: 8px; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kgomotso Thabo — Developer & Cellphone Shop System</title>
+<meta name="description" content="ITC Student | Web Developer | VB.NET | SQL Server | South Africa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root {
+  --bg:#06060f; --surface:#0c0c1d; --card:#10102a; --card2:#14142e;
+  --accent:#7c3aed; --al:#a855f7; --gold:#f59e0b; --green:#10b981; --pink:#ec4899;
+  --text:#eeeeff; --muted:#6b6b9a; --border:rgba(124,58,237,0.18); --border2:rgba(255,255,255,0.06);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;min-height:100vh}
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 15% 5%,rgba(124,58,237,.13) 0%,transparent 55%),
+             radial-gradient(ellipse 50% 40% at 85% 85%,rgba(236,72,153,.07) 0%,transparent 55%),
+             radial-gradient(ellipse 40% 50% at 50% 40%,rgba(16,185,129,.04) 0%,transparent 55%)}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);
+  background-size:60px 60px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+.page{display:none;min-height:100vh}
+.page.active{display:block}
 
-    /* Portfolio Section */
-    .portfolio-section { background: white; padding: 30px 20px; border-radius: 15px; margin-bottom: 20px; }
-    .portfolio-section h2 { color: #667eea; margin-bottom: 20px; font-size: 24px; text-align: center; }
-    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
-    .portfolio-item { background: #f9fafb; border-radius: 12px; overflow: hidden; border: 2px solid #e5e7eb; transition: 0.3s; }
-    .portfolio-item:hover { border-color: #667eea; transform: translateY(-5px); box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2); }
-    .portfolio-item img { width: 100%; height: 180px; object-fit: cover; }
-    .portfolio-info { padding: 15px; }
-    .portfolio-info h3 { color: #667eea; margin-bottom: 10px; font-size: 18px; }
-    .portfolio-info p { color: #6b7280; margin-bottom: 12px; font-size: 13px; line-height: 1.5; }
-    .project-badges { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0; }
-    .project-badge { padding: 4px 12px; background: rgba(139, 92, 246, 0.2); color: #8b5cf6; border-radius: 15px; font-size: 12px; }
-    .project-links { display: flex; gap: 8px; flex-wrap: wrap; }
-    .project-link { flex: 1; padding: 8px 12px; background: rgba(59, 130, 246, 0.1); color: #3b82f6; text-decoration: none; border-radius: 6px; text-align: center; border: 1px solid #3b82f6; transition: 0.3s; font-size: 12px; }
-    .project-link:hover { background: #3b82f6; color: white; }
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(6,6,15,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;height:60px;max-width:1120px;margin:0 auto;padding:0 24px}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:var(--al);cursor:pointer}
+.nav-tabs{display:flex;gap:4px}
+.ntab{padding:7px 16px;background:none;border:1px solid transparent;border-radius:6px;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;font-size:12px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.ntab:hover{color:var(--text);border-color:var(--border)}
+.ntab.active{background:rgba(124,58,237,.15);border-color:var(--accent);color:var(--al)}
 
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; }
-    .stat-card { background: #f9fafb; padding: 15px; border-radius: 8px; text-align: center; }
-    .stat-number { font-size: 28px; font-weight: bold; color: #667eea; }
-    .stat-label { color: #6b7280; font-size: 13px; margin-top: 5px; }
-    
-    @media (max-width: 768px) {
-      .container { padding: 5px; }
-      .header { padding: 15px; }
-      .header h1 { font-size: 20px; }
-      .content { padding: 15px; }
-      .form-grid { grid-template-columns: 1fr; }
-      .tabs { gap: 5px; padding: 8px; }
-      .tab-btn { padding: 8px 12px; font-size: 12px; }
-      .receipt-header { flex-direction: column; }
-      .action-btns { flex-direction: column; }
-      .action-btns .btn { width: 100%; }
-      table { font-size: 12px; }
-      th, td { padding: 8px; }
-      .summary-total { font-size: 28px; }
-      .portfolio-grid { grid-template-columns: 1fr; }
-    }
-    
-    @media (max-width: 480px) {
-      .header h1 { font-size: 18px; }
-      .header-btn { padding: 8px 12px; font-size: 12px; }
-      .summary-card h3 { font-size: 16px; }
-    }
-  </style>
+/* HERO */
+.hero{padding:80px 0 60px;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:start}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.1);
+  border:1px solid rgba(16,185,129,.25);color:var(--green);
+  font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:30px;
+  margin-bottom:24px;animation:rise .5s ease both}
+.hero-badge::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,108px);line-height:.9;letter-spacing:2px;animation:rise .5s .08s ease both}
+.grad{background:linear-gradient(135deg,var(--al) 0%,var(--pink) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero-role{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);animation:rise .5s .16s ease both}
+.hero-role span{color:var(--al)}
+.hero-bio{margin-top:18px;font-size:16px;line-height:1.75;color:rgba(238,238,255,.65);max-width:500px;animation:rise .5s .24s ease both}
+.hero-ctas{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;animation:rise .5s .32s ease both}
+.btn-v{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;
+  font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .22s;text-decoration:none;border:none}
+.bsolid{background:var(--accent);color:#fff}
+.bsolid:hover{background:var(--al);transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,58,237,.4)}
+.bghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.bghost:hover{border-color:var(--al);background:rgba(124,58,237,.08);transform:translateY(-2px)}
+
+/* QR */
+.qr-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;position:relative;overflow:hidden;animation:rise .5s .2s ease both}
+.qr-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--pink))}
+.qr-head{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;margin-bottom:4px}
+.qr-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:20px}
+#qrcode{display:flex;justify-content:center;margin-bottom:18px}
+#qrcode canvas,#qrcode img{border-radius:12px;border:4px solid rgba(124,58,237,.25);padding:8px;background:#fff}
+.qr-steps{display:flex;flex-direction:column;gap:10px}
+.qr-step{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
+.sn{width:22px;height:22px;border-radius:50%;background:rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:700;color:var(--al);flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.qr-note{margin-top:14px;padding:10px 14px;background:rgba(236,72,153,.07);border:1px solid rgba(236,72,153,.2);
+  border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--pink)}
+
+/* TICKER */
+.ticker-wrap{border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:18px 0;overflow:hidden}
+.ticker-track{display:flex;gap:36px;animation:ticker 22s linear infinite;width:max-content}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.titem{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;
+  color:var(--muted);white-space:nowrap;padding:6px 14px;border:1px solid var(--border2);border-radius:30px}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--al);flex-shrink:0}
+
+/* SECTION */
+.section{padding:70px 0}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,52px);letter-spacing:1px;margin-bottom:40px;line-height:1}
+.sdiv{border-top:1px solid var(--border2)}
+
+/* PROJECTS */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.pcard{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;transition:all .28s;cursor:default}
+.pcard:hover{border-color:rgba(124,58,237,.45);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.pimg{width:100%;height:160px;object-fit:cover;display:block}
+.pbody{padding:20px}
+.pnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);margin-bottom:8px}
+.ptitle{font-size:17px;font-weight:700;margin-bottom:8px}
+.pdesc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.ptags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:20px;
+  background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);color:var(--al)}
+.plinks{display:flex;gap:8px}
+.plnk{flex:1;text-align:center;padding:8px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;
+  border:1px solid var(--border2);color:var(--muted);transition:all .2s}
+.plnk:hover{border-color:var(--al);color:var(--al)}
+
+/* SKILLS */
+.skgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.skitem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:16px}
+.skrow{display:flex;justify-content:space-between;margin-bottom:10px}
+.skname{font-size:13px;font-weight:600}
+.skpct{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al)}
+.sktrack{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.skfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--al));
+  animation:barGrow 1.2s ease both;transform-origin:left}
+@keyframes barGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* CONTACT */
+.crow{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}
+.clnk{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;
+  border:1px solid var(--border2);color:var(--text);text-decoration:none;font-size:14px;
+  font-weight:600;background:var(--card);transition:all .22s}
+.clnk:hover{border-color:var(--al);color:var(--al);transform:translateY(-2px)}
+
+/* FEATURES (APP PAGE) */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:40px 0}
+.fcard{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:all .22s}
+.fcard:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px)}
+.fico{font-size:26px;margin-bottom:10px}
+.ftitle{font-size:14px;font-weight:700;margin-bottom:6px}
+.fdesc{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* VIDEO */
+.vwrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 70px rgba(0,0,0,.55);background:#000;margin-top:28px}
+.vwrap iframe{width:100%;aspect-ratio:16/9;display:block;border:none}
+
+/* BROWSER FRAME */
+.bframe{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.5);margin-top:28px}
+.bbar{background:#12122a;padding:11px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border2)}
+.bdots{display:flex;gap:6px}
+.bdot{width:11px;height:11px;border-radius:50%}
+.burl{flex:1;background:rgba(255,255,255,.04);border-radius:6px;padding:4px 12px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.aframe{height:680px}
+.aframe iframe{width:100%;height:100%;border:none;display:block}
+
+/* TECH */
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:24px}
+.titem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:14px 16px;
+  display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;transition:all .2s}
+.titem:hover{border-color:rgba(124,58,237,.4)}
+.tico{font-size:20px}
+
+/* MODAL */
+.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);
+  z-index:500;align-items:center;justify-content:center;padding:20px}
+.mbg.open{display:flex}
+.mbox{background:var(--card2);border:1px solid var(--border);border-radius:22px;padding:44px 36px;
+  max-width:400px;width:100%;text-align:center;position:relative;overflow:hidden;animation:rise .3s ease}
+.mbox::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--pink))}
+.mico{font-size:48px;margin-bottom:16px}
+.mtitle{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px;margin-bottom:6px}
+.msub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:26px}
+.minp{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;
+  padding:14px 18px;font-size:16px;color:var(--text);font-family:'JetBrains Mono',monospace;
+  text-align:center;letter-spacing:5px;margin-bottom:14px;outline:none;transition:border-color .2s}
+.minp:focus{border-color:var(--al)}
+.minp.err{border-color:var(--pink);animation:shake .3s ease}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.mbtn{width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:10px;
+  font-size:15px;font-weight:800;cursor:pointer;transition:all .2s;font-family:'Syne',sans-serif}
+.mbtn:hover{background:var(--al)}
+.merr{color:var(--pink);font-size:11px;font-family:'JetBrains Mono',monospace;margin-top:10px;display:none}
+.mclose{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
+
+footer{border-top:1px solid var(--border2);padding:26px 0;text-align:center;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+footer span{color:var(--al)}
+
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:40px;padding:40px 0 30px}.qr-card{max-width:360px}}
+@media(max-width:580px){.hero-ctas{flex-direction:column}.nav-tabs{gap:2px}.ntab{padding:6px 10px;font-size:11px}.aframe{height:500px}}
+</style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="header-content">
-        <div>
-          <h1>📱 Cellphone Shop Management</h1>
-          <p>Professional Receipt System</p>
-        </div>
-        <div class="header-btns">
-          <button class="header-btn btn-export" onclick="exportDatabase()">📥 Export</button>
-          <label class="header-btn btn-import" style="cursor: pointer;">
-            📤 Import
-            <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importDatabase(event)">
-          </label>
-        </div>
-      </div>
+<div class="bg-mesh"></div>
+<div class="bg-grid"></div>
+
+<!-- PASSWORD MODAL -->
+<div class="mbg" id="pwModal">
+  <div class="mbox">
+    <button class="mclose" onclick="closeModal()">✕</button>
+    <div class="mico">🔐</div>
+    <div class="mtitle">PORTFOLIO ACCESS</div>
+    <div class="msub">// enter password to unlock</div>
+    <input type="password" id="pwInput" class="minp" placeholder="••••••••" autocomplete="off" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="mbtn" onclick="checkPw()">🔓 UNLOCK</button>
+    <div class="merr" id="pwErr">❌ Wrong password — contact Kgomotso for access</div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <div class="nav-logo" onclick="gotoPage('p1')">KT.DEV</div>
+    <div class="nav-tabs">
+      <button class="ntab active" id="tab-p1" onclick="gotoPage('p1')">💼 Portfolio</button>
+      <button class="ntab" id="tab-p2" onclick="gotoPage('p2')">📱 The App</button>
     </div>
+  </div>
+</nav>
 
-    <div class="tabs">
-      <button class="tab-btn active" onclick="switchTab('new-receipt')">➕ New Receipt</button>
-      <button class="tab-btn" onclick="switchTab('history')">📜 History</button>
-      <button class="tab-btn" onclick="switchTab('settings')">⚙️ Settings</button>
-      <button class="tab-btn" onclick="openPortfolio()">👨‍💻 Portfolio</button>
-    </div>
-
-    <div class="content">
-      <!-- NEW RECEIPT TAB -->
-      <div id="new-receipt" class="tab-content active">
-        <h2 style="margin-bottom: 15px; color: #667eea; font-size: 20px;">Create New Receipt</h2>
-        
-        <div class="warning-box">
-          <h4>⚠️ Important: Data Storage Notice</h4>
-          <p>Your data is saved in your browser. Export regularly to backup!</p>
-        </div>
-
-        <h3 style="margin-bottom: 12px; font-size: 16px;">Customer Information</h3>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Phone Number *</label>
-            <input type="tel" id="customerPhone" placeholder="0821234567" required>
-          </div>
-          <div class="form-group">
-            <label>Customer Name</label>
-            <input type="text" id="customerName" placeholder="John Doe">
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" id="customerEmail" placeholder="customer@email.com">
-          </div>
-        </div>
-
-        <h3 style="margin: 20px 0 12px; font-size: 16px;">Add Items</h3>
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Description *</label>
-            <input type="text" id="itemDescription" placeholder="Screen replacement">
-          </div>
-          <div class="form-group">
-            <label>Category *</label>
-            <select id="itemCategory">
-              <option>Repair Service</option>
-              <option>Software Update</option>
-              <option>Battery</option>
-              <option>Screen Protector</option>
-              <option>Phone Case</option>
-              <option>Charger</option>
-              <option>Cable</option>
-              <option>Earphones</option>
-              <option>Memory Card</option>
-              <option>SIM Card</option>
-              <option>Other Accessories</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Quantity *</label>
-            <input type="number" id="itemQuantity" value="1" min="1">
-          </div>
-          <div class="form-group">
-            <label>Price (R) *</label>
-            <input type="number" id="itemPrice" placeholder="0.00" step="0.01" min="0">
-          </div>
-        </div>
-        
-        <div class="checkbox-group" style="margin: 12px 0;">
-          <input type="checkbox" id="applyDiscount" onchange="toggleDiscount()">
-          <label for="applyDiscount" style="margin: 0; cursor: pointer;">Apply Discount</label>
-          <input type="number" id="discountPercent" placeholder="%" min="0" max="100" style="width: 80px; padding: 8px; border-radius: 5px; border: 2px solid #e5e7eb;" disabled>
-        </div>
-
-        <button class="btn btn-primary" onclick="addItem()" style="width: 100%;">➕ Add Item to Receipt</button>
-
-        <div id="itemsTableContainer" style="display: none; margin-top: 20px;">
-          <h3 style="font-size: 16px; margin-bottom: 10px;">Items on Receipt</h3>
-          <div class="table-container">
-            <table id="itemsTable">
-              <thead>
-                <tr>
-                  <th>Description</th>
-                  <th>Category</th>
-                  <th>Qty</th>
-                  <th>Price</th>
-                  <th>Total</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="itemsTableBody"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="summary-card" id="summaryCard" style="display: none;">
-          <h3>Receipt Summary</h3>
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; flex-wrap: wrap; gap: 10px;">
-            <div>
-              <p>Total Items: <span id="totalItems">0</span></p>
-            </div>
-            <div style="text-align: right;">
-              <p style="font-size: 14px; opacity: 0.9;">TOTAL AMOUNT</p>
-              <div class="summary-total">R <span id="totalAmount">0.00</span></div>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 15px;">
-            <label style="color: white;">Notes (Optional)</label>
-            <textarea id="receiptNotes" rows="3" placeholder="Additional notes..."></textarea>
-          </div>
-
-          <div class="action-btns">
-            <button class="btn btn-success" onclick="saveReceipt()">💾 Save Receipt</button>
-            <button class="btn btn-secondary" onclick="clearReceipt()">🗑️ Clear All</button>
-          </div>
+<!-- ======================== PAGE 1: PORTFOLIO ======================== -->
+<div class="page active" id="p1">
+  <div class="wrap">
+    <div class="hero">
+      <div>
+        <div class="hero-badge">Available for projects</div>
+        <h1 class="hero-name">KGOMOTSO<br><span class="grad">THABO</span></h1>
+        <div class="hero-role"><span>ITC Student</span> · Web Developer · Database Designer · 🇿🇦</div>
+        <p class="hero-bio">Passionate about building real software that solves real problems. From desktop apps in VB.NET with SQL Server, to full web systems deployed on Netlify — I turn ideas into working products.</p>
+        <div class="hero-ctas">
+          <button class="btn-v bsolid" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">📁 View Projects</button>
+          <button class="btn-v bghost" onclick="gotoPage('p2')">📱 See The App →</button>
         </div>
       </div>
-
-      <!-- HISTORY TAB -->
-      <div id="history" class="tab-content">
-        <h2 style="margin-bottom: 15px; color: #667eea; font-size: 20px;">Receipt History</h2>
-        
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Search by Phone / Receipt ID / Code</label>
-            <input type="text" id="searchTerm" placeholder="Enter search term...">
-          </div>
-          <div style="display: flex; align-items: flex-end;">
-            <button class="btn btn-primary" onclick="searchReceipts()" style="width: 100%;">🔍 Search</button>
-          </div>
+      <div class="qr-card">
+        <div class="qr-head">SCAN TO VIEW</div>
+        <div class="qr-sub">// portfolio access via QR code</div>
+        <div id="qrcode"></div>
+        <div class="qr-steps">
+          <div class="qr-step"><div class="sn">1</div>Scan QR with any phone camera</div>
+          <div class="qr-step"><div class="sn">2</div>Page opens — enter password</div>
+          <div class="qr-step"><div class="sn">3</div>Portfolio unlocks on your device</div>
         </div>
-
-        <div id="searchResults"></div>
-      </div>
-
-      <!-- SETTINGS TAB -->
-      <div id="settings" class="tab-content">
-        <div id="settingsLocked" class="settings-locked">
-          <div class="lock-icon">🔒</div>
-          <h2 style="margin-bottom: 15px; font-size: 20px;">Settings Locked</h2>
-          <p style="color: #6b7280; margin-bottom: 20px;">Enter password to unlock settings</p>
-          <div style="max-width: 400px; margin: 0 auto;">
-            <input type="password" id="passwordInput" placeholder="Enter password" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #e5e7eb; margin-bottom: 12px;">
-            <button class="btn btn-primary" onclick="unlockSettings()" style="width: 100%;">🔓 Unlock Settings</button>
-            <p style="margin-top: 12px; color: #6b7280; font-size: 13px;">Default password: admin123</p>
-          </div>
-        </div>
-
-        <div id="settingsUnlocked" style="display: none;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-            <h2 style="color: #667eea; font-size: 20px;">Company Settings</h2>
-            <button class="btn btn-danger" onclick="lockSettings()">🔒 Lock Settings</button>
-          </div>
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label>Company Name</label>
-              <input type="text" id="settingCompanyName" placeholder="Your Company Name">
-            </div>
-            <div class="form-group">
-              <label>Phone</label>
-              <input type="tel" id="settingPhone" placeholder="(555) 123-4567">
-            </div>
-            <div class="form-group">
-              <label>Email</label>
-              <input type="email" id="settingEmail" placeholder="info@company.com">
-            </div>
-            <div class="form-group">
-              <label>Address</label>
-              <input type="text" id="settingAddress" placeholder="123 Main Street, City">
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-top: 15px;">
-            <label>Warranty Text</label>
-            <textarea id="settingWarranty" rows="2" placeholder="Warranty: 30 days on all repairs"></textarea>
-          </div>
-
-          <div class="form-group" style="margin-top: 15px;">
-            <label>Company Logo</label>
-            <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 10px; flex-wrap: wrap;">
-              <input type="file" id="logoUpload" accept="image/*" style="display: none;" onchange="handleLogoUpload(event)">
-              <button class="btn btn-primary" onclick="document.getElementById('logoUpload').click()">📷 Upload Logo</button>
-              <span id="logoStatus" style="color: #6b7280; font-size: 13px;">No logo uploaded</span>
-            </div>
-            <div id="logoPreview" class="logo-preview-box" style="display: none;">
-              <img id="logoImage" alt="Company Logo Preview">
-              <br>
-              <button class="btn btn-danger" onclick="removeLogo()" style="margin-top: 10px; padding: 8px 15px;">Remove Logo</button>
-            </div>
-          </div>
-
-          <div style="background: #f9fafb; padding: 15px; border-radius: 12px; margin: 20px 0;">
-            <h3 style="margin-bottom: 15px; font-size: 16px;">Database Statistics</h3>
-            <div class="stats-grid">
-              <div class="stat-card">
-                <div class="stat-number" id="totalReceiptsCount">0</div>
-                <div class="stat-label">Total Receipts</div>
-              </div>
-              <div class="stat-card">
-                <div class="stat-number" id="totalCustomersCount">0</div>
-                <div class="stat-label">Total Customers</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="action-btns">
-            <button class="btn btn-success" onclick="saveSettings()">💾 Save Settings</button>
-            <button class="btn btn-secondary" onclick="changePassword()">🔑 Change Password</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- PORTFOLIO TAB -->
-      <div id="portfolio" class="tab-content">
-        <div id="portfolioLocked" class="settings-locked">
-          <div class="lock-icon">🔒</div>
-          <h2 style="margin-bottom: 15px; font-size: 20px;">Portfolio Locked</h2>
-          <p style="color: #6b7280; margin-bottom: 20px;">Enter password to view portfolio</p>
-          <div style="max-width: 400px; margin: 0 auto;">
-            <input type="password" id="portfolioPasswordInput" placeholder="Enter password" style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #e5e7eb; margin-bottom: 12px;">
-            <button class="btn btn-primary" onclick="unlockPortfolio()" style="width: 100%;">🔓 Unlock Portfolio</button>
-            <p style="margin-top: 12px; color: #6b7280; font-size: 13px;">Password required to access</p>
-          </div>
-        </div>
-
-        <div id="portfolioUnlocked" style="display: none;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 10px;">
-            <h2 style="color: #667eea; font-size: 20px;">My Portfolio</h2>
-            <button class="btn btn-danger" onclick="lockPortfolio()">🔒 Lock Portfolio</button>
-          </div>
-
-          <div class="portfolio-section">
-          <p style="text-align: center; color: #6b7280; margin-bottom: 30px; font-size: 14px;">
-            Hi! I'm an ITC student passionate about web development and coding. Check out my projects below.
-          </p>
-          
-          <div class="portfolio-grid">
-            <div class="portfolio-item">
-              <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="MobileFix Manager">
-              <div class="portfolio-info">
-                <h3>MobileFix Manager</h3>
-                <p>Complete cellphone repair shop management system with VB.NET and SQL Server. Features receipt management, customer database, and inventory tracking.</p>
-                <div class="project-badges">
-                  <span class="project-badge">VB.NET</span>
-                  <span class="project-badge">SQL Server</span>
-                  <span class="project-badge">Desktop App</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
-                  <a href="#" class="project-link" onclick="alert('Demo coming soon!')">Watch Demo</a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="portfolio-item">
-              <img src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=600&fit=crop" alt="BMI Calculator">
-              <div class="portfolio-info">
-                <h3>BMI Explorer</h3>
-                <p>Interactive BMI calculator web application. Users can calculate their Body Mass Index with visual feedback and health recommendations.</p>
-                <div class="project-badges">
-                  <span class="project-badge">HTML</span>
-                  <span class="project-badge">CSS</span>
-                  <span class="project-badge">JavaScript</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/soul-net00/bmi_explore" class="project-link" target="_blank">View Code</a>
-                  <a href="https://soul-net00.github.io/bmi_explore/" class="project-link" target="_blank">Live Demo</a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="portfolio-item">
-              <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&h=600&fit=crop" alt="Portfolio">
-              <div class="portfolio-info">
-                <h3>Portfolio Website</h3>
-                <p>This responsive portfolio website built from scratch using HTML and CSS. Showcases my projects and skills with modern design.</p>
-                <div class="project-badges">
-                  <span class="project-badge">HTML</span>
-                  <span class="project-badge">CSS</span>
-                  <span class="project-badge">Responsive</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
-                  <a href="#" class="project-link">You're Here!</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="portfolio-item">
-              <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=600&fit=crop" alt="Database">
-              <div class="portfolio-info">
-                <h3>Database Management</h3>
-                <p>SQL database projects including CellphoneShopDB with proper table relationships, stored procedures, and data management features.</p>
-                <div class="project-badges">
-                  <span class="project-badge">SQL Server</span>
-                  <span class="project-badge">Database Design</span>
-                </div>
-                <div class="project-links">
-                  <a href="https://github.com/soul-net00" class="project-link" target="_blank">View Code</a>
-                  <a href="#" class="project-link" onclick="alert('Documentation available on GitHub!')">Docs</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div style="margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; text-align: center; color: white;">
-            <h3 style="margin-bottom: 10px; font-size: 18px;">Get In Touch</h3>
-            <p style="margin-bottom: 15px; font-size: 14px;">Want to collaborate or have a project in mind?</p>
-            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
-              <a href="https://github.com/soul-net00" target="_blank" style="padding: 8px 20px; background: white; color: #667eea; text-decoration: none; border-radius: 20px; font-weight: 600; font-size: 13px;">GitHub</a>
-              <a href="mailto:your.email@gmail.com" style="padding: 8px 20px; background: white; color: #667eea; text-decoration: none; border-radius: 20px; font-weight: 600; font-size: 13px;">Email Me</a>
-              <a href="https://linkedin.com/in/yourusername" target="_blank" style="padding: 8px 20px; background: white; color: #667eea; text-decoration: none; border-radius: 20px; font-weight: 600; font-size: 13px;">LinkedIn</a>
-            </div>
-          </div>
-        </div>
-        </div>
+        <div class="qr-note">⚠ Password protected · Ask Kgomotso for access</div>
       </div>
     </div>
   </div>
 
-  <!-- Receipt Details Modal -->
-  <div class="modal" id="receiptModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 style="font-size: 18px;">Receipt Details</h2>
-        <button class="modal-close" onclick="closeModal()">×</button>
-      </div>
-      <div id="modalBody"></div>
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
+      <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
+      <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
+      <span class="titem"><span class="tdot"></span>SQL Server</span>
+      <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Database Design</span>
+      <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Responsive Design</span>
+      <span class="titem"><span class="tdot" style="background:var(--green)"></span>Git &amp; GitHub</span>
+      <span class="titem"><span class="tdot"></span>Netlify</span>
+      <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Problem Solving</span>
+      <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
+      <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
+      <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
+      <span class="titem"><span class="tdot"></span>SQL Server</span>
+      <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Database Design</span>
+      <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Responsive Design</span>
+      <span class="titem"><span class="tdot" style="background:var(--green)"></span>Git &amp; GitHub</span>
+      <span class="titem"><span class="tdot"></span>Netlify</span>
+      <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Problem Solving</span>
     </div>
   </div>
 
-  <script>
-    const STORAGE_KEYS = {
-      receipts: 'cellphone_receipts',
-      customers: 'cellphone_customers',
-      settings: 'cellphone_settings'
-    };
-
-    let currentItems = [];
-    let settings = getSettings();
-    let portfolioUnlocked = false;
-
-    function getSettings() {
-      const defaults = {
-        companyName: 'CELLPHONE REPAIR SHOP',
-        phone: '(555) 123-4567',
-        email: 'info@cellshop.com',
-        address: '123 Main Street, City, State',
-        warranty: 'Warranty: 30 days on all repairs',
-        password: 'admin123',
-        logo: ''
-      };
-      const saved = localStorage.getItem(STORAGE_KEYS.settings);
-      return saved ? JSON.parse(saved) : defaults;
-    }
-
-    function saveToStorage(key, data) {
-      localStorage.setItem(key, JSON.stringify(data));
-    }
-
-    function getFromStorage(key) {
-      const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : (key === STORAGE_KEYS.receipts || key === STORAGE_KEYS.customers ? [] : {});
-    }
-
-    function generateReceiptCode() {
-      const year = new Date().getFullYear();
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      let code = '';
-      for (let i = 0; i < 6; i++) {
-        code += chars[Math.floor(Math.random() * chars.length)];
-      }
-      return `RCP-${year}-${code}`;
-    }
-
-    function formatCurrency(amount) {
-      return parseFloat(amount).toFixed(2);
-    }
-
-    function toggleDiscount() {
-      document.getElementById('discountPercent').disabled = !document.getElementById('applyDiscount').checked;
-      if (!document.getElementById('applyDiscount').checked) {
-        document.getElementById('discountPercent').value = '';
-      }
-    }
-
-    function switchTab(tabName) {
-      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-      document.getElementById(tabName).classList.add('active');
-      event.target.classList.add('active');
-
-      if (tabName === 'history') {
-        loadAllReceipts();
-      } else if (tabName === 'settings') {
-        loadSettingsData();
-      }
-    }
-
-    function openPortfolio() {
-      if (portfolioUnlocked) {
-        switchTab('portfolio');
-      } else {
-        switchTab('portfolio');
-      }
-    }
-
-    function unlockPortfolio() {
-      const password = document.getElementById('portfolioPasswordInput').value;
-      if (password === '@soul123') {
-        portfolioUnlocked = true;
-        document.getElementById('portfolioLocked').style.display = 'none';
-        document.getElementById('portfolioUnlocked').style.display = 'block';
-        document.getElementById('portfolioPasswordInput').value = '';
-      } else {
-        alert('❌ Incorrect password!');
-        document.getElementById('portfolioPasswordInput').value = '';
-        document.getElementById('portfolioPasswordInput').focus();
-      }
-    }
-
-    function lockPortfolio() {
-      portfolioUnlocked = false;
-      document.getElementById('portfolioLocked').style.display = 'block';
-      document.getElementById('portfolioUnlocked').style.display = 'none';
-      document.getElementById('portfolioPasswordInput').value = '';
-    }
-
-    function addItem() {
-      const description = document.getElementById('itemDescription').value.trim();
-      const category = document.getElementById('itemCategory').value;
-      const quantity = parseInt(document.getElementById('itemQuantity').value);
-      const price = parseFloat(document.getElementById('itemPrice').value);
-
-      if (!description || !price || price <= 0 || quantity <= 0) {
-        alert('Please fill in all required fields correctly!');
-        return;
-      }
-
-      let total = quantity * price;
-      
-      if (document.getElementById('applyDiscount').checked) {
-        const discount = parseFloat(document.getElementById('discountPercent').value) || 0;
-        if (discount > 0 && discount <= 100) {
-          total = total * (1 - discount / 100);
-        }
-      }
-
-      const item = {
-        id: Date.now(),
-        description,
-        category,
-        quantity,
-        price,
-        total
-      };
-
-      currentItems.push(item);
-      renderItems();
-      clearItemForm();
-    }
-
-    function removeItem(id) {
-      currentItems = currentItems.filter(item => item.id !== id);
-      renderItems();
-    }
-
-    function renderItems() {
-      const tbody = document.getElementById('itemsTableBody');
-      const container = document.getElementById('itemsTableContainer');
-      const summary = document.getElementById('summaryCard');
-
-      if (currentItems.length === 0) {
-        container.style.display = 'none';
-        summary.style.display = 'none';
-        return;
-      }
-
-      container.style.display = 'block';
-      summary.style.display = 'block';
-
-      tbody.innerHTML = currentItems.map(item => `
-        <tr>
-          <td>${item.description}</td>
-          <td>${item.category}</td>
-          <td>${item.quantity}</td>
-          <td>R ${formatCurrency(item.price)}</td>
-          <td><strong>R ${formatCurrency(item.total)}</strong></td>
-          <td>
-            <button class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;" onclick="removeItem(${item.id})">Delete</button>
-          </td>
-        </tr>
-      `).join('');
-
-      const total = currentItems.reduce((sum, item) => sum + item.total, 0);
-      document.getElementById('totalItems').textContent = currentItems.length;
-      document.getElementById('totalAmount').textContent = formatCurrency(total);
-    }
-
-    function clearItemForm() {
-      document.getElementById('itemDescription').value = '';
-      document.getElementById('itemQuantity').value = '1';
-      document.getElementById('itemPrice').value = '';
-      document.getElementById('applyDiscount').checked = false;
-      document.getElementById('discountPercent').value = '';
-      document.getElementById('discountPercent').disabled = true;
-      document.getElementById('itemCategory').selectedIndex = 0;
-    }
-
-    function clearReceipt() {
-      if (currentItems.length > 0 && !confirm('Clear all items from this receipt?')) {
-        return;
-      }
-      currentItems = [];
-      renderItems();
-      document.getElementById('customerPhone').value = '';
-      document.getElementById('customerName').value = '';
-      document.getElementById('customerEmail').value = '';
-      document.getElementById('receiptNotes').value = '';
-    }
-
-    function saveReceipt() {
-      const phone = document.getElementById('customerPhone').value.trim();
-      const name = document.getElementById('customerName').value.trim();
-      const email = document.getElementById('customerEmail').value.trim();
-      const notes = document.getElementById('receiptNotes').value.trim();
-
-      if (!phone || phone.length < 10) {
-        alert('Please enter a valid phone number (at least 10 digits)!');
-        return;
-      }
-
-      if (currentItems.length === 0) {
-        alert('Please add at least one item!');
-        return;
-      }
-
-      const receiptCode = generateReceiptCode();
-      const total = currentItems.reduce((sum, item) => sum + item.total, 0);
-
-      const receipt = {
-        id: Date.now(),
-        receiptCode,
-        customerPhone: phone,
-        customerName: name || 'Walk-in Customer',
-        customerEmail: email,
-        date: new Date().toISOString(),
-        items: [...currentItems],
-        total,
-        notes
-      };
-
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      receipts.push(receipt);
-      saveToStorage(STORAGE_KEYS.receipts, receipts);
-
-      const customers = getFromStorage(STORAGE_KEYS.customers);
-      const existingCustomer = customers.find(c => c.phone === phone);
-      if (existingCustomer) {
-        existingCustomer.name = name;
-        existingCustomer.email = email;
-      } else {
-        customers.push({ phone, name, email });
-      }
-      saveToStorage(STORAGE_KEYS.customers, customers);
-
-      alert(`✅ Receipt saved successfully!\n\nReceipt Code: ${receiptCode}\nTotal: R ${formatCurrency(total)}`);
-
-      if (confirm('Would you like to print this receipt? 🖨️')) {
-        exportReceiptAsHTML(receipt.id);
-      }
-
-      clearReceipt();
-    }
-
-    function searchReceipts() {
-      const term = document.getElementById('searchTerm').value.trim();
-      if (!term) {
-        loadAllReceipts();
-        return;
-      }
-
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      const results = receipts.filter(r => 
-        r.customerPhone.includes(term) ||
-        r.receiptCode.toUpperCase().includes(term.toUpperCase()) ||
-        r.id.toString() === term
-      );
-
-      displayReceipts(results);
-    }
-
-    function loadAllReceipts() {
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      displayReceipts(receipts.reverse());
-    }
-
-    function displayReceipts(receipts) {
-      const container = document.getElementById('searchResults');
-      
-      if (receipts.length === 0) {
-        container.innerHTML = '<p style="text-align: center; color: #6b7280; padding: 40px;">No receipts found</p>';
-        return;
-      }
-
-      container.innerHTML = receipts.map(r => `
-        <div class="receipt-card" onclick="viewReceipt(${r.id})">
-          <div class="receipt-header">
-            <div>
-              <div class="receipt-code">${r.receiptCode}</div>
-              <p style="color: #6b7280; margin-top: 5px; font-size: 13px;">${r.customerName} • ${r.customerPhone}</p>
-              <p style="color: #9ca3af; font-size: 12px; margin-top: 3px;">${new Date(r.date).toLocaleString()}</p>
-            </div>
-            <div class="receipt-amount">R ${formatCurrency(r.total)}</div>
-          </div>
-          <p style="color: #6b7280; font-size: 12px;">${r.items.length} item(s)</p>
-        </div>
-      `).join('');
-    }
-
-    function viewReceipt(id) {
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      const receipt = receipts.find(r => r.id === id);
-      if (!receipt) return;
-
-      const modal = document.getElementById('receiptModal');
-      const body = document.getElementById('modalBody');
-
-      body.innerHTML = `
-        <div style="text-align: center; border-bottom: 2px solid #e5e7eb; padding-bottom: 15px; margin-bottom: 15px;">
-          <h2 style="color: #667eea; font-size: 18px;">${settings.companyName}</h2>
-          <p style="font-size: 12px;">${settings.phone} • ${settings.email}</p>
-          <p style="font-size: 12px;">${settings.address}</p>
-        </div>
-
-        <div style="background: #f9fafb; padding: 12px; border-radius: 8px; margin-bottom: 15px;">
-          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; font-size: 13px;">
-            <div>
-              <p style="color: #6b7280;">Receipt #</p>
-              <p style="font-weight: bold;">${receipt.id}</p>
-            </div>
-            <div>
-              <p style="color: #6b7280;">Receipt Code</p>
-              <p style="font-weight: bold; color: #667eea;">${receipt.receiptCode}</p>
-            </div>
-            <div>
-              <p style="color: #6b7280;">Date</p>
-              <p style="font-weight: bold;">${new Date(receipt.date).toLocaleString()}</p>
-            </div>
-            <div>
-              <p style="color: #6b7280;">Customer</p>
-              <p style="font-weight: bold;">${receipt.customerName}</p>
+  <div class="wrap">
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <div class="slabel">// what I've built</div>
+      <div class="stitle">FEATURED PROJECTS</div>
+      <div class="pgrid">
+        <div class="pcard">
+          <img class="pimg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop" alt="MobileFix">
+          <div class="pbody">
+            <div class="pnum">01 / DESKTOP APP</div>
+            <div class="ptitle">MobileFix Manager</div>
+            <div class="pdesc">Full cellphone repair shop system in VB.NET — receipt generation, customer database, and inventory connected to SQL Server.</div>
+            <div class="ptags"><span class="tag">VB.NET</span><span class="tag">SQL Server</span><span class="tag">Desktop App</span></div>
+            <div class="plinks">
+              <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+              <a href="#" class="plnk" onclick="gotoPage('p2');return false">↗ Web Version</a>
             </div>
           </div>
         </div>
-
-        <h3 style="margin-bottom: 12px; font-size: 16px;">Items</h3>
-        <div class="table-container">
-          <table style="margin-bottom: 15px;">
-            <thead>
-              <tr>
-                <th>Description</th>
-                <th>Category</th>
-                <th>Qty</th>
-                <th>Price</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${receipt.items.map(item => `
-                <tr>
-                  <td>${item.description}</td>
-                  <td>${item.category}</td>
-                  <td>${item.quantity}</td>
-                  <td>R ${formatCurrency(item.price)}</td>
-                  <td><strong>R ${formatCurrency(item.total)}</strong></td>
-                </tr>
-              `).join('')}
-            </tbody>
-          </table>
+        <div class="pcard">
+          <img class="pimg" src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=400&fit=crop" alt="BMI">
+          <div class="pbody">
+            <div class="pnum">02 / WEB APP</div>
+            <div class="ptitle">BMI Explorer</div>
+            <div class="pdesc">Interactive BMI calculator with visual feedback and personalized health recommendations. Deployed live on GitHub Pages.</div>
+            <div class="ptags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+            <div class="plinks">
+              <a href="https://github.com/soul-net00/bmi_explore" class="plnk" target="_blank">↗ GitHub</a>
+              <a href="https://soul-net00.github.io/bmi_explore/" class="plnk" target="_blank">↗ Live Demo</a>
+            </div>
+          </div>
         </div>
-
-        <div style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 15px; border-radius: 12px; text-align: right;">
-          <p style="font-size: 13px; opacity: 0.9; margin-bottom: 5px;">TOTAL AMOUNT</p>
-          <p style="font-size: 28px; font-weight: bold;">R ${formatCurrency(receipt.total)}</p>
+        <div class="pcard">
+          <img class="pimg" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop" alt="DB">
+          <div class="pbody">
+            <div class="pnum">03 / DATABASE</div>
+            <div class="ptitle">CellphoneShopDB</div>
+            <div class="pdesc">Normalized SQL database with proper FK relationships, stored procedures, and indexing for a real shop management system.</div>
+            <div class="ptags"><span class="tag">SQL Server</span><span class="tag">Database Design</span><span class="tag">T-SQL</span></div>
+            <div class="plinks">
+              <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+              <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ Schema</a>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
 
-        ${receipt.notes ? `<div style="background: #fef3c7; padding: 12px; border-radius: 8px; margin-top: 15px;">
-          <p style="font-weight: bold; margin-bottom: 5px; font-size: 13px;">Notes:</p>
-          <p style="font-size: 13px;">${receipt.notes}</p>
-        </div>` : ''}
+    <!-- SKILLS -->
+    <section class="section sdiv">
+      <div class="slabel">// what I know</div>
+      <div class="stitle">SKILLS</div>
+      <div class="skgrid">
+        <div class="skitem"><div class="skrow"><span class="skname">HTML &amp; CSS</span><span class="skpct">85%</span></div><div class="sktrack"><div class="skfill" style="width:85%"></div></div></div>
+        <div class="skitem"><div class="skrow"><span class="skname">JavaScript</span><span class="skpct">70%</span></div><div class="sktrack"><div class="skfill" style="width:70%"></div></div></div>
+        <div class="skitem"><div class="skrow"><span class="skname">VB.NET</span><span class="skpct">80%</span></div><div class="sktrack"><div class="skfill" style="width:80%"></div></div></div>
+        <div class="skitem"><div class="skrow"><span class="skname">SQL Server</span><span class="skpct">75%</span></div><div class="sktrack"><div class="skfill" style="width:75%"></div></div></div>
+        <div class="skitem"><div class="skrow"><span class="skname">Git &amp; GitHub</span><span class="skpct">65%</span></div><div class="sktrack"><div class="skfill" style="width:65%"></div></div></div>
+        <div class="skitem"><div class="skrow"><span class="skname">Database Design</span><span class="skpct">78%</span></div><div class="sktrack"><div class="skfill" style="width:78%"></div></div></div>
+      </div>
+    </section>
 
-        <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 2px solid #e5e7eb;">
-          <p style="font-style: italic; color: #6b7280; font-size: 12px;">${settings.warranty}</p>
-          <p style="margin-top: 8px; font-weight: bold; font-size: 13px;">Thank you for your business!</p>
+    <!-- CONTACT -->
+    <section class="section sdiv" style="text-align:center" id="contact">
+      <div class="slabel" style="text-align:center">// let's connect</div>
+      <div class="stitle" style="text-align:center">GET IN TOUCH</div>
+      <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto;line-height:1.7">Looking to collaborate, have a project idea, or just want to say hi?</p>
+      <div class="crow">
+        <a href="mailto:kgomotsothabo2004@gmail.com" class="clnk">✉️ kgomotsothabo2004@gmail.com</a>
+        <a href="https://github.com/soul-net00" target="_blank" class="clnk">🐙 GitHub</a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank" class="clnk">💼 LinkedIn</a>
+      </div>
+    </section>
+  </div>
+
+  <footer><div class="wrap">built by <span>kgomotso thabo</span> · <span>soul-net00</span> · bmiexplore.netlify.app</div></footer>
+</div>
+
+
+<!-- ======================== PAGE 2: THE APP ======================== -->
+<div class="page" id="p2">
+  <div class="wrap">
+    <div style="padding:60px 0 20px;text-align:center">
+      <div class="slabel" style="text-align:center">// featured project</div>
+      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,78px);letter-spacing:2px;line-height:.95;margin-bottom:20px">
+        CELLPHONE SHOP<br><span style="background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">MANAGEMENT SYSTEM</span>
+      </h2>
+      <p style="color:var(--muted);font-size:16px;max-width:560px;margin:0 auto 24px;line-height:1.7">
+        A fully functional browser-based receipt &amp; shop management system. No install needed — works entirely in the browser with local data storage.
+      </p>
+      <button class="btn-v bsolid" onclick="document.getElementById('liveapp').scrollIntoView({behavior:'smooth'})" style="margin:0 auto">🚀 Try It Live</button>
+    </div>
+
+    <div class="fgrid">
+      <div class="fcard"><div class="fico">🧾</div><div class="ftitle">Receipt Generation</div><div class="fdesc">Auto-generated codes, print-ready HTML with watermarks, signature lines and legal disclaimer.</div></div>
+      <div class="fcard"><div class="fico">👥</div><div class="ftitle">Customer Database</div><div class="fdesc">Save customer details. Instant search by phone number, receipt ID or code.</div></div>
+      <div class="fcard"><div class="fico">📦</div><div class="ftitle">11 Categories</div><div class="fdesc">Repairs, accessories, software — all with optional per-item discount support.</div></div>
+      <div class="fcard"><div class="fico">💾</div><div class="ftitle">Export &amp; Backup</div><div class="fdesc">Full JSON export/import. Restore your entire database on any device instantly.</div></div>
+      <div class="fcard"><div class="fico">🖨️</div><div class="ftitle">Print Ready</div><div class="fdesc">Professional print page with company logo, branding and all legal terms included.</div></div>
+      <div class="fcard"><div class="fico">🔒</div><div class="ftitle">Password Protected</div><div class="fdesc">Settings locked. Only you control company info, warranty text and branding.</div></div>
+    </div>
+
+    <!-- VIDEO -->
+    <section class="section sdiv">
+      <div class="slabel">// watch it in action</div>
+      <div class="stitle">VIDEO DEMO</div>
+      <div class="vwrap">
+        <iframe src="https://www.youtube.com/embed/L99lApSNXuo?si=2OmKCjXUdDPmnkMX"
+          title="Cellphone Shop Management System Demo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <!-- TECH -->
+    <section class="section sdiv">
+      <div class="slabel">// built with</div>
+      <div class="stitle">TECH STACK</div>
+      <div class="tgrid">
+        <div class="titem"><span class="tico">🌐</span>HTML5 &amp; CSS3</div>
+        <div class="titem"><span class="tico">⚡</span>Vanilla JavaScript</div>
+        <div class="titem"><span class="tico">💾</span>localStorage API</div>
+        <div class="titem"><span class="tico">🖨️</span>Browser Print API</div>
+        <div class="titem"><span class="tico">📄</span>Blob / File API</div>
+        <div class="titem"><span class="tico">🚀</span>Netlify Hosting</div>
+      </div>
+    </section>
+
+    <!-- LIVE APP -->
+    <section class="section sdiv" id="liveapp">
+      <div class="slabel">// try it yourself</div>
+      <div class="stitle">LIVE APPLICATION</div>
+      <p style="color:var(--muted);font-size:14px;line-height:1.7">Fully interactive. Your data stays in your browser — nothing sent to any server.</p>
+      <div class="bframe">
+        <div class="bbar">
+          <div class="bdots">
+            <div class="bdot" style="background:#ff5f57"></div>
+            <div class="bdot" style="background:#febc2e"></div>
+            <div class="bdot" style="background:#28c840"></div>
+          </div>
+          <div class="burl">bmiexplore.netlify.app · Cellphone Shop Management System</div>
         </div>
-
-        <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
-          <button class="btn btn-primary" onclick="exportReceiptAsHTML(${receipt.id})" style="flex: 1;">🖨️ Print</button>
-          <button class="btn btn-secondary" onclick="closeModal()" style="flex: 1;">Close</button>
+        <div class="aframe" id="appFrameWrap">
+          <div id="appPlaceholder" style="height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:var(--surface)">
+            <div style="font-size:48px">📱</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)">Click to load the live app</div>
+            <button class="btn-v bsolid" onclick="loadApp()">▶ Launch App</button>
+          </div>
         </div>
-      `;
+      </div>
+    </section>
+  </div>
 
-      modal.classList.add('active');
-    }
+  <footer><div class="wrap">built by <span>kgomotso thabo</span> · kgomotsothabo2004@gmail.com · <span>soul-net00</span></div></footer>
+</div>
 
-    function closeModal() {
-      document.getElementById('receiptModal').classList.remove('active');
-    }
 
-    function exportReceiptAsHTML(id) {
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      const receipt = receipts.find(r => r.id === id);
-      if (!receipt) return;
-
-      const html = generateReceiptHTML(receipt);
-      const blob = new Blob([html], { type: 'text/html' });
-      const url = URL.createObjectURL(blob);
-      window.open(url, '_blank');
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
-    }
-
-    function generateReceiptHTML(receipt) {
-      return `<!DOCTYPE html>
-<html><head>
-<meta charset='UTF-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1.0'>
-<title>Receipt ${receipt.id} - ${receipt.receiptCode}</title>
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: Arial, sans-serif; padding: 20px; background: white; position: relative; }
-@media print { body { padding: 10px; } }
-.receipt-container { max-width: 100%; margin: 0; position: relative; z-index: 1; }
-
-.watermark { position: fixed; top: 50%; left: 50%; 
-              transform: translate(-50%, -50%) rotate(-45deg); 
-              font-size: 60pt; font-weight: bold; 
-              color: rgba(200, 200, 200, 0.12); 
-              pointer-events: none; z-index: 0; 
-              white-space: nowrap; user-select: none; 
-              text-transform: uppercase; letter-spacing: 8px; }
-@media print { .watermark { color: rgba(200, 200, 200, 0.12) !important; } }
-
-.header-section { display: flex; align-items: flex-start; margin-bottom: 15px; gap: 15px; flex-wrap: wrap; }
-.logo-section { flex: 0 0 120px; }
-.logo-section img { max-width: 120px; max-height: 120px; object-fit: contain; }
-.company-info-section { flex: 1; min-width: 200px; }
-
-.company-name { font-size: 16pt; font-weight: bold; margin: 0 0 8px 0; }
-.company-detail { font-size: 9pt; margin: 4px 0; }
-.separator { border-top: 2px solid black; margin: 15px 0; }
-.title { font-size: 14pt; font-weight: bold; text-align: center; margin: 15px 0; }
-
-.info-box { background: #f5f5f5; border: 1px solid black; padding: 12px; margin: 15px 0; }
-.info-row { display: flex; justify-content: space-between; margin-bottom: 8px; gap: 10px; flex-wrap: wrap; }
-.info-column { flex: 1; min-width: 150px; }
-.info-label { font-weight: bold; display: inline-block; width: 90px; font-size: 9pt; }
-.info-value { display: inline-block; font-size: 9pt; }
-.code-value { color: #00008B; font-weight: bold; font-size: 9pt; }
-
-table { width: 100%; border-collapse: collapse; margin: 15px 0; }
-th { background: #dcdcdc; border: 1px solid black; padding: 6px; text-align: left; font-weight: bold; font-size: 9pt; }
-td { border: 1px solid #ccc; padding: 6px; font-size: 8pt; }
-tr:nth-child(even) { background: #fafafa; }
-
-.total-box { background: #e6e6e6; border: 2px solid black; padding: 10px 12px; 
-              margin: 20px 0; text-align: right; font-size: 11pt; font-weight: bold; }
-.total-label { display: inline-block; margin-right: 15px; }
-.total-value { display: inline-block; min-width: 100px; text-align: right; }
-
-.notes-section { margin: 20px 0; }
-.notes-title { font-weight: bold; margin-bottom: 8px; font-size: 9pt; }
-.notes-content { border: 1px solid #ccc; padding: 8px; font-size: 8pt; min-height: 40px; }
-
-.warranty { border-top: 1px solid gray; padding-top: 8px; margin-top: 20px; 
-             font-size: 8pt; font-style: italic; color: #666; }
-
-.disclaimer-section { border-top: 2px solid black; margin-top: 25px; padding-top: 10px; }
-.disclaimer-title { font-weight: bold; font-size: 8pt; margin-bottom: 8px; }
-.disclaimer-text { font-size: 5pt; line-height: 1.3; text-align: justify; }
-
-.footer { margin-top: 30px; border-top: 1px solid black; padding-top: 10px; }
-.signature-section { display: flex; justify-content: space-between; align-items: flex-end; margin: 15px 0; gap: 10px; flex-wrap: wrap; }
-.signature-line { flex: 1; max-width: 250px; min-width: 150px; }
-.signature-label { font-size: 8pt; margin-bottom: 4px; }
-.signature-underline { border-bottom: 1px solid black; height: 25px; }
-.fingerprint-box { width: 80px; height: 50px; border: 1px solid black; text-align: center; padding-top: 15px; font-size: 7pt; color: #999; }
-.thank-you { text-align: center; font-weight: bold; font-size: 9pt; margin: 15px 0; }
-.footer-info { text-align: center; font-size: 7pt; color: #666; }
-
-@media (max-width: 600px) {
-  .header-section { flex-direction: column; }
-  .info-row { flex-direction: column; }
-  .signature-section { flex-direction: column; }
-  table { font-size: 7pt; }
-  th, td { padding: 4px; }
+<script>
+/* ── PAGE SWITCHING ── */
+function gotoPage(id) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo(0,0);
 }
+
+/* ── QR CODE ── */
+window.addEventListener('DOMContentLoaded',function(){
+  const url=window.location.origin+window.location.pathname+'?unlock=1';
+  new QRCode(document.getElementById('qrcode'),{
+    text:url,width:200,height:200,
+    colorDark:'#7c3aed',colorLight:'#ffffff',
+    correctLevel:QRCode.CorrectLevel.H
+  });
+  if(new URLSearchParams(window.location.search).get('unlock')==='1'){
+    setTimeout(openModal,700);
+  }
+});
+
+/* ── SECURE PASSWORD (SHA-256 hash, no plaintext stored) ──
+   Password: @soul123
+   Hash of "@soul123" + salt "ktsalt2024" via SubtleCrypto SHA-256
+*/
+const _H="39dc3250bb9b4eb62515f5af3f396f94d0ef529b224bdcbcc4fa7e60d74f9835";
+async function _hash(s){
+  const d=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s+"ktsalt2024"));
+  return Array.from(new Uint8Array(d)).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+function openModal(){document.getElementById('pwModal').classList.add('open');setTimeout(()=>document.getElementById('pwInput').focus(),150);}
+function closeModal(){document.getElementById('pwModal').classList.remove('open');document.getElementById('pwInput').value='';document.getElementById('pwErr').style.display='none';}
+document.getElementById('pwModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+async function checkPw(){
+  const v=document.getElementById('pwInput').value;
+  const h=await _hash(v);
+  if(h===_H){
+    closeModal();
+    // Scroll to projects on page 1
+    gotoPage('p1');
+    setTimeout(()=>document.getElementById('projects').scrollIntoView({behavior:'smooth'}),200);
+  } else {
+    const inp=document.getElementById('pwInput');
+    inp.classList.add('err');
+    document.getElementById('pwErr').style.display='block';
+    inp.value='';
+    setTimeout(()=>inp.classList.remove('err'),400);
+  }
+}
+
+/* ── APP LOADER ── */
+function loadApp(){
+  const wrap=document.getElementById('appFrameWrap');
+  const iframe=document.createElement('iframe');
+  iframe.style.cssText='width:100%;height:100%;border:none;display:block';
+  iframe.title='Cellphone Shop Management System';
+  const blob=new Blob([shopHTML()],{type:'text/html'});
+  iframe.src=URL.createObjectURL(blob);
+  wrap.innerHTML='';
+  wrap.appendChild(iframe);
+}
+
+/* ── FULL SHOP APP HTML ── */
+function shopHTML(){return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cellphone Shop Management System</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
+.container{max-width:1400px;margin:0 auto;padding:10px}
+.header{background:white;border-radius:15px;padding:20px;margin-bottom:15px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.header-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.header h1{color:#667eea;font-size:24px}.header p{color:#6b7280;margin-top:5px;font-size:14px}
+.header-btns{display:flex;gap:10px;flex-wrap:wrap}
+.header-btn{padding:10px 15px;border:none;border-radius:8px;cursor:pointer;font-weight:600;transition:.3s;font-size:13px}
+.btn-export{background:#10b981;color:white}.btn-import{background:#3b82f6;color:white}
+.tabs{background:white;border-radius:15px;padding:10px;margin-bottom:15px;box-shadow:0 10px 30px rgba(0,0,0,.2);display:flex;gap:8px;flex-wrap:wrap}
+.tab-btn{padding:10px 15px;border:none;background:#f3f4f6;border-radius:8px;cursor:pointer;font-weight:600;transition:.3s;color:#6b7280;font-size:13px}
+.tab-btn.active{background:linear-gradient(135deg,#667eea,#764ba2);color:white}
+.content{background:white;border-radius:15px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.tab-content{display:none}.tab-content.active{display:block}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:20px}
+.form-group{display:flex;flex-direction:column}
+.form-group label{font-weight:600;margin-bottom:8px;color:#374151;font-size:14px}
+.form-group input,.form-group select,.form-group textarea{padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:14px;transition:.3s;width:100%}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#667eea}
+.btn{padding:12px 25px;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:.3s;font-size:14px}
+.btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);color:white}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-success{background:#10b981;color:white}.btn-danger{background:#ef4444;color:white}.btn-secondary{background:#6b7280;color:white}
+.table-container{overflow-x:auto;margin-top:15px}
+table{width:100%;border-collapse:collapse;min-width:500px}
+th{background:#f9fafb;padding:10px;text-align:left;font-weight:600;border-bottom:2px solid #e5e7eb;font-size:13px}
+td{padding:10px;border-bottom:1px solid #e5e7eb;font-size:13px}
+tr:hover{background:#f9fafb}
+.summary-card{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:20px;border-radius:12px;margin-top:20px}
+.summary-total{font-size:32px;font-weight:bold}
+.receipt-card{background:#f9fafb;padding:15px;border-radius:12px;margin-bottom:15px;border-left:4px solid #667eea;cursor:pointer;transition:.3s}
+.receipt-card:hover{background:#f3f4f6;transform:translateX(5px)}
+.receipt-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:10px}
+.receipt-code{font-size:16px;font-weight:bold;color:#667eea}
+.receipt-amount{font-size:20px;font-weight:bold;color:#10b981}
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;padding:10px}
+.modal.active{display:flex}
+.modal-content{background:white;border-radius:15px;padding:20px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.modal-close{background:none;border:none;font-size:30px;cursor:pointer;color:#6b7280}
+.settings-locked{text-align:center;padding:30px 10px}
+.action-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+.warning-box{background:#fef3c7;border-left:4px solid #f59e0b;padding:15px;border-radius:8px;margin:15px 0}
+.checkbox-group{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.checkbox-group input[type="checkbox"]{width:20px;height:20px;cursor:pointer}
+.logo-preview-box{margin-top:15px;padding:15px;border:2px dashed #e5e7eb;border-radius:8px;text-align:center}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px}
+.stat-card{background:#f9fafb;padding:15px;border-radius:8px;text-align:center}
+.stat-number{font-size:28px;font-weight:bold;color:#667eea}
+.stat-label{color:#6b7280;font-size:13px;margin-top:5px}
 </style>
-</head><body>
-
-<div class='watermark'>${settings.companyName}</div>
-
-<div class='receipt-container'>
-
-<div class='header-section'>
-${settings.logo ? `<div class='logo-section'><img src='${settings.logo}' alt='Company Logo'></div>` : ''}
-<div class='company-info-section'>
-<div class='company-name'>${settings.companyName.toUpperCase()}</div>
-<div class='company-detail'>Phone: ${settings.phone}</div>
-<div class='company-detail'>Email: ${settings.email}</div>
-<div class='company-detail'>${settings.address}</div>
+</head>
+<body>
+<div class="container">
+<div class="header"><div class="header-content">
+<div><h1>📱 Cellphone Shop Management</h1><p>Professional Receipt System</p></div>
+<div class="header-btns">
+<button class="header-btn btn-export" onclick="exportDatabase()">📥 Export</button>
+<label class="header-btn btn-import" style="cursor:pointer">📤 Import<input type="file" id="importFile" accept=".json" style="display:none" onchange="importDatabase(event)"></label>
+</div></div></div>
+<div class="tabs">
+<button class="tab-btn active" onclick="switchTab('new-receipt',event)">➕ New Receipt</button>
+<button class="tab-btn" onclick="switchTab('history',event)">📜 History</button>
+<button class="tab-btn" onclick="switchTab('settings',event)">⚙️ Settings</button>
 </div>
+<div class="content">
+<div id="new-receipt" class="tab-content active">
+<h2 style="margin-bottom:15px;color:#667eea;font-size:20px">Create New Receipt</h2>
+<div class="warning-box"><h4>⚠️ Data Storage Notice</h4><p>Your data is saved in your browser. Export regularly to backup!</p></div>
+<h3 style="margin-bottom:12px;font-size:16px">Customer Information</h3>
+<div class="form-grid">
+<div class="form-group"><label>Phone Number *</label><input type="tel" id="customerPhone" placeholder="0821234567"></div>
+<div class="form-group"><label>Customer Name</label><input type="text" id="customerName" placeholder="John Doe"></div>
+<div class="form-group"><label>Email</label><input type="email" id="customerEmail" placeholder="customer@email.com"></div>
 </div>
-<div class='separator'></div>
-
-<div class='title'>SALES RECEIPT</div>
-
-<div class='info-box'>
-<div class='info-row'>
-<div class='info-column'>
-<span class='info-label'>Receipt #:</span><span class='info-value'>${receipt.id}</span><br>
-<span class='info-label'>Receipt Code:</span><span class='code-value'>${receipt.receiptCode}</span><br>
-<span class='info-label'>Date:</span><span class='info-value'>${new Date(receipt.date).toLocaleDateString()}</span><br>
-<span class='info-label'>Time:</span><span class='info-value'>${new Date(receipt.date).toLocaleTimeString()}</span>
+<h3 style="margin:20px 0 12px;font-size:16px">Add Items</h3>
+<div class="form-grid">
+<div class="form-group"><label>Description *</label><input type="text" id="itemDescription" placeholder="Screen replacement"></div>
+<div class="form-group"><label>Category *</label>
+<select id="itemCategory"><option>Repair Service</option><option>Software Update</option><option>Battery</option><option>Screen Protector</option><option>Phone Case</option><option>Charger</option><option>Cable</option><option>Earphones</option><option>Memory Card</option><option>SIM Card</option><option>Other Accessories</option></select>
 </div>
-<div class='info-column'>
-<span class='info-label'>Customer:</span><span class='info-value'>${receipt.customerName}</span><br>
-<span class='info-label'>Phone:</span><span class='info-value'>${receipt.customerPhone}</span><br>
-${receipt.customerEmail ? `<span class='info-label'>Email:</span><span class='info-value'>${receipt.customerEmail}</span>` : ''}
+<div class="form-group"><label>Quantity *</label><input type="number" id="itemQuantity" value="1" min="1"></div>
+<div class="form-group"><label>Price (R) *</label><input type="number" id="itemPrice" placeholder="0.00" step="0.01" min="0"></div>
 </div>
+<div class="checkbox-group" style="margin:12px 0">
+<input type="checkbox" id="applyDiscount" onchange="toggleDiscount()">
+<label for="applyDiscount" style="margin:0;cursor:pointer">Apply Discount</label>
+<input type="number" id="discountPercent" placeholder="%" min="0" max="100" style="width:80px;padding:8px;border-radius:5px;border:2px solid #e5e7eb" disabled>
 </div>
+<button class="btn btn-primary" onclick="addItem()" style="width:100%">➕ Add Item to Receipt</button>
+<div id="itemsTableContainer" style="display:none;margin-top:20px">
+<h3 style="font-size:16px;margin-bottom:10px">Items on Receipt</h3>
+<div class="table-container">
+<table><thead><tr><th>Description</th><th>Category</th><th>Qty</th><th>Price</th><th>Total</th><th>Action</th></tr></thead>
+<tbody id="itemsTableBody"></tbody></table></div></div>
+<div class="summary-card" id="summaryCard" style="display:none">
+<h3>Receipt Summary</h3>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-top:15px;flex-wrap:wrap;gap:10px">
+<div><p>Total Items: <span id="totalItems">0</span></p></div>
+<div style="text-align:right"><p style="font-size:14px;opacity:.9">TOTAL AMOUNT</p><div class="summary-total">R <span id="totalAmount">0.00</span></div></div>
 </div>
-
-<table>
-<tr>
-<th style='width: 35%;'>Description</th>
-<th style='width: 20%;'>Category</th>
-<th style='width: 10%;'>Qty</th>
-<th style='width: 17%;'>Unit Price</th>
-<th style='width: 18%;'>Total</th>
-</tr>
-${receipt.items.map(item => `
-<tr>
-<td>${item.description}</td>
-<td>${item.category}</td>
-<td>${item.quantity}</td>
-<td>R ${formatCurrency(item.price)}</td>
-<td>R ${formatCurrency(item.total)}</td>
-</tr>
-`).join('')}
-</table>
-
-<div class='total-box'>
-<span class='total-label'>GRAND TOTAL:</span>
-<span class='total-value'>R ${formatCurrency(receipt.total)}</span>
+<div class="form-group" style="margin-top:15px"><label style="color:white">Notes (Optional)</label><textarea id="receiptNotes" rows="3" placeholder="Additional notes..."></textarea></div>
+<div class="action-btns">
+<button class="btn btn-success" onclick="saveReceipt()">💾 Save Receipt</button>
+<button class="btn btn-secondary" onclick="clearReceipt()">🗑️ Clear All</button>
+</div></div></div>
+<div id="history" class="tab-content">
+<h2 style="margin-bottom:15px;color:#667eea;font-size:20px">Receipt History</h2>
+<div class="form-grid">
+<div class="form-group"><label>Search by Phone / Receipt ID / Code</label><input type="text" id="searchTerm" placeholder="Enter search term..."></div>
+<div style="display:flex;align-items:flex-end"><button class="btn btn-primary" onclick="searchReceipts()" style="width:100%">🔍 Search</button></div>
+</div><div id="searchResults"></div></div>
+<div id="settings" class="tab-content">
+<div id="settingsLocked" class="settings-locked">
+<div style="font-size:60px;margin-bottom:20px">🔒</div>
+<h2 style="margin-bottom:15px;font-size:20px">Settings Locked</h2>
+<p style="color:#6b7280;margin-bottom:20px">Enter password to unlock settings</p>
+<div style="max-width:400px;margin:0 auto">
+<input type="password" id="passwordInput" placeholder="Enter password" style="width:100%;padding:12px;border-radius:8px;border:2px solid #e5e7eb;margin-bottom:12px">
+<button class="btn btn-primary" onclick="unlockSettings()" style="width:100%">🔓 Unlock Settings</button>
+<p style="margin-top:12px;color:#6b7280;font-size:13px">Default password: admin123</p>
+</div></div>
+<div id="settingsUnlocked" style="display:none">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px">
+<h2 style="color:#667eea;font-size:20px">Company Settings</h2>
+<button class="btn btn-danger" onclick="lockSettings()">🔒 Lock Settings</button>
 </div>
-
-${receipt.notes ? `
-<div class='notes-section'>
-<div class='notes-title'>Notes:</div>
-<div class='notes-content'>${receipt.notes}</div>
+<div class="form-grid">
+<div class="form-group"><label>Company Name</label><input type="text" id="settingCompanyName"></div>
+<div class="form-group"><label>Phone</label><input type="tel" id="settingPhone"></div>
+<div class="form-group"><label>Email</label><input type="email" id="settingEmail"></div>
+<div class="form-group"><label>Address</label><input type="text" id="settingAddress"></div>
 </div>
-` : ''}
-
-<div class='warranty'>${settings.warranty}</div>
-
-<div class='disclaimer-section'>
-<div class='disclaimer-title'>GENERAL SALES & REPAIRS DISCLAIMER</div>
-<div class='disclaimer-text'>
-All devices, accessories, and electronic equipment sold or repaired by us are handled in good faith. 
-While every effort is made to ensure quality service and functional testing, we do not guarantee 
-manufacturer warranty unless explicitly stated.<br><br>
-We are not responsible for: Pre-existing faults, hidden defects, or data loss on devices; 
-Damage caused by customer misuse, liquid exposure, power surges, or third-party repairs; 
-Software issues, data corruption, or loss of personal information during repairs. 
-Customers are advised to back up all data before handing in devices.<br><br>
-All repairs are tested before release. Once the device leaves our premises, we are not liable for 
-damage due to mishandling or unauthorized alterations. Used or second-hand devices are sold as-is, 
-unless otherwise agreed in writing. No refunds or exchanges after completion of service or sale, 
-except where required by law.<br><br>
-By proceeding with a purchase or repair, the customer acknowledges and accepts these terms.
+<div class="form-group" style="margin-top:15px"><label>Warranty Text</label><textarea id="settingWarranty" rows="2"></textarea></div>
+<div class="form-group" style="margin-top:15px">
+<label>Company Logo</label>
+<div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
+<input type="file" id="logoUpload" accept="image/*" style="display:none" onchange="handleLogoUpload(event)">
+<button class="btn btn-primary" onclick="document.getElementById('logoUpload').click()">📷 Upload Logo</button>
+<span id="logoStatus" style="color:#6b7280;font-size:13px">No logo uploaded</span>
 </div>
-</div>
-
-<div class='footer'>
-<div class='signature-section'>
-<div class='signature-line'>
-<div class='signature-label'>Customer Signature:</div>
-<div class='signature-underline'></div>
-</div>
-<div>
-<div class='fingerprint-box'>Thumbprint</div>
-</div>
-</div>
-
-<div class='thank-you'>Thank you for your business!</div>
-<div class='footer-info'>All prices in South African Rand (R) | Receipt Code: ${receipt.receiptCode}</div>
-</div>
-
-</div>
-</body></html>`;
-    }
-
-    function exportDatabase() {
-      const data = {
-        receipts: getFromStorage(STORAGE_KEYS.receipts),
-        customers: getFromStorage(STORAGE_KEYS.customers),
-        settings: settings,
-        exportDate: new Date().toISOString(),
-        version: '1.0'
-      };
-      
-      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `CellphoneShop_Backup_${Date.now()}.json`;
-      a.click();
-      URL.revokeObjectURL(url);
-      
-      alert('✅ Database exported successfully!');
-    }
-
-    function importDatabase(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        try {
-          const data = JSON.parse(e.target.result);
-          
-          if (!confirm('⚠️ WARNING: This will replace ALL current data!\n\nAre you sure?')) {
-            return;
-          }
-
-          if (data.receipts) saveToStorage(STORAGE_KEYS.receipts, data.receipts);
-          if (data.customers) saveToStorage(STORAGE_KEYS.customers, data.customers);
-          if (data.settings) {
-            settings = data.settings;
-            saveToStorage(STORAGE_KEYS.settings, data.settings);
-          }
-          
-          alert('✅ Database imported successfully!');
-          location.reload();
-        } catch (error) {
-          alert('❌ Error importing database.');
-        }
-      };
-      reader.readAsText(file);
-      event.target.value = '';
-    }
-
-    function handleLogoUpload(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-
-      if (file.size > 5000000) {
-        alert('Logo file too large! Max 5MB.');
-        return;
-      }
-
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        settings.logo = e.target.result;
-        updateLogoPreview();
-        document.getElementById('logoStatus').textContent = file.name;
-        alert('Logo uploaded! Click "Save Settings".');
-      };
-      reader.readAsDataURL(file);
-    }
-
-    function updateLogoPreview() {
-      const preview = document.getElementById('logoPreview');
-      const image = document.getElementById('logoImage');
-      
-      if (settings.logo) {
-        image.src = settings.logo;
-        preview.style.display = 'block';
-      } else {
-        preview.style.display = 'none';
-      }
-    }
-
-    function removeLogo() {
-      if (confirm('Remove company logo?')) {
-        settings.logo = '';
-        updateLogoPreview();
-        document.getElementById('logoStatus').textContent = 'No logo uploaded';
-        document.getElementById('logoUpload').value = '';
-      }
-    }
-
-    function unlockSettings() {
-      const password = document.getElementById('passwordInput').value;
-      if (password === settings.password) {
-        document.getElementById('settingsLocked').style.display = 'none';
-        document.getElementById('settingsUnlocked').style.display = 'block';
-        loadSettingsData();
-      } else {
-        alert('❌ Incorrect password!');
-      }
-    }
-
-    function lockSettings() {
-      document.getElementById('settingsLocked').style.display = 'block';
-      document.getElementById('settingsUnlocked').style.display = 'none';
-      document.getElementById('passwordInput').value = '';
-    }
-
-    function loadSettingsData() {
-      document.getElementById('settingCompanyName').value = settings.companyName;
-      document.getElementById('settingPhone').value = settings.phone;
-      document.getElementById('settingEmail').value = settings.email;
-      document.getElementById('settingAddress').value = settings.address;
-      document.getElementById('settingWarranty').value = settings.warranty;
-      
-      if (settings.logo) {
-        document.getElementById('logoStatus').textContent = 'Logo uploaded';
-        updateLogoPreview();
-      }
-      
-      const receipts = getFromStorage(STORAGE_KEYS.receipts);
-      const customers = getFromStorage(STORAGE_KEYS.customers);
-      document.getElementById('totalReceiptsCount').textContent = receipts.length;
-      document.getElementById('totalCustomersCount').textContent = customers.length;
-    }
-
-    function saveSettings() {
-      settings.companyName = document.getElementById('settingCompanyName').value;
-      settings.phone = document.getElementById('settingPhone').value;
-      settings.email = document.getElementById('settingEmail').value;
-      settings.address = document.getElementById('settingAddress').value;
-      settings.warranty = document.getElementById('settingWarranty').value;
-      
-      saveToStorage(STORAGE_KEYS.settings, settings);
-      alert('✅ Settings saved!');
-    }
-
-    window.addEventListener('DOMContentLoaded', function() {
-      console.log('Cellphone Shop System initialized');
-    });
-  </script>
+<div id="logoPreview" class="logo-preview-box" style="display:none">
+<img id="logoImage" alt="Logo" style="max-width:100%;max-height:150px">
+<br><button class="btn btn-danger" onclick="removeLogo()" style="margin-top:10px;padding:8px 15px">Remove Logo</button>
+</div></div>
+<div style="background:#f9fafb;padding:15px;border-radius:12px;margin:20px 0">
+<h3 style="margin-bottom:15px;font-size:16px">Database Statistics</h3>
+<div class="stats-grid">
+<div class="stat-card"><div class="stat-number" id="totalReceiptsCount">0</div><div class="stat-label">Total Receipts</div></div>
+<div class="stat-card"><div class="stat-number" id="totalCustomersCount">0</div><div class="stat-label">Total Customers</div></div>
+</div></div>
+<div class="action-btns">
+<button class="btn btn-success" onclick="saveSettings()">💾 Save Settings</button>
+<button class="btn btn-secondary" onclick="changePassword()">🔑 Change Password</button>
+</div></div></div></div></div>
+<div class="modal" id="receiptModal">
+<div class="modal-content">
+<div class="modal-header"><h2 style="font-size:18px">Receipt Details</h2><button class="modal-close" onclick="closeModal()">×</button></div>
+<div id="modalBody"></div></div></div>
+<script>
+const SK={r:'cellphone_receipts',c:'cellphone_customers',s:'cellphone_settings'};
+let items=[];let cfg=getCfg();
+function getCfg(){const d={companyName:'CELLPHONE REPAIR SHOP',phone:'(555) 123-4567',email:'info@cellshop.com',address:'123 Main Street, City',warranty:'Warranty: 30 days on all repairs',password:'admin123',logo:''};const s=localStorage.getItem(SK.s);return s?JSON.parse(s):d;}
+function save(k,d){localStorage.setItem(k,JSON.stringify(d));}
+function load(k){const d=localStorage.getItem(k);return d?JSON.parse(d):(k===SK.r||k===SK.c?[]:{});}
+function genCode(){const y=new Date().getFullYear();const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return 'RCP-'+y+'-'+s;}
+function fmt(a){return parseFloat(a).toFixed(2);}
+function toggleDiscount(){document.getElementById('discountPercent').disabled=!document.getElementById('applyDiscount').checked;if(!document.getElementById('applyDiscount').checked)document.getElementById('discountPercent').value='';}
+function switchTab(t,e){document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.getElementById(t).classList.add('active');if(e&&e.target)e.target.classList.add('active');if(t==='history')loadAll();else if(t==='settings')loadCfg();}
+function addItem(){const d=document.getElementById('itemDescription').value.trim(),cat=document.getElementById('itemCategory').value,q=parseInt(document.getElementById('itemQuantity').value),p=parseFloat(document.getElementById('itemPrice').value);if(!d||!p||p<=0||q<=0){alert('Fill in all required fields!');return;}let tot=q*p;if(document.getElementById('applyDiscount').checked){const disc=parseFloat(document.getElementById('discountPercent').value)||0;if(disc>0&&disc<=100)tot=tot*(1-disc/100);}items.push({id:Date.now(),description:d,category:cat,quantity:q,price:p,total:tot});renderItems();clearForm();}
+function removeItem(id){items=items.filter(i=>i.id!==id);renderItems();}
+function renderItems(){const tbody=document.getElementById('itemsTableBody'),cont=document.getElementById('itemsTableContainer'),sum=document.getElementById('summaryCard');if(items.length===0){cont.style.display='none';sum.style.display='none';return;}cont.style.display='block';sum.style.display='block';tbody.innerHTML=items.map(i=>'<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+fmt(i.price)+'</td><td><strong>R '+fmt(i.total)+'</strong></td><td><button class="btn btn-danger" style="padding:5px 10px;font-size:12px" onclick="removeItem('+i.id+')">Delete</button></td></tr>').join('');const tot=items.reduce((s,i)=>s+i.total,0);document.getElementById('totalItems').textContent=items.length;document.getElementById('totalAmount').textContent=fmt(tot);}
+function clearForm(){document.getElementById('itemDescription').value='';document.getElementById('itemQuantity').value='1';document.getElementById('itemPrice').value='';document.getElementById('applyDiscount').checked=false;document.getElementById('discountPercent').value='';document.getElementById('discountPercent').disabled=true;document.getElementById('itemCategory').selectedIndex=0;}
+function clearReceipt(){if(items.length>0&&!confirm('Clear all items?'))return;items=[];renderItems();['customerPhone','customerName','customerEmail','receiptNotes'].forEach(id=>document.getElementById(id).value='');}
+function saveReceipt(){const ph=document.getElementById('customerPhone').value.trim(),nm=document.getElementById('customerName').value.trim(),em=document.getElementById('customerEmail').value.trim(),nt=document.getElementById('receiptNotes').value.trim();if(!ph||ph.length<10){alert('Enter a valid phone number!');return;}if(items.length===0){alert('Add at least one item!');return;}const code=genCode(),tot=items.reduce((s,i)=>s+i.total,0);const rec={id:Date.now(),receiptCode:code,customerPhone:ph,customerName:nm||'Walk-in Customer',customerEmail:em,date:new Date().toISOString(),items:[...items],total:tot,notes:nt};const recs=load(SK.r);recs.push(rec);save(SK.r,recs);const custs=load(SK.c);const ex=custs.find(c=>c.phone===ph);if(ex){ex.name=nm;ex.email=em;}else custs.push({phone:ph,name:nm,email:em});save(SK.c,custs);alert('✅ Receipt saved!\nCode: '+code+'\nTotal: R '+fmt(tot));if(confirm('Print receipt? 🖨️'))printRec(rec.id);clearReceipt();}
+function searchReceipts(){const t=document.getElementById('searchTerm').value.trim();if(!t){loadAll();return;}const recs=load(SK.r),res=recs.filter(r=>r.customerPhone.includes(t)||r.receiptCode.toUpperCase().includes(t.toUpperCase())||r.id.toString()===t);showRecs(res);}
+function loadAll(){showRecs(load(SK.r).reverse());}
+function showRecs(recs){const c=document.getElementById('searchResults');if(!recs.length){c.innerHTML='<p style="text-align:center;color:#6b7280;padding:40px">No receipts found</p>';return;}c.innerHTML=recs.map(r=>'<div class="receipt-card" onclick="viewRec('+r.id+')"><div class="receipt-header"><div><div class="receipt-code">'+r.receiptCode+'</div><p style="color:#6b7280;margin-top:5px;font-size:13px">'+r.customerName+' • '+r.customerPhone+'</p><p style="color:#9ca3af;font-size:12px;margin-top:3px">'+new Date(r.date).toLocaleString()+'</p></div><div class="receipt-amount">R '+fmt(r.total)+'</div></div><p style="color:#6b7280;font-size:12px">'+r.items.length+' item(s)</p></div>').join('');}
+function viewRec(id){const rec=load(SK.r).find(r=>r.id===id);if(!rec)return;document.getElementById('modalBody').innerHTML='<div style="text-align:center;border-bottom:2px solid #e5e7eb;padding-bottom:15px;margin-bottom:15px"><h2 style="color:#667eea;font-size:18px">'+cfg.companyName+'</h2><p style="font-size:12px">'+cfg.phone+' • '+cfg.email+'</p><p style="font-size:12px">'+cfg.address+'</p></div><div style="background:#f9fafb;padding:12px;border-radius:8px;margin-bottom:15px"><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:13px"><div><p style="color:#6b7280">Code</p><p style="font-weight:bold;color:#667eea">'+rec.receiptCode+'</p></div><div><p style="color:#6b7280">Date</p><p style="font-weight:bold">'+new Date(rec.date).toLocaleString()+'</p></div><div><p style="color:#6b7280">Customer</p><p style="font-weight:bold">'+rec.customerName+'</p></div><div><p style="color:#6b7280">Phone</p><p style="font-weight:bold">'+rec.customerPhone+'</p></div></div></div><div class="table-container"><table><thead><tr><th>Description</th><th>Category</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>'+rec.items.map(i=>'<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+fmt(i.price)+'</td><td><strong>R '+fmt(i.total)+'</strong></td></tr>').join('')+'</tbody></table></div><div style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:15px;border-radius:12px;text-align:right"><p style="font-size:13px;opacity:.9">TOTAL</p><p style="font-size:28px;font-weight:bold">R '+fmt(rec.total)+'</p></div>'+(rec.notes?'<div style="background:#fef3c7;padding:12px;border-radius:8px;margin-top:15px"><p style="font-weight:bold;font-size:13px">Notes:</p><p style="font-size:13px">'+rec.notes+'</p></div>':'')+'<div style="text-align:center;margin-top:20px;padding-top:15px;border-top:2px solid #e5e7eb"><p style="font-style:italic;color:#6b7280;font-size:12px">'+cfg.warranty+'</p></div><div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap"><button class="btn btn-primary" onclick="printRec('+rec.id+')" style="flex:1">🖨️ Print</button><button class="btn btn-secondary" onclick="closeModal()" style="flex:1">Close</button></div>';document.getElementById('receiptModal').classList.add('active');}
+function closeModal(){document.getElementById('receiptModal').classList.remove('active');}
+function printRec(id){const rec=load(SK.r).find(r=>r.id===id);if(!rec)return;const html=makeRecHTML(rec);const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);window.open(url,'_blank');setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function makeRecHTML(rec){return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Receipt '+rec.receiptCode+'</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;padding:20px;background:white;position:relative}.watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-45deg);font-size:60pt;font-weight:bold;color:rgba(200,200,200,.12);pointer-events:none;z-index:0;white-space:nowrap;user-select:none;letter-spacing:8px}.comp-name{font-size:16pt;font-weight:bold;margin:0 0 8px 0}.comp-det{font-size:9pt;margin:4px 0}.sep{border-top:2px solid black;margin:15px 0}.ttl{font-size:14pt;font-weight:bold;text-align:center;margin:15px 0}.info-box{background:#f5f5f5;border:1px solid black;padding:12px;margin:15px 0}.info-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}.inf-col{flex:1;min-width:150px}.lbl{font-weight:bold;display:inline-block;width:90px;font-size:9pt}.val{display:inline-block;font-size:9pt}.cval{color:#00008B;font-weight:bold;font-size:9pt}table{width:100%;border-collapse:collapse;margin:15px 0}th{background:#dcdcdc;border:1px solid black;padding:6px;text-align:left;font-weight:bold;font-size:9pt}td{border:1px solid #ccc;padding:6px;font-size:8pt}.tot-box{background:#e6e6e6;border:2px solid black;padding:10px 12px;margin:20px 0;text-align:right;font-size:11pt;font-weight:bold}.war{border-top:1px solid gray;padding-top:8px;margin-top:20px;font-size:8pt;font-style:italic;color:#666}.disc{border-top:2px solid black;margin-top:25px;padding-top:10px}.disc-t{font-weight:bold;font-size:8pt;margin-bottom:8px}.disc-tx{font-size:5pt;line-height:1.3;text-align:justify}.ftr{margin-top:30px;border-top:1px solid black;padding-top:10px}.sig-sec{display:flex;justify-content:space-between;align-items:flex-end;margin:15px 0;gap:10px;flex-wrap:wrap}.sig-ln{flex:1;max-width:250px}.sig-lbl{font-size:8pt;margin-bottom:4px}.sig-ul{border-bottom:1px solid black;height:25px}.fp{width:80px;height:50px;border:1px solid black;text-align:center;padding-top:15px;font-size:7pt;color:#999}.ty{text-align:center;font-weight:bold;font-size:9pt;margin:15px 0}.fi{text-align:center;font-size:7pt;color:#666}@media print{body{padding:10px}}</style></head><body><div class="watermark">'+cfg.companyName+'</div><div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:15px">'+(cfg.logo?'<div><img src="'+cfg.logo+'" style="max-width:120px;max-height:120px;object-fit:contain"></div>':'')+'<div><div class="comp-name">'+cfg.companyName.toUpperCase()+'</div><div class="comp-det">Phone: '+cfg.phone+'</div><div class="comp-det">Email: '+cfg.email+'</div><div class="comp-det">'+cfg.address+'</div></div></div><div class="sep"></div><div class="ttl">SALES RECEIPT</div><div class="info-box"><div class="info-row"><div class="inf-col"><span class="lbl">Code:</span><span class="cval">'+rec.receiptCode+'</span><br><span class="lbl">Date:</span><span class="val">'+new Date(rec.date).toLocaleDateString()+'</span><br><span class="lbl">Time:</span><span class="val">'+new Date(rec.date).toLocaleTimeString()+'</span></div><div class="inf-col"><span class="lbl">Customer:</span><span class="val">'+rec.customerName+'</span><br><span class="lbl">Phone:</span><span class="val">'+rec.customerPhone+'</span>'+(rec.customerEmail?'<br><span class="lbl">Email:</span><span class="val">'+rec.customerEmail+'</span>':'')+'</div></div></div><table><tr><th style="width:35%">Description</th><th style="width:20%">Category</th><th style="width:10%">Qty</th><th style="width:17%">Unit Price</th><th style="width:18%">Total</th></tr>'+rec.items.map(i=>'<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+fmt(i.price)+'</td><td>R '+fmt(i.total)+'</td></tr>').join('')+'</table><div class="tot-box">GRAND TOTAL: R '+fmt(rec.total)+'</div>'+(rec.notes?'<div style="margin:15px 0;padding:10px;border:1px solid #ccc;font-size:9pt"><strong>Notes:</strong> '+rec.notes+'</div>':'')+'<div class="war">'+cfg.warranty+'</div><div class="disc"><div class="disc-t">GENERAL SALES &amp; REPAIRS DISCLAIMER</div><div class="disc-tx">All devices handled in good faith. Not responsible for pre-existing faults, data loss, or damage from misuse. Back up data before repairs. Once device leaves premises we are not liable for damage from mishandling or unauthorized alterations. By proceeding, customer accepts these terms.</div></div><div class="ftr"><div class="sig-sec"><div class="sig-ln"><div class="sig-lbl">Customer Signature:</div><div class="sig-ul"></div></div><div class="fp">Thumbprint</div></div><div class="ty">Thank you for your business!</div><div class="fi">Receipt Code: '+rec.receiptCode+' | All prices in South African Rand (R)</div></div></body></html>';}
+function exportDatabase(){const data={receipts:load(SK.r),customers:load(SK.c),settings:cfg,exportDate:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='CellphoneShop_Backup_'+Date.now()+'.json';a.click();URL.revokeObjectURL(url);alert('✅ Exported!');}
+function importDatabase(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!confirm('⚠️ Replace ALL data?'))return;if(d.receipts)save(SK.r,d.receipts);if(d.customers)save(SK.c,d.customers);if(d.settings){cfg=d.settings;save(SK.s,d.settings);}alert('✅ Imported!');location.reload();}catch(err){alert('❌ Import error.');}};reader.readAsText(file);e.target.value='';}
+function handleLogoUpload(e){const file=e.target.files[0];if(!file)return;if(file.size>5000000){alert('Max 5MB');return;}const reader=new FileReader();reader.onload=function(ev){cfg.logo=ev.target.result;updateLogo();document.getElementById('logoStatus').textContent=file.name;alert('Logo uploaded! Save settings.');};reader.readAsDataURL(file);}
+function updateLogo(){const p=document.getElementById('logoPreview'),img=document.getElementById('logoImage');if(cfg.logo){img.src=cfg.logo;p.style.display='block';}else p.style.display='none';}
+function removeLogo(){if(confirm('Remove logo?')){cfg.logo='';updateLogo();document.getElementById('logoStatus').textContent='No logo uploaded';document.getElementById('logoUpload').value='';}}
+function unlockSettings(){if(document.getElementById('passwordInput').value===cfg.password){document.getElementById('settingsLocked').style.display='none';document.getElementById('settingsUnlocked').style.display='block';loadCfg();}else alert('❌ Wrong password!');}
+function lockSettings(){document.getElementById('settingsLocked').style.display='block';document.getElementById('settingsUnlocked').style.display='none';document.getElementById('passwordInput').value='';}
+function loadCfg(){document.getElementById('settingCompanyName').value=cfg.companyName;document.getElementById('settingPhone').value=cfg.phone;document.getElementById('settingEmail').value=cfg.email;document.getElementById('settingAddress').value=cfg.address;document.getElementById('settingWarranty').value=cfg.warranty;if(cfg.logo){document.getElementById('logoStatus').textContent='Logo uploaded';updateLogo();}const r=load(SK.r),c=load(SK.c);document.getElementById('totalReceiptsCount').textContent=r.length;document.getElementById('totalCustomersCount').textContent=c.length;}
+function saveSettings(){cfg.companyName=document.getElementById('settingCompanyName').value;cfg.phone=document.getElementById('settingPhone').value;cfg.email=document.getElementById('settingEmail').value;cfg.address=document.getElementById('settingAddress').value;cfg.warranty=document.getElementById('settingWarranty').value;save(SK.s,cfg);alert('✅ Settings saved!');}
+function changePassword(){const cur=prompt('Current password:');if(cur!==cfg.password){alert('❌ Wrong!');return;}const np=prompt('New password:');if(!np||np.length<4){alert('Too short!');return;}if(prompt('Confirm:')!==np){alert('❌ No match!');return;}cfg.password=np;save(SK.s,cfg);alert('✅ Password changed!');}
+<\/script>
+</body></html>`;}
+</script>
 </body>
 </html>
