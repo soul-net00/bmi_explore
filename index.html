@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kgomotso Thabo — Developer & Cellphone Shop System</title>
-<meta name="description" content="ITC Student | Web Developer | VB.NET | SQL Server | South Africa">
+<title>Kgomotso Mamogale — IT Portfolio</title>
+<meta name="description" content="NC(V) ITC Student | Web Developer | Cisco Certified | Ekurhuleni East TVET College | South Africa">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-:root {
-  --bg:#06060f; --surface:#0c0c1d; --card:#10102a; --card2:#14142e;
-  --accent:#7c3aed; --al:#a855f7; --gold:#f59e0b; --green:#10b981; --pink:#ec4899;
-  --text:#eeeeff; --muted:#6b6b9a; --border:rgba(124,58,237,0.18); --border2:rgba(255,255,255,0.06);
+:root{
+  --bg:#06060f;--surface:#0c0c1d;--card:#10102a;--card2:#14142e;
+  --accent:#7c3aed;--al:#a855f7;--gold:#f59e0b;--green:#10b981;--pink:#ec4899;--cyan:#06b6d4;
+  --text:#eeeeff;--muted:#6b6b9a;--border:rgba(124,58,237,.18);--border2:rgba(255,255,255,.06);
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
@@ -20,7 +20,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overfl
 .bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:radial-gradient(ellipse 70% 60% at 15% 5%,rgba(124,58,237,.13) 0%,transparent 55%),
              radial-gradient(ellipse 50% 40% at 85% 85%,rgba(236,72,153,.07) 0%,transparent 55%),
-             radial-gradient(ellipse 40% 50% at 50% 40%,rgba(16,185,129,.04) 0%,transparent 55%)}
+             radial-gradient(ellipse 40% 50% at 50% 40%,rgba(6,182,212,.04) 0%,transparent 55%)}
 .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
   background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),
                    linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);
@@ -40,75 +40,111 @@ nav{position:sticky;top:0;z-index:100;background:rgba(6,6,15,.88);backdrop-filte
 .ntab.active{background:rgba(124,58,237,.15);border-color:var(--accent);color:var(--al)}
 
 /* HERO */
-.hero{padding:80px 0 60px;display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:start}
+.hero{padding:72px 0 56px;display:grid;grid-template-columns:1fr 370px;gap:56px;align-items:start}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.1);
-  border:1px solid rgba(16,185,129,.25);color:var(--green);
-  font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:30px;
-  margin-bottom:24px;animation:rise .5s ease both}
+  border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;
+  font-size:11px;padding:6px 14px;border-radius:30px;margin-bottom:22px;animation:rise .5s ease both}
 .hero-badge::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,9vw,108px);line-height:.9;letter-spacing:2px;animation:rise .5s .08s ease both}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8.5vw,100px);line-height:.9;letter-spacing:2px;animation:rise .5s .08s ease both}
 .grad{background:linear-gradient(135deg,var(--al) 0%,var(--pink) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
-.hero-role{margin-top:20px;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted);animation:rise .5s .16s ease both}
+.hero-role{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);animation:rise .5s .16s ease both;line-height:1.7}
 .hero-role span{color:var(--al)}
-.hero-bio{margin-top:18px;font-size:16px;line-height:1.75;color:rgba(238,238,255,.65);max-width:500px;animation:rise .5s .24s ease both}
-.hero-ctas{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;animation:rise .5s .32s ease both}
-.btn-v{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;
+.hero-bio{margin-top:16px;font-size:15px;line-height:1.75;color:rgba(238,238,255,.65);max-width:500px;animation:rise .5s .24s ease both}
+.hero-ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;animation:rise .5s .32s ease both}
+.btn-v{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;
   font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .22s;text-decoration:none;border:none}
 .bsolid{background:var(--accent);color:#fff}
 .bsolid:hover{background:var(--al);transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,58,237,.4)}
 .bghost{background:transparent;border:1px solid var(--border);color:var(--text)}
 .bghost:hover{border-color:var(--al);background:rgba(124,58,237,.08);transform:translateY(-2px)}
 
-/* QR */
-.qr-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;position:relative;overflow:hidden;animation:rise .5s .2s ease both}
+/* QR CARD */
+.qr-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;position:relative;overflow:hidden;animation:rise .5s .2s ease both}
 .qr-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--pink))}
-.qr-head{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;margin-bottom:4px}
-.qr-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:20px}
-#qrcode{display:flex;justify-content:center;margin-bottom:18px}
+.qr-head{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;margin-bottom:3px}
+.qr-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px}
+#qrcode{display:flex;justify-content:center;margin-bottom:16px}
 #qrcode canvas,#qrcode img{border-radius:12px;border:4px solid rgba(124,58,237,.25);padding:8px;background:#fff}
-.qr-steps{display:flex;flex-direction:column;gap:10px}
+.qr-steps{display:flex;flex-direction:column;gap:9px}
 .qr-step{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
-.sn{width:22px;height:22px;border-radius:50%;background:rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;
+.sn{width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;
   font-size:10px;font-weight:700;color:var(--al);flex-shrink:0;font-family:'JetBrains Mono',monospace}
-.qr-note{margin-top:14px;padding:10px 14px;background:rgba(236,72,153,.07);border:1px solid rgba(236,72,153,.2);
-  border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--pink)}
+.qr-note{margin-top:12px;padding:9px 12px;background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.2);
+  border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan)}
 
 /* TICKER */
-.ticker-wrap{border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:18px 0;overflow:hidden}
-.ticker-track{display:flex;gap:36px;animation:ticker 22s linear infinite;width:max-content}
+.ticker-wrap{border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:16px 0;overflow:hidden}
+.ticker-track{display:flex;gap:32px;animation:ticker 24s linear infinite;width:max-content}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .titem{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;
-  color:var(--muted);white-space:nowrap;padding:6px 14px;border:1px solid var(--border2);border-radius:30px}
+  color:var(--muted);white-space:nowrap;padding:5px 12px;border:1px solid var(--border2);border-radius:30px}
 .tdot{width:5px;height:5px;border-radius:50%;background:var(--al);flex-shrink:0}
 
-/* SECTION */
-.section{padding:70px 0}
+/* SECTIONS */
+.section{padding:64px 0}
 .slabel{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
-.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,5vw,52px);letter-spacing:1px;margin-bottom:40px;line-height:1}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,5vw,50px);letter-spacing:1px;margin-bottom:36px;line-height:1}
 .sdiv{border-top:1px solid var(--border2)}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.about-box{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:24px}
+.about-box h3{font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.about-list{display:flex;flex-direction:column;gap:8px}
+.about-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(238,238,255,.75);line-height:1.5}
+.about-ico{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* EDUCATION */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.edu-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:all .25s;position:relative;overflow:hidden}
+.edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--accent),var(--pink))}
+.edu-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px)}
+.edu-level{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);margin-bottom:6px;padding-left:12px}
+.edu-title{font-size:14px;font-weight:700;margin-bottom:4px;padding-left:12px}
+.edu-place{font-size:12px;color:var(--muted);margin-bottom:12px;padding-left:12px}
+.edu-subjects{display:flex;flex-wrap:wrap;gap:5px;padding-left:12px}
+.edu-subj{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;
+  background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);color:var(--muted)}
+.edu-subj.highlight{background:rgba(124,58,237,.18);border-color:rgba(124,58,237,.35);color:var(--al)}
+.edu-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);
+  color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border-radius:20px;margin:10px 0 0 12px}
+
+/* CERTS */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.cert-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:22px;transition:all .25s;display:flex;gap:16px;align-items:flex-start}
+.cert-card:hover{border-color:rgba(6,182,212,.4);transform:translateY(-3px)}
+.cert-logo{width:48px;height:48px;flex-shrink:0;border-radius:10px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);
+  display:flex;align-items:center;justify-content:center;font-size:22px}
+.cert-body{}
+.cert-issuer{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);margin-bottom:4px}
+.cert-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.cert-date{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
+.cert-tags{display:flex;flex-wrap:wrap;gap:5px}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;
+  background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.15);color:var(--cyan)}
 
 /* PROJECTS */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
-.pcard{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;transition:all .28s;cursor:default}
-.pcard:hover{border-color:rgba(124,58,237,.45);transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,0,0,.45)}
-.pimg{width:100%;height:160px;object-fit:cover;display:block}
-.pbody{padding:20px}
-.pnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);margin-bottom:8px}
-.ptitle{font-size:17px;font-weight:700;margin-bottom:8px}
-.pdesc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
-.ptags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.pcard{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;transition:all .28s}
+.pcard:hover{border-color:rgba(124,58,237,.45);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.pimg{width:100%;height:155px;object-fit:cover;display:block}
+.pbody{padding:18px}
+.pnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);margin-bottom:7px}
+.ptitle{font-size:16px;font-weight:700;margin-bottom:7px}
+.pdesc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:13px}
+.ptags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:13px}
 .tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:20px;
   background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);color:var(--al)}
 .plinks{display:flex;gap:8px}
-.plnk{flex:1;text-align:center;padding:8px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;
-  border:1px solid var(--border2);color:var(--muted);transition:all .2s}
+.plnk{flex:1;text-align:center;padding:7px;border-radius:6px;font-size:12px;font-weight:600;
+  text-decoration:none;border:1px solid var(--border2);color:var(--muted);transition:all .2s}
 .plnk:hover{border-color:var(--al);color:var(--al)}
 
 /* SKILLS */
-.skgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
-.skitem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:16px}
-.skrow{display:flex;justify-content:space-between;margin-bottom:10px}
+.skgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}
+.skitem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:15px}
+.skrow{display:flex;justify-content:space-between;margin-bottom:9px}
 .skname{font-size:13px;font-weight:600}
 .skpct{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al)}
 .sktrack{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
@@ -117,94 +153,81 @@ nav{position:sticky;top:0;z-index:100;background:rgba(6,6,15,.88);backdrop-filte
 @keyframes barGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
 /* CONTACT */
-.crow{display:flex;justify-content:center;gap:12px;margin-top:28px;flex-wrap:wrap}
-.clnk{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;
+.crow{display:flex;justify-content:center;gap:12px;margin-top:26px;flex-wrap:wrap}
+.clnk{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;
   border:1px solid var(--border2);color:var(--text);text-decoration:none;font-size:14px;
   font-weight:600;background:var(--card);transition:all .22s}
 .clnk:hover{border-color:var(--al);color:var(--al);transform:translateY(-2px)}
 
+/* HONEST ADVICE BOX */
+.advice-box{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(236,72,153,.05));
+  border:1px solid rgba(124,58,237,.25);border-radius:16px;padding:28px;margin-top:20px}
+.advice-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:20px;
+  display:flex;align-items:center;gap:10px}
+.advice-section{margin-bottom:20px}
+.advice-section:last-child{margin-bottom:0}
+.advice-head{font-size:13px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.advice-items{display:flex;flex-direction:column;gap:7px}
+.advice-item{font-size:13px;color:rgba(238,238,255,.75);line-height:1.55;padding-left:16px;position:relative}
+.advice-item::before{content:'→';position:absolute;left:0;color:var(--al);font-size:12px}
+.advice-item.good::before{color:var(--green)}
+.advice-item.warn::before{color:var(--gold)}
+.advice-item.remove::before{content:'✕';color:var(--pink)}
+
 /* FEATURES (APP PAGE) */
-.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:40px 0}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:36px 0}
 .fcard{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:all .22s}
 .fcard:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px)}
-.fico{font-size:26px;margin-bottom:10px}
-.ftitle{font-size:14px;font-weight:700;margin-bottom:6px}
+.fico{font-size:24px;margin-bottom:10px}
+.ftitle{font-size:14px;font-weight:700;margin-bottom:5px}
 .fdesc{font-size:12px;color:var(--muted);line-height:1.6}
 
 /* VIDEO */
-.vwrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 70px rgba(0,0,0,.55);background:#000;margin-top:28px}
+.vwrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 70px rgba(0,0,0,.55);background:#000;margin-top:26px}
 .vwrap iframe{width:100%;aspect-ratio:16/9;display:block;border:none}
 
 /* BROWSER FRAME */
-.bframe{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.5);margin-top:28px}
-.bbar{background:#12122a;padding:11px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border2)}
+.bframe{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.5);margin-top:26px}
+.bbar{background:#12122a;padding:10px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border2)}
 .bdots{display:flex;gap:6px}
 .bdot{width:11px;height:11px;border-radius:50%}
 .burl{flex:1;background:rgba(255,255,255,.04);border-radius:6px;padding:4px 12px;
   font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
-.aframe{height:680px}
+.aframe{height:660px}
 .aframe iframe{width:100%;height:100%;border:none;display:block}
-
-/* TECH */
-.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:24px}
-.titem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:14px 16px;
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:22px}
+.titem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:13px 15px;
   display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;transition:all .2s}
 .titem:hover{border-color:rgba(124,58,237,.4)}
-.tico{font-size:20px}
 
-/* MODAL */
-.mbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);
-  z-index:500;align-items:center;justify-content:center;padding:20px}
-.mbg.open{display:flex}
-.mbox{background:var(--card2);border:1px solid var(--border);border-radius:22px;padding:44px 36px;
-  max-width:400px;width:100%;text-align:center;position:relative;overflow:hidden;animation:rise .3s ease}
-.mbox::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--pink))}
-.mico{font-size:48px;margin-bottom:16px}
-.mtitle{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:3px;margin-bottom:6px}
-.msub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:26px}
-.minp{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;
-  padding:14px 18px;font-size:16px;color:var(--text);font-family:'JetBrains Mono',monospace;
-  text-align:center;letter-spacing:5px;margin-bottom:14px;outline:none;transition:border-color .2s}
-.minp:focus{border-color:var(--al)}
-.minp.err{border-color:var(--pink);animation:shake .3s ease}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.mbtn{width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:10px;
-  font-size:15px;font-weight:800;cursor:pointer;transition:all .2s;font-family:'Syne',sans-serif}
-.mbtn:hover{background:var(--al)}
-.merr{color:var(--pink);font-size:11px;font-family:'JetBrains Mono',monospace;margin-top:10px;display:none}
-.mclose{position:absolute;top:12px;right:14px;background:none;border:none;color:var(--muted);font-size:22px;cursor:pointer;line-height:1}
-
-footer{border-top:1px solid var(--border2);padding:26px 0;text-align:center;
+footer{border-top:1px solid var(--border2);padding:24px 0;text-align:center;
   font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
 footer span{color:var(--al)}
 
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 
-@media(max-width:860px){.hero{grid-template-columns:1fr;gap:40px;padding:40px 0 30px}.qr-card{max-width:360px}}
-@media(max-width:580px){.hero-ctas{flex-direction:column}.nav-tabs{gap:2px}.ntab{padding:6px 10px;font-size:11px}.aframe{height:500px}}
+@media(max-width:860px){
+  .hero{grid-template-columns:1fr;gap:36px;padding:40px 0 30px}
+  .qr-card{max-width:340px}
+  .about-grid{grid-template-columns:1fr}
+}
+@media(max-width:580px){
+  .hero-ctas{flex-direction:column}
+  .nav-tabs{gap:2px}
+  .ntab{padding:6px 10px;font-size:11px}
+  .aframe{height:500px}
+  .crow{flex-direction:column;align-items:center}
+}
 </style>
 </head>
 <body>
 <div class="bg-mesh"></div>
 <div class="bg-grid"></div>
 
-<!-- PASSWORD MODAL -->
-<div class="mbg" id="pwModal">
-  <div class="mbox">
-    <button class="mclose" onclick="closeModal()">✕</button>
-    <div class="mico">🔐</div>
-    <div class="mtitle">PORTFOLIO ACCESS</div>
-    <div class="msub">// enter password to unlock</div>
-    <input type="password" id="pwInput" class="minp" placeholder="••••••••" autocomplete="off" onkeydown="if(event.key==='Enter')checkPw()">
-    <button class="mbtn" onclick="checkPw()">🔓 UNLOCK</button>
-    <div class="merr" id="pwErr">❌ Wrong password — contact Kgomotso for access</div>
-  </div>
-</div>
-
 <!-- NAV -->
 <nav>
   <div class="nav-in">
-    <div class="nav-logo" onclick="gotoPage('p1')">KT.DEV</div>
+    <div class="nav-logo" onclick="gotoPage('p1')">KM.DEV</div>
     <div class="nav-tabs">
       <button class="ntab active" id="tab-p1" onclick="gotoPage('p1')">💼 Portfolio</button>
       <button class="ntab" id="tab-p2" onclick="gotoPage('p2')">📱 The App</button>
@@ -214,216 +237,445 @@ footer span{color:var(--al)}
 
 <!-- ======================== PAGE 1: PORTFOLIO ======================== -->
 <div class="page active" id="p1">
-  <div class="wrap">
-    <div class="hero">
-      <div>
-        <div class="hero-badge">Available for projects</div>
-        <h1 class="hero-name">KGOMOTSO<br><span class="grad">THABO</span></h1>
-        <div class="hero-role"><span>ITC Student</span> · Web Developer · Database Designer · 🇿🇦</div>
-        <p class="hero-bio">Passionate about building real software that solves real problems. From desktop apps in VB.NET with SQL Server, to full web systems deployed on Netlify — I turn ideas into working products.</p>
-        <div class="hero-ctas">
-          <button class="btn-v bsolid" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">📁 View Projects</button>
-          <button class="btn-v bghost" onclick="gotoPage('p2')">📱 See The App →</button>
-        </div>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div>
+      <div class="hero-badge">Final Year · NC(V) Level 4 · 2025</div>
+      <h1 class="hero-name">KGOMOTSO<br><span class="grad">MAMOGALE</span></h1>
+      <div class="hero-role">
+        <span>ITC Student</span> · Ekurhuleni East TVET College<br>
+        <span>Cisco Certified</span> · Web Developer · IT Support · 🇿🇦 Gauteng, SA
       </div>
-      <div class="qr-card">
-        <div class="qr-head">SCAN TO VIEW</div>
-        <div class="qr-sub">// portfolio access via QR code</div>
-        <div id="qrcode"></div>
-        <div class="qr-steps">
-          <div class="qr-step"><div class="sn">1</div>Scan QR with any phone camera</div>
-          <div class="qr-step"><div class="sn">2</div>Page opens — enter password</div>
-          <div class="qr-step"><div class="sn">3</div>Portfolio unlocks on your device</div>
-        </div>
-        <div class="qr-note">⚠ Password protected · Ask Kgomotso for access</div>
+      <p class="hero-bio">
+        Final-year NC(V) Information Technology &amp; Computer Science student. I build real software, fix real hardware, and learn everything I can — from SQL databases to VPS networks to Cisco networking.
+      </p>
+      <div class="hero-ctas">
+        <button class="btn-v bsolid" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">📁 Projects</button>
+        <button class="btn-v bghost" onclick="document.getElementById('education').scrollIntoView({behavior:'smooth'})">🎓 Education</button>
+        <button class="btn-v bghost" onclick="gotoPage('p2')">📱 See The App →</button>
       </div>
+    </div>
+
+    <!-- QR CARD — PUBLIC, NO LOCK -->
+    <div class="qr-card">
+      <div class="qr-head">SHARE PORTFOLIO</div>
+      <div class="qr-sub">// scan to open on any device</div>
+      <div id="qrcode"></div>
+      <div class="qr-steps">
+        <div class="qr-step"><div class="sn">1</div>Scan with any phone camera</div>
+        <div class="qr-step"><div class="sn">2</div>Portfolio opens instantly</div>
+        <div class="qr-step"><div class="sn">3</div>Works on any device, no app needed</div>
+      </div>
+      <div class="qr-note">🌐 Public · bmiexplore.netlify.app · Free to share</div>
     </div>
   </div>
 
-  <!-- TICKER -->
-  <div class="ticker-wrap">
-    <div class="ticker-track">
-      <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
-      <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
-      <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
-      <span class="titem"><span class="tdot"></span>SQL Server</span>
-      <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Database Design</span>
-      <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Responsive Design</span>
-      <span class="titem"><span class="tdot" style="background:var(--green)"></span>Git &amp; GitHub</span>
-      <span class="titem"><span class="tdot"></span>Netlify</span>
-      <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Problem Solving</span>
-      <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
-      <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
-      <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
-      <span class="titem"><span class="tdot"></span>SQL Server</span>
-      <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Database Design</span>
-      <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Responsive Design</span>
-      <span class="titem"><span class="tdot" style="background:var(--green)"></span>Git &amp; GitHub</span>
-      <span class="titem"><span class="tdot"></span>Netlify</span>
-      <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Problem Solving</span>
-    </div>
+</div><!-- /wrap -->
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
+    <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
+    <span class="titem"><span class="tdot"></span>SQL Server</span>
+    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Cisco Networking</span>
+    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>VPS Setup</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>IT Support</span>
+    <span class="titem"><span class="tdot" style="background:var(--green)"></span>Excel</span>
+    <span class="titem"><span class="tdot"></span>Git &amp; GitHub</span>
+    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>WiFi &amp; Networking</span>
+    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>Windows Admin</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Database Design</span>
+    <!-- duplicate -->
+    <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
+    <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
+    <span class="titem"><span class="tdot"></span>SQL Server</span>
+    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Cisco Networking</span>
+    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>VPS Setup</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>IT Support</span>
+    <span class="titem"><span class="tdot" style="background:var(--green)"></span>Excel</span>
+    <span class="titem"><span class="tdot"></span>Git &amp; GitHub</span>
+    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>WiFi &amp; Networking</span>
+    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>Windows Admin</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Database Design</span>
   </div>
-
-  <div class="wrap">
-    <!-- PROJECTS -->
-    <section class="section" id="projects">
-      <div class="slabel">// what I've built</div>
-      <div class="stitle">FEATURED PROJECTS</div>
-      <div class="pgrid">
-        <div class="pcard">
-          <img class="pimg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop" alt="MobileFix">
-          <div class="pbody">
-            <div class="pnum">01 / DESKTOP APP</div>
-            <div class="ptitle">MobileFix Manager</div>
-            <div class="pdesc">Full cellphone repair shop system in VB.NET — receipt generation, customer database, and inventory connected to SQL Server.</div>
-            <div class="ptags"><span class="tag">VB.NET</span><span class="tag">SQL Server</span><span class="tag">Desktop App</span></div>
-            <div class="plinks">
-              <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
-              <a href="#" class="plnk" onclick="gotoPage('p2');return false">↗ Web Version</a>
-            </div>
-          </div>
-        </div>
-        <div class="pcard">
-          <img class="pimg" src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=400&fit=crop" alt="BMI">
-          <div class="pbody">
-            <div class="pnum">02 / WEB APP</div>
-            <div class="ptitle">BMI Explorer</div>
-            <div class="pdesc">Interactive BMI calculator with visual feedback and personalized health recommendations. Deployed live on GitHub Pages.</div>
-            <div class="ptags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-            <div class="plinks">
-              <a href="https://github.com/soul-net00/bmi_explore" class="plnk" target="_blank">↗ GitHub</a>
-              <a href="https://soul-net00.github.io/bmi_explore/" class="plnk" target="_blank">↗ Live Demo</a>
-            </div>
-          </div>
-        </div>
-        <div class="pcard">
-          <img class="pimg" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop" alt="DB">
-          <div class="pbody">
-            <div class="pnum">03 / DATABASE</div>
-            <div class="ptitle">CellphoneShopDB</div>
-            <div class="pdesc">Normalized SQL database with proper FK relationships, stored procedures, and indexing for a real shop management system.</div>
-            <div class="ptags"><span class="tag">SQL Server</span><span class="tag">Database Design</span><span class="tag">T-SQL</span></div>
-            <div class="plinks">
-              <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
-              <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ Schema</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SKILLS -->
-    <section class="section sdiv">
-      <div class="slabel">// what I know</div>
-      <div class="stitle">SKILLS</div>
-      <div class="skgrid">
-        <div class="skitem"><div class="skrow"><span class="skname">HTML &amp; CSS</span><span class="skpct">85%</span></div><div class="sktrack"><div class="skfill" style="width:85%"></div></div></div>
-        <div class="skitem"><div class="skrow"><span class="skname">JavaScript</span><span class="skpct">70%</span></div><div class="sktrack"><div class="skfill" style="width:70%"></div></div></div>
-        <div class="skitem"><div class="skrow"><span class="skname">VB.NET</span><span class="skpct">80%</span></div><div class="sktrack"><div class="skfill" style="width:80%"></div></div></div>
-        <div class="skitem"><div class="skrow"><span class="skname">SQL Server</span><span class="skpct">75%</span></div><div class="sktrack"><div class="skfill" style="width:75%"></div></div></div>
-        <div class="skitem"><div class="skrow"><span class="skname">Git &amp; GitHub</span><span class="skpct">65%</span></div><div class="sktrack"><div class="skfill" style="width:65%"></div></div></div>
-        <div class="skitem"><div class="skrow"><span class="skname">Database Design</span><span class="skpct">78%</span></div><div class="sktrack"><div class="skfill" style="width:78%"></div></div></div>
-      </div>
-    </section>
-
-    <!-- CONTACT -->
-    <section class="section sdiv" style="text-align:center" id="contact">
-      <div class="slabel" style="text-align:center">// let's connect</div>
-      <div class="stitle" style="text-align:center">GET IN TOUCH</div>
-      <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto;line-height:1.7">Looking to collaborate, have a project idea, or just want to say hi?</p>
-      <div class="crow">
-        <a href="mailto:kgomotsothabo2004@gmail.com" class="clnk">✉️ kgomotsothabo2004@gmail.com</a>
-        <a href="https://github.com/soul-net00" target="_blank" class="clnk">🐙 GitHub</a>
-        <a href="https://linkedin.com/in/yourusername" target="_blank" class="clnk">💼 LinkedIn</a>
-      </div>
-    </section>
-  </div>
-
-  <footer><div class="wrap">built by <span>kgomotso thabo</span> · <span>soul-net00</span> · bmiexplore.netlify.app</div></footer>
 </div>
+
+<div class="wrap">
+
+  <!-- ABOUT ME -->
+  <section class="section" id="about">
+    <div class="slabel">// who I am</div>
+    <div class="stitle">ABOUT ME</div>
+    <div class="about-grid">
+      <div class="about-box">
+        <h3>🔧 What I Do</h3>
+        <div class="about-list">
+          <div class="about-item"><span class="about-ico">🌐</span>Build websites &amp; web apps from scratch — HTML, CSS, JavaScript, deployed on Netlify</div>
+          <div class="about-item"><span class="about-ico">🖥️</span>Set up VPS servers for fast, secure networks and remote environments</div>
+          <div class="about-item"><span class="about-ico">💻</span>Fix laptops, upgrade drives, clean install Windows, update drivers</div>
+          <div class="about-item"><span class="about-ico">📶</span>Configure WiFi routers, set restrictions, and troubleshoot network issues</div>
+          <div class="about-item"><span class="about-ico">📊</span>Advanced Excel — formulas, data analysis, formatting and automation</div>
+          <div class="about-item"><span class="about-ico">🗄️</span>Design SQL Server databases with proper relationships and stored procedures</div>
+          <div class="about-item"><span class="about-ico">🤖</span>Work effectively with AI tools to accelerate development</div>
+          <div class="about-item"><span class="about-ico">🖨️</span>Write desktop apps in VB.NET with full database backends</div>
+        </div>
+      </div>
+      <div class="about-box">
+        <h3>📌 Quick Facts</h3>
+        <div class="about-list">
+          <div class="about-item"><span class="about-ico">🏫</span>Ekurhuleni East TVET College · Currently Level 4 (final year)</div>
+          <div class="about-item"><span class="about-ico">✅</span>Passed Level 2 &amp; Level 3 NC(V) ITC with distinction subjects</div>
+          <div class="about-item"><span class="about-ico">🏆</span>2× Cisco Networking Academy certified</div>
+          <div class="about-item"><span class="about-ico">📍</span>Based in Gauteng, South Africa</div>
+          <div class="about-item"><span class="about-ico">💡</span>Self-taught in areas beyond the curriculum — VPS, AI tools, web dev</div>
+          <div class="about-item"><span class="about-ico">🔓</span>Available for freelance projects, part-time IT work &amp; internships</div>
+          <div class="about-item"><span class="about-ico">📧</span>kgomotsothabo2004@gmail.com</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section sdiv" id="education">
+    <div class="slabel">// formal qualifications</div>
+    <div class="stitle">EDUCATION</div>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <div class="edu-level">CURRENT · NC(V) LEVEL 4</div>
+        <div class="edu-title">Information Technology &amp; Computer Science</div>
+        <div class="edu-place">Ekurhuleni East TVET College · 2025 (Final Year)</div>
+        <div class="edu-subjects">
+          <span class="edu-subj highlight">Computer Programming</span>
+          <span class="edu-subj highlight">System Analysis &amp; Design</span>
+          <span class="edu-subj highlight">Data Communication &amp; Networking</span>
+          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
+          <span class="edu-subj">Mathematics</span>
+          <span class="edu-subj">English FAL</span>
+          <span class="edu-subj">Life Skills</span>
+        </div>
+        <div class="edu-badge">🎯 In Progress</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-level">PASSED · NC(V) LEVEL 3</div>
+        <div class="edu-title">Information Technology &amp; Computer Science</div>
+        <div class="edu-place">Ekurhuleni East TVET College · 2024</div>
+        <div class="edu-subjects">
+          <span class="edu-subj highlight">Principles of Computer Programming</span>
+          <span class="edu-subj highlight">System Analysis &amp; Design</span>
+          <span class="edu-subj">Computer Hardware &amp; Software</span>
+          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
+          <span class="edu-subj">Mathematics</span>
+          <span class="edu-subj">English FAL</span>
+          <span class="edu-subj">Life Skills</span>
+        </div>
+        <div class="edu-badge">✅ Completed</div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-level">PASSED · NC(V) LEVEL 2</div>
+        <div class="edu-title">Information Technology &amp; Computer Science</div>
+        <div class="edu-place">Ekurhuleni East TVET College · 2023</div>
+        <div class="edu-subjects">
+          <span class="edu-subj highlight">Introduction to Systems Development</span>
+          <span class="edu-subj highlight">Introduction to Information Systems</span>
+          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
+          <span class="edu-subj">Electronics</span>
+          <span class="edu-subj">Mathematics</span>
+          <span class="edu-subj">English FAL</span>
+          <span class="edu-subj">Life Skills</span>
+        </div>
+        <div class="edu-badge">✅ Completed</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="section sdiv" id="certs">
+    <div class="slabel">// verified credentials</div>
+    <div class="stitle">CERTIFICATIONS</div>
+    <div class="cert-grid">
+
+      <div class="cert-card">
+        <div class="cert-logo">🛡️</div>
+        <div class="cert-body">
+          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
+          <div class="cert-name">Introduction to Cybersecurity</div>
+          <div class="cert-date">Issued: 04 Sep 2025 · Ekurhuleni East TVET College</div>
+          <div class="cert-tags">
+            <span class="ctag">Cyber Threats</span>
+            <span class="ctag">Online Safety</span>
+            <span class="ctag">Network Security</span>
+            <span class="ctag">Verified Badge</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-logo">🌐</div>
+        <div class="cert-body">
+          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
+          <div class="cert-name">Get Connected</div>
+          <div class="cert-date">Issued: 12 Aug 2024 · Cisco Global</div>
+          <div class="cert-tags">
+            <span class="ctag">Internet Fundamentals</span>
+            <span class="ctag">Digital Literacy</span>
+            <span class="ctag">Connectivity</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-card" style="border-color:rgba(245,158,11,.15)">
+        <div class="cert-logo" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2)">📜</div>
+        <div class="cert-body">
+          <div class="cert-issuer" style="color:var(--gold)">COMING SOON</div>
+          <div class="cert-name">NC(V) Level 4 Certificate</div>
+          <div class="cert-date">Expected: 2025 · Ekurhuleni East TVET College</div>
+          <div class="cert-tags">
+            <span class="ctag" style="color:var(--gold);border-color:rgba(245,158,11,.2)">In Progress</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section sdiv" id="projects">
+    <div class="slabel">// what I've built</div>
+    <div class="stitle">PROJECTS</div>
+    <div class="pgrid">
+      <div class="pcard">
+        <img class="pimg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop" alt="MobileFix">
+        <div class="pbody">
+          <div class="pnum">01 / DESKTOP APP</div>
+          <div class="ptitle">MobileFix Manager</div>
+          <div class="pdesc">Full cellphone repair shop system in VB.NET — receipt generation, customer database, inventory, connected to SQL Server. Used by a real shop.</div>
+          <div class="ptags"><span class="tag">VB.NET</span><span class="tag">SQL Server</span><span class="tag">Desktop</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="#" class="plnk" onclick="gotoPage('p2');return false">↗ Web Version</a>
+          </div>
+        </div>
+      </div>
+      <div class="pcard">
+        <img class="pimg" src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=400&fit=crop" alt="BMI">
+        <div class="pbody">
+          <div class="pnum">02 / WEB APP</div>
+          <div class="ptitle">BMI Explorer</div>
+          <div class="pdesc">Interactive BMI calculator with visual feedback and personalized health recommendations. Deployed live on GitHub Pages.</div>
+          <div class="ptags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00/bmi_explore" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="https://soul-net00.github.io/bmi_explore/" class="plnk" target="_blank">↗ Live Demo</a>
+          </div>
+        </div>
+      </div>
+      <div class="pcard">
+        <img class="pimg" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop" alt="DB">
+        <div class="pbody">
+          <div class="pnum">03 / DATABASE</div>
+          <div class="ptitle">CellphoneShopDB</div>
+          <div class="pdesc">Normalized SQL Server database with FK relationships, stored procedures, and indexing. Designed as the backbone for the MobileFix app.</div>
+          <div class="ptags"><span class="tag">SQL Server</span><span class="tag">Database Design</span><span class="tag">T-SQL</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ Schema</a>
+          </div>
+        </div>
+      </div>
+      <div class="pcard">
+        <img class="pimg" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop" alt="VPS">
+        <div class="pbody">
+          <div class="pnum">04 / INFRASTRUCTURE</div>
+          <div class="ptitle">VPS Network Setup</div>
+          <div class="pdesc">Configured VPS environments for fast, secure hosting. Includes server setup, network configuration, and remote access management.</div>
+          <div class="ptags"><span class="tag">VPS</span><span class="tag">Linux</span><span class="tag">Networking</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="mailto:kgomotsothabo2004@gmail.com" class="plnk">↗ Ask Me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section sdiv">
+    <div class="slabel">// proficiency levels</div>
+    <div class="stitle">SKILLS</div>
+    <div class="skgrid">
+      <div class="skitem"><div class="skrow"><span class="skname">HTML &amp; CSS</span><span class="skpct">85%</span></div><div class="sktrack"><div class="skfill" style="width:85%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">JavaScript</span><span class="skpct">68%</span></div><div class="sktrack"><div class="skfill" style="width:68%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">VB.NET</span><span class="skpct">78%</span></div><div class="sktrack"><div class="skfill" style="width:78%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">SQL Server</span><span class="skpct">75%</span></div><div class="sktrack"><div class="skfill" style="width:75%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">Networking / Cisco</span><span class="skpct">65%</span></div><div class="sktrack"><div class="skfill" style="width:65%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">VPS / Linux Basics</span><span class="skpct">60%</span></div><div class="sktrack"><div class="skfill" style="width:60%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">IT Support / Hardware</span><span class="skpct">80%</span></div><div class="sktrack"><div class="skfill" style="width:80%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">Excel</span><span class="skpct">75%</span></div><div class="sktrack"><div class="skfill" style="width:75%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">WiFi &amp; Router Config</span><span class="skpct">72%</span></div><div class="sktrack"><div class="skfill" style="width:72%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">Git &amp; GitHub</span><span class="skpct">62%</span></div><div class="sktrack"><div class="skfill" style="width:62%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">Windows Administration</span><span class="skpct">80%</span></div><div class="sktrack"><div class="skfill" style="width:80%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">AI Tools Usage</span><span class="skpct">82%</span></div><div class="sktrack"><div class="skfill" style="width:82%"></div></div></div>
+    </div>
+  </section>
+
+  <!-- HONEST ADVICE -->
+  <section class="section sdiv" id="advice">
+    <div class="slabel">// honest self-assessment</div>
+    <div class="stitle">WHAT TO IMPROVE</div>
+    <div class="advice-box">
+      <div class="advice-title">💬 Honest Feedback</div>
+
+      <div class="advice-section">
+        <div class="advice-head" style="color:var(--green)">✅ What's Working Well</div>
+        <div class="advice-items">
+          <div class="advice-item good">You have <strong>real, deployed projects</strong> — not just tutorials. That's rare at student level and extremely valuable.</div>
+          <div class="advice-item good">Your breadth is impressive: networking, hardware, web, databases, VPS — you're a full IT generalist.</div>
+          <div class="advice-item good">Two Cisco certifications from a recognized program adds serious credibility to your CV.</div>
+          <div class="advice-item good">NC(V) Level 4 at Ekurhuleni East TVET College is a recognized qualification — don't undersell it.</div>
+          <div class="advice-item good">Deploying on Netlify and GitHub shows you understand real-world workflows, not just local development.</div>
+        </div>
+      </div>
+
+      <div class="advice-section">
+        <div class="advice-head" style="color:var(--gold)">⚠️ What to Improve</div>
+        <div class="advice-items">
+          <div class="advice-item warn"><strong>GitHub is mostly empty</strong> — this is the #1 thing to fix. Push your VB.NET code, SQL schemas, even school projects. Employers check GitHub.</div>
+          <div class="advice-item warn"><strong>LinkedIn profile</strong> is missing from your portfolio. Create one and link it — even as a student it matters. List your Cisco certs there too.</div>
+          <div class="advice-item warn"><strong>Update the domain name</strong> — "bmiexplore.netlify.app" makes it look like a BMI calculator site, not a developer portfolio. A custom domain like "kgomamogale.dev" costs ~R200/year and looks professional.</div>
+          <div class="advice-item warn"><strong>Document your work</strong> — write a proper README for each GitHub repo with screenshots. If someone lands on an empty repo, they leave immediately.</div>
+          <div class="advice-item warn"><strong>Add a photo</strong> to your portfolio. People connect with faces. A clean professional photo increases trust significantly.</div>
+          <div class="advice-item warn"><strong>The "Email Me" link</strong> still said "your.email@gmail.com" in older versions — always check your own site for placeholder text.</div>
+        </div>
+      </div>
+
+      <div class="advice-section">
+        <div class="advice-head" style="color:var(--pink)">✕ What to Remove / Fix</div>
+        <div class="advice-items">
+          <div class="advice-item remove">Remove <strong>"admin123"</strong> as the default shop password in the app — it's a security red flag if this is used in a real business.</div>
+          <div class="advice-item remove">The old Portfolio section inside the shop app tabs was confusing — mixing a shop system with a personal portfolio in one UI is unprofessional. Good that it's now separate.</div>
+          <div class="advice-item remove">Don't list <strong>"good with AI"</strong> as a standalone skill on a CV — employers are skeptical of this. Rather show it through your work (like this site).</div>
+          <div class="advice-item remove">The <strong>LinkedIn link</strong> still goes to "/yourusername" — update it or remove it. A broken link looks worse than no link.</div>
+        </div>
+      </div>
+
+      <div class="advice-section">
+        <div class="advice-head" style="color:var(--cyan)">💡 Next Steps to Level Up</div>
+        <div class="advice-items">
+          <div class="advice-item">Finish Level 4 strong — it unlocks higher education and better job opportunities.</div>
+          <div class="advice-item">Look into <strong>CompTIA A+</strong> or <strong>Cisco CCNA</strong> after Level 4 — these are globally recognized IT certifications.</div>
+          <div class="advice-item">Build one more web project with a real backend (Node.js or Python + a database) — this bridges you into full-stack and significantly increases your value.</div>
+          <div class="advice-item">Apply for <strong>IT internships</strong> and <strong>learnerships</strong> in your final year — companies like iOCO, BCX, and Dimension Data recruit TVET graduates.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section sdiv" style="text-align:center" id="contact">
+    <div class="slabel" style="text-align:center">// let's connect</div>
+    <div class="stitle" style="text-align:center">GET IN TOUCH</div>
+    <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto;line-height:1.7">
+      Looking for IT support, freelance web work, or to collaborate on a project? I'm available.
+    </p>
+    <div class="crow">
+      <a href="mailto:kgomotsothabo2004@gmail.com" class="clnk">✉️ kgomotsothabo2004@gmail.com</a>
+      <a href="https://github.com/soul-net00" target="_blank" class="clnk">🐙 GitHub</a>
+      <a href="https://linkedin.com/in/yourusername" target="_blank" class="clnk" id="liLink">💼 LinkedIn</a>
+    </div>
+  </section>
+
+</div><!-- /wrap -->
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <span>soul-net00</span> · kgomotsothabo2004@gmail.com · Ekurhuleni East TVET College · 2025</div></footer>
+</div><!-- /p1 -->
 
 
 <!-- ======================== PAGE 2: THE APP ======================== -->
 <div class="page" id="p2">
-  <div class="wrap">
-    <div style="padding:60px 0 20px;text-align:center">
-      <div class="slabel" style="text-align:center">// featured project</div>
-      <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,78px);letter-spacing:2px;line-height:.95;margin-bottom:20px">
-        CELLPHONE SHOP<br><span style="background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">MANAGEMENT SYSTEM</span>
-      </h2>
-      <p style="color:var(--muted);font-size:16px;max-width:560px;margin:0 auto 24px;line-height:1.7">
-        A fully functional browser-based receipt &amp; shop management system. No install needed — works entirely in the browser with local data storage.
-      </p>
-      <button class="btn-v bsolid" onclick="document.getElementById('liveapp').scrollIntoView({behavior:'smooth'})" style="margin:0 auto">🚀 Try It Live</button>
-    </div>
-
-    <div class="fgrid">
-      <div class="fcard"><div class="fico">🧾</div><div class="ftitle">Receipt Generation</div><div class="fdesc">Auto-generated codes, print-ready HTML with watermarks, signature lines and legal disclaimer.</div></div>
-      <div class="fcard"><div class="fico">👥</div><div class="ftitle">Customer Database</div><div class="fdesc">Save customer details. Instant search by phone number, receipt ID or code.</div></div>
-      <div class="fcard"><div class="fico">📦</div><div class="ftitle">11 Categories</div><div class="fdesc">Repairs, accessories, software — all with optional per-item discount support.</div></div>
-      <div class="fcard"><div class="fico">💾</div><div class="ftitle">Export &amp; Backup</div><div class="fdesc">Full JSON export/import. Restore your entire database on any device instantly.</div></div>
-      <div class="fcard"><div class="fico">🖨️</div><div class="ftitle">Print Ready</div><div class="fdesc">Professional print page with company logo, branding and all legal terms included.</div></div>
-      <div class="fcard"><div class="fico">🔒</div><div class="ftitle">Password Protected</div><div class="fdesc">Settings locked. Only you control company info, warranty text and branding.</div></div>
-    </div>
-
-    <!-- VIDEO -->
-    <section class="section sdiv">
-      <div class="slabel">// watch it in action</div>
-      <div class="stitle">VIDEO DEMO</div>
-      <div class="vwrap">
-        <iframe src="https://www.youtube.com/embed/L99lApSNXuo?si=2OmKCjXUdDPmnkMX"
-          title="Cellphone Shop Management System Demo"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-      </div>
-    </section>
-
-    <!-- TECH -->
-    <section class="section sdiv">
-      <div class="slabel">// built with</div>
-      <div class="stitle">TECH STACK</div>
-      <div class="tgrid">
-        <div class="titem"><span class="tico">🌐</span>HTML5 &amp; CSS3</div>
-        <div class="titem"><span class="tico">⚡</span>Vanilla JavaScript</div>
-        <div class="titem"><span class="tico">💾</span>localStorage API</div>
-        <div class="titem"><span class="tico">🖨️</span>Browser Print API</div>
-        <div class="titem"><span class="tico">📄</span>Blob / File API</div>
-        <div class="titem"><span class="tico">🚀</span>Netlify Hosting</div>
-      </div>
-    </section>
-
-    <!-- LIVE APP -->
-    <section class="section sdiv" id="liveapp">
-      <div class="slabel">// try it yourself</div>
-      <div class="stitle">LIVE APPLICATION</div>
-      <p style="color:var(--muted);font-size:14px;line-height:1.7">Fully interactive. Your data stays in your browser — nothing sent to any server.</p>
-      <div class="bframe">
-        <div class="bbar">
-          <div class="bdots">
-            <div class="bdot" style="background:#ff5f57"></div>
-            <div class="bdot" style="background:#febc2e"></div>
-            <div class="bdot" style="background:#28c840"></div>
-          </div>
-          <div class="burl">bmiexplore.netlify.app · Cellphone Shop Management System</div>
-        </div>
-        <div class="aframe" id="appFrameWrap">
-          <div id="appPlaceholder" style="height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:var(--surface)">
-            <div style="font-size:48px">📱</div>
-            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)">Click to load the live app</div>
-            <button class="btn-v bsolid" onclick="loadApp()">▶ Launch App</button>
-          </div>
-        </div>
-      </div>
-    </section>
+<div class="wrap">
+  <div style="padding:60px 0 20px;text-align:center">
+    <div class="slabel" style="text-align:center">// featured project</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,7vw,76px);letter-spacing:2px;line-height:.95;margin-bottom:18px">
+      CELLPHONE SHOP<br>
+      <span style="background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">MANAGEMENT SYSTEM</span>
+    </h2>
+    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 22px;line-height:1.7">
+      A fully functional browser-based shop management system. No install needed — runs in the browser with local data storage and print-ready receipts.
+    </p>
+    <button class="btn-v bsolid" onclick="document.getElementById('liveapp').scrollIntoView({behavior:'smooth'})" style="margin:0 auto">🚀 Try It Live</button>
   </div>
 
-  <footer><div class="wrap">built by <span>kgomotso thabo</span> · kgomotsothabo2004@gmail.com · <span>soul-net00</span></div></footer>
+  <div class="fgrid">
+    <div class="fcard"><div class="fico">🧾</div><div class="ftitle">Receipt Generation</div><div class="fdesc">Auto-generated codes, print-ready HTML with watermarks, signature lines and legal disclaimer.</div></div>
+    <div class="fcard"><div class="fico">👥</div><div class="ftitle">Customer Database</div><div class="fdesc">Save customer details. Instant search by phone, receipt ID or code.</div></div>
+    <div class="fcard"><div class="fico">📦</div><div class="ftitle">11 Categories</div><div class="fdesc">Repairs, accessories, software — all with optional per-item discount support.</div></div>
+    <div class="fcard"><div class="fico">💾</div><div class="ftitle">Export &amp; Backup</div><div class="fdesc">Full JSON export/import. Restore your entire database on any device.</div></div>
+    <div class="fcard"><div class="fico">🖨️</div><div class="ftitle">Print Ready</div><div class="fdesc">Professional print page with company logo, branding and full legal terms.</div></div>
+    <div class="fcard"><div class="fico">🔒</div><div class="ftitle">Password Protected</div><div class="fdesc">Settings locked. Only you control company info and branding.</div></div>
+  </div>
+
+  <section class="section sdiv">
+    <div class="slabel">// watch it in action</div>
+    <div class="stitle">VIDEO DEMO</div>
+    <div class="vwrap">
+      <iframe src="https://www.youtube.com/embed/L99lApSNXuo?si=2OmKCjXUdDPmnkMX"
+        title="Cellphone Shop System Demo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section class="section sdiv">
+    <div class="slabel">// built with</div>
+    <div class="stitle">TECH STACK</div>
+    <div class="tgrid">
+      <div class="titem"><span style="font-size:20px">🌐</span>HTML5 &amp; CSS3</div>
+      <div class="titem"><span style="font-size:20px">⚡</span>Vanilla JavaScript</div>
+      <div class="titem"><span style="font-size:20px">💾</span>localStorage API</div>
+      <div class="titem"><span style="font-size:20px">🖨️</span>Browser Print API</div>
+      <div class="titem"><span style="font-size:20px">📄</span>Blob / File API</div>
+      <div class="titem"><span style="font-size:20px">🚀</span>Netlify Hosting</div>
+    </div>
+  </section>
+
+  <section class="section sdiv" id="liveapp">
+    <div class="slabel">// try it yourself</div>
+    <div class="stitle">LIVE APPLICATION</div>
+    <p style="color:var(--muted);font-size:14px;line-height:1.7">Fully interactive. Your data stays in your browser — nothing sent to any server.</p>
+    <div class="bframe">
+      <div class="bbar">
+        <div class="bdots">
+          <div class="bdot" style="background:#ff5f57"></div>
+          <div class="bdot" style="background:#febc2e"></div>
+          <div class="bdot" style="background:#28c840"></div>
+        </div>
+        <div class="burl">bmiexplore.netlify.app · Cellphone Shop Management System</div>
+      </div>
+      <div class="aframe" id="appFrameWrap">
+        <div id="appPlaceholder" style="height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;background:var(--surface)">
+          <div style="font-size:46px">📱</div>
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--muted)">Click to load the live app</div>
+          <button class="btn-v bsolid" onclick="loadApp()">▶ Launch App</button>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> · kgomotsothabo2004@gmail.com · <span>soul-net00</span></div></footer>
+</div><!-- /p2 -->
 
 
 <script>
 /* ── PAGE SWITCHING ── */
-function gotoPage(id) {
+function gotoPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
@@ -431,47 +683,19 @@ function gotoPage(id) {
   window.scrollTo(0,0);
 }
 
-/* ── QR CODE ── */
+/* ── QR CODE — PUBLIC, NO PASSWORD ── */
 window.addEventListener('DOMContentLoaded',function(){
-  const url=window.location.origin+window.location.pathname+'?unlock=1';
+  const url=window.location.origin+window.location.pathname;
   new QRCode(document.getElementById('qrcode'),{
-    text:url,width:200,height:200,
+    text:url,width:190,height:190,
     colorDark:'#7c3aed',colorLight:'#ffffff',
     correctLevel:QRCode.CorrectLevel.H
   });
-  if(new URLSearchParams(window.location.search).get('unlock')==='1'){
-    setTimeout(openModal,700);
-  }
-});
 
-/* ── SECURE PASSWORD (SHA-256 hash, no plaintext stored) ──
-   Password: @soul123
-   Hash of "@soul123" + salt "ktsalt2024" via SubtleCrypto SHA-256
-*/
-const _H="39dc3250bb9b4eb62515f5af3f396f94d0ef529b224bdcbcc4fa7e60d74f9835";
-async function _hash(s){
-  const d=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(s+"ktsalt2024"));
-  return Array.from(new Uint8Array(d)).map(b=>b.toString(16).padStart(2,"0")).join("");
-}
-function openModal(){document.getElementById('pwModal').classList.add('open');setTimeout(()=>document.getElementById('pwInput').focus(),150);}
-function closeModal(){document.getElementById('pwModal').classList.remove('open');document.getElementById('pwInput').value='';document.getElementById('pwErr').style.display='none';}
-document.getElementById('pwModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
-async function checkPw(){
-  const v=document.getElementById('pwInput').value;
-  const h=await _hash(v);
-  if(h===_H){
-    closeModal();
-    // Scroll to projects on page 1
-    gotoPage('p1');
-    setTimeout(()=>document.getElementById('projects').scrollIntoView({behavior:'smooth'}),200);
-  } else {
-    const inp=document.getElementById('pwInput');
-    inp.classList.add('err');
-    document.getElementById('pwErr').style.display='block';
-    inp.value='';
-    setTimeout(()=>inp.classList.remove('err'),400);
-  }
-}
+  // Hide broken LinkedIn link if not updated
+  const li=document.getElementById('liLink');
+  if(li&&li.href.includes('yourusername')){li.style.opacity='0.4';li.title='Update your LinkedIn username!';}
+});
 
 /* ── APP LOADER ── */
 function loadApp(){
@@ -485,7 +709,6 @@ function loadApp(){
   wrap.appendChild(iframe);
 }
 
-/* ── FULL SHOP APP HTML ── */
 function shopHTML(){return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -512,14 +735,12 @@ body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh
 .form-group input,.form-group select,.form-group textarea{padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:14px;transition:.3s;width:100%}
 .form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#667eea}
 .btn{padding:12px 25px;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:.3s;font-size:14px}
-.btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);color:white}
-.btn-primary:hover{transform:translateY(-2px)}
+.btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);color:white}.btn-primary:hover{transform:translateY(-2px)}
 .btn-success{background:#10b981;color:white}.btn-danger{background:#ef4444;color:white}.btn-secondary{background:#6b7280;color:white}
 .table-container{overflow-x:auto;margin-top:15px}
 table{width:100%;border-collapse:collapse;min-width:500px}
 th{background:#f9fafb;padding:10px;text-align:left;font-weight:600;border-bottom:2px solid #e5e7eb;font-size:13px}
-td{padding:10px;border-bottom:1px solid #e5e7eb;font-size:13px}
-tr:hover{background:#f9fafb}
+td{padding:10px;border-bottom:1px solid #e5e7eb;font-size:13px}tr:hover{background:#f9fafb}
 .summary-card{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:20px;border-radius:12px;margin-top:20px}
 .summary-total{font-size:32px;font-weight:bold}
 .receipt-card{background:#f9fafb;padding:15px;border-radius:12px;margin-bottom:15px;border-left:4px solid #667eea;cursor:pointer;transition:.3s}
@@ -542,150 +763,146 @@ tr:hover{background:#f9fafb}
 .stat-card{background:#f9fafb;padding:15px;border-radius:8px;text-align:center}
 .stat-number{font-size:28px;font-weight:bold;color:#667eea}
 .stat-label{color:#6b7280;font-size:13px;margin-top:5px}
-</style>
-</head>
+</style></head>
 <body>
 <div class="container">
 <div class="header"><div class="header-content">
 <div><h1>📱 Cellphone Shop Management</h1><p>Professional Receipt System</p></div>
 <div class="header-btns">
-<button class="header-btn btn-export" onclick="exportDatabase()">📥 Export</button>
-<label class="header-btn btn-import" style="cursor:pointer">📤 Import<input type="file" id="importFile" accept=".json" style="display:none" onchange="importDatabase(event)"></label>
+<button class="header-btn btn-export" onclick="exportDB()">📥 Export</button>
+<label class="header-btn btn-import" style="cursor:pointer">📤 Import<input type="file" id="importFile" accept=".json" style="display:none" onchange="importDB(event)"></label>
 </div></div></div>
 <div class="tabs">
-<button class="tab-btn active" onclick="switchTab('new-receipt',event)">➕ New Receipt</button>
-<button class="tab-btn" onclick="switchTab('history',event)">📜 History</button>
-<button class="tab-btn" onclick="switchTab('settings',event)">⚙️ Settings</button>
+<button class="tab-btn active" onclick="st('new-receipt',event)">➕ New Receipt</button>
+<button class="tab-btn" onclick="st('history',event)">📜 History</button>
+<button class="tab-btn" onclick="st('settings',event)">⚙️ Settings</button>
 </div>
 <div class="content">
 <div id="new-receipt" class="tab-content active">
 <h2 style="margin-bottom:15px;color:#667eea;font-size:20px">Create New Receipt</h2>
-<div class="warning-box"><h4>⚠️ Data Storage Notice</h4><p>Your data is saved in your browser. Export regularly to backup!</p></div>
+<div class="warning-box"><h4>⚠️ Data Storage Notice</h4><p>Data saved in your browser. Export regularly to backup!</p></div>
 <h3 style="margin-bottom:12px;font-size:16px">Customer Information</h3>
 <div class="form-grid">
-<div class="form-group"><label>Phone Number *</label><input type="tel" id="customerPhone" placeholder="0821234567"></div>
-<div class="form-group"><label>Customer Name</label><input type="text" id="customerName" placeholder="John Doe"></div>
-<div class="form-group"><label>Email</label><input type="email" id="customerEmail" placeholder="customer@email.com"></div>
+<div class="form-group"><label>Phone Number *</label><input type="tel" id="cPhone" placeholder="0821234567"></div>
+<div class="form-group"><label>Customer Name</label><input type="text" id="cName" placeholder="John Doe"></div>
+<div class="form-group"><label>Email</label><input type="email" id="cEmail" placeholder="customer@email.com"></div>
 </div>
 <h3 style="margin:20px 0 12px;font-size:16px">Add Items</h3>
 <div class="form-grid">
-<div class="form-group"><label>Description *</label><input type="text" id="itemDescription" placeholder="Screen replacement"></div>
+<div class="form-group"><label>Description *</label><input type="text" id="iDesc" placeholder="Screen replacement"></div>
 <div class="form-group"><label>Category *</label>
-<select id="itemCategory"><option>Repair Service</option><option>Software Update</option><option>Battery</option><option>Screen Protector</option><option>Phone Case</option><option>Charger</option><option>Cable</option><option>Earphones</option><option>Memory Card</option><option>SIM Card</option><option>Other Accessories</option></select>
+<select id="iCat"><option>Repair Service</option><option>Software Update</option><option>Battery</option><option>Screen Protector</option><option>Phone Case</option><option>Charger</option><option>Cable</option><option>Earphones</option><option>Memory Card</option><option>SIM Card</option><option>Other Accessories</option></select>
 </div>
-<div class="form-group"><label>Quantity *</label><input type="number" id="itemQuantity" value="1" min="1"></div>
-<div class="form-group"><label>Price (R) *</label><input type="number" id="itemPrice" placeholder="0.00" step="0.01" min="0"></div>
+<div class="form-group"><label>Quantity *</label><input type="number" id="iQty" value="1" min="1"></div>
+<div class="form-group"><label>Price (R) *</label><input type="number" id="iPrice" placeholder="0.00" step="0.01" min="0"></div>
 </div>
 <div class="checkbox-group" style="margin:12px 0">
-<input type="checkbox" id="applyDiscount" onchange="toggleDiscount()">
-<label for="applyDiscount" style="margin:0;cursor:pointer">Apply Discount</label>
-<input type="number" id="discountPercent" placeholder="%" min="0" max="100" style="width:80px;padding:8px;border-radius:5px;border:2px solid #e5e7eb" disabled>
+<input type="checkbox" id="applyDisc" onchange="togDisc()">
+<label for="applyDisc" style="margin:0;cursor:pointer">Apply Discount</label>
+<input type="number" id="discPct" placeholder="%" min="0" max="100" style="width:80px;padding:8px;border-radius:5px;border:2px solid #e5e7eb" disabled>
 </div>
-<button class="btn btn-primary" onclick="addItem()" style="width:100%">➕ Add Item to Receipt</button>
-<div id="itemsTableContainer" style="display:none;margin-top:20px">
+<button class="btn btn-primary" onclick="addItem()" style="width:100%">➕ Add Item</button>
+<div id="itemsCont" style="display:none;margin-top:20px">
 <h3 style="font-size:16px;margin-bottom:10px">Items on Receipt</h3>
 <div class="table-container">
 <table><thead><tr><th>Description</th><th>Category</th><th>Qty</th><th>Price</th><th>Total</th><th>Action</th></tr></thead>
-<tbody id="itemsTableBody"></tbody></table></div></div>
-<div class="summary-card" id="summaryCard" style="display:none">
+<tbody id="itemsBody"></tbody></table></div></div>
+<div class="summary-card" id="sumCard" style="display:none">
 <h3>Receipt Summary</h3>
 <div style="display:flex;justify-content:space-between;align-items:center;margin-top:15px;flex-wrap:wrap;gap:10px">
-<div><p>Total Items: <span id="totalItems">0</span></p></div>
-<div style="text-align:right"><p style="font-size:14px;opacity:.9">TOTAL AMOUNT</p><div class="summary-total">R <span id="totalAmount">0.00</span></div></div>
+<div><p>Items: <span id="totItems">0</span></p></div>
+<div style="text-align:right"><p style="font-size:14px;opacity:.9">TOTAL</p><div class="summary-total">R <span id="totAmt">0.00</span></div></div>
 </div>
-<div class="form-group" style="margin-top:15px"><label style="color:white">Notes (Optional)</label><textarea id="receiptNotes" rows="3" placeholder="Additional notes..."></textarea></div>
+<div class="form-group" style="margin-top:15px"><label style="color:white">Notes</label><textarea id="recNotes" rows="3" placeholder="Additional notes..."></textarea></div>
 <div class="action-btns">
-<button class="btn btn-success" onclick="saveReceipt()">💾 Save Receipt</button>
-<button class="btn btn-secondary" onclick="clearReceipt()">🗑️ Clear All</button>
+<button class="btn btn-success" onclick="saveRec()">💾 Save Receipt</button>
+<button class="btn btn-secondary" onclick="clearRec()">🗑️ Clear</button>
 </div></div></div>
 <div id="history" class="tab-content">
 <h2 style="margin-bottom:15px;color:#667eea;font-size:20px">Receipt History</h2>
 <div class="form-grid">
-<div class="form-group"><label>Search by Phone / Receipt ID / Code</label><input type="text" id="searchTerm" placeholder="Enter search term..."></div>
-<div style="display:flex;align-items:flex-end"><button class="btn btn-primary" onclick="searchReceipts()" style="width:100%">🔍 Search</button></div>
-</div><div id="searchResults"></div></div>
+<div class="form-group"><label>Search by Phone / ID / Code</label><input type="text" id="srchTerm" placeholder="Enter search term..."></div>
+<div style="display:flex;align-items:flex-end"><button class="btn btn-primary" onclick="srch()" style="width:100%">🔍 Search</button></div>
+</div><div id="srchResults"></div></div>
 <div id="settings" class="tab-content">
-<div id="settingsLocked" class="settings-locked">
+<div id="sLocked" class="settings-locked">
 <div style="font-size:60px;margin-bottom:20px">🔒</div>
 <h2 style="margin-bottom:15px;font-size:20px">Settings Locked</h2>
 <p style="color:#6b7280;margin-bottom:20px">Enter password to unlock settings</p>
 <div style="max-width:400px;margin:0 auto">
-<input type="password" id="passwordInput" placeholder="Enter password" style="width:100%;padding:12px;border-radius:8px;border:2px solid #e5e7eb;margin-bottom:12px">
-<button class="btn btn-primary" onclick="unlockSettings()" style="width:100%">🔓 Unlock Settings</button>
-<p style="margin-top:12px;color:#6b7280;font-size:13px">Default password: admin123</p>
+<input type="password" id="pwdIn" placeholder="Enter password" style="width:100%;padding:12px;border-radius:8px;border:2px solid #e5e7eb;margin-bottom:12px">
+<button class="btn btn-primary" onclick="unlockS()" style="width:100%">🔓 Unlock</button>
+<p style="margin-top:12px;color:#6b7280;font-size:13px">Default: admin123</p>
 </div></div>
-<div id="settingsUnlocked" style="display:none">
+<div id="sUnlocked" style="display:none">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px">
 <h2 style="color:#667eea;font-size:20px">Company Settings</h2>
-<button class="btn btn-danger" onclick="lockSettings()">🔒 Lock Settings</button>
-</div>
+<button class="btn btn-danger" onclick="lockS()">🔒 Lock</button></div>
 <div class="form-grid">
-<div class="form-group"><label>Company Name</label><input type="text" id="settingCompanyName"></div>
-<div class="form-group"><label>Phone</label><input type="tel" id="settingPhone"></div>
-<div class="form-group"><label>Email</label><input type="email" id="settingEmail"></div>
-<div class="form-group"><label>Address</label><input type="text" id="settingAddress"></div>
+<div class="form-group"><label>Company Name</label><input type="text" id="sComp"></div>
+<div class="form-group"><label>Phone</label><input type="tel" id="sPhone"></div>
+<div class="form-group"><label>Email</label><input type="email" id="sEmail"></div>
+<div class="form-group"><label>Address</label><input type="text" id="sAddr"></div>
 </div>
-<div class="form-group" style="margin-top:15px"><label>Warranty Text</label><textarea id="settingWarranty" rows="2"></textarea></div>
+<div class="form-group" style="margin-top:15px"><label>Warranty Text</label><textarea id="sWarr" rows="2"></textarea></div>
 <div class="form-group" style="margin-top:15px">
 <label>Company Logo</label>
 <div style="display:flex;gap:10px;align-items:center;margin-bottom:10px;flex-wrap:wrap">
-<input type="file" id="logoUpload" accept="image/*" style="display:none" onchange="handleLogoUpload(event)">
-<button class="btn btn-primary" onclick="document.getElementById('logoUpload').click()">📷 Upload Logo</button>
-<span id="logoStatus" style="color:#6b7280;font-size:13px">No logo uploaded</span>
+<input type="file" id="logoIn" accept="image/*" style="display:none" onchange="uploadLogo(event)">
+<button class="btn btn-primary" onclick="document.getElementById('logoIn').click()">📷 Upload Logo</button>
+<span id="logoStat" style="color:#6b7280;font-size:13px">No logo uploaded</span>
 </div>
 <div id="logoPreview" class="logo-preview-box" style="display:none">
-<img id="logoImage" alt="Logo" style="max-width:100%;max-height:150px">
-<br><button class="btn btn-danger" onclick="removeLogo()" style="margin-top:10px;padding:8px 15px">Remove Logo</button>
+<img id="logoImg" alt="Logo" style="max-width:100%;max-height:150px">
+<br><button class="btn btn-danger" onclick="removeLogo()" style="margin-top:10px;padding:8px 15px">Remove</button>
 </div></div>
 <div style="background:#f9fafb;padding:15px;border-radius:12px;margin:20px 0">
-<h3 style="margin-bottom:15px;font-size:16px">Database Statistics</h3>
+<h3 style="margin-bottom:15px;font-size:16px">Stats</h3>
 <div class="stats-grid">
-<div class="stat-card"><div class="stat-number" id="totalReceiptsCount">0</div><div class="stat-label">Total Receipts</div></div>
-<div class="stat-card"><div class="stat-number" id="totalCustomersCount">0</div><div class="stat-label">Total Customers</div></div>
+<div class="stat-card"><div class="stat-number" id="totRecs">0</div><div class="stat-label">Receipts</div></div>
+<div class="stat-card"><div class="stat-number" id="totCusts">0</div><div class="stat-label">Customers</div></div>
 </div></div>
 <div class="action-btns">
-<button class="btn btn-success" onclick="saveSettings()">💾 Save Settings</button>
-<button class="btn btn-secondary" onclick="changePassword()">🔑 Change Password</button>
+<button class="btn btn-success" onclick="saveS()">💾 Save Settings</button>
+<button class="btn btn-secondary" onclick="changePwd()">🔑 Change Password</button>
 </div></div></div></div></div>
-<div class="modal" id="receiptModal">
+<div class="modal" id="recModal">
 <div class="modal-content">
-<div class="modal-header"><h2 style="font-size:18px">Receipt Details</h2><button class="modal-close" onclick="closeModal()">×</button></div>
-<div id="modalBody"></div></div></div>
+<div class="modal-header"><h2 style="font-size:18px">Receipt Details</h2><button class="modal-close" onclick="closeMod()">×</button></div>
+<div id="modBody"></div></div></div>
 <script>
-const SK={r:'cellphone_receipts',c:'cellphone_customers',s:'cellphone_settings'};
-let items=[];let cfg=getCfg();
-function getCfg(){const d={companyName:'CELLPHONE REPAIR SHOP',phone:'(555) 123-4567',email:'info@cellshop.com',address:'123 Main Street, City',warranty:'Warranty: 30 days on all repairs',password:'admin123',logo:''};const s=localStorage.getItem(SK.s);return s?JSON.parse(s):d;}
-function save(k,d){localStorage.setItem(k,JSON.stringify(d));}
-function load(k){const d=localStorage.getItem(k);return d?JSON.parse(d):(k===SK.r||k===SK.c?[]:{});}
-function genCode(){const y=new Date().getFullYear();const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return 'RCP-'+y+'-'+s;}
-function fmt(a){return parseFloat(a).toFixed(2);}
-function toggleDiscount(){document.getElementById('discountPercent').disabled=!document.getElementById('applyDiscount').checked;if(!document.getElementById('applyDiscount').checked)document.getElementById('discountPercent').value='';}
-function switchTab(t,e){document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.getElementById(t).classList.add('active');if(e&&e.target)e.target.classList.add('active');if(t==='history')loadAll();else if(t==='settings')loadCfg();}
-function addItem(){const d=document.getElementById('itemDescription').value.trim(),cat=document.getElementById('itemCategory').value,q=parseInt(document.getElementById('itemQuantity').value),p=parseFloat(document.getElementById('itemPrice').value);if(!d||!p||p<=0||q<=0){alert('Fill in all required fields!');return;}let tot=q*p;if(document.getElementById('applyDiscount').checked){const disc=parseFloat(document.getElementById('discountPercent').value)||0;if(disc>0&&disc<=100)tot=tot*(1-disc/100);}items.push({id:Date.now(),description:d,category:cat,quantity:q,price:p,total:tot});renderItems();clearForm();}
-function removeItem(id){items=items.filter(i=>i.id!==id);renderItems();}
-function renderItems(){const tbody=document.getElementById('itemsTableBody'),cont=document.getElementById('itemsTableContainer'),sum=document.getElementById('summaryCard');if(items.length===0){cont.style.display='none';sum.style.display='none';return;}cont.style.display='block';sum.style.display='block';tbody.innerHTML=items.map(i=>'<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+fmt(i.price)+'</td><td><strong>R '+fmt(i.total)+'</strong></td><td><button class="btn btn-danger" style="padding:5px 10px;font-size:12px" onclick="removeItem('+i.id+')">Delete</button></td></tr>').join('');const tot=items.reduce((s,i)=>s+i.total,0);document.getElementById('totalItems').textContent=items.length;document.getElementById('totalAmount').textContent=fmt(tot);}
-function clearForm(){document.getElementById('itemDescription').value='';document.getElementById('itemQuantity').value='1';document.getElementById('itemPrice').value='';document.getElementById('applyDiscount').checked=false;document.getElementById('discountPercent').value='';document.getElementById('discountPercent').disabled=true;document.getElementById('itemCategory').selectedIndex=0;}
-function clearReceipt(){if(items.length>0&&!confirm('Clear all items?'))return;items=[];renderItems();['customerPhone','customerName','customerEmail','receiptNotes'].forEach(id=>document.getElementById(id).value='');}
-function saveReceipt(){const ph=document.getElementById('customerPhone').value.trim(),nm=document.getElementById('customerName').value.trim(),em=document.getElementById('customerEmail').value.trim(),nt=document.getElementById('receiptNotes').value.trim();if(!ph||ph.length<10){alert('Enter a valid phone number!');return;}if(items.length===0){alert('Add at least one item!');return;}const code=genCode(),tot=items.reduce((s,i)=>s+i.total,0);const rec={id:Date.now(),receiptCode:code,customerPhone:ph,customerName:nm||'Walk-in Customer',customerEmail:em,date:new Date().toISOString(),items:[...items],total:tot,notes:nt};const recs=load(SK.r);recs.push(rec);save(SK.r,recs);const custs=load(SK.c);const ex=custs.find(c=>c.phone===ph);if(ex){ex.name=nm;ex.email=em;}else custs.push({phone:ph,name:nm,email:em});save(SK.c,custs);alert('✅ Receipt saved!\nCode: '+code+'\nTotal: R '+fmt(tot));if(confirm('Print receipt? 🖨️'))printRec(rec.id);clearReceipt();}
-function searchReceipts(){const t=document.getElementById('searchTerm').value.trim();if(!t){loadAll();return;}const recs=load(SK.r),res=recs.filter(r=>r.customerPhone.includes(t)||r.receiptCode.toUpperCase().includes(t.toUpperCase())||r.id.toString()===t);showRecs(res);}
-function loadAll(){showRecs(load(SK.r).reverse());}
-function showRecs(recs){const c=document.getElementById('searchResults');if(!recs.length){c.innerHTML='<p style="text-align:center;color:#6b7280;padding:40px">No receipts found</p>';return;}c.innerHTML=recs.map(r=>'<div class="receipt-card" onclick="viewRec('+r.id+')"><div class="receipt-header"><div><div class="receipt-code">'+r.receiptCode+'</div><p style="color:#6b7280;margin-top:5px;font-size:13px">'+r.customerName+' • '+r.customerPhone+'</p><p style="color:#9ca3af;font-size:12px;margin-top:3px">'+new Date(r.date).toLocaleString()+'</p></div><div class="receipt-amount">R '+fmt(r.total)+'</div></div><p style="color:#6b7280;font-size:12px">'+r.items.length+' item(s)</p></div>').join('');}
-function viewRec(id){const rec=load(SK.r).find(r=>r.id===id);if(!rec)return;document.getElementById('modalBody').innerHTML='<div style="text-align:center;border-bottom:2px solid #e5e7eb;padding-bottom:15px;margin-bottom:15px"><h2 style="color:#667eea;font-size:18px">'+cfg.companyName+'</h2><p style="font-size:12px">'+cfg.phone+' • '+cfg.email+'</p><p style="font-size:12px">'+cfg.address+'</p></div><div style="background:#f9fafb;padding:12px;border-radius:8px;margin-bottom:15px"><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:13px"><div><p style="color:#6b7280">Code</p><p style="font-weight:bold;color:#667eea">'+rec.receiptCode+'</p></div><div><p style="color:#6b7280">Date</p><p style="font-weight:bold">'+new Date(rec.date).toLocaleString()+'</p></div><div><p style="color:#6b7280">Customer</p><p style="font-weight:bold">'+rec.customerName+'</p></div><div><p style="color:#6b7280">Phone</p><p style="font-weight:bold">'+rec.customerPhone+'</p></div></div></div><div class="table-container"><table><thead><tr><th>Description</th><th>Category</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>'+rec.items.map(i=>'<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+fmt(i.price)+'</td><td><strong>R '+fmt(i.total)+'</strong></td></tr>').join('')+'</tbody></table></div><div style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:15px;border-radius:12px;text-align:right"><p style="font-size:13px;opacity:.9">TOTAL</p><p style="font-size:28px;font-weight:bold">R '+fmt(rec.total)+'</p></div>'+(rec.notes?'<div style="background:#fef3c7;padding:12px;border-radius:8px;margin-top:15px"><p style="font-weight:bold;font-size:13px">Notes:</p><p style="font-size:13px">'+rec.notes+'</p></div>':'')+'<div style="text-align:center;margin-top:20px;padding-top:15px;border-top:2px solid #e5e7eb"><p style="font-style:italic;color:#6b7280;font-size:12px">'+cfg.warranty+'</p></div><div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap"><button class="btn btn-primary" onclick="printRec('+rec.id+')" style="flex:1">🖨️ Print</button><button class="btn btn-secondary" onclick="closeModal()" style="flex:1">Close</button></div>';document.getElementById('receiptModal').classList.add('active');}
-function closeModal(){document.getElementById('receiptModal').classList.remove('active');}
-function printRec(id){const rec=load(SK.r).find(r=>r.id===id);if(!rec)return;const html=makeRecHTML(rec);const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);window.open(url,'_blank');setTimeout(()=>URL.revokeObjectURL(url),1000);}
-function makeRecHTML(rec){return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Receipt '+rec.receiptCode+'</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;padding:20px;background:white;position:relative}.watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-45deg);font-size:60pt;font-weight:bold;color:rgba(200,200,200,.12);pointer-events:none;z-index:0;white-space:nowrap;user-select:none;letter-spacing:8px}.comp-name{font-size:16pt;font-weight:bold;margin:0 0 8px 0}.comp-det{font-size:9pt;margin:4px 0}.sep{border-top:2px solid black;margin:15px 0}.ttl{font-size:14pt;font-weight:bold;text-align:center;margin:15px 0}.info-box{background:#f5f5f5;border:1px solid black;padding:12px;margin:15px 0}.info-row{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}.inf-col{flex:1;min-width:150px}.lbl{font-weight:bold;display:inline-block;width:90px;font-size:9pt}.val{display:inline-block;font-size:9pt}.cval{color:#00008B;font-weight:bold;font-size:9pt}table{width:100%;border-collapse:collapse;margin:15px 0}th{background:#dcdcdc;border:1px solid black;padding:6px;text-align:left;font-weight:bold;font-size:9pt}td{border:1px solid #ccc;padding:6px;font-size:8pt}.tot-box{background:#e6e6e6;border:2px solid black;padding:10px 12px;margin:20px 0;text-align:right;font-size:11pt;font-weight:bold}.war{border-top:1px solid gray;padding-top:8px;margin-top:20px;font-size:8pt;font-style:italic;color:#666}.disc{border-top:2px solid black;margin-top:25px;padding-top:10px}.disc-t{font-weight:bold;font-size:8pt;margin-bottom:8px}.disc-tx{font-size:5pt;line-height:1.3;text-align:justify}.ftr{margin-top:30px;border-top:1px solid black;padding-top:10px}.sig-sec{display:flex;justify-content:space-between;align-items:flex-end;margin:15px 0;gap:10px;flex-wrap:wrap}.sig-ln{flex:1;max-width:250px}.sig-lbl{font-size:8pt;margin-bottom:4px}.sig-ul{border-bottom:1px solid black;height:25px}.fp{width:80px;height:50px;border:1px solid black;text-align:center;padding-top:15px;font-size:7pt;color:#999}.ty{text-align:center;font-weight:bold;font-size:9pt;margin:15px 0}.fi{text-align:center;font-size:7pt;color:#666}@media print{body{padding:10px}}</style></head><body><div class="watermark">'+cfg.companyName+'</div><div style="display:flex;align-items:flex-start;gap:15px;margin-bottom:15px">'+(cfg.logo?'<div><img src="'+cfg.logo+'" style="max-width:120px;max-height:120px;object-fit:contain"></div>':'')+'<div><div class="comp-name">'+cfg.companyName.toUpperCase()+'</div><div class="comp-det">Phone: '+cfg.phone+'</div><div class="comp-det">Email: '+cfg.email+'</div><div class="comp-det">'+cfg.address+'</div></div></div><div class="sep"></div><div class="ttl">SALES RECEIPT</div><div class="info-box"><div class="info-row"><div class="inf-col"><span class="lbl">Code:</span><span class="cval">'+rec.receiptCode+'</span><br><span class="lbl">Date:</span><span class="val">'+new Date(rec.date).toLocaleDateString()+'</span><br><span class="lbl">Time:</span><span class="val">'+new Date(rec.date).toLocaleTimeString()+'</span></div><div class="inf-col"><span class="lbl">Customer:</span><span class="val">'+rec.customerName+'</span><br><span class="lbl">Phone:</span><span class="val">'+rec.customerPhone+'</span>'+(rec.customerEmail?'<br><span class="lbl">Email:</span><span class="val">'+rec.customerEmail+'</span>':'')+'</div></div></div><table><tr><th style="width:35%">Description</th><th style="width:20%">Category</th><th style="width:10%">Qty</th><th style="width:17%">Unit Price</th><th style="width:18%">Total</th></tr>'+rec.items.map(i=>'<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+fmt(i.price)+'</td><td>R '+fmt(i.total)+'</td></tr>').join('')+'</table><div class="tot-box">GRAND TOTAL: R '+fmt(rec.total)+'</div>'+(rec.notes?'<div style="margin:15px 0;padding:10px;border:1px solid #ccc;font-size:9pt"><strong>Notes:</strong> '+rec.notes+'</div>':'')+'<div class="war">'+cfg.warranty+'</div><div class="disc"><div class="disc-t">GENERAL SALES &amp; REPAIRS DISCLAIMER</div><div class="disc-tx">All devices handled in good faith. Not responsible for pre-existing faults, data loss, or damage from misuse. Back up data before repairs. Once device leaves premises we are not liable for damage from mishandling or unauthorized alterations. By proceeding, customer accepts these terms.</div></div><div class="ftr"><div class="sig-sec"><div class="sig-ln"><div class="sig-lbl">Customer Signature:</div><div class="sig-ul"></div></div><div class="fp">Thumbprint</div></div><div class="ty">Thank you for your business!</div><div class="fi">Receipt Code: '+rec.receiptCode+' | All prices in South African Rand (R)</div></div></body></html>';}
-function exportDatabase(){const data={receipts:load(SK.r),customers:load(SK.c),settings:cfg,exportDate:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='CellphoneShop_Backup_'+Date.now()+'.json';a.click();URL.revokeObjectURL(url);alert('✅ Exported!');}
-function importDatabase(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!confirm('⚠️ Replace ALL data?'))return;if(d.receipts)save(SK.r,d.receipts);if(d.customers)save(SK.c,d.customers);if(d.settings){cfg=d.settings;save(SK.s,d.settings);}alert('✅ Imported!');location.reload();}catch(err){alert('❌ Import error.');}};reader.readAsText(file);e.target.value='';}
-function handleLogoUpload(e){const file=e.target.files[0];if(!file)return;if(file.size>5000000){alert('Max 5MB');return;}const reader=new FileReader();reader.onload=function(ev){cfg.logo=ev.target.result;updateLogo();document.getElementById('logoStatus').textContent=file.name;alert('Logo uploaded! Save settings.');};reader.readAsDataURL(file);}
-function updateLogo(){const p=document.getElementById('logoPreview'),img=document.getElementById('logoImage');if(cfg.logo){img.src=cfg.logo;p.style.display='block';}else p.style.display='none';}
-function removeLogo(){if(confirm('Remove logo?')){cfg.logo='';updateLogo();document.getElementById('logoStatus').textContent='No logo uploaded';document.getElementById('logoUpload').value='';}}
-function unlockSettings(){if(document.getElementById('passwordInput').value===cfg.password){document.getElementById('settingsLocked').style.display='none';document.getElementById('settingsUnlocked').style.display='block';loadCfg();}else alert('❌ Wrong password!');}
-function lockSettings(){document.getElementById('settingsLocked').style.display='block';document.getElementById('settingsUnlocked').style.display='none';document.getElementById('passwordInput').value='';}
-function loadCfg(){document.getElementById('settingCompanyName').value=cfg.companyName;document.getElementById('settingPhone').value=cfg.phone;document.getElementById('settingEmail').value=cfg.email;document.getElementById('settingAddress').value=cfg.address;document.getElementById('settingWarranty').value=cfg.warranty;if(cfg.logo){document.getElementById('logoStatus').textContent='Logo uploaded';updateLogo();}const r=load(SK.r),c=load(SK.c);document.getElementById('totalReceiptsCount').textContent=r.length;document.getElementById('totalCustomersCount').textContent=c.length;}
-function saveSettings(){cfg.companyName=document.getElementById('settingCompanyName').value;cfg.phone=document.getElementById('settingPhone').value;cfg.email=document.getElementById('settingEmail').value;cfg.address=document.getElementById('settingAddress').value;cfg.warranty=document.getElementById('settingWarranty').value;save(SK.s,cfg);alert('✅ Settings saved!');}
-function changePassword(){const cur=prompt('Current password:');if(cur!==cfg.password){alert('❌ Wrong!');return;}const np=prompt('New password:');if(!np||np.length<4){alert('Too short!');return;}if(prompt('Confirm:')!==np){alert('❌ No match!');return;}cfg.password=np;save(SK.s,cfg);alert('✅ Password changed!');}
-<\/script>
-</body></html>`;}
+const K={r:'cr',c:'cc',s:'cs'};let its=[];let cfg=loadCfg();
+function loadCfg(){const d={companyName:'CELLPHONE REPAIR SHOP',phone:'(555) 123-4567',email:'info@cellshop.com',address:'123 Main Street',warranty:'Warranty: 30 days on all repairs',password:'admin123',logo:''};const s=localStorage.getItem(K.s);return s?JSON.parse(s):d;}
+function sv(k,d){localStorage.setItem(k,JSON.stringify(d));}
+function ld(k){const d=localStorage.getItem(k);return d?JSON.parse(d):(k===K.r||k===K.c?[]:{});}
+function gc(){const y=new Date().getFullYear();const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let s='';for(let i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];return 'RCP-'+y+'-'+s;}
+function f(a){return parseFloat(a).toFixed(2);}
+function togDisc(){document.getElementById('discPct').disabled=!document.getElementById('applyDisc').checked;if(!document.getElementById('applyDisc').checked)document.getElementById('discPct').value='';}
+function st(t,e){document.querySelectorAll('.tab-content').forEach(x=>x.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));document.getElementById(t).classList.add('active');if(e&&e.target)e.target.classList.add('active');if(t==='history')loadAll();else if(t==='settings')loadS();}
+function addItem(){const d=document.getElementById('iDesc').value.trim(),cat=document.getElementById('iCat').value,q=parseInt(document.getElementById('iQty').value),p=parseFloat(document.getElementById('iPrice').value);if(!d||!p||p<=0||q<=0){alert('Fill in all required fields!');return;}let tot=q*p;if(document.getElementById('applyDisc').checked){const disc=parseFloat(document.getElementById('discPct').value)||0;if(disc>0&&disc<=100)tot=tot*(1-disc/100);}its.push({id:Date.now(),description:d,category:cat,quantity:q,price:p,total:tot});renderItems();clearForm();}
+function removeItem(id){its=its.filter(i=>i.id!==id);renderItems();}
+function renderItems(){const b=document.getElementById('itemsBody'),c=document.getElementById('itemsCont'),s=document.getElementById('sumCard');if(!its.length){c.style.display='none';s.style.display='none';return;}c.style.display='block';s.style.display='block';b.innerHTML=its.map(i=>'<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+f(i.price)+'</td><td><strong>R '+f(i.total)+'</strong></td><td><button class="btn btn-danger" style="padding:5px 10px;font-size:12px" onclick="removeItem('+i.id+')">Del</button></td></tr>').join('');const tot=its.reduce((s,i)=>s+i.total,0);document.getElementById('totItems').textContent=its.length;document.getElementById('totAmt').textContent=f(tot);}
+function clearForm(){document.getElementById('iDesc').value='';document.getElementById('iQty').value='1';document.getElementById('iPrice').value='';document.getElementById('applyDisc').checked=false;document.getElementById('discPct').value='';document.getElementById('discPct').disabled=true;document.getElementById('iCat').selectedIndex=0;}
+function clearRec(){if(its.length>0&&!confirm('Clear all items?'))return;its=[];renderItems();['cPhone','cName','cEmail','recNotes'].forEach(id=>document.getElementById(id).value='');}
+function saveRec(){const ph=document.getElementById('cPhone').value.trim(),nm=document.getElementById('cName').value.trim(),em=document.getElementById('cEmail').value.trim(),nt=document.getElementById('recNotes').value.trim();if(!ph||ph.length<10){alert('Enter a valid phone number!');return;}if(!its.length){alert('Add at least one item!');return;}const code=gc(),tot=its.reduce((s,i)=>s+i.total,0);const rec={id:Date.now(),receiptCode:code,customerPhone:ph,customerName:nm||'Walk-in Customer',customerEmail:em,date:new Date().toISOString(),items:[...its],total:tot,notes:nt};const recs=ld(K.r);recs.push(rec);sv(K.r,recs);const custs=ld(K.c);const ex=custs.find(c=>c.phone===ph);if(ex){ex.name=nm;ex.email=em;}else custs.push({phone:ph,name:nm,email:em});sv(K.c,custs);alert('✅ Receipt saved!\\nCode: '+code+'\\nTotal: R '+f(tot));if(confirm('Print receipt? 🖨️'))printRec(rec.id);clearRec();}
+function srch(){const t=document.getElementById('srchTerm').value.trim();if(!t){loadAll();return;}const recs=ld(K.r),res=recs.filter(r=>r.customerPhone.includes(t)||r.receiptCode.toUpperCase().includes(t.toUpperCase())||r.id.toString()===t);showRecs(res);}
+function loadAll(){showRecs(ld(K.r).reverse());}
+function showRecs(recs){const c=document.getElementById('srchResults');if(!recs.length){c.innerHTML='<p style="text-align:center;color:#6b7280;padding:40px">No receipts found</p>';return;}c.innerHTML=recs.map(r=>'<div class="receipt-card" onclick="viewRec('+r.id+')"><div class="receipt-header"><div><div class="receipt-code">'+r.receiptCode+'</div><p style="color:#6b7280;margin-top:5px;font-size:13px">'+r.customerName+' · '+r.customerPhone+'</p><p style="color:#9ca3af;font-size:12px;margin-top:3px">'+new Date(r.date).toLocaleString()+'</p></div><div class="receipt-amount">R '+f(r.total)+'</div></div><p style="color:#6b7280;font-size:12px">'+r.items.length+' item(s)</p></div>').join('');}
+function viewRec(id){const rec=ld(K.r).find(r=>r.id===id);if(!rec)return;document.getElementById('modBody').innerHTML='<div style="text-align:center;border-bottom:2px solid #e5e7eb;padding-bottom:15px;margin-bottom:15px"><h2 style="color:#667eea;font-size:18px">'+cfg.companyName+'</h2><p style="font-size:12px">'+cfg.phone+' · '+cfg.email+'</p><p style="font-size:12px">'+cfg.address+'</p></div><div style="background:#f9fafb;padding:12px;border-radius:8px;margin-bottom:15px"><div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;font-size:13px"><div><p style="color:#6b7280">Code</p><p style="font-weight:bold;color:#667eea">'+rec.receiptCode+'</p></div><div><p style="color:#6b7280">Date</p><p style="font-weight:bold">'+new Date(rec.date).toLocaleString()+'</p></div><div><p style="color:#6b7280">Customer</p><p style="font-weight:bold">'+rec.customerName+'</p></div><div><p style="color:#6b7280">Phone</p><p style="font-weight:bold">'+rec.customerPhone+'</p></div></div></div><div class="table-container"><table><thead><tr><th>Description</th><th>Category</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>'+rec.items.map(i=>'<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+f(i.price)+'</td><td><strong>R '+f(i.total)+'</strong></td></tr>').join('')+'</tbody></table></div><div style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:15px;border-radius:12px;text-align:right"><p style="font-size:13px;opacity:.9">TOTAL</p><p style="font-size:28px;font-weight:bold">R '+f(rec.total)+'</p></div>'+(rec.notes?'<div style="background:#fef3c7;padding:12px;border-radius:8px;margin-top:15px"><strong>Notes:</strong> '+rec.notes+'</div>':'')+'<div style="text-align:center;margin-top:20px;padding-top:15px;border-top:2px solid #e5e7eb"><p style="font-style:italic;color:#6b7280;font-size:12px">'+cfg.warranty+'</p></div><div style="display:flex;gap:10px;margin-top:20px;flex-wrap:wrap"><button class="btn btn-primary" onclick="printRec('+rec.id+')" style="flex:1">🖨️ Print</button><button class="btn btn-secondary" onclick="closeMod()" style="flex:1">Close</button></div>';document.getElementById('recModal').classList.add('active');}
+function closeMod(){document.getElementById('recModal').classList.remove('active');}
+function printRec(id){const rec=ld(K.r).find(r=>r.id===id);if(!rec)return;const html=makeHTML(rec);const blob=new Blob([html],{type:'text/html'});const url=URL.createObjectURL(blob);window.open(url,'_blank');setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function makeHTML(rec){return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Receipt '+rec.receiptCode+'</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,sans-serif;padding:20px;background:white;position:relative}.wm{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-45deg);font-size:60pt;font-weight:bold;color:rgba(200,200,200,.12);pointer-events:none;z-index:0;white-space:nowrap;user-select:none;letter-spacing:8px}.hs{display:flex;align-items:flex-start;gap:15px;margin-bottom:15px}.cn{font-size:16pt;font-weight:bold;margin:0 0 8px}.cd{font-size:9pt;margin:4px 0}.sp{border-top:2px solid black;margin:15px 0}.tt{font-size:14pt;font-weight:bold;text-align:center;margin:15px 0}.ib{background:#f5f5f5;border:1px solid black;padding:12px;margin:15px 0}.ir{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:8px}.ic{flex:1;min-width:150px}.lb{font-weight:bold;display:inline-block;width:90px;font-size:9pt}.vl{display:inline-block;font-size:9pt}.cv{color:#00008B;font-weight:bold;font-size:9pt}table{width:100%;border-collapse:collapse;margin:15px 0}th{background:#dcdcdc;border:1px solid black;padding:6px;text-align:left;font-weight:bold;font-size:9pt}td{border:1px solid #ccc;padding:6px;font-size:8pt}.tb{background:#e6e6e6;border:2px solid black;padding:10px 12px;margin:20px 0;text-align:right;font-size:11pt;font-weight:bold}.wr{border-top:1px solid gray;padding-top:8px;margin-top:20px;font-size:8pt;font-style:italic;color:#666}.ds{border-top:2px solid black;margin-top:25px;padding-top:10px}.dt{font-weight:bold;font-size:8pt;margin-bottom:8px}.dx{font-size:5pt;line-height:1.3;text-align:justify}.ft{margin-top:30px;border-top:1px solid black;padding-top:10px}.ss{display:flex;justify-content:space-between;align-items:flex-end;margin:15px 0;gap:10px;flex-wrap:wrap}.sl{flex:1;max-width:250px}.slb{font-size:8pt;margin-bottom:4px}.su{border-bottom:1px solid black;height:25px}.fp{width:80px;height:50px;border:1px solid black;text-align:center;padding-top:15px;font-size:7pt;color:#999}.ty{text-align:center;font-weight:bold;font-size:9pt;margin:15px 0}.fi{text-align:center;font-size:7pt;color:#666}@media print{body{padding:10px}}</style></head><body><div class="wm">'+cfg.companyName+'</div><div class="hs">'+(cfg.logo?'<div><img src="'+cfg.logo+'" style="max-width:120px;max-height:120px;object-fit:contain"></div>':'')+'<div><div class="cn">'+cfg.companyName.toUpperCase()+'</div><div class="cd">Phone: '+cfg.phone+'</div><div class="cd">Email: '+cfg.email+'</div><div class="cd">'+cfg.address+'</div></div></div><div class="sp"></div><div class="tt">SALES RECEIPT</div><div class="ib"><div class="ir"><div class="ic"><span class="lb">Code:</span><span class="cv">'+rec.receiptCode+'</span><br><span class="lb">Date:</span><span class="vl">'+new Date(rec.date).toLocaleDateString()+'</span><br><span class="lb">Time:</span><span class="vl">'+new Date(rec.date).toLocaleTimeString()+'</span></div><div class="ic"><span class="lb">Customer:</span><span class="vl">'+rec.customerName+'</span><br><span class="lb">Phone:</span><span class="vl">'+rec.customerPhone+'</span>'+(rec.customerEmail?'<br><span class="lb">Email:</span><span class="vl">'+rec.customerEmail+'</span>':'')+'</div></div></div><table><tr><th style="width:35%">Description</th><th style="width:20%">Category</th><th style="width:10%">Qty</th><th style="width:17%">Unit Price</th><th style="width:18%">Total</th></tr>'+rec.items.map(i=>'<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+f(i.price)+'</td><td>R '+f(i.total)+'</td></tr>').join('')+'</table><div class="tb">GRAND TOTAL: R '+f(rec.total)+'</div>'+(rec.notes?'<div style="margin:15px 0;padding:10px;border:1px solid #ccc;font-size:9pt"><strong>Notes:</strong> '+rec.notes+'</div>':'')+'<div class="wr">'+cfg.warranty+'</div><div class="ds"><div class="dt">GENERAL SALES &amp; REPAIRS DISCLAIMER</div><div class="dx">All devices handled in good faith. Not responsible for pre-existing faults, data loss, damage from misuse, liquid exposure, or third-party repairs. Customers must back up data before repairs. Once device leaves premises liability ceases. By proceeding, customer accepts these terms.</div></div><div class="ft"><div class="ss"><div class="sl"><div class="slb">Customer Signature:</div><div class="su"></div></div><div class="fp">Thumbprint</div></div><div class="ty">Thank you for your business!</div><div class="fi">Receipt: '+rec.receiptCode+' | All prices in South African Rand (R)</div></div></body></html>';}
+function exportDB(){const data={receipts:ld(K.r),customers:ld(K.c),settings:cfg,exportDate:new Date().toISOString()};const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='ShopBackup_'+Date.now()+'.json';a.click();URL.revokeObjectURL(url);alert('✅ Exported!');}
+function importDB(e){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(!confirm('⚠️ Replace ALL data?'))return;if(d.receipts)sv(K.r,d.receipts);if(d.customers)sv(K.c,d.customers);if(d.settings){cfg=d.settings;sv(K.s,d.settings);}alert('✅ Imported!');location.reload();}catch(err){alert('❌ Import error.');}};reader.readAsText(file);e.target.value='';}
+function uploadLogo(e){const file=e.target.files[0];if(!file)return;if(file.size>5000000){alert('Max 5MB');return;}const reader=new FileReader();reader.onload=function(ev){cfg.logo=ev.target.result;updLogo();document.getElementById('logoStat').textContent=file.name;alert('Logo uploaded! Save settings.');};reader.readAsDataURL(file);}
+function updLogo(){const p=document.getElementById('logoPreview'),img=document.getElementById('logoImg');if(cfg.logo){img.src=cfg.logo;p.style.display='block';}else p.style.display='none';}
+function removeLogo(){if(confirm('Remove logo?')){cfg.logo='';updLogo();document.getElementById('logoStat').textContent='No logo';document.getElementById('logoIn').value='';}}
+function unlockS(){if(document.getElementById('pwdIn').value===cfg.password){document.getElementById('sLocked').style.display='none';document.getElementById('sUnlocked').style.display='block';loadS();}else alert('❌ Wrong password!');}
+function lockS(){document.getElementById('sLocked').style.display='block';document.getElementById('sUnlocked').style.display='none';document.getElementById('pwdIn').value='';}
+function loadS(){document.getElementById('sComp').value=cfg.companyName;document.getElementById('sPhone').value=cfg.phone;document.getElementById('sEmail').value=cfg.email;document.getElementById('sAddr').value=cfg.address;document.getElementById('sWarr').value=cfg.warranty;if(cfg.logo){document.getElementById('logoStat').textContent='Logo uploaded';updLogo();}const r=ld(K.r),c=ld(K.c);document.getElementById('totRecs').textContent=r.length;document.getElementById('totCusts').textContent=c.length;}
+function saveS(){cfg.companyName=document.getElementById('sComp').value;cfg.phone=document.getElementById('sPhone').value;cfg.email=document.getElementById('sEmail').value;cfg.address=document.getElementById('sAddr').value;cfg.warranty=document.getElementById('sWarr').value;sv(K.s,cfg);alert('✅ Settings saved!');}
+function changePwd(){const cur=prompt('Current password:');if(cur!==cfg.password){alert('❌ Wrong!');return;}const np=prompt('New password:');if(!np||np.length<6){alert('Min 6 chars!');return;}if(prompt('Confirm:')!==np){alert('❌ No match!');return;}cfg.password=np;sv(K.s,cfg);alert('✅ Password changed!');}
+<\/script></body></html>`;}
 </script>
 </body>
 </html>
