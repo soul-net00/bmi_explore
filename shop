@@ -1,34 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>📱 Cellphone Shop Management</title>
 <style>
+/* ── THEME VARIABLES ── */
+[data-theme="light"] {
+  --bg: linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+  --card: #ffffff;
+  --card2: #f9fafb;
+  --border: #e5e7eb;
+  --border2: #f3f4f6;
+  --text: #111827;
+  --text2: #374151;
+  --muted: #6b7280;
+  --muted2: #9ca3af;
+  --input-bg: #ffffff;
+  --input-border: #e5e7eb;
+  --tab-bg: #f3f4f6;
+  --tab-hover: #e5e7eb;
+  --rec-card: #f9fafb;
+  --rec-hover: #f0f0ff;
+  --shadow: 0 10px 30px rgba(0,0,0,.2);
+  --shadow2: 0 4px 12px rgba(102,126,234,.15);
+  --warn-bg: #fef3c7;
+  --warn-border: #f59e0b;
+  --warn-text: #78350f;
+  --stat-bg: #f9fafb;
+  --modal-bg: #ffffff;
+  --logo-border: #e5e7eb;
+  --th-bg: #f9fafb;
+  --toggle-bg: #e5e7eb;
+  --toggle-knob: #ffffff;
+  --err-bg: #fef2f2;
+  --err-border: #fca5a5;
+  --err-text: #991b1b;
+}
+[data-theme="dark"] {
+  --bg: linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);
+  --card: #1e1e30;
+  --card2: #252540;
+  --border: #2e2e4e;
+  --border2: #252540;
+  --text: #eeeeff;
+  --text2: #c4c4e8;
+  --muted: #8888aa;
+  --muted2: #6b6b9a;
+  --input-bg: #252540;
+  --input-border: #3a3a60;
+  --tab-bg: #252540;
+  --tab-hover: #2e2e50;
+  --rec-card: #252540;
+  --rec-hover: #2a2a50;
+  --shadow: 0 10px 30px rgba(0,0,0,.5);
+  --shadow2: 0 4px 12px rgba(102,126,234,.3);
+  --warn-bg: rgba(245,158,11,.1);
+  --warn-border: #f59e0b;
+  --warn-text: #fcd34d;
+  --stat-bg: #252540;
+  --modal-bg: #1e1e30;
+  --logo-border: #3a3a60;
+  --th-bg: #252540;
+  --toggle-bg: #7c3aed;
+  --toggle-knob: #ffffff;
+  --err-bg: rgba(239,68,68,.1);
+  --err-border: #ef4444;
+  --err-text: #fca5a5;
+}
+
+/* ── BASE ── */
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
-body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:10px}
+body{background:var(--bg);min-height:100vh;padding:10px;transition:background .3s}
 .container{max-width:1400px;margin:0 auto}
-.header{background:white;border-radius:15px;padding:20px;margin-bottom:15px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-.header-content{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
-.header h1{color:#667eea;font-size:24px}
-.header p{color:#6b7280;margin-top:5px;font-size:14px}
-.header-btns{display:flex;gap:10px;flex-wrap:wrap}
-.header-btn{padding:10px 15px;border:none;border-radius:8px;cursor:pointer;font-weight:600;transition:.3s;font-size:13px}
+
+/* ── HEADER ── */
+.header{background:var(--card);border-radius:15px;padding:20px;margin-bottom:15px;box-shadow:var(--shadow);border:1px solid var(--border);transition:all .3s}
+.header-top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px}
+.header h1{color:#667eea;font-size:22px}
+.header p{color:var(--muted);margin-top:5px;font-size:13px}
+.header-right{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.header-btns{display:flex;gap:8px;flex-wrap:wrap}
+.header-btn{padding:9px 14px;border:none;border-radius:8px;cursor:pointer;font-weight:600;transition:.3s;font-size:12px}
 .btn-export{background:#10b981;color:white}
 .btn-import{background:#3b82f6;color:white}
 .header-btn:hover{opacity:.85;transform:translateY(-1px)}
-.tabs{background:white;border-radius:15px;padding:10px;margin-bottom:15px;box-shadow:0 10px 30px rgba(0,0,0,.2);display:flex;gap:8px;flex-wrap:wrap}
-.tab-btn{padding:10px 18px;border:none;background:#f3f4f6;border-radius:8px;cursor:pointer;font-weight:600;transition:.3s;color:#6b7280;font-size:13px}
+
+/* ── DARK/LIGHT TOGGLE ── */
+.theme-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.toggle-label{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
+.toggle-switch{width:44px;height:24px;background:var(--toggle-bg);border-radius:12px;position:relative;transition:background .3s;flex-shrink:0}
+.toggle-switch::after{content:'';position:absolute;width:18px;height:18px;background:var(--toggle-knob);border-radius:50%;top:3px;left:3px;transition:transform .3s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
+[data-theme="dark"] .toggle-switch::after{transform:translateX(20px)}
+.toggle-icons{font-size:14px}
+
+/* ── TABS ── */
+.tabs{background:var(--card);border-radius:15px;padding:10px;margin-bottom:15px;box-shadow:var(--shadow);display:flex;gap:8px;flex-wrap:wrap;border:1px solid var(--border);transition:all .3s}
+.tab-btn{padding:10px 16px;border:none;background:var(--tab-bg);border-radius:8px;cursor:pointer;font-weight:600;transition:.3s;color:var(--muted);font-size:13px}
 .tab-btn.active{background:linear-gradient(135deg,#667eea,#764ba2);color:white}
-.tab-btn:hover:not(.active){background:#e5e7eb}
-.content{background:white;border-radius:15px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.tab-btn:hover:not(.active){background:var(--tab-hover);color:var(--text)}
+
+/* ── CONTENT ── */
+.content{background:var(--card);border-radius:15px;padding:20px;box-shadow:var(--shadow);border:1px solid var(--border);transition:all .3s}
 .tab-content{display:none}
 .tab-content.active{display:block}
+
+/* ── FORMS ── */
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;margin-bottom:20px}
 .form-group{display:flex;flex-direction:column}
-.form-group label{font-weight:600;margin-bottom:8px;color:#374151;font-size:14px}
-.form-group input,.form-group select,.form-group textarea{padding:10px;border:2px solid #e5e7eb;border-radius:8px;font-size:14px;transition:.3s;width:100%}
-.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.1)}
+.form-group label{font-weight:600;margin-bottom:8px;color:var(--text2);font-size:14px}
+.form-group input,.form-group select,.form-group textarea{
+  padding:10px;border:2px solid var(--input-border);border-radius:8px;font-size:14px;
+  transition:.3s;width:100%;background:var(--input-bg);color:var(--text)}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+  outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.15)}
+.form-group select option{background:var(--card);color:var(--text)}
+
+/* ── BUTTONS ── */
 .btn{padding:12px 25px;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:.3s;font-size:14px}
 .btn-primary{background:linear-gradient(135deg,#667eea,#764ba2);color:white}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(102,126,234,.4)}
@@ -36,63 +124,114 @@ body{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh
 .btn-success:hover{background:#059669}
 .btn-danger{background:#ef4444;color:white}
 .btn-danger:hover{background:#dc2626}
-.btn-secondary{background:#6b7280;color:white}
-.btn-secondary:hover{background:#4b5563}
+.btn-secondary{background:var(--tab-bg);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{background:var(--tab-hover)}
+.act-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+
+/* ── TABLE ── */
 .table-container{overflow-x:auto;margin-top:15px}
 table{width:100%;border-collapse:collapse;min-width:500px}
-th{background:#f9fafb;padding:12px 10px;text-align:left;font-weight:700;border-bottom:2px solid #e5e7eb;font-size:13px;color:#374151}
-td{padding:12px 10px;border-bottom:1px solid #f3f4f6;font-size:13px}
-tr:hover td{background:#f9fafb}
+th{background:var(--th-bg);padding:12px 10px;text-align:left;font-weight:700;border-bottom:2px solid var(--border);font-size:13px;color:var(--text2)}
+td{padding:12px 10px;border-bottom:1px solid var(--border2);font-size:13px;color:var(--text)}
+tr:hover td{background:var(--card2)}
+
+/* ── RECEIPT SUMMARY ── */
 .sum-card{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:22px;border-radius:14px;margin-top:20px}
 .sum-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .sum-tot{font-size:38px;font-weight:800}
-.rec-card{background:#f9fafb;padding:16px;border-radius:12px;margin-bottom:12px;border-left:4px solid #667eea;cursor:pointer;transition:.3s}
-.rec-card:hover{background:#f0f0ff;transform:translateX(4px);box-shadow:0 4px 12px rgba(102,126,234,.15)}
-.rec-hdr{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;gap:10px;flex-wrap:wrap}
-.rec-code{font-size:16px;font-weight:700;color:#667eea;font-family:monospace}
+
+/* ── RECEIPT CARDS ── */
+.rec-card{background:var(--rec-card);padding:16px;border-radius:12px;margin-bottom:12px;border-left:4px solid #667eea;cursor:pointer;transition:.3s;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border)}
+.rec-card:hover{background:var(--rec-hover);transform:translateX(4px);box-shadow:var(--shadow2)}
+.rec-code{font-size:15px;font-weight:700;color:#667eea;font-family:monospace}
 .rec-amt{font-size:20px;font-weight:700;color:#10b981}
-.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:15px;backdrop-filter:blur(4px)}
+
+/* ── MODAL ── */
+.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.8);z-index:1000;align-items:center;justify-content:center;padding:15px;backdrop-filter:blur(4px)}
 .modal.active{display:flex}
-.modal-content{background:white;border-radius:18px;padding:24px;max-width:820px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.4)}
-.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid #f3f4f6}
-.modal-title{font-size:18px;font-weight:700;color:#374151}
-.modal-close{background:none;border:none;font-size:28px;cursor:pointer;color:#9ca3af;line-height:1;padding:4px}
-.modal-close:hover{color:#374151}
-.warn-box{background:#fef3c7;border-left:4px solid #f59e0b;padding:14px;border-radius:8px;margin:15px 0;font-size:14px}
-.warn-box h4{color:#92400e;margin-bottom:4px}
+.modal-content{background:var(--modal-bg);border-radius:18px;padding:24px;max-width:820px;width:100%;max-height:92vh;overflow-y:auto;box-shadow:0 30px 80px rgba(0,0,0,.5);border:1px solid var(--border)}
+.modal-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:15px;border-bottom:2px solid var(--border)}
+.modal-title{font-size:18px;font-weight:700;color:var(--text)}
+.modal-close{background:none;border:none;font-size:28px;cursor:pointer;color:var(--muted);line-height:1;padding:4px}
+.modal-close:hover{color:var(--text)}
+
+/* ── MISC ── */
+.warn-box{background:var(--warn-bg);border-left:4px solid var(--warn-border);padding:14px;border-radius:8px;margin:15px 0;font-size:14px;color:var(--warn-text)}
+.warn-box h4{margin-bottom:4px}
 .chk-grp{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0}
 .chk-grp input[type=checkbox]{width:18px;height:18px;cursor:pointer;accent-color:#667eea}
-.act-btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
-.logo-prev{margin-top:12px;padding:15px;border:2px dashed #e5e7eb;border-radius:10px;text-align:center}
+.chk-grp label{margin:0;cursor:pointer;font-size:14px;font-weight:500;color:var(--text2)}
+.logo-prev{margin-top:12px;padding:15px;border:2px dashed var(--logo-border);border-radius:10px;text-align:center}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin-top:10px}
-.stat-card{background:#f9fafb;padding:16px;border-radius:10px;text-align:center;border:1px solid #e5e7eb}
+.stat-card{background:var(--stat-bg);padding:16px;border-radius:10px;text-align:center;border:1px solid var(--border)}
 .stat-num{font-size:32px;font-weight:800;color:#667eea}
-.stat-lbl{color:#6b7280;font-size:13px;margin-top:4px}
+.stat-lbl{color:var(--muted);font-size:13px;margin-top:4px}
 .s-locked{text-align:center;padding:40px 20px}
-.sec-title{font-size:17px;font-weight:700;color:#374151;margin:20px 0 12px}
-.empty-state{text-align:center;padding:50px 20px;color:#9ca3af}
+.sec-title{font-size:16px;font-weight:700;color:var(--text2);margin:20px 0 12px;display:flex;align-items:center;gap:8px}
+.empty-state{text-align:center;padding:50px 20px;color:var(--muted2)}
 .empty-state .ico{font-size:48px;margin-bottom:12px}
+
+/* ── ERROR CONTACT BOX ── */
+.err-contact{background:var(--err-bg);border:1px solid var(--err-border);border-radius:10px;padding:14px 18px;margin-top:20px;font-size:13px;color:var(--err-text);display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.err-contact a{color:#667eea;font-weight:700;text-decoration:none}
+.err-contact a:hover{text-decoration:underline}
+
+/* ── SEARCH BAR ── */
+.search-bar{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.search-bar input{flex:1;min-width:200px;padding:11px 14px;border:2px solid var(--input-border);border-radius:8px;font-size:14px;background:var(--input-bg);color:var(--text);transition:.3s}
+.search-bar input:focus{outline:none;border-color:#667eea}
+
+/* ── CUSTOMER CARD ── */
+.cust-card{background:var(--rec-card);border-radius:12px;padding:14px 16px;margin-bottom:10px;border:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;transition:.3s}
+.cust-card:hover{border-color:#667eea;background:var(--rec-hover)}
+.cust-badge{background:rgba(124,58,237,.15);color:#7c3aed;font-weight:700;padding:4px 12px;border-radius:20px;font-size:12px}
+.new-rec-btn{padding:6px 12px;background:#667eea;color:white;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;transition:.3s}
+.new-rec-btn:hover{background:#764ba2}
+
+/* ── SCROLLBAR (dark mode) ── */
+[data-theme="dark"] ::-webkit-scrollbar{width:8px;height:8px}
+[data-theme="dark"] ::-webkit-scrollbar-track{background:#1e1e30}
+[data-theme="dark"] ::-webkit-scrollbar-thumb{background:#3a3a60;border-radius:4px}
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover{background:#667eea}
 </style>
 </head>
 <body>
 <div class="container">
 
+<!-- HEADER -->
 <div class="header">
-  <div class="header-content">
+  <div class="header-top">
     <div>
       <h1>📱 Cellphone Shop Management</h1>
-      <p>Professional Receipt &amp; Customer System &nbsp;·&nbsp; All data saved in your browser</p>
+      <p>Professional Receipt &amp; Customer System · Data saved in your browser</p>
     </div>
-    <div class="header-btns">
-      <button class="header-btn btn-export" onclick="expDB()">📥 Export Backup</button>
-      <label class="header-btn btn-import" style="cursor:pointer">
-        📤 Import
-        <input type="file" id="iFile" accept=".json" style="display:none" onchange="impDB(event)">
-      </label>
+    <div class="header-right">
+      <!-- THEME TOGGLE -->
+      <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode">
+        <span class="toggle-icons" id="themeIcon">☀️</span>
+        <div class="toggle-switch"></div>
+        <span class="toggle-label" id="themeLabel">Light</span>
+      </div>
+      <!-- EXPORT / IMPORT -->
+      <div class="header-btns">
+        <button class="header-btn btn-export" onclick="expDB()">📥 Export</button>
+        <label class="header-btn btn-import" style="cursor:pointer">
+          📤 Import
+          <input type="file" id="iFile" accept=".json" style="display:none" onchange="impDB(event)">
+        </label>
+      </div>
     </div>
+  </div>
+  <!-- ERROR CONTACT -->
+  <div class="err-contact">
+    <span>⚠️ If you experience any error or problem:</span>
+    <span>📞 <a href="tel:0602227788">060 222 7788</a></span>
+    <span>💬 <a href="https://wa.me/27602227788" target="_blank">WhatsApp Kgomotso</a></span>
+    <span>✉️ <a href="mailto:kgomotsothabo2004@gmail.com">kgomotsothabo2004@gmail.com</a></span>
   </div>
 </div>
 
+<!-- TABS -->
 <div class="tabs">
   <button class="tab-btn active" id="tab-nr" onclick="swTab('nr',this)">➕ New Receipt</button>
   <button class="tab-btn" id="tab-hi" onclick="swTab('hi',this)">📜 History</button>
@@ -100,13 +239,14 @@ tr:hover td{background:#f9fafb}
   <button class="tab-btn" id="tab-se" onclick="swTab('se',this)">⚙️ Settings</button>
 </div>
 
+<!-- CONTENT -->
 <div class="content">
 
   <!-- NEW RECEIPT -->
   <div id="nr" class="tab-content active">
     <div class="warn-box">
-      <h4>⚠️ Data Notice</h4>
-      Data is saved in this browser only. Use <strong>Export Backup</strong> regularly to avoid losing your data!
+      <h4>⚠️ Important</h4>
+      Data saved in this browser only. Use <strong>Export</strong> regularly to backup!
     </div>
     <div class="sec-title">👤 Customer Information</div>
     <div class="form-grid">
@@ -114,6 +254,7 @@ tr:hover td{background:#f9fafb}
       <div class="form-group"><label>Customer Name</label><input type="text" id="cn" placeholder="John Doe"></div>
       <div class="form-group"><label>Email (optional)</label><input type="email" id="ce" placeholder="customer@email.com"></div>
     </div>
+
     <div class="sec-title">📦 Add Item</div>
     <div class="form-grid">
       <div class="form-group"><label>Description *</label><input type="text" id="id_" placeholder="e.g. Screen replacement"></div>
@@ -131,10 +272,10 @@ tr:hover td{background:#f9fafb}
     </div>
     <div class="chk-grp">
       <input type="checkbox" id="adc" onchange="togD()">
-      <label for="adc" style="font-weight:500;cursor:pointer">Apply Discount %</label>
+      <label for="adc">Apply Discount %</label>
       <input type="number" id="dp" placeholder="e.g. 10" min="0" max="100"
-        style="width:90px;padding:9px;border-radius:8px;border:2px solid #e5e7eb;font-size:14px" disabled>
-      <span id="dPrev" style="font-size:13px;color:#10b981;font-weight:500"></span>
+        style="width:90px;padding:9px;border-radius:8px;border:2px solid var(--input-border);background:var(--input-bg);color:var(--text);font-size:14px" disabled>
+      <span id="dPrev" style="font-size:13px;color:#10b981;font-weight:600"></span>
     </div>
     <button class="btn btn-primary" onclick="addIt()" style="width:100%;margin-top:6px">➕ Add Item to Receipt</button>
 
@@ -159,8 +300,8 @@ tr:hover td{background:#f9fafb}
       </div>
       <div class="form-group" style="margin-top:16px">
         <label style="color:rgba(255,255,255,.85)">Notes (optional)</label>
-        <textarea id="rN" rows="2" placeholder="Any extra notes for this receipt..."
-          style="margin-top:8px;border-color:rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:white;border-radius:8px;padding:10px;font-size:14px"></textarea>
+        <textarea id="rN" rows="2" placeholder="Any extra notes..."
+          style="margin-top:8px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.12);color:white;border-radius:8px;padding:10px;font-size:14px;width:100%"></textarea>
       </div>
       <div class="act-btns">
         <button class="btn btn-success" onclick="saveR()">💾 Save &amp; Generate Receipt</button>
@@ -171,10 +312,8 @@ tr:hover td{background:#f9fafb}
 
   <!-- HISTORY -->
   <div id="hi" class="tab-content">
-    <div style="display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap">
-      <input type="text" id="sT" placeholder="Search by phone, name, or receipt code..."
-        style="flex:1;min-width:200px;padding:11px 14px;border:2px solid #e5e7eb;border-radius:8px;font-size:14px"
-        onkeyup="if(event.key==='Enter')srch()">
+    <div class="search-bar">
+      <input type="text" id="sT" placeholder="Search by phone, name, or receipt code..." onkeyup="if(event.key==='Enter')srch()">
       <button class="btn btn-primary" onclick="srch()">🔍 Search</button>
       <button class="btn btn-secondary" onclick="ldAll()">Show All</button>
     </div>
@@ -183,8 +322,8 @@ tr:hover td{background:#f9fafb}
 
   <!-- CUSTOMERS -->
   <div id="cu" class="tab-content">
-    <input type="text" id="cSrch" placeholder="Search customers by name or phone..."
-      style="width:100%;padding:11px 14px;border:2px solid #e5e7eb;border-radius:8px;font-size:14px;margin-bottom:16px"
+    <input type="text" id="cSrch" placeholder="Search customers..."
+      style="width:100%;padding:11px 14px;border:2px solid var(--input-border);border-radius:8px;font-size:14px;background:var(--input-bg);color:var(--text);margin-bottom:16px"
       oninput="filterCusts()">
     <div id="custList"></div>
   </div>
@@ -193,19 +332,19 @@ tr:hover td{background:#f9fafb}
   <div id="se" class="tab-content">
     <div id="sLk" class="s-locked">
       <div style="font-size:64px;margin-bottom:16px">🔒</div>
-      <h2 style="margin-bottom:10px;color:#374151">Settings Locked</h2>
-      <p style="color:#6b7280;margin-bottom:22px;font-size:14px">Enter your password to access company settings</p>
+      <h2 style="margin-bottom:10px;color:var(--text)">Settings Locked</h2>
+      <p style="color:var(--muted);margin-bottom:22px;font-size:14px">Enter your password to access company settings</p>
       <div style="max-width:380px;margin:0 auto">
         <input type="password" id="pI" placeholder="Enter password"
-          style="width:100%;padding:12px;border-radius:10px;border:2px solid #e5e7eb;margin-bottom:12px;font-size:15px"
+          style="width:100%;padding:12px;border-radius:10px;border:2px solid var(--input-border);background:var(--input-bg);color:var(--text);margin-bottom:12px;font-size:15px"
           onkeyup="if(event.key==='Enter')unlkS()">
         <button class="btn btn-primary" onclick="unlkS()" style="width:100%">🔓 Unlock Settings</button>
-        <p style="margin-top:12px;color:#9ca3af;font-size:13px">Default password: <strong>admin123</strong></p>
+        <p style="margin-top:12px;color:var(--muted2);font-size:13px">Default password: <strong>admin123</strong></p>
       </div>
     </div>
     <div id="sUl" style="display:none">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:10px">
-        <h2 style="color:#374151">⚙️ Company Settings</h2>
+        <h2 style="color:var(--text)">⚙️ Company Settings</h2>
         <button class="btn btn-danger" onclick="lkS()">🔒 Lock Settings</button>
       </div>
       <div class="form-grid">
@@ -215,7 +354,7 @@ tr:hover td{background:#f9fafb}
         <div class="form-group"><label>Address</label><input type="text" id="sAd"></div>
       </div>
       <div class="form-group" style="margin-top:4px">
-        <label>Warranty / Terms Text (printed on receipt)</label>
+        <label>Warranty / Terms Text</label>
         <textarea id="sW" rows="2"></textarea>
       </div>
       <div class="form-group" style="margin-top:16px">
@@ -223,19 +362,19 @@ tr:hover td{background:#f9fafb}
         <div style="display:flex;gap:10px;align-items:center;margin-top:8px;flex-wrap:wrap">
           <input type="file" id="lIn" accept="image/*" style="display:none" onchange="upLogo(event)">
           <button class="btn btn-primary" onclick="document.getElementById('lIn').click()">📷 Upload Logo</button>
-          <span id="lSt" style="color:#6b7280;font-size:13px">No logo uploaded</span>
+          <span id="lSt" style="color:var(--muted);font-size:13px">No logo uploaded</span>
         </div>
         <div id="lPv" class="logo-prev" style="display:none">
           <img id="lIm" alt="Logo" style="max-width:100%;max-height:160px;border-radius:8px">
           <br><button class="btn btn-danger" onclick="rmLogo()" style="margin-top:10px;padding:8px 18px;font-size:13px">Remove Logo</button>
         </div>
       </div>
-      <div style="background:#f9fafb;padding:18px;border-radius:14px;margin:22px 0;border:1px solid #e5e7eb">
-        <div class="sec-title" style="margin:0 0 12px">📊 Stats</div>
+      <div style="background:var(--stat-bg);padding:18px;border-radius:14px;margin:22px 0;border:1px solid var(--border)">
+        <div class="sec-title" style="margin:0 0 12px">📊 Statistics</div>
         <div class="stats-grid">
           <div class="stat-card"><div class="stat-num" id="tRc">0</div><div class="stat-lbl">Receipts</div></div>
           <div class="stat-card"><div class="stat-num" id="tCu">0</div><div class="stat-lbl">Customers</div></div>
-          <div class="stat-card"><div class="stat-num" id="totRev">R0</div><div class="stat-lbl">Total Revenue</div></div>
+          <div class="stat-card"><div class="stat-num" id="totRev">R0</div><div class="stat-lbl">Revenue</div></div>
         </div>
       </div>
       <div class="act-btns">
@@ -245,8 +384,8 @@ tr:hover td{background:#f9fafb}
     </div>
   </div>
 
-</div>
-</div>
+</div><!-- /content -->
+</div><!-- /container -->
 
 <!-- RECEIPT MODAL -->
 <div class="modal" id="rMod">
@@ -260,83 +399,104 @@ tr:hover td{background:#f9fafb}
 </div>
 
 <script>
-var K={r:'shop_receipts',c:'shop_customers',s:'shop_settings'};
-var its=[];
-var cfg=lCfg();
+/* ── THEME ── */
+var theme = localStorage.getItem('shop_theme') || 'light';
+applyTheme(theme);
 
-function lCfg(){
-  var def={companyName:'CELLPHONE REPAIR SHOP',phone:'060 222 7788',email:'kgomotsothabo2004@gmail.com',
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('themeIcon').textContent = t === 'dark' ? '🌙' : '☀️';
+  document.getElementById('themeLabel').textContent = t === 'dark' ? 'Dark' : 'Light';
+  localStorage.setItem('shop_theme', t);
+}
+function toggleTheme() {
+  applyTheme(theme === 'light' ? 'dark' : 'light');
+}
+
+/* ── STORAGE ── */
+var K = {r:'shop_receipts', c:'shop_customers', s:'shop_settings'};
+var its = [];
+var cfg = lCfg();
+
+function lCfg() {
+  var def = {companyName:'CELLPHONE REPAIR SHOP',phone:'060 222 7788',email:'kgomotsothabo2004@gmail.com',
     address:'Gauteng, South Africa',warranty:'Warranty: 30 days on all repairs. Keep your receipt.',
     password:'admin123',logo:''};
-  try{var s=localStorage.getItem(K.s);return s?Object.assign({},def,JSON.parse(s)):def;}
-  catch(e){return def;}
+  try { var s = localStorage.getItem(K.s); return s ? Object.assign({},def,JSON.parse(s)) : def; }
+  catch(e) { return def; }
 }
-function sv(k,d){try{localStorage.setItem(k,JSON.stringify(d));}catch(e){alert('Storage full! Export your data now.');}}
-function ld(k){try{var d=localStorage.getItem(k);return d?JSON.parse(d):(k===K.r||k===K.c?[]:{});}catch(e){return k===K.r||k===K.c?[]:{}; }}
-function fmt(a){return parseFloat(a||0).toFixed(2);}
+function sv(k,d) { try { localStorage.setItem(k,JSON.stringify(d)); } catch(e) { showErr('Storage full! Export your data now.'); } }
+function ld(k) { try { var d=localStorage.getItem(k); return d?JSON.parse(d):(k===K.r||k===K.c?[]:{});} catch(e){return k===K.r||k===K.c?[]:{}; } }
+function fmt(a) { return parseFloat(a||0).toFixed(2); }
 
-function swTab(t,btn){
+function showErr(msg) {
+  alert('ERROR: ' + msg + '\n\nIf this keeps happening, contact Kgomotso:\nWhatsApp: 060 222 7788\nEmail: kgomotsothabo2004@gmail.com');
+}
+
+/* ── TABS ── */
+function swTab(t, btn) {
   document.querySelectorAll('.tab-content').forEach(function(x){x.classList.remove('active');});
   document.querySelectorAll('.tab-btn').forEach(function(x){x.classList.remove('active');});
   document.getElementById(t).classList.add('active');
   btn.classList.add('active');
-  if(t==='hi')ldAll();
-  else if(t==='se')ldS();
-  else if(t==='cu')ldCusts();
+  if(t==='hi') ldAll();
+  else if(t==='se') ldS();
+  else if(t==='cu') ldCusts();
 }
 
-function gc(){
-  var y=new Date().getFullYear(),c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789',s='';
-  for(var i=0;i<6;i++)s+=c[Math.floor(Math.random()*c.length)];
+/* ── RECEIPT CODE ── */
+function gc() {
+  var y=new Date().getFullYear(), chars='ABCDEFGHJKLMNPQRSTUVWXYZ23456789', s='';
+  for(var i=0;i<6;i++) s+=chars[Math.floor(Math.random()*chars.length)];
   return 'RCP-'+y+'-'+s;
 }
 
-function autoFill(){
-  var ph=document.getElementById('cp').value.trim();
-  if(ph.length>=10){
-    var custs=ld(K.c);
-    var found=custs.find(function(c){return c.phone===ph;});
-    if(found){
-      if(found.name&&!document.getElementById('cn').value)document.getElementById('cn').value=found.name;
-      if(found.email&&!document.getElementById('ce').value)document.getElementById('ce').value=found.email||'';
+/* ── AUTO-FILL CUSTOMER ── */
+function autoFill() {
+  var ph = document.getElementById('cp').value.trim();
+  if(ph.length >= 10) {
+    var found = ld(K.c).find(function(c){return c.phone===ph;});
+    if(found) {
+      if(found.name && !document.getElementById('cn').value) document.getElementById('cn').value = found.name;
+      if(found.email && !document.getElementById('ce').value) document.getElementById('ce').value = found.email||'';
     }
   }
 }
 
-function togD(){
-  var chk=document.getElementById('adc').checked;
-  document.getElementById('dp').disabled=!chk;
+/* ── DISCOUNT ── */
+function togD() {
+  var chk = document.getElementById('adc').checked;
+  document.getElementById('dp').disabled = !chk;
   if(!chk){document.getElementById('dp').value='';document.getElementById('dPrev').textContent='';}
 }
-document.getElementById('dp').addEventListener('input',function(){
-  var p=parseFloat(this.value),price=parseFloat(document.getElementById('ip').value),qty=parseInt(document.getElementById('iq').value)||1;
-  if(p>0&&price>0){var orig=price*qty,disc=orig*(1-p/100);document.getElementById('dPrev').textContent='R'+fmt(orig)+' → R'+fmt(disc)+' (save R'+fmt(orig-disc)+')';}
+document.getElementById('dp').addEventListener('input', function() {
+  var p=parseFloat(this.value), price=parseFloat(document.getElementById('ip').value), qty=parseInt(document.getElementById('iq').value)||1;
+  if(p>0&&price>0){var orig=price*qty, disc=orig*(1-p/100); document.getElementById('dPrev').textContent='R'+fmt(orig)+' → R'+fmt(disc)+' (save R'+fmt(orig-disc)+')';}
   else document.getElementById('dPrev').textContent='';
 });
 
-function addIt(){
-  var d=document.getElementById('id_').value.trim(),
-      cat=document.getElementById('ic').value,
-      q=parseInt(document.getElementById('iq').value),
-      p=parseFloat(document.getElementById('ip').value);
+/* ── ADD ITEM ── */
+function addIt() {
+  var d=document.getElementById('id_').value.trim(), cat=document.getElementById('ic').value,
+      q=parseInt(document.getElementById('iq').value), p=parseFloat(document.getElementById('ip').value);
   if(!d){alert('Please enter a description!');document.getElementById('id_').focus();return;}
   if(!p||p<=0){alert('Please enter a valid price!');document.getElementById('ip').focus();return;}
   if(!q||q<=0){alert('Please enter a valid quantity!');return;}
-  var tot=q*p,discPct=0;
+  var tot=q*p, discPct=0;
   if(document.getElementById('adc').checked){
     discPct=parseFloat(document.getElementById('dp').value)||0;
-    if(discPct>0&&discPct<=100)tot=tot*(1-discPct/100);
+    if(discPct>0&&discPct<=100) tot=tot*(1-discPct/100);
   }
   its.push({id:Date.now(),description:d,category:cat,quantity:q,price:p,discount:discPct,total:tot});
-  rndr();clrF();document.getElementById('id_').focus();
+  rndr(); clrF(); document.getElementById('id_').focus();
 }
-
 function rmIt(id){its=its.filter(function(i){return i.id!==id;});rndr();}
 
-function rndr(){
-  var b=document.getElementById('itB'),c=document.getElementById('itC'),s=document.getElementById('sC');
+function rndr() {
+  var b=document.getElementById('itB'), c=document.getElementById('itC'), s=document.getElementById('sC');
   if(!its.length){c.style.display='none';s.style.display='none';return;}
-  c.style.display='block';s.style.display='block';
+  c.style.display='block'; s.style.display='block';
   b.innerHTML=its.map(function(i){
     return '<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+fmt(i.price)+(i.discount>0?' <span style="color:#10b981;font-size:11px">-'+i.discount+'%</span>':'')+'</td><td><strong>R '+fmt(i.total)+'</strong></td><td><button class="btn btn-danger" style="padding:5px 12px;font-size:12px" onclick="rmIt('+i.id+')">✕</button></td></tr>';
   }).join('');
@@ -344,179 +504,223 @@ function rndr(){
   document.getElementById('tI').textContent=its.length;
   document.getElementById('tA').textContent=fmt(tot);
 }
-
-function clrF(){
-  document.getElementById('id_').value='';document.getElementById('iq').value='1';
-  document.getElementById('ip').value='';document.getElementById('adc').checked=false;
-  document.getElementById('dp').value='';document.getElementById('dp').disabled=true;
-  document.getElementById('ic').selectedIndex=0;document.getElementById('dPrev').textContent='';
+function clrF() {
+  document.getElementById('id_').value=''; document.getElementById('iq').value='1';
+  document.getElementById('ip').value=''; document.getElementById('adc').checked=false;
+  document.getElementById('dp').value=''; document.getElementById('dp').disabled=true;
+  document.getElementById('ic').selectedIndex=0; document.getElementById('dPrev').textContent='';
 }
-
-function clearR(){
+function clearR() {
   if(its.length>0&&!confirm('Clear all items and customer info?'))return;
-  its=[];rndr();
+  its=[]; rndr();
   ['cp','cn','ce','rN'].forEach(function(id){document.getElementById(id).value='';});
 }
 
-function saveR(){
-  var ph=document.getElementById('cp').value.trim(),nm=document.getElementById('cn').value.trim(),
-      em=document.getElementById('ce').value.trim(),nt=document.getElementById('rN').value.trim();
+/* ── SAVE RECEIPT ── */
+function saveR() {
+  var ph=document.getElementById('cp').value.trim(), nm=document.getElementById('cn').value.trim(),
+      em=document.getElementById('ce').value.trim(), nt=document.getElementById('rN').value.trim();
   if(!ph||ph.length<10){alert('Please enter a valid phone number (at least 10 digits)!');document.getElementById('cp').focus();return;}
   if(!its.length){alert('Please add at least one item!');return;}
-  var code=gc(),tot=its.reduce(function(s,i){return s+i.total;},0);
+  var code=gc(), tot=its.reduce(function(s,i){return s+i.total;},0);
   var rec={id:Date.now(),receiptCode:code,customerPhone:ph,customerName:nm||'Walk-in Customer',
     customerEmail:em,date:new Date().toISOString(),items:its.slice(),total:tot,notes:nt};
-  var recs=ld(K.r);recs.push(rec);sv(K.r,recs);
-  var custs=ld(K.c),ex=custs.find(function(c){return c.phone===ph;});
-  if(ex){ex.name=nm||ex.name;ex.email=em||ex.email;ex.lastVisit=rec.date;ex.visits=(ex.visits||0)+1;}
-  else custs.push({phone:ph,name:nm||'Walk-in Customer',email:em,firstVisit:rec.date,lastVisit:rec.date,visits:1});
-  sv(K.c,custs);
-  alert('Receipt saved!\n\nCode: '+code+'\nCustomer: '+(nm||'Walk-in')+'\nTotal: R '+fmt(tot));
-  if(confirm('Print this receipt now?'))prtR(rec);
-  clearR();
+  try {
+    var recs=ld(K.r); recs.push(rec); sv(K.r,recs);
+    var custs=ld(K.c), ex=custs.find(function(c){return c.phone===ph;});
+    if(ex){ex.name=nm||ex.name;ex.email=em||ex.email;ex.lastVisit=rec.date;ex.visits=(ex.visits||0)+1;}
+    else custs.push({phone:ph,name:nm||'Walk-in Customer',email:em,firstVisit:rec.date,lastVisit:rec.date,visits:1});
+    sv(K.c,custs);
+    alert('Receipt saved!\nCode: '+code+'\nCustomer: '+(nm||'Walk-in')+'\nTotal: R '+fmt(tot));
+    if(confirm('Print this receipt now?')) prtR(rec);
+    clearR();
+  } catch(e) { showErr('Could not save receipt: '+e.message); }
 }
 
-function srch(){
+/* ── HISTORY ── */
+function srch() {
   var t=document.getElementById('sT').value.trim().toLowerCase();
   if(!t){ldAll();return;}
-  var recs=ld(K.r).filter(function(r){
+  var res=ld(K.r).filter(function(r){
     return r.customerPhone.includes(t)||(r.customerName||'').toLowerCase().includes(t)||r.receiptCode.toLowerCase().includes(t);
   });
-  shRecs(recs.reverse());
+  shRecs(res.reverse());
 }
 function ldAll(){shRecs(ld(K.r).slice().reverse());}
-function shRecs(recs){
+function shRecs(recs) {
   var c=document.getElementById('sR');
   if(!recs.length){c.innerHTML='<div class="empty-state"><div class="ico">📋</div><p>No receipts found</p></div>';return;}
   c.innerHTML=recs.map(function(r){
-    return '<div class="rec-card" onclick="vRec('+r.id+')"><div class="rec-hdr"><div><div class="rec-code">'+r.receiptCode+'</div><div style="font-weight:600;margin-top:3px">'+r.customerName+'</div><div style="font-size:12px;color:#9ca3af;margin-top:2px">'+r.customerPhone+' · '+new Date(r.date).toLocaleString()+'</div></div><div style="text-align:right"><div class="rec-amt">R '+fmt(r.total)+'</div><div style="font-size:12px;color:#9ca3af;margin-top:3px">'+r.items.length+' item(s)</div></div></div></div>';
+    return '<div class="rec-card" onclick="vRec('+r.id+')"><div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px"><div><div class="rec-code">'+r.receiptCode+'</div><div style="font-weight:600;margin-top:3px;color:var(--text)">'+r.customerName+'</div><div style="font-size:12px;color:var(--muted2);margin-top:2px">'+r.customerPhone+' · '+new Date(r.date).toLocaleString()+'</div></div><div style="text-align:right"><div class="rec-amt">R '+fmt(r.total)+'</div><div style="font-size:12px;color:var(--muted2);margin-top:3px">'+r.items.length+' item(s)</div></div></div></div>';
   }).join('');
 }
 
-function vRec(id){
+/* ── VIEW RECEIPT MODAL ── */
+function vRec(id) {
   var rec=ld(K.r).find(function(r){return r.id===id;});
   if(!rec)return;
   var rows=rec.items.map(function(i){return '<tr><td>'+i.description+'</td><td>'+i.category+'</td><td>'+i.quantity+'</td><td>R '+fmt(i.price)+(i.discount>0?' (-'+i.discount+'%)':'')+'</td><td><strong>R '+fmt(i.total)+'</strong></td></tr>';}).join('');
   document.getElementById('mBd').innerHTML=
-    '<div style="text-align:center;padding-bottom:16px;margin-bottom:16px;border-bottom:2px solid #f3f4f6">'+(cfg.logo?'<img src="'+cfg.logo+'" style="max-height:70px;margin-bottom:8px;border-radius:6px"><br>':'')+'<h2 style="color:#667eea">'+cfg.companyName+'</h2><p style="font-size:12px;color:#6b7280;margin-top:4px">'+cfg.phone+' · '+cfg.email+'</p><p style="font-size:12px;color:#6b7280">'+cfg.address+'</p></div>'+
-    '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;background:#f9fafb;padding:14px;border-radius:10px;font-size:13px"><div><p style="color:#9ca3af;font-size:11px">RECEIPT CODE</p><p style="font-weight:700;color:#667eea;font-family:monospace;font-size:15px">'+rec.receiptCode+'</p></div><div><p style="color:#9ca3af;font-size:11px">DATE & TIME</p><p style="font-weight:600">'+new Date(rec.date).toLocaleString()+'</p></div><div><p style="color:#9ca3af;font-size:11px">CUSTOMER</p><p style="font-weight:600">'+rec.customerName+'</p></div><div><p style="color:#9ca3af;font-size:11px">PHONE</p><p style="font-weight:600">'+rec.customerPhone+'</p></div></div>'+
+    '<div style="text-align:center;padding-bottom:16px;margin-bottom:16px;border-bottom:2px solid var(--border)">'+(cfg.logo?'<img src="'+cfg.logo+'" style="max-height:70px;margin-bottom:8px;border-radius:6px"><br>':'')+'<h2 style="color:#667eea">'+cfg.companyName+'</h2><p style="font-size:12px;color:var(--muted);margin-top:4px">'+cfg.phone+' · '+cfg.email+'</p><p style="font-size:12px;color:var(--muted)">'+cfg.address+'</p></div>'+
+    '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:16px;background:var(--card2);padding:14px;border-radius:10px;font-size:13px">'+
+    '<div><p style="color:var(--muted2);font-size:11px">RECEIPT CODE</p><p style="font-weight:700;color:#667eea;font-family:monospace;font-size:15px">'+rec.receiptCode+'</p></div>'+
+    '<div><p style="color:var(--muted2);font-size:11px">DATE & TIME</p><p style="font-weight:600;color:var(--text)">'+new Date(rec.date).toLocaleString()+'</p></div>'+
+    '<div><p style="color:var(--muted2);font-size:11px">CUSTOMER</p><p style="font-weight:600;color:var(--text)">'+rec.customerName+'</p></div>'+
+    '<div><p style="color:var(--muted2);font-size:11px">PHONE</p><p style="font-weight:600;color:var(--text)">'+rec.customerPhone+'</p></div></div>'+
     '<div class="table-container"><table><thead><tr><th>Description</th><th>Category</th><th>Qty</th><th>Price</th><th>Total</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+
     '<div style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:16px;border-radius:12px;text-align:right;margin-top:14px"><p style="font-size:12px;opacity:.85">GRAND TOTAL</p><p style="font-size:32px;font-weight:800">R '+fmt(rec.total)+'</p></div>'+
-    (rec.notes?'<div style="background:#fef3c7;padding:12px;border-radius:8px;margin-top:12px;font-size:13px"><strong>Notes:</strong> '+rec.notes+'</div>':'')+
-    '<div style="text-align:center;margin-top:14px;padding-top:12px;border-top:1px solid #e5e7eb;font-size:12px;color:#9ca3af;font-style:italic">'+cfg.warranty+'</div>'+
+    (rec.notes?'<div style="background:var(--warn-bg);padding:12px;border-radius:8px;margin-top:12px;font-size:13px;color:var(--warn-text)"><strong>📝 Notes:</strong> '+rec.notes+'</div>':'')+
+    '<div style="text-align:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--muted2);font-style:italic">'+cfg.warranty+'</div>'+
     '<div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">'+
-    '<button class="btn btn-primary" onclick="prtById('+rec.id+')" style="flex:1">Print Receipt</button>'+
-    '<button class="btn btn-danger" onclick="delRec('+rec.id+')" style="flex:1">Delete</button>'+
+    '<button class="btn btn-primary" onclick="prtById('+rec.id+')" style="flex:1">🖨️ Print</button>'+
+    '<button class="btn btn-danger" onclick="delRec('+rec.id+')" style="flex:1">🗑️ Delete</button>'+
     '<button class="btn btn-secondary" onclick="closM()" style="flex:1">Close</button></div>';
   document.getElementById('rMod').classList.add('active');
 }
-
 function prtById(id){var r=ld(K.r).find(function(r){return r.id===id;});if(r)prtR(r);}
-function delRec(id){
+function delRec(id) {
   if(!confirm('Delete this receipt permanently?'))return;
   sv(K.r,ld(K.r).filter(function(r){return r.id!==id;}));
-  closM();ldAll();
+  closM(); ldAll();
 }
 function closM(){document.getElementById('rMod').classList.remove('active');}
 
-function prtR(rec){
+/* ── PRINT ── */
+function prtR(rec) {
   if(!rec)return;
-  var html=mkHTML(rec);
-  var w=window.open('','_blank','width=850,height=950,scrollbars=yes');
-  if(!w){alert('Please allow popups to print receipts!');return;}
-  w.document.open();
-  w.document.write(html);
-  w.document.close();
-  setTimeout(function(){w.focus();w.print();},700);
+  try {
+    var html=mkHTML(rec);
+    var w=window.open('','_blank','width=850,height=950,scrollbars=yes');
+    if(!w){alert('Please allow popups to print receipts!\n\nIf the problem continues, contact Kgomotso on WhatsApp: 060 222 7788');return;}
+    w.document.open(); w.document.write(html); w.document.close();
+    setTimeout(function(){w.focus();w.print();},700);
+  } catch(e) { showErr('Print failed: '+e.message); }
 }
 
-function mkHTML(rec){
+function mkHTML(rec) {
   var rows=rec.items.map(function(i){return '<tr><td>'+i.description+'</td><td>'+i.category+'</td><td style="text-align:center">'+i.quantity+'</td><td>R '+fmt(i.price)+(i.discount>0?' (-'+i.discount+'%)':'')+'</td><td><strong>R '+fmt(i.total)+'</strong></td></tr>';}).join('');
-  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Receipt '+rec.receiptCode+'</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;padding:25px;background:white;color:#000;max-width:800px;margin:0 auto}.wm{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-42deg);font-size:72pt;font-weight:900;color:rgba(180,180,180,.08);pointer-events:none;z-index:0;white-space:nowrap;user-select:none}.hdr{display:flex;align-items:flex-start;gap:18px;margin-bottom:16px;padding-bottom:14px;border-bottom:3px solid #333}.logo-box img{max-width:110px;max-height:110px;object-fit:contain}.co-name{font-size:20pt;font-weight:900;margin-bottom:6px}.co-detail{font-size:9pt;color:#555;margin:3px 0}.rtitle{text-align:center;font-size:14pt;font-weight:900;letter-spacing:4px;margin:14px 0;border:2px solid #333;padding:8px}.ibox{background:#f5f5f5;border:1px solid #ccc;border-radius:6px;padding:14px;margin:14px 0;display:flex;gap:20px;flex-wrap:wrap}.icol{flex:1;min-width:180px}.lbl{font-weight:700;font-size:8.5pt;color:#555;display:inline-block;width:80px}.val{font-size:9pt}.cval{color:#00008B;font-weight:900;font-family:Courier New,monospace;font-size:11pt}table{width:100%;border-collapse:collapse;margin:14px 0}th{background:#ddd;border:1px solid #bbb;padding:7px 6px;text-align:left;font-size:8.5pt;font-weight:700}td{border:1px solid #ccc;padding:7px 6px;font-size:8pt}tr:nth-child(even) td{background:#fafafa}.tbox{background:#e8e8e8;border:2.5px solid #333;border-radius:4px;padding:12px 16px;margin:16px 0;text-align:right;font-size:14pt;font-weight:900}.warr{border-top:1px dashed #aaa;padding-top:10px;margin-top:14px;font-size:8pt;font-style:italic;color:#666;text-align:center}.disc{border-top:2px solid #333;margin-top:16px;padding-top:10px}.disc-title{font-weight:700;font-size:8pt;margin-bottom:6px}.disc-text{font-size:6pt;line-height:1.5;color:#555;text-align:justify}.sig-area{display:flex;justify-content:space-between;align-items:flex-end;margin-top:22px;gap:20px;flex-wrap:wrap;border-top:1px solid #ccc;padding-top:14px}.sig-line{flex:1;max-width:240px}.sig-lbl{font-size:8pt;margin-bottom:6px;color:#555}.sig-und{border-bottom:1.5px solid #333;height:28px}.thumb{width:75px;height:55px;border:1.5px solid #bbb;text-align:center;padding-top:16px;font-size:7pt;color:#aaa;border-radius:4px}.ty{text-align:center;font-weight:700;font-size:11pt;margin:14px 0}.footer{text-align:center;font-size:7pt;color:#aaa;margin-top:8px;font-family:Courier New,monospace}.prtbtn{display:block;margin:20px auto 0;padding:12px 28px;background:#667eea;color:white;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer}@media print{.prtbtn{display:none}body{padding:10px}}</style></head><body>'+
-    '<div class="wm">'+rec.receiptCode+'</div>'+
-    '<div class="hdr">'+(cfg.logo?'<div class="logo-box"><img src="'+cfg.logo+'" alt="Logo"></div>':'')+
-    '<div><div class="co-name">'+cfg.companyName.toUpperCase()+'</div><div class="co-detail">Tel: '+cfg.phone+'</div><div class="co-detail">Email: '+cfg.email+'</div><div class="co-detail">'+cfg.address+'</div></div></div>'+
-    '<div class="rtitle">OFFICIAL SALES RECEIPT</div>'+
-    '<div class="ibox"><div class="icol"><div><span class="lbl">Receipt:</span><span class="cval">'+rec.receiptCode+'</span></div><div style="margin-top:6px"><span class="lbl">Date:</span><span class="val">'+new Date(rec.date).toLocaleDateString('en-ZA')+'</span></div><div style="margin-top:6px"><span class="lbl">Time:</span><span class="val">'+new Date(rec.date).toLocaleTimeString()+'</span></div></div><div class="icol"><div><span class="lbl">Customer:</span><span class="val">'+rec.customerName+'</span></div><div style="margin-top:6px"><span class="lbl">Phone:</span><span class="val">'+rec.customerPhone+'</span></div>'+(rec.customerEmail?'<div style="margin-top:6px"><span class="lbl">Email:</span><span class="val">'+rec.customerEmail+'</span></div>':'')+'</div></div>'+
-    '<table><thead><tr><th style="width:36%">Description</th><th style="width:20%">Category</th><th style="width:8%">Qty</th><th style="width:18%">Unit Price</th><th style="width:18%">Total</th></tr></thead><tbody>'+rows+'</tbody></table>'+
-    '<div class="tbox">GRAND TOTAL: R '+fmt(rec.total)+'</div>'+
-    (rec.notes?'<div style="border:1px solid #ddd;padding:10px;border-radius:6px;font-size:9pt;margin-bottom:10px"><strong>Notes:</strong> '+rec.notes+'</div>':'')+
-    '<div class="warr">'+cfg.warranty+'</div>'+
-    '<div class="disc"><div class="disc-title">GENERAL SALES & REPAIRS DISCLAIMER</div><div class="disc-text">All devices are accepted in good faith. We are not responsible for pre-existing damage, data loss, damage from misuse, liquid damage, or prior third-party repairs. Customers must back up all data before submitting devices. Once a device has left our premises, company liability ceases. By proceeding, the customer accepts these terms in full.</div></div>'+
-    '<div class="sig-area"><div class="sig-line"><div class="sig-lbl">Customer Signature:</div><div class="sig-und"></div></div><div class="thumb">Thumbprint</div></div>'+
-    '<div class="ty">Thank you for your business!</div>'+
-    '<div class="footer">Receipt: '+rec.receiptCode+' | '+new Date(rec.date).toLocaleDateString('en-ZA')+' | All amounts in South African Rand (ZAR)</div>'+
-    '<button class="prtbtn" onclick="window.print()">Print This Receipt</button>'+
-    '</body></html>';
+  return '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Receipt '+rec.receiptCode+'</title>'+
+  '<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Arial,Helvetica,sans-serif;padding:25px;background:white;color:#000;max-width:800px;margin:0 auto}'+
+  '.wm{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-42deg);font-size:72pt;font-weight:900;color:rgba(180,180,180,.08);pointer-events:none;z-index:0;white-space:nowrap;user-select:none}'+
+  '.hdr{display:flex;align-items:flex-start;gap:18px;margin-bottom:16px;padding-bottom:14px;border-bottom:3px solid #333}'+
+  '.co-name{font-size:20pt;font-weight:900;margin-bottom:6px}.co-detail{font-size:9pt;color:#555;margin:3px 0}'+
+  '.rtitle{text-align:center;font-size:14pt;font-weight:900;letter-spacing:4px;margin:14px 0;border:2px solid #333;padding:8px}'+
+  '.ibox{background:#f5f5f5;border:1px solid #ccc;border-radius:6px;padding:14px;margin:14px 0;display:flex;gap:20px;flex-wrap:wrap}'+
+  '.icol{flex:1;min-width:180px}.lbl{font-weight:700;font-size:8.5pt;color:#555;display:inline-block;width:80px}.val{font-size:9pt}.cval{color:#00008B;font-weight:900;font-family:Courier New,monospace;font-size:11pt}'+
+  'table{width:100%;border-collapse:collapse;margin:14px 0}th{background:#ddd;border:1px solid #bbb;padding:7px 6px;text-align:left;font-size:8.5pt;font-weight:700}td{border:1px solid #ccc;padding:7px 6px;font-size:8pt}tr:nth-child(even) td{background:#fafafa}'+
+  '.tbox{background:#e8e8e8;border:2.5px solid #333;border-radius:4px;padding:12px 16px;margin:16px 0;text-align:right;font-size:14pt;font-weight:900}'+
+  '.warr{border-top:1px dashed #aaa;padding-top:10px;margin-top:14px;font-size:8pt;font-style:italic;color:#666;text-align:center}'+
+  '.disc{border-top:2px solid #333;margin-top:16px;padding-top:10px}.disc-title{font-weight:700;font-size:8pt;margin-bottom:6px}.disc-text{font-size:6pt;line-height:1.5;color:#555;text-align:justify}'+
+  '.sig-area{display:flex;justify-content:space-between;align-items:flex-end;margin-top:22px;gap:20px;flex-wrap:wrap;border-top:1px solid #ccc;padding-top:14px}'+
+  '.sig-line{flex:1;max-width:240px}.sig-lbl{font-size:8pt;margin-bottom:6px;color:#555}.sig-und{border-bottom:1.5px solid #333;height:28px}'+
+  '.thumb{width:75px;height:55px;border:1.5px solid #bbb;text-align:center;padding-top:16px;font-size:7pt;color:#aaa;border-radius:4px}'+
+  '.ty{text-align:center;font-weight:700;font-size:11pt;margin:14px 0}.footer{text-align:center;font-size:7pt;color:#aaa;margin-top:8px;font-family:Courier New,monospace}'+
+  '.prtbtn{display:block;margin:20px auto 0;padding:12px 28px;background:#667eea;color:white;border:none;border-radius:10px;font-size:14px;font-weight:700;cursor:pointer}'+
+  '@media print{.prtbtn{display:none}body{padding:10px}}</style></head><body>'+
+  '<div class="wm">'+rec.receiptCode+'</div>'+
+  '<div class="hdr">'+(cfg.logo?'<div><img src="'+cfg.logo+'" alt="Logo" style="max-width:110px;max-height:110px;object-fit:contain;border-radius:6px"></div>':'')+
+  '<div><div class="co-name">'+cfg.companyName.toUpperCase()+'</div><div class="co-detail">Tel: '+cfg.phone+'</div><div class="co-detail">Email: '+cfg.email+'</div><div class="co-detail">'+cfg.address+'</div></div></div>'+
+  '<div class="rtitle">OFFICIAL SALES RECEIPT</div>'+
+  '<div class="ibox"><div class="icol"><div><span class="lbl">Receipt:</span><span class="cval">'+rec.receiptCode+'</span></div><div style="margin-top:6px"><span class="lbl">Date:</span><span class="val">'+new Date(rec.date).toLocaleDateString('en-ZA')+'</span></div><div style="margin-top:6px"><span class="lbl">Time:</span><span class="val">'+new Date(rec.date).toLocaleTimeString()+'</span></div></div>'+
+  '<div class="icol"><div><span class="lbl">Customer:</span><span class="val">'+rec.customerName+'</span></div><div style="margin-top:6px"><span class="lbl">Phone:</span><span class="val">'+rec.customerPhone+'</span></div>'+(rec.customerEmail?'<div style="margin-top:6px"><span class="lbl">Email:</span><span class="val">'+rec.customerEmail+'</span></div>':'')+'</div></div>'+
+  '<table><thead><tr><th style="width:36%">Description</th><th style="width:20%">Category</th><th style="width:8%">Qty</th><th style="width:18%">Unit Price</th><th style="width:18%">Total</th></tr></thead><tbody>'+rows+'</tbody></table>'+
+  '<div class="tbox">GRAND TOTAL: R '+fmt(rec.total)+'</div>'+
+  (rec.notes?'<div style="border:1px solid #ddd;padding:10px;border-radius:6px;font-size:9pt;margin-bottom:10px"><strong>Notes:</strong> '+rec.notes+'</div>':'')+
+  '<div class="warr">'+cfg.warranty+'</div>'+
+  '<div class="disc"><div class="disc-title">GENERAL SALES & REPAIRS DISCLAIMER</div><div class="disc-text">All devices are accepted in good faith. We are not responsible for pre-existing damage, data loss, damage from misuse, liquid damage, or prior third-party repairs. Customers must back up all data before submitting devices. Once a device has left our premises, company liability ceases. By proceeding, the customer accepts these terms.</div></div>'+
+  '<div class="sig-area"><div class="sig-line"><div class="sig-lbl">Customer Signature:</div><div class="sig-und"></div></div><div class="thumb">Thumbprint</div></div>'+
+  '<div class="ty">✅ Thank you for your business!</div>'+
+  '<div class="footer">Receipt: '+rec.receiptCode+' | '+new Date(rec.date).toLocaleDateString('en-ZA')+' | All amounts in ZAR (R)</div>'+
+  '<button class="prtbtn" onclick="window.print()">🖨️ Print This Receipt</button>'+
+  '</body></html>';
 }
 
+/* ── CUSTOMERS ── */
 function ldCusts(){filterCusts();}
-function filterCusts(){
+function filterCusts() {
   var q=(document.getElementById('cSrch').value||'').toLowerCase();
   var custs=ld(K.c).filter(function(c){return !q||(c.name||'').toLowerCase().includes(q)||c.phone.includes(q);});
   var el=document.getElementById('custList');
   if(!custs.length){el.innerHTML='<div class="empty-state"><div class="ico">👥</div><p>No customers yet</p></div>';return;}
   custs.sort(function(a,b){return (b.visits||0)-(a.visits||0);});
   el.innerHTML=custs.map(function(c){
-    return '<div style="background:#f9fafb;border-radius:12px;padding:14px 16px;margin-bottom:10px;border:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px"><div><div style="font-weight:700;font-size:15px">'+( c.name||'Unknown')+'</div><div style="color:#6b7280;font-size:13px;margin-top:3px">'+c.phone+(c.email?' · '+c.email:'')+'</div><div style="font-size:12px;color:#9ca3af;margin-top:3px">Last visit: '+(c.lastVisit?new Date(c.lastVisit).toLocaleDateString('en-ZA'):'Unknown')+'</div></div><div style="text-align:right"><div style="background:#ede9fe;color:#7c3aed;font-weight:700;padding:4px 12px;border-radius:20px;font-size:12px">'+(c.visits||1)+' visit(s)</div><button onclick="newFor(\''+c.phone+'\',\''+( c.name||'')+'\',\''+(c.email||'')+'\')" style="margin-top:6px;padding:6px 12px;background:#667eea;color:white;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">New Receipt</button></div></div>';
+    return '<div class="cust-card"><div><div style="font-weight:700;font-size:15px;color:var(--text)">'+(c.name||'Unknown')+'</div><div style="color:var(--muted);font-size:13px;margin-top:3px">'+c.phone+(c.email?' · '+c.email:'')+'</div><div style="font-size:12px;color:var(--muted2);margin-top:3px">Last visit: '+(c.lastVisit?new Date(c.lastVisit).toLocaleDateString('en-ZA'):'Unknown')+'</div></div>'+
+    '<div style="text-align:right;display:flex;flex-direction:column;align-items:flex-end;gap:8px"><div class="cust-badge">'+(c.visits||1)+' visit(s)</div>'+
+    '<button class="new-rec-btn" onclick="newFor(\''+c.phone+'\',\''+(c.name||'')+'\',\''+(c.email||'')+'\')">➕ New Receipt</button></div></div>';
   }).join('');
 }
-function newFor(phone,name,email){
+function newFor(phone,name,email) {
   swTab('nr',document.getElementById('tab-nr'));
   setTimeout(function(){document.getElementById('cp').value=phone;document.getElementById('cn').value=name;document.getElementById('ce').value=email;},60);
 }
 
-function unlkS(){
+/* ── SETTINGS ── */
+function unlkS() {
   if(document.getElementById('pI').value===cfg.password){document.getElementById('sLk').style.display='none';document.getElementById('sUl').style.display='block';ldS();}
-  else{alert('Wrong password! Try again.');document.getElementById('pI').focus();}
+  else{alert('Wrong password! Try again.\n\nForgot your password? Contact Kgomotso: 060 222 7788');document.getElementById('pI').focus();}
 }
 function lkS(){document.getElementById('sLk').style.display='block';document.getElementById('sUl').style.display='none';document.getElementById('pI').value='';}
-function ldS(){
-  document.getElementById('sN').value=cfg.companyName;document.getElementById('sPh').value=cfg.phone;
-  document.getElementById('sEm').value=cfg.email;document.getElementById('sAd').value=cfg.address;document.getElementById('sW').value=cfg.warranty;
-  if(cfg.logo){document.getElementById('lSt').textContent='Logo uploaded';updL();}
+function ldS() {
+  document.getElementById('sN').value=cfg.companyName; document.getElementById('sPh').value=cfg.phone;
+  document.getElementById('sEm').value=cfg.email; document.getElementById('sAd').value=cfg.address; document.getElementById('sW').value=cfg.warranty;
+  if(cfg.logo){document.getElementById('lSt').textContent='Logo uploaded ✅';updL();}
   var recs=ld(K.r),custs=ld(K.c);
-  document.getElementById('tRc').textContent=recs.length;document.getElementById('tCu').textContent=custs.length;
+  document.getElementById('tRc').textContent=recs.length;
+  document.getElementById('tCu').textContent=custs.length;
   document.getElementById('totRev').textContent='R'+Math.round(recs.reduce(function(s,r){return s+(r.total||0);},0));
 }
-function savS(){
-  cfg.companyName=document.getElementById('sN').value||cfg.companyName;cfg.phone=document.getElementById('sPh').value||cfg.phone;
-  cfg.email=document.getElementById('sEm').value||cfg.email;cfg.address=document.getElementById('sAd').value||cfg.address;cfg.warranty=document.getElementById('sW').value||cfg.warranty;
-  sv(K.s,cfg);alert('Settings saved!');
+function savS() {
+  cfg.companyName=document.getElementById('sN').value||cfg.companyName;
+  cfg.phone=document.getElementById('sPh').value||cfg.phone;
+  cfg.email=document.getElementById('sEm').value||cfg.email;
+  cfg.address=document.getElementById('sAd').value||cfg.address;
+  cfg.warranty=document.getElementById('sW').value||cfg.warranty;
+  sv(K.s,cfg); alert('Settings saved!');
 }
-function chPwd(){
-  var cur=prompt('Enter current password:');if(cur===null)return;
+function chPwd() {
+  var cur=prompt('Enter current password:'); if(cur===null)return;
   if(cur!==cfg.password){alert('Wrong password!');return;}
-  var np=prompt('New password (min 6 chars):');if(!np||np.length<6){alert('Too short!');return;}
+  var np=prompt('New password (min 6 characters):'); if(!np||np.length<6){alert('Too short!');return;}
   if(prompt('Confirm new password:')!==np){alert('Passwords do not match!');return;}
-  cfg.password=np;sv(K.s,cfg);alert('Password changed!');
+  cfg.password=np; sv(K.s,cfg); alert('Password changed successfully!');
 }
-function upLogo(e){
-  var file=e.target.files[0];if(!file)return;if(file.size>5000000){alert('Max 5MB!');return;}
-  var reader=new FileReader();reader.onload=function(ev){cfg.logo=ev.target.result;updL();document.getElementById('lSt').textContent=file.name;alert('Logo uploaded! Click Save Settings.');};reader.readAsDataURL(file);
+function upLogo(e) {
+  var file=e.target.files[0]; if(!file)return;
+  if(file.size>5000000){alert('Max 5MB!');return;}
+  var reader=new FileReader();
+  reader.onload=function(ev){cfg.logo=ev.target.result;updL();document.getElementById('lSt').textContent=file.name+' ✅';alert('Logo uploaded! Click Save Settings.');};
+  reader.readAsDataURL(file);
 }
 function updL(){var img=document.getElementById('lIm'),pv=document.getElementById('lPv');if(cfg.logo){img.src=cfg.logo;pv.style.display='block';}else pv.style.display='none';}
 function rmLogo(){if(!confirm('Remove logo?'))return;cfg.logo='';updL();document.getElementById('lSt').textContent='No logo';document.getElementById('lIn').value='';}
 
-function expDB(){
-  var data={receipts:ld(K.r),customers:ld(K.c),settings:Object.assign({},cfg,{password:undefined}),exportDate:new Date().toISOString()};
-  var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  var url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url;a.download='ShopBackup_'+new Date().toISOString().slice(0,10)+'.json';a.click();URL.revokeObjectURL(url);
-  alert('Exported! '+data.receipts.length+' receipts, '+data.customers.length+' customers');
+/* ── EXPORT / IMPORT ── */
+function expDB() {
+  try {
+    var data={receipts:ld(K.r),customers:ld(K.c),settings:Object.assign({},cfg,{password:undefined}),exportDate:new Date().toISOString()};
+    var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    var url=URL.createObjectURL(blob), a=document.createElement('a');
+    a.href=url; a.download='ShopBackup_'+new Date().toISOString().slice(0,10)+'.json'; a.click();
+    URL.revokeObjectURL(url);
+    alert('Exported! '+data.receipts.length+' receipts, '+data.customers.length+' customers');
+  } catch(e){ showErr('Export failed: '+e.message); }
 }
-function impDB(e){
-  var file=e.target.files[0];if(!file)return;
-  var reader=new FileReader();reader.onload=function(ev){
-    try{var d=JSON.parse(ev.target.result);
-      if(!confirm('Import?\n'+((d.receipts||[]).length)+' receipts, '+((d.customers||[]).length)+' customers\nThis REPLACES all current data!'))return;
-      if(d.receipts)sv(K.r,d.receipts);if(d.customers)sv(K.c,d.customers);
+function impDB(e) {
+  var file=e.target.files[0]; if(!file)return;
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    try {
+      var d=JSON.parse(ev.target.result);
+      if(!confirm('Import backup?\n'+((d.receipts||[]).length)+' receipts, '+((d.customers||[]).length)+' customers\n\nThis REPLACES all current data!'))return;
+      if(d.receipts)sv(K.r,d.receipts); if(d.customers)sv(K.c,d.customers);
       if(d.settings){cfg=Object.assign({},cfg,d.settings);sv(K.s,cfg);}
-      alert('Imported!');location.reload();
-    }catch(err){alert('Import failed! Check the file.');}
-  };reader.readAsText(file);e.target.value='';
+      alert('Imported successfully!'); location.reload();
+    } catch(e){ showErr('Import failed: '+e.message+'\n\nMake sure you selected a valid backup file.'); }
+  };
+  reader.readAsText(file); e.target.value='';
 }
 
+/* ── EVENTS ── */
 document.getElementById('rMod').addEventListener('click',function(e){if(e.target===this)closM();});
 document.getElementById('ip').addEventListener('keyup',function(e){if(e.key==='Enter')addIt();});
 window.addEventListener('load',function(){ldAll();});
