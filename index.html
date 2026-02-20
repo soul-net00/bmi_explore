@@ -3,7 +3,788 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kgomotso Mamogale — IT Portfolio</title><!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kgomotso Mamogale — IT Portfolio</title>
+<meta name="description" content="NC(V) ITC Student | Web Developer | Cisco Certified | Ekurhuleni East TVET College | South Africa">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<style>
+:root{
+  --bg:#06060f;--surface:#0c0c1d;--card:#10102a;--card2:#14142e;
+  --accent:#7c3aed;--al:#a855f7;--gold:#f59e0b;--green:#10b981;--pink:#ec4899;--cyan:#06b6d4;
+  --text:#eeeeff;--muted:#6b6b9a;--border:rgba(124,58,237,.18);--border2:rgba(255,255,255,.06);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;min-height:100vh}
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 15% 5%,rgba(124,58,237,.13) 0%,transparent 55%),
+             radial-gradient(ellipse 50% 40% at 85% 85%,rgba(236,72,153,.07) 0%,transparent 55%)}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);
+  background-size:60px 60px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
+.page{display:none;min-height:100vh}.page.active{display:block}
+
+/* ── HAMBURGER SIDEBAR ── */
+.ham-btn{background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;z-index:200;position:relative}
+.ham-btn span{display:block;width:22px;height:2px;background:var(--al);border-radius:2px;transition:all .3s}
+.ham-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.ham-btn.open span:nth-child(2){opacity:0}
+.ham-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+.sidebar{position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#0a0a1e;border-right:1px solid var(--border);z-index:150;transition:left .3s ease;overflow-y:auto;padding:80px 0 30px}
+.sidebar.open{left:0}
+.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:140;display:none;backdrop-filter:blur(4px)}
+.sidebar-overlay.open{display:block}
+.sid-head{padding:0 24px 20px;border-bottom:1px solid var(--border2);margin-bottom:16px}
+.sid-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--al)}
+.sid-role{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px}
+.sid-avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--pink));display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px;border:2px solid var(--border)}
+.sid-contact{padding:16px 24px;background:rgba(124,58,237,.06);margin:0 12px 16px;border-radius:10px;border:1px solid var(--border2)}
+.sid-contact-title{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:2px;margin-bottom:10px}
+.sid-contact-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(238,238,255,.7);margin-bottom:7px;text-decoration:none}
+.sid-contact-item:hover{color:var(--al)}
+.sid-links{padding:0 12px}
+.sid-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:rgba(238,238,255,.75);transition:all .2s;border:none;background:none;width:100%;text-align:left;text-decoration:none}
+.sid-link:hover{background:rgba(124,58,237,.12);color:var(--al)}
+.sid-link-ico{font-size:18px;width:24px;flex-shrink:0}
+.sid-divider{height:1px;background:var(--border2);margin:10px 14px}
+.sid-wa{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);color:#25d366;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;margin:10px 12px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none}
+.sid-wa:hover{background:rgba(37,211,102,.2)}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2)}
+.nav-in{display:flex;justify-content:space-between;align-items:center;height:60px;max-width:1120px;margin:0 auto;padding:0 24px}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:var(--al);cursor:pointer}
+.nav-tabs{display:flex;gap:4px}
+.ntab{padding:6px 13px;background:none;border:1px solid transparent;border-radius:6px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:all .2s;white-space:nowrap}
+.ntab:hover{color:var(--text);border-color:var(--border)}
+.ntab.active{background:rgba(124,58,237,.15);border-color:var(--accent);color:var(--al)}
+
+/* ── HERO ── */
+.hero{padding:72px 0 56px;display:grid;grid-template-columns:1fr 370px;gap:56px;align-items:start}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:30px;margin-bottom:22px;animation:rise .5s ease both}
+.hero-badge::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8.5vw,100px);line-height:.9;letter-spacing:2px;animation:rise .5s .08s ease both}
+.grad{background:linear-gradient(135deg,var(--al) 0%,var(--pink) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero-role{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);animation:rise .5s .16s ease both;line-height:1.7}
+.hero-role span{color:var(--al)}
+.hero-bio{margin-top:16px;font-size:15px;line-height:1.75;color:rgba(238,238,255,.65);max-width:500px;animation:rise .5s .24s ease both}
+.hero-ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;animation:rise .5s .32s ease both}
+.btn-v{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .22s;text-decoration:none;border:none}
+.bsolid{background:var(--accent);color:#fff}
+.bsolid:hover{background:var(--al);transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,58,237,.4)}
+.bghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+.bghost:hover{border-color:var(--al);background:rgba(124,58,237,.08);transform:translateY(-2px)}
+
+/* ── QR CARD ── */
+.qr-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;position:relative;overflow:hidden;animation:rise .5s .2s ease both}
+.qr-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--pink))}
+.qr-head{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;margin-bottom:3px}
+.qr-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px}
+#qrcode{display:flex;justify-content:center;margin-bottom:16px}
+#qrcode canvas,#qrcode img{border-radius:12px;border:4px solid rgba(124,58,237,.25);padding:8px;background:#fff}
+.qr-steps{display:flex;flex-direction:column;gap:9px}
+.qr-step{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
+.sn{width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--al);flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.qr-note{margin-top:12px;padding:9px 12px;background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.2);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan)}
+
+/* ── TICKER ── */
+.ticker-wrap{border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:16px 0;overflow:hidden}
+.ticker-track{display:flex;gap:32px;animation:ticker 24s linear infinite;width:max-content}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.titem{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);white-space:nowrap;padding:5px 12px;border:1px solid var(--border2);border-radius:30px}
+.tdot{width:5px;height:5px;border-radius:50%;background:var(--al);flex-shrink:0}
+
+/* ── SECTIONS ── */
+.section{padding:64px 0}
+.slabel{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,5vw,50px);letter-spacing:1px;margin-bottom:36px;line-height:1}
+.sdiv{border-top:1px solid var(--border2)}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.about-box{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:24px}
+.about-box h3{font-size:15px;font-weight:700;margin-bottom:14px}
+.about-list{display:flex;flex-direction:column;gap:8px}
+.about-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(238,238,255,.75);line-height:1.5}
+.about-ico{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* ── EDUCATION ── */
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.edu-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:all .25s;position:relative;overflow:hidden}
+.edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--accent),var(--pink))}
+.edu-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px)}
+.edu-level{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);margin-bottom:6px;padding-left:12px}
+.edu-title{font-size:14px;font-weight:700;margin-bottom:4px;padding-left:12px}
+.edu-place{font-size:12px;color:var(--muted);margin-bottom:12px;padding-left:12px}
+.edu-subjects{display:flex;flex-wrap:wrap;gap:5px;padding-left:12px}
+.edu-subj{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);color:var(--muted)}
+.edu-subj.hl{background:rgba(124,58,237,.18);border-color:rgba(124,58,237,.35);color:var(--al)}
+.edu-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border-radius:20px;margin:10px 0 0 12px}
+
+/* ── CERTS ── */
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.cert-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:22px;transition:all .25s;display:flex;gap:16px;align-items:flex-start;cursor:pointer;position:relative}
+.cert-card:hover{border-color:rgba(6,182,212,.5);transform:translateY(-4px);box-shadow:0 16px 40px rgba(6,182,212,.1)}
+.cert-card .view-hint{position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);opacity:0;transition:opacity .2s}
+.cert-card:hover .view-hint{opacity:1}
+.cert-logo{width:48px;height:48px;flex-shrink:0;border-radius:10px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);display:flex;align-items:center;justify-content:center;font-size:22px}
+.cert-issuer{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);margin-bottom:4px}
+.cert-name{font-size:14px;font-weight:700;margin-bottom:4px}
+.cert-date{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
+.cert-tags{display:flex;flex-wrap:wrap;gap:5px}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.15);color:var(--cyan)}
+
+/* ── CERT MODAL ── */
+.cert-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:500;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+.cert-modal-bg.open{display:flex}
+.cert-modal-box{background:var(--card2);border:1px solid var(--border);border-radius:18px;max-width:900px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column}
+.cert-modal-head{display:flex;justify-content:space-between;align-items:center;padding:16px 22px;border-bottom:1px solid var(--border2)}
+.cert-modal-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:var(--al)}
+.cert-modal-close{background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1}
+.cert-modal-close:hover{color:var(--text)}
+.cert-modal-body{flex:1;overflow:auto;padding:4px}
+.cert-modal-body iframe{width:100%;height:70vh;border:none;border-radius:8px}
+
+/* ── PROJECTS ── */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.pcard{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;transition:all .28s}
+.pcard:hover{border-color:rgba(124,58,237,.45);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.pimg{width:100%;height:155px;object-fit:cover;display:block}
+.pbody{padding:18px}
+.pnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);margin-bottom:7px}
+.ptitle{font-size:16px;font-weight:700;margin-bottom:7px}
+.pdesc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:13px}
+.ptags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:13px}
+.tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:20px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);color:var(--al)}
+.plinks{display:flex;gap:8px}
+.plnk{flex:1;text-align:center;padding:7px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid var(--border2);color:var(--muted);transition:all .2s}
+.plnk:hover{border-color:var(--al);color:var(--al)}
+
+/* ── SKILLS ── */
+.skgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}
+.skitem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:15px}
+.skrow{display:flex;justify-content:space-between;margin-bottom:9px}
+.skname{font-size:13px;font-weight:600}
+.skpct{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al)}
+.sktrack{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
+.skfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--al));animation:barGrow 1.2s ease both;transform-origin:left}
+@keyframes barGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+
+/* ── CONTACT ── */
+.crow{display:flex;justify-content:center;gap:12px;margin-top:26px;flex-wrap:wrap}
+.clnk{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;border:1px solid var(--border2);color:var(--text);text-decoration:none;font-size:14px;font-weight:600;background:var(--card);transition:all .22s}
+.clnk:hover{border-color:var(--al);color:var(--al);transform:translateY(-2px)}
+
+/* ── BUSINESS PAGE ── */
+.biz-hero{padding:60px 0 30px;text-align:center}
+.biz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:32px}
+.biz-card{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:24px;transition:all .25s;position:relative;overflow:hidden}
+.biz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.biz-card.web::before{background:linear-gradient(90deg,var(--accent),var(--al))}
+.biz-card.hw::before{background:linear-gradient(90deg,var(--green),var(--cyan))}
+.biz-card.net::before{background:linear-gradient(90deg,var(--cyan),var(--al))}
+.biz-card.doc::before{background:linear-gradient(90deg,var(--gold),var(--pink))}
+.biz-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.biz-ico{font-size:38px;margin-bottom:14px}
+.biz-title{font-size:17px;font-weight:800;margin-bottom:8px}
+.biz-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px}
+.biz-price{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 12px;border-radius:20px;font-weight:700}
+.biz-price-note{font-size:10px;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace}
+.biz-cta{margin-top:40px;text-align:center;padding:36px;background:linear-gradient(135deg,rgba(37,211,102,.06),rgba(124,58,237,.06));border:1px solid rgba(37,211,102,.2);border-radius:18px}
+.biz-cta h3{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;margin-bottom:10px}
+.biz-cta p{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.6}
+.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;transition:all .22s;border:none;cursor:pointer}
+.wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.35)}
+.laptop-box{margin-top:24px;padding:20px 24px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center}
+.laptop-box p{font-size:13px;color:rgba(238,238,255,.75);margin-bottom:10px}
+
+/* ── APP PAGE ── */
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:36px 0}
+.fcard{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:all .22s}
+.fcard:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px)}
+.fico{font-size:24px;margin-bottom:10px}
+.ftitle{font-size:14px;font-weight:700;margin-bottom:5px}
+.fdesc{font-size:12px;color:var(--muted);line-height:1.6}
+.vwrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 70px rgba(0,0,0,.55);background:#000;margin-top:26px}
+.vwrap iframe{width:100%;aspect-ratio:16/9;display:block;border:none}
+.bframe{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.5);margin-top:26px}
+.bbar{background:#12122a;padding:10px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border2)}
+.bdots{display:flex;gap:6px}
+.bdot{width:11px;height:11px;border-radius:50%}
+.burl{flex:1;background:rgba(255,255,255,.04);border-radius:6px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+.aframe{height:660px}
+.aframe iframe{width:100%;height:100%;border:none;display:block}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:22px}
+.titem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:13px 15px;display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;transition:all .2s}
+.titem:hover{border-color:rgba(124,58,237,.4)}
+
+footer{border-top:1px solid var(--border2);padding:24px 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
+footer span{color:var(--al)}
+@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+@media(max-width:860px){.hero{grid-template-columns:1fr;gap:36px;padding:40px 0 30px}.qr-card{max-width:340px}.about-grid{grid-template-columns:1fr}}
+@media(max-width:580px){.hero-ctas{flex-direction:column}.ntab{padding:5px 9px;font-size:10px}.aframe{height:500px}.crow{flex-direction:column;align-items:center}}
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+<div class="bg-grid"></div>
+
+<!-- SIDEBAR OVERLAY -->
+<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebar">
+  <div class="sid-head">
+    <div class="sid-avatar">🧑🏾‍💻</div>
+    <div class="sid-name">KM.DEV</div>
+    <div class="sid-role">// Kgomotso Mamogale · ITC Level 4</div>
+  </div>
+  <div class="sid-contact">
+    <div class="sid-contact-title">QUICK CONTACT</div>
+    <a class="sid-contact-item" href="mailto:kgomotsothabo2004@gmail.com">✉️ kgomotsothabo2004@gmail.com</a>
+    <a class="sid-contact-item" href="tel:0602227788">📞 060 222 7788</a>
+    <a class="sid-contact-item" href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank">💼 LinkedIn Profile</a>
+    <a class="sid-contact-item" href="https://github.com/soul-net00" target="_blank">🐙 GitHub · soul-net00</a>
+  </div>
+  <a class="sid-wa" href="https://wa.me/27602227788" target="_blank">
+    <span style="font-size:20px">💬</span> WhatsApp Me
+  </a>
+  <div class="sid-links">
+    <div class="sid-divider"></div>
+    <button class="sid-link" onclick="gotoPage('p1');closeSidebar()"><span class="sid-link-ico">💼</span>Portfolio</button>
+    <button class="sid-link" onclick="scrollToSection('about')"><span class="sid-link-ico">👤</span>About Me</button>
+    <button class="sid-link" onclick="scrollToSection('education')"><span class="sid-link-ico">🎓</span>Education</button>
+    <button class="sid-link" onclick="scrollToSection('certs')"><span class="sid-link-ico">🏆</span>Certifications</button>
+    <button class="sid-link" onclick="scrollToSection('projects')"><span class="sid-link-ico">📁</span>Projects</button>
+    <button class="sid-link" onclick="scrollToSection('skills')"><span class="sid-link-ico">⚡</span>Skills</button>
+    <button class="sid-link" onclick="scrollToSection('contact')"><span class="sid-link-ico">📬</span>Contact</button>
+    <div class="sid-divider"></div>
+    <button class="sid-link" onclick="gotoPage('p3');closeSidebar()"><span class="sid-link-ico">💼</span>Business Services</button>
+    <button class="sid-link" onclick="gotoPage('p2');closeSidebar()"><span class="sid-link-ico">📱</span>Shop App</button>
+  </div>
+</div>
+
+<!-- CERT VIEWER MODAL -->
+<div class="cert-modal-bg" id="certModal">
+  <div class="cert-modal-box">
+    <div class="cert-modal-head">
+      <div class="cert-modal-title" id="certModalTitle">CERTIFICATE</div>
+      <button class="cert-modal-close" onclick="closeCertModal()">✕</button>
+    </div>
+    <div class="cert-modal-body">
+      <div style="padding:40px;text-align:center;color:#6b6b9a;font-family:JetBrains Mono,monospace;font-size:13px">Certificate opens in new tab via Cisco verification portal</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-in">
+    <div style="display:flex;align-items:center;gap:14px">
+      <button class="ham-btn" id="hamBtn" onclick="toggleSidebar()">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-logo" onclick="gotoPage('p1')">KM.DEV</div>
+    </div>
+    <div class="nav-tabs">
+      <button class="ntab active" id="tab-p1" onclick="gotoPage('p1')">💼 Portfolio</button>
+      <button class="ntab" id="tab-p3" onclick="gotoPage('p3')">🛠️ Services</button>
+      <button class="ntab" id="tab-p2" onclick="gotoPage('p2')">📱 The App</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ===================== PAGE 1: PORTFOLIO ===================== -->
+<div class="page active" id="p1">
+<div class="wrap">
+  <div class="hero">
+    <div>
+      <div class="hero-badge">Final Year · NC(V) Level 4 · 2025</div>
+      <h1 class="hero-name">KGOMOTSO<br><span class="grad">MAMOGALE</span></h1>
+      <div class="hero-role">
+        <span>ITC Student</span> · Ekurhuleni East TVET College<br>
+        <span>Cisco Certified</span> · Web Dev · IT Support · 🇿🇦 Gauteng
+      </div>
+      <p class="hero-bio">Final-year NC(V) ITC student. I build real software, fix real hardware — from SQL databases to VPS networks. Available for freelance work &amp; internships.</p>
+      <div class="hero-ctas">
+        <button class="btn-v bsolid" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">📁 Projects</button>
+        <button class="btn-v bghost" onclick="gotoPage('p3')">🛠️ My Services</button>
+        <a class="btn-v bghost" href="https://wa.me/27602227788" target="_blank">💬 WhatsApp</a>
+      </div>
+    </div>
+    <div class="qr-card">
+      <div class="qr-head">SHARE PORTFOLIO</div>
+      <div class="qr-sub">// scan to open on any device</div>
+      <div id="qrcode"></div>
+      <div class="qr-steps">
+        <div class="qr-step"><div class="sn">1</div>Scan with any phone camera</div>
+        <div class="qr-step"><div class="sn">2</div>Portfolio opens instantly</div>
+        <div class="qr-step"><div class="sn">3</div>No app needed</div>
+      </div>
+      <div class="qr-note">🌐 Public · bmiexplore.netlify.app</div>
+    </div>
+  </div>
+</div>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
+    <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
+    <span class="titem"><span class="tdot"></span>SQL Server</span>
+    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Cisco Networking</span>
+    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>VPS Setup</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>IT Support</span>
+    <span class="titem"><span class="tdot" style="background:var(--green)"></span>Excel</span>
+    <span class="titem"><span class="tdot"></span>Word &amp; PowerPoint</span>
+    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>WiFi &amp; Networking</span>
+    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>Windows Admin</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Systems Analysis</span>
+    <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
+    <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
+    <span class="titem"><span class="tdot"></span>SQL Server</span>
+    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Cisco Networking</span>
+    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>VPS Setup</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>IT Support</span>
+    <span class="titem"><span class="tdot" style="background:var(--green)"></span>Excel</span>
+    <span class="titem"><span class="tdot"></span>Word &amp; PowerPoint</span>
+    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>WiFi &amp; Networking</span>
+    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>Windows Admin</span>
+    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Systems Analysis</span>
+  </div>
+</div>
+
+<div class="wrap">
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="slabel">// who I am</div>
+    <div class="stitle">ABOUT ME</div>
+    <div class="about-grid">
+      <div class="about-box">
+        <h3>🔧 What I Do</h3>
+        <div class="about-list">
+          <div class="about-item"><span class="about-ico">🌐</span>Build websites &amp; web apps — HTML, CSS, JavaScript, deployed on Netlify</div>
+          <div class="about-item"><span class="about-ico">🖥️</span>Set up VPS servers for fast, secure networks and remote environments</div>
+          <div class="about-item"><span class="about-ico">💻</span>Fix laptops, upgrade drives, clean install Windows, update drivers</div>
+          <div class="about-item"><span class="about-ico">📶</span>Configure WiFi routers, set access restrictions, troubleshoot networks</div>
+          <div class="about-item"><span class="about-ico">📊</span>Advanced Excel, Word, PowerPoint — data, documents, presentations</div>
+          <div class="about-item"><span class="about-ico">🗄️</span>Design and build SQL Server databases with stored procedures</div>
+          <div class="about-item"><span class="about-ico">📋</span>Systems Analysis &amp; Design — requirements, diagrams, documentation</div>
+          <div class="about-item"><span class="about-ico">🖨️</span>Desktop apps in VB.NET with full SQL Server backends</div>
+        </div>
+      </div>
+      <div class="about-box">
+        <h3>📌 Quick Facts</h3>
+        <div class="about-list">
+          <div class="about-item"><span class="about-ico">🏫</span>Ekurhuleni East TVET College · Level 4 final year</div>
+          <div class="about-item"><span class="about-ico">✅</span>Passed NC(V) Level 2 &amp; 3 ITC</div>
+          <div class="about-item"><span class="about-ico">🏆</span>2× Cisco Networking Academy certified</div>
+          <div class="about-item"><span class="about-ico">📍</span>Gauteng, South Africa</div>
+          <div class="about-item"><span class="about-ico">📞</span>060 222 7788</div>
+          <div class="about-item"><span class="about-ico">📧</span>kgomotsothabo2004@gmail.com</div>
+          <div class="about-item"><span class="about-ico">💡</span>Self-taught: VPS, AI tools, web deployment</div>
+          <div class="about-item"><span class="about-ico">🔓</span>Available for freelance &amp; internships</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section class="section sdiv" id="education">
+    <div class="slabel">// formal qualifications</div>
+    <div class="stitle">EDUCATION</div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-level">CURRENT · NC(V) LEVEL 4</div>
+        <div class="edu-title">Information Technology &amp; Computer Science</div>
+        <div class="edu-place">Ekurhuleni East TVET College · 2025 (Final Year)</div>
+        <div class="edu-subjects">
+          <span class="edu-subj hl">Computer Programming</span>
+          <span class="edu-subj hl">System Analysis &amp; Design</span>
+          <span class="edu-subj hl">Data Communication &amp; Networking</span>
+          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
+          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
+        </div>
+        <div class="edu-badge">🎯 In Progress</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-level">PASSED · NC(V) LEVEL 3</div>
+        <div class="edu-title">Information Technology &amp; Computer Science</div>
+        <div class="edu-place">Ekurhuleni East TVET College · 2024</div>
+        <div class="edu-subjects">
+          <span class="edu-subj hl">Principles of Computer Programming</span>
+          <span class="edu-subj hl">System Analysis &amp; Design</span>
+          <span class="edu-subj">Computer Hardware &amp; Software</span>
+          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
+          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
+        </div>
+        <div class="edu-badge">✅ Completed</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-level">PASSED · NC(V) LEVEL 2</div>
+        <div class="edu-title">Information Technology &amp; Computer Science</div>
+        <div class="edu-place">Ekurhuleni East TVET College · 2023</div>
+        <div class="edu-subjects">
+          <span class="edu-subj hl">Introduction to Systems Development</span>
+          <span class="edu-subj hl">Introduction to Information Systems</span>
+          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
+          <span class="edu-subj">Electronics</span>
+          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
+        </div>
+        <div class="edu-badge">✅ Completed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="section sdiv" id="certs">
+    <div class="slabel">// verified credentials · click to view</div>
+    <div class="stitle">CERTIFICATIONS</div>
+    <div class="cert-grid">
+      <div class="cert-card" onclick="openCert('cyber')">
+        <span class="view-hint">👁 Click to view certificate</span>
+        <div class="cert-logo">🛡️</div>
+        <div>
+          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
+          <div class="cert-name">Introduction to Cybersecurity</div>
+          <div class="cert-date">Issued: 04 Sep 2025 · Ekurhuleni East TVET College</div>
+          <div class="cert-tags">
+            <span class="ctag">Cyber Threats</span><span class="ctag">Online Safety</span>
+            <span class="ctag">Network Security</span><span class="ctag">Verified Badge</span>
+          </div>
+        </div>
+      </div>
+      <div class="cert-card" onclick="openCert('connected')">
+        <span class="view-hint">👁 Click to view certificate</span>
+        <div class="cert-logo">🌐</div>
+        <div>
+          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
+          <div class="cert-name">Get Connected</div>
+          <div class="cert-date">Issued: 12 Aug 2024 · Cisco Global</div>
+          <div class="cert-tags">
+            <span class="ctag">Internet Fundamentals</span><span class="ctag">Digital Literacy</span>
+            <span class="ctag">Connectivity</span>
+          </div>
+        </div>
+      </div>
+      <div class="cert-card" style="border-color:rgba(245,158,11,.15);cursor:default">
+        <div class="cert-logo" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2)">📜</div>
+        <div>
+          <div class="cert-issuer" style="color:var(--gold)">COMING SOON</div>
+          <div class="cert-name">NC(V) Level 4 Certificate</div>
+          <div class="cert-date">Expected: 2025 · Ekurhuleni East TVET College</div>
+          <div class="cert-tags"><span class="ctag" style="color:var(--gold);border-color:rgba(245,158,11,.2)">In Progress</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="section sdiv" id="projects">
+    <div class="slabel">// what I've built</div>
+    <div class="stitle">PROJECTS</div>
+    <div class="pgrid">
+      <div class="pcard">
+        <img class="pimg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop" alt="MobileFix">
+        <div class="pbody">
+          <div class="pnum">01 / DESKTOP APP</div><div class="ptitle">MobileFix Manager</div>
+          <div class="pdesc">Full cellphone repair shop system in VB.NET — receipt generation, customer database, inventory connected to SQL Server.</div>
+          <div class="ptags"><span class="tag">VB.NET</span><span class="tag">SQL Server</span><span class="tag">Desktop</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="#" class="plnk" onclick="gotoPage('p2');return false">↗ Web Version</a>
+          </div>
+        </div>
+      </div>
+      <div class="pcard">
+        <img class="pimg" src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=400&fit=crop" alt="BMI">
+        <div class="pbody">
+          <div class="pnum">02 / WEB APP</div><div class="ptitle">BMI Explorer</div>
+          <div class="pdesc">Interactive BMI calculator with visual feedback and health recommendations. Live on GitHub Pages.</div>
+          <div class="ptags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00/bmi_explore" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="https://soul-net00.github.io/bmi_explore/" class="plnk" target="_blank">↗ Live Demo</a>
+          </div>
+        </div>
+      </div>
+      <div class="pcard">
+        <img class="pimg" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop" alt="DB">
+        <div class="pbody">
+          <div class="pnum">03 / DATABASE</div><div class="ptitle">CellphoneShopDB</div>
+          <div class="pdesc">Normalized SQL Server database with FK relationships, stored procedures and indexing for the MobileFix system.</div>
+          <div class="ptags"><span class="tag">SQL Server</span><span class="tag">Database Design</span><span class="tag">T-SQL</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ Schema</a>
+          </div>
+        </div>
+      </div>
+      <div class="pcard">
+        <img class="pimg" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop" alt="VPS">
+        <div class="pbody">
+          <div class="pnum">04 / INFRASTRUCTURE</div><div class="ptitle">VPS Network Setup</div>
+          <div class="pdesc">Configured VPS environments for fast, secure hosting. Server setup, network config, and remote access management.</div>
+          <div class="ptags"><span class="tag">VPS</span><span class="tag">Linux</span><span class="tag">Networking</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="mailto:kgomotsothabo2004@gmail.com" class="plnk">↗ Ask Me</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section sdiv" id="skills">
+    <div class="slabel">// proficiency levels</div>
+    <div class="stitle">SKILLS</div>
+    <div class="skgrid">
+      <div class="skitem"><div class="skrow"><span class="skname">HTML &amp; CSS</span><span class="skpct">85%</span></div><div class="sktrack"><div class="skfill" style="width:85%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">JavaScript</span><span class="skpct">68%</span></div><div class="sktrack"><div class="skfill" style="width:68%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">VB.NET</span><span class="skpct">78%</span></div><div class="sktrack"><div class="skfill" style="width:78%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">SQL Server / Database</span><span class="skpct">75%</span></div><div class="sktrack"><div class="skfill" style="width:75%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">Systems Analysis</span><span class="skpct">72%</span></div><div class="sktrack"><div class="skfill" style="width:72%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">Cisco / Networking</span><span class="skpct">65%</span></div><div class="sktrack"><div class="skfill" style="width:65%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">VPS / Linux Basics</span><span class="skpct">60%</span></div><div class="sktrack"><div class="skfill" style="width:60%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">IT Support / Hardware</span><span class="skpct">80%</span></div><div class="sktrack"><div class="skfill" style="width:80%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">Excel / Word / PowerPoint</span><span class="skpct">78%</span></div><div class="sktrack"><div class="skfill" style="width:78%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">WiFi &amp; Router Config</span><span class="skpct">72%</span></div><div class="sktrack"><div class="skfill" style="width:72%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">Windows Administration</span><span class="skpct">80%</span></div><div class="sktrack"><div class="skfill" style="width:80%"></div></div></div>
+      <div class="skitem"><div class="skrow"><span class="skname">AI Tools</span><span class="skpct">82%</span></div><div class="sktrack"><div class="skfill" style="width:82%"></div></div></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section sdiv" style="text-align:center" id="contact">
+    <div class="slabel" style="text-align:center">// let's connect</div>
+    <div class="stitle" style="text-align:center">GET IN TOUCH</div>
+    <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto;line-height:1.7">IT support, freelance web work, or collaborating on a project? I'm available.</p>
+    <div class="crow">
+      <a href="mailto:kgomotsothabo2004@gmail.com" class="clnk">✉️ kgomotsothabo2004@gmail.com</a>
+      <a href="tel:0602227788" class="clnk">📞 060 222 7788</a>
+      <a href="https://github.com/soul-net00" target="_blank" class="clnk">🐙 GitHub</a>
+      <a href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank" class="clnk">💼 LinkedIn</a>
+      <a href="https://wa.me/27602227788" target="_blank" class="clnk" style="background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.3);color:#25d366">💬 WhatsApp</a>
+    </div>
+  </section>
+</div>
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <span>060 222 7788</span> · kgomotsothabo2004@gmail.com · 2025</div></footer>
+</div><!-- /p1 -->
+
+
+<!-- ===================== PAGE 3: BUSINESS SERVICES ===================== -->
+<div class="page" id="p3">
+<div class="wrap">
+  <div class="biz-hero">
+    <div class="slabel" style="text-align:center">// available for hire</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,72px);letter-spacing:2px;line-height:.95;margin-bottom:16px">
+      IT SERVICES &amp;<br><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">BUSINESS SOLUTIONS</span>
+    </h2>
+    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto;line-height:1.7">Professional IT services at student-friendly prices. All prices starting from R50 and fully negotiable. WhatsApp me to discuss your needs.</p>
+  </div>
+
+  <div class="biz-grid">
+
+    <div class="biz-card web">
+      <div class="biz-ico">🌐</div>
+      <div class="biz-title">Website / Web App</div>
+      <div class="biz-desc">Custom websites built from scratch — portfolio sites, business landing pages, web apps with JavaScript. Deployed on Netlify or GitHub Pages. Mobile-friendly &amp; fast.</div>
+      <div class="biz-price">💰 From R50</div>
+      <div class="biz-price-note">Price depends on complexity · Negotiable</div>
+    </div>
+
+    <div class="biz-card hw">
+      <div class="biz-ico">💻</div>
+      <div class="biz-title">Laptop Repair &amp; Setup</div>
+      <div class="biz-desc">Windows clean install, driver updates, virus removal, SSD/HDD upgrades, speed optimization. Slow laptop? I can fix it. Available in Gauteng area.</div>
+      <div class="biz-price">💰 From R50</div>
+      <div class="biz-price-note">Price per job · Negotiable</div>
+    </div>
+
+    <div class="biz-card net">
+      <div class="biz-ico">📶</div>
+      <div class="biz-title">WiFi &amp; Network Setup</div>
+      <div class="biz-desc">Router configuration, WiFi password &amp; access restrictions, network troubleshooting, VPS setup for fast &amp; secure remote access. Home or small business.</div>
+      <div class="biz-price">💰 From R50</div>
+      <div class="biz-price-note">Price depends on complexity · Negotiable</div>
+    </div>
+
+    <div class="biz-card doc">
+      <div class="biz-ico">📊</div>
+      <div class="biz-title">Excel, Word &amp; PowerPoint</div>
+      <div class="biz-desc">Spreadsheets with formulas &amp; automation, professional Word documents, PowerPoint presentations. Data analysis, reports, any document you need.</div>
+      <div class="biz-price">💰 From R50</div>
+      <div class="biz-price-note">Per document / project · Negotiable</div>
+    </div>
+
+    <div class="biz-card web">
+      <div class="biz-ico">🗄️</div>
+      <div class="biz-title">Database Design</div>
+      <div class="biz-desc">SQL Server database design, table relationships, stored procedures, data management. Perfect for small businesses needing structured data storage.</div>
+      <div class="biz-price">💰 From R50</div>
+      <div class="biz-price-note">Price by project scope · Negotiable</div>
+    </div>
+
+    <div class="biz-card hw">
+      <div class="biz-ico">📋</div>
+      <div class="biz-title">Systems Analysis &amp; Design</div>
+      <div class="biz-desc">Requirements gathering, system diagrams (DFD, ERD, flowcharts), documentation. Students and small businesses needing IT analysis help.</div>
+      <div class="biz-price">💰 From R50</div>
+      <div class="biz-price-note">Price by project · Negotiable</div>
+    </div>
+
+  </div>
+
+  <!-- LAPTOP SPECIAL -->
+  <div class="laptop-box" style="margin-top:30px">
+    <p style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px">🖥️ Need a Laptop?</p>
+    <p>I can help source and set up laptops. Text me on WhatsApp to discuss what you need and your budget.</p>
+    <a href="https://wa.me/27602227788?text=Hi Kgomotso, I need help with a laptop" target="_blank" class="btn-v bsolid" style="margin:16px auto 0;display:inline-flex">💬 WhatsApp About Laptops</a>
+  </div>
+
+  <!-- CTA -->
+  <div class="biz-cta" style="margin-top:40px">
+    <h3>READY TO GET STARTED?</h3>
+    <p>All prices start at R50 and are fully negotiable. No job too small. Message me on WhatsApp to discuss your project — I usually reply fast.</p>
+    <a href="https://wa.me/27602227788?text=Hi Kgomotso, I need your IT services" target="_blank" class="wa-btn">
+      💬 WhatsApp · 060 222 7788
+    </a>
+    <div style="margin-top:16px;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace">
+      📧 kgomotsothabo2004@gmail.com &nbsp;·&nbsp; 📞 060 222 7788
+    </div>
+  </div>
+</div>
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <span>060 222 7788</span> · kgomotsothabo2004@gmail.com · 2025</div></footer>
+</div><!-- /p3 -->
+
+
+<!-- ===================== PAGE 2: THE APP ===================== -->
+<div class="page" id="p2">
+<div class="wrap">
+  <div style="padding:60px 0 20px;text-align:center">
+    <div class="slabel" style="text-align:center">// featured project</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,7vw,76px);letter-spacing:2px;line-height:.95;margin-bottom:18px">
+      CELLPHONE SHOP<br><span style="background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">MANAGEMENT SYSTEM</span>
+    </h2>
+    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 22px;line-height:1.7">Fully functional browser-based shop management. No install needed — runs in your browser with local data and print-ready receipts.</p>
+    <button class="btn-v bsolid" onclick="document.getElementById('liveapp').scrollIntoView({behavior:'smooth'})" style="margin:0 auto">🚀 Try It Live</button>
+  </div>
+
+  <div class="fgrid">
+    <div class="fcard"><div class="fico">🧾</div><div class="ftitle">Receipt Generation</div><div class="fdesc">Auto codes, print-ready HTML with watermarks, signature lines and legal disclaimer.</div></div>
+    <div class="fcard"><div class="fico">👥</div><div class="ftitle">Customer Database</div><div class="fdesc">Save details. Instant search by phone, receipt ID or code.</div></div>
+    <div class="fcard"><div class="fico">📦</div><div class="ftitle">11 Categories</div><div class="fdesc">Repairs, accessories, software — with optional per-item discounts.</div></div>
+    <div class="fcard"><div class="fico">💾</div><div class="ftitle">Export &amp; Backup</div><div class="fdesc">Full JSON export/import. Restore database on any device instantly.</div></div>
+    <div class="fcard"><div class="fico">🖨️</div><div class="ftitle">Print Ready</div><div class="fdesc">Professional print page with company logo and full legal terms.</div></div>
+    <div class="fcard"><div class="fico">🔒</div><div class="ftitle">Password Protected</div><div class="fdesc">Settings locked. You control company info and branding.</div></div>
+  </div>
+
+  <section class="section sdiv">
+    <div class="slabel">// watch it in action</div>
+    <div class="stitle">VIDEO DEMO</div>
+    <div class="vwrap">
+      <iframe src="https://www.youtube.com/embed/L99lApSNXuo?si=2OmKCjXUdDPmnkMX" title="Shop System Demo"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section class="section sdiv">
+    <div class="slabel">// built with</div>
+    <div class="stitle">TECH STACK</div>
+    <div class="tgrid">
+      <div class="titem"><span style="font-size:20px">🌐</span>HTML5 &amp; CSS3</div>
+      <div class="titem"><span style="font-size:20px">⚡</span>Vanilla JavaScript</div>
+      <div class="titem"><span style="font-size:20px">💾</span>localStorage API</div>
+      <div class="titem"><span style="font-size:20px">🖨️</span>Browser Print API</div>
+      <div class="titem"><span style="font-size:20px">📄</span>Blob / File API</div>
+      <div class="titem"><span style="font-size:20px">🚀</span>Netlify Hosting</div>
+    </div>
+  </section>
+
+  <section class="section sdiv" id="liveapp">
+    <div class="slabel">// try it yourself</div>
+    <div class="stitle">LIVE APPLICATION</div>
+    <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Fully interactive. Data stays in your browser — nothing sent to any server.</p>
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:40px;text-align:center;max-width:500px;margin:0 auto">
+      <div style="font-size:64px;margin-bottom:16px">📱</div>
+      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:10px">CELLPHONE SHOP APP</h3>
+      <p style="color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:24px">Create receipts, manage customers, track revenue. Opens in a new tab — works on any device.</p>
+      <a href="shop.html" target="_blank" class="btn-v bsolid" style="margin:0 auto;display:inline-flex">🚀 Open App</a>
+      <div style="margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)">soul-net00.github.io/bmi_explore/shop.html</div>
+    </div>
+  </section>
+</div>
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> · kgomotsothabo2004@gmail.com · <span>soul-net00</span></div></footer>
+</div><!-- /p2 -->
+
+
+<script>
+/* ── CERT DATA (base64 embedded) ── */
+const CERTS={
+  cyber:'https://www.credly.com/badges/b8ab7c11-2b59-45bd-8d85-97b6b6dcb3fc',
+  connected:'https://www.credly.com/badges/5996b50a-e8f7-421c-b88a-27863505a0aa'
+};
+
+/* ── SIDEBAR ── */
+function toggleSidebar(){
+  const s=document.getElementById('sidebar'),o=document.getElementById('overlay'),b=document.getElementById('hamBtn');
+  s.classList.toggle('open');o.classList.toggle('open');b.classList.toggle('open');
+}
+function closeSidebar(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('hamBtn').classList.remove('open');
+}
+
+/* ── PAGE SWITCHING ── */
+function gotoPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+  window.scrollTo(0,0);
+}
+function scrollToSection(id){
+  closeSidebar();
+  gotoPage('p1');
+  setTimeout(()=>{
+    const el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth'});
+  },100);
+}
+
+/* ── CERT MODAL ── */
+function openCert(type){
+  // Open cert verification in new tab
+  window.open(CERTS[type],'_blank');
+}
+function closeCertModal(){document.getElementById('certModal').classList.remove('open');}
+
+/* ── QR CODE ── */
+window.addEventListener('DOMContentLoaded',function(){
+  const url=window.location.origin+window.location.pathname;
+  new QRCode(document.getElementById('qrcode'),{
+    text:url,width:190,height:190,
+    colorDark:'#7c3aed',colorLight:'#ffffff',
+    correctLevel:QRCode.CorrectLevel.H
+  });
+});
+
+</script>
+</body>
+</html>
 <meta name="description" content="NC(V) ITC Student | Web Developer | Cisco Certified | Ekurhuleni East TVET College | South Africa">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -863,4 +1644,5 @@ function chPwd(){const cur=prompt('Current password:');if(cur!==cfg.password){al
 </script>
 </body>
 </html>
+
 
