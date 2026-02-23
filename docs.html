@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📂 My Documents & Learning</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Syne:wght@700;800&display=swap');
+
+/* ── THEME ── */
+[data-theme="light"] {
+  --bg: #f0f0f8;
+  --surface: #ffffff;
+  --surface2: #f7f7fc;
+  --border: #e2e2f0;
+  --text: #0d0d1a;
+  --text2: #4a4a6a;
+  --muted: #8888aa;
+  --accent: #6c63ff;
+  --accent2: #ff6584;
+  --accent3: #43d9ad;
+  --shadow: 0 4px 24px rgba(108,99,255,.10);
+  --shadow2: 0 2px 8px rgba(0,0,0,.06);
+  --tag-bg: rgba(108,99,255,.08);
+  --tag-text: #6c63ff;
+  --drop-bg: rgba(108,99,255,.04);
+  --drop-border: rgba(108,99,255,.3);
+  --progress-bg: #e2e2f0;
+  --card-hover: rgba(108,99,255,.04);
+}
+[data-theme="dark"] {
+  --bg: #0a0a14;
+  --surface: #12121e;
+  --surface2: #1a1a28;
+  --border: #2a2a40;
+  --text: #eeeeff;
+  --text2: #9999cc;
+  --muted: #5555aa;
+  --accent: #7c6dff;
+  --accent2: #ff6584;
+  --accent3: #43d9ad;
+  --shadow: 0 4px 24px rgba(124,109,255,.15);
+  --shadow2: 0 2px 8px rgba(0,0,0,.3);
+  --tag-bg: rgba(124,109,255,.15);
+  --tag-text: #9d8fff;
+  --drop-bg: rgba(124,109,255,.06);
+  --drop-border: rgba(124,109,255,.4);
+  --progress-bg: #2a2a40;
+  --card-hover: rgba(124,109,255,.06);
+}
+
+/* ── RESET ── */
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s}
+
+/* ── HEADER ── */
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:var(--shadow2)}
+.header-left{display:flex;align-items:center;gap:12px}
+.back-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;transition:.2s;font-family:inherit}
+.back-btn:hover{border-color:var(--accent);color:var(--accent)}
+.header-title{font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--text)}
+.header-title span{color:var(--accent)}
+.header-right{display:flex;align-items:center;gap:10px}
+.theme-toggle{width:38px;height:38px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:.2s}
+.theme-toggle:hover{border-color:var(--accent)}
+.wip-badge{padding:5px 12px;background:rgba(255,101,132,.12);border:1px solid rgba(255,101,132,.3);border-radius:20px;font-size:12px;font-weight:700;color:var(--accent2);font-family:'JetBrains Mono',monospace}
+
+/* ── LAYOUT ── */
+.main{max-width:1100px;margin:0 auto;padding:32px 20px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:768px){.main{grid-template-columns:1fr}}
+.full-width{grid-column:1/-1}
+
+/* ── SECTION CARD ── */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px;box-shadow:var(--shadow2);transition:.3s}
+.card:hover{box-shadow:var(--shadow)}
+.card-header{display:flex;align-items:center;gap:10px;margin-bottom:20px}
+.card-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.icon-purple{background:rgba(108,99,255,.12)}
+.icon-green{background:rgba(67,217,173,.12)}
+.icon-pink{background:rgba(255,101,132,.12)}
+.icon-blue{background:rgba(59,130,246,.12)}
+.card-title{font-family:'Syne',sans-serif;font-size:17px;font-weight:800}
+.card-sub{font-size:13px;color:var(--muted);margin-top:2px}
+
+/* ── UPLOAD ZONE ── */
+.drop-zone{border:2px dashed var(--drop-border);border-radius:16px;background:var(--drop-bg);padding:40px 20px;text-align:center;cursor:pointer;transition:.3s;position:relative}
+.drop-zone:hover,.drop-zone.drag-over{border-color:var(--accent);background:rgba(108,99,255,.08)}
+.drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-icon{font-size:40px;margin-bottom:12px}
+.drop-text{font-size:15px;font-weight:600;color:var(--text2);margin-bottom:6px}
+.drop-hint{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.upload-btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:10px 22px;background:var(--accent);color:white;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.upload-btn:hover{opacity:.88;transform:translateY(-1px)}
+
+/* ── UPLOADED FILES LIST ── */
+.file-list{margin-top:20px;display:flex;flex-direction:column;gap:10px}
+.file-item{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;transition:.2s}
+.file-item:hover{border-color:var(--accent);background:var(--card-hover)}
+.file-ext{width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;flex-shrink:0}
+.ext-pdf{background:rgba(239,68,68,.12);color:#ef4444}
+.ext-doc{background:rgba(59,130,246,.12);color:#3b82f6}
+.ext-img{background:rgba(67,217,173,.12);color:#43d9ad}
+.ext-other{background:var(--tag-bg);color:var(--tag-text)}
+.file-info{flex:1;min-width:0}
+.file-name{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text)}
+.file-meta{font-size:12px;color:var(--muted);margin-top:2px;font-family:'JetBrains Mono',monospace}
+.file-actions{display:flex;gap:6px;flex-shrink:0}
+.file-btn{width:32px;height:32px;border:1px solid var(--border);border-radius:8px;background:none;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:.2s;color:var(--text2)}
+.file-btn:hover{border-color:var(--accent);color:var(--accent)}
+.file-btn.del:hover{border-color:#ef4444;color:#ef4444}
+.empty-files{text-align:center;padding:20px;color:var(--muted);font-size:14px}
+.empty-files .ico{font-size:32px;margin-bottom:8px}
+
+/* ── NOTES AREA ── */
+.notes-area{width:100%;padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:'Space Grotesk',sans-serif;font-size:14px;line-height:1.6;resize:vertical;min-height:120px;transition:.2s}
+.notes-area:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(108,99,255,.1)}
+.save-note-btn{margin-top:10px;padding:9px 20px;background:var(--accent);color:white;border:none;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:.2s}
+.save-note-btn:hover{opacity:.88}
+
+/* ── DB LEARNING TRACKER ── */
+.topic-list{display:flex;flex-direction:column;gap:8px}
+.topic-item{padding:14px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;cursor:pointer;transition:.2s;user-select:none}
+.topic-item:hover{border-color:var(--accent);background:var(--card-hover)}
+.topic-item.done{border-color:var(--accent3);background:rgba(67,217,173,.06)}
+.topic-top{display:flex;align-items:center;gap:10px}
+.topic-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;transition:.2s}
+.topic-item.done .topic-check{background:var(--accent3);border-color:var(--accent3);color:white}
+.topic-name{font-size:14px;font-weight:600;flex:1;color:var(--text)}
+.topic-tag{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;background:var(--tag-bg);color:var(--tag-text);font-family:'JetBrains Mono',monospace}
+.topic-desc{font-size:12px;color:var(--muted);margin-top:6px;margin-left:32px;line-height:1.5}
+
+/* ── PROGRESS BAR ── */
+.progress-wrap{margin-top:20px;margin-bottom:6px}
+.progress-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.progress-title{font-size:14px;font-weight:600;color:var(--text2)}
+.progress-pct{font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--accent)}
+.progress-bar{height:10px;background:var(--progress-bg);border-radius:100px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent3));border-radius:100px;transition:width .5s ease}
+
+/* ── RESOURCE LINKS ── */
+.resource-list{display:flex;flex-direction:column;gap:8px}
+.resource-link{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface2);border:1px solid var(--border);border-radius:12px;text-decoration:none;color:var(--text);transition:.2s}
+.resource-link:hover{border-color:var(--accent);transform:translateX(4px)}
+.res-ico{font-size:20px}
+.res-info{flex:1}
+.res-name{font-size:14px;font-weight:600}
+.res-desc{font-size:12px;color:var(--muted);margin-top:2px}
+.res-arrow{color:var(--muted);font-size:16px}
+
+/* ── STATS ROW ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:0}
+.stat-box{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center}
+.stat-val{font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--accent)}
+.stat-lbl{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* ── QUOTE ── */
+.quote-box{background:linear-gradient(135deg,rgba(108,99,255,.1),rgba(67,217,173,.08));border:1px solid rgba(108,99,255,.2);border-radius:16px;padding:20px 24px;text-align:center}
+.quote-text{font-size:15px;font-style:italic;color:var(--text2);line-height:1.6}
+.quote-author{font-size:12px;color:var(--muted);margin-top:8px;font-family:'JetBrains Mono',monospace}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;padding:12px 20px;background:var(--accent);color:white;border-radius:12px;font-size:14px;font-weight:600;box-shadow:0 8px 24px rgba(108,99,255,.4);transform:translateY(100px);opacity:0;transition:.3s;z-index:9999;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <a href="index.html" class="back-btn">← Portfolio</a>
+    <div class="header-title">My <span>Documents</span></div>
+  </div>
+  <div class="header-right">
+    <div class="wip-badge">🔨 Work in Progress</div>
+    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Toggle theme">☀️</button>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main">
+
+  <!-- STATS ROW -->
+  <div class="card full-width" style="padding:20px 28px">
+    <div class="stats-row">
+      <div class="stat-box"><div class="stat-val" id="statFiles">0</div><div class="stat-lbl">Files Uploaded</div></div>
+      <div class="stat-box"><div class="stat-val" id="statTopics">0</div><div class="stat-lbl">Topics Learned</div></div>
+      <div class="stat-box"><div class="stat-val" id="statPct">0%</div><div class="stat-lbl">DB Progress</div></div>
+    </div>
+  </div>
+
+  <!-- UPLOAD SECTION -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-purple">📂</div>
+      <div>
+        <div class="card-title">Document Upload</div>
+        <div class="card-sub">PDF, Word, Images, Notes</div>
+      </div>
+    </div>
+
+    <div class="drop-zone" id="dropZone">
+      <input type="file" id="fileInput" multiple accept=".pdf,.doc,.docx,.txt,.png,.jpg,.jpeg,.pptx,.xlsx" onchange="handleFiles(this.files)">
+      <div class="drop-icon">📁</div>
+      <div class="drop-text">Drop files here or click to browse</div>
+      <div class="drop-hint">PDF · DOC · IMG · TXT · PPTX · XLSX</div>
+      <button class="upload-btn" onclick="document.getElementById('fileInput').click();event.stopPropagation()">
+        ➕ Choose Files
+      </button>
+    </div>
+
+    <div class="file-list" id="fileList">
+      <div class="empty-files" id="emptyFiles">
+        <div class="ico">📭</div>
+        <div>No documents uploaded yet</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTES SECTION -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-green">📝</div>
+      <div>
+        <div class="card-title">Quick Notes</div>
+        <div class="card-sub">Jot down what you're learning</div>
+      </div>
+    </div>
+
+    <textarea class="notes-area" id="notesArea" placeholder="Write your notes here... e.g.
+• SQL uses SELECT to get data
+• Primary key = unique ID for each row
+• JOIN connects two tables
+• Still working on stored procedures..."></textarea>
+    <button class="save-note-btn" onclick="saveNotes()">💾 Save Notes</button>
+
+    <!-- MOTIVATIONAL QUOTE -->
+    <div class="quote-box" style="margin-top:20px">
+      <div class="quote-text" id="quoteText">"The expert in anything was once a beginner."</div>
+      <div class="quote-author" id="quoteAuthor">— Helen Hayes</div>
+    </div>
+  </div>
+
+  <!-- DATABASE LEARNING TRACKER -->
+  <div class="card full-width">
+    <div class="card-header">
+      <div class="card-icon icon-blue">🗄️</div>
+      <div>
+        <div class="card-title">Database Learning Tracker</div>
+        <div class="card-sub">Tick topics as you complete them — progress saves automatically</div>
+      </div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-label">
+        <span class="progress-title">Overall Progress</span>
+        <span class="progress-pct" id="progressPct">0%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+
+    <div class="topic-list" id="topicList"></div>
+  </div>
+
+  <!-- RESOURCES -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-pink">🔗</div>
+      <div>
+        <div class="card-title">Learning Resources</div>
+        <div class="card-sub">Useful links for databases & IT</div>
+      </div>
+    </div>
+    <div class="resource-list">
+      <a class="resource-link" href="https://www.w3schools.com/sql/" target="_blank">
+        <span class="res-ico">🌐</span>
+        <div class="res-info"><div class="res-name">W3Schools SQL</div><div class="res-desc">Best place to start learning SQL basics</div></div>
+        <span class="res-arrow">→</span>
+      </a>
+      <a class="resource-link" href="https://sqlzoo.net/" target="_blank">
+        <span class="res-ico">🏋️</span>
+        <div class="res-info"><div class="res-name">SQLZoo</div><div class="res-desc">Interactive SQL exercises and quizzes</div></div>
+        <span class="res-arrow">→</span>
+      </a>
+      <a class="resource-link" href="https://www.youtube.com/results?search_query=SQL+database+for+beginners" target="_blank">
+        <span class="res-ico">▶️</span>
+        <div class="res-info"><div class="res-name">YouTube — SQL for Beginners</div><div class="res-desc">Video tutorials, great for visual learning</div></div>
+        <span class="res-arrow">→</span>
+      </a>
+      <a class="resource-link" href="https://www.db-fiddle.com/" target="_blank">
+        <span class="res-ico">🧪</span>
+        <div class="res-info"><div class="res-name">DB Fiddle</div><div class="res-desc">Test SQL queries online, no install needed</div></div>
+        <span class="res-arrow">→</span>
+      </a>
+      <a class="resource-link" href="https://drawsql.app/" target="_blank">
+        <span class="res-ico">📊</span>
+        <div class="res-info"><div class="res-name">DrawSQL</div><div class="res-desc">Draw database diagrams (ERD) visually</div></div>
+        <span class="res-arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- WHAT IS A DATABASE CARD -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon icon-green">💡</div>
+      <div>
+        <div class="card-title">What is a Database?</div>
+        <div class="card-sub">Simple explanation for beginners</div>
+      </div>
+    </div>
+    <div style="font-size:14px;color:var(--text2);line-height:1.8;display:flex;flex-direction:column;gap:12px">
+      <div style="padding:12px;background:var(--surface2);border-radius:10px;border-left:3px solid var(--accent)">
+        <strong style="color:var(--text)">📋 What it is:</strong><br>
+        A database is like a super organized Excel file that can hold millions of rows, connect related data, and search it instantly.
+      </div>
+      <div style="padding:12px;background:var(--surface2);border-radius:10px;border-left:3px solid var(--accent3)">
+        <strong style="color:var(--text)">🗣️ SQL:</strong><br>
+        SQL is the language you use to talk to a database. <code style="background:var(--tag-bg);color:var(--tag-text);padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace">SELECT * FROM customers</code> means "show me everything in the customers table."
+      </div>
+      <div style="padding:12px;background:var(--surface2);border-radius:10px;border-left:3px solid var(--accent2)">
+        <strong style="color:var(--text)">🔑 Key concepts:</strong><br>
+        Table · Row · Column · Primary Key · Foreign Key · JOIN · WHERE · INSERT · UPDATE · DELETE
+      </div>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ── THEME ── */
+var theme = localStorage.getItem('docs_theme') || 'light';
+setTheme(theme);
+function setTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('themeBtn').textContent = t === 'dark' ? '🌙' : '☀️';
+  localStorage.setItem('docs_theme', t);
+}
+function toggleTheme() { setTheme(theme === 'light' ? 'dark' : 'light'); }
+
+/* ── TOAST ── */
+function toast(msg) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function(){el.classList.remove('show');}, 2500);
+}
+
+/* ── NOTES ── */
+var savedNotes = localStorage.getItem('docs_notes') || '';
+document.getElementById('notesArea').value = savedNotes;
+function saveNotes() {
+  localStorage.setItem('docs_notes', document.getElementById('notesArea').value);
+  toast('✅ Notes saved!');
+}
+// Auto-save notes on typing
+document.getElementById('notesArea').addEventListener('input', function() {
+  clearTimeout(window._noteTimer);
+  window._noteTimer = setTimeout(function(){localStorage.setItem('docs_notes', document.getElementById('notesArea').value);}, 1000);
+});
+
+/* ── FILES ── */
+var files = JSON.parse(localStorage.getItem('docs_files') || '[]');
+
+function getExt(name) {
+  var parts = name.split('.');
+  return parts.length > 1 ? parts.pop().toLowerCase() : 'file';
+}
+function extClass(ext) {
+  if(['pdf'].includes(ext)) return 'ext-pdf';
+  if(['doc','docx','txt','pptx','xlsx'].includes(ext)) return 'ext-doc';
+  if(['png','jpg','jpeg','gif','webp'].includes(ext)) return 'ext-img';
+  return 'ext-other';
+}
+function fmtSize(bytes) {
+  if(bytes < 1024) return bytes + ' B';
+  if(bytes < 1048576) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/1048576).toFixed(1) + ' MB';
+}
+
+function handleFiles(fileList) {
+  Array.from(fileList).forEach(function(file) {
+    var exists = files.find(function(f){return f.name===file.name;});
+    if(exists){toast('⚠️ ' + file.name + ' already added');return;}
+    files.push({
+      id: Date.now() + Math.random(),
+      name: file.name,
+      size: file.size,
+      ext: getExt(file.name),
+      date: new Date().toLocaleDateString('en-ZA')
+    });
+  });
+  saveFiles();
+  renderFiles();
+  toast('✅ ' + fileList.length + ' file(s) added!');
+}
+
+function saveFiles() { localStorage.setItem('docs_files', JSON.stringify(files)); }
+
+function delFile(id) {
+  files = files.filter(function(f){return f.id !== id;});
+  saveFiles(); renderFiles();
+  toast('🗑️ File removed');
+}
+
+function renderFiles() {
+  var list = document.getElementById('fileList');
+  var empty = document.getElementById('emptyFiles');
+  if(!files.length) {
+    list.innerHTML = '<div class="empty-files" id="emptyFiles"><div class="ico">📭</div><div>No documents uploaded yet</div></div>';
+    updateStats(); return;
+  }
+  list.innerHTML = files.map(function(f){
+    return '<div class="file-item">'+
+      '<div class="file-ext '+extClass(f.ext)+'">'+f.ext.toUpperCase()+'</div>'+
+      '<div class="file-info"><div class="file-name">'+f.name+'</div><div class="file-meta">'+fmtSize(f.size)+' · '+f.date+'</div></div>'+
+      '<div class="file-actions">'+
+      '<button class="file-btn del" onclick="delFile('+f.id+')" title="Remove">🗑️</button>'+
+      '</div></div>';
+  }).join('');
+  updateStats();
+}
+
+/* ── DRAG AND DROP ── */
+var dz = document.getElementById('dropZone');
+dz.addEventListener('dragover', function(e){e.preventDefault();dz.classList.add('drag-over');});
+dz.addEventListener('dragleave', function(){dz.classList.remove('drag-over');});
+dz.addEventListener('drop', function(e){e.preventDefault();dz.classList.remove('drag-over');handleFiles(e.dataTransfer.files);});
+
+/* ── DB TOPICS ── */
+var DB_TOPICS = [
+  {id:'t1', name:'What is a Database?', tag:'Basics', desc:'Understanding what databases are and why we use them'},
+  {id:'t2', name:'Tables, Rows & Columns', tag:'Basics', desc:'The structure of a database — like a spreadsheet with rules'},
+  {id:'t3', name:'SQL Basics — SELECT', tag:'SQL', desc:'SELECT * FROM table — fetching data from a table'},
+  {id:'t4', name:'WHERE clause', tag:'SQL', desc:'Filtering data: SELECT * FROM table WHERE age > 18'},
+  {id:'t5', name:'INSERT, UPDATE, DELETE', tag:'SQL', desc:'Adding, changing and removing data from tables'},
+  {id:'t6', name:'Primary Keys & Foreign Keys', tag:'Design', desc:'How tables identify rows and link to each other'},
+  {id:'t7', name:'JOINs (INNER, LEFT, RIGHT)', tag:'SQL', desc:'Combining data from two or more related tables'},
+  {id:'t8', name:'Database Design (ERD)', tag:'Design', desc:'Planning your database with Entity Relationship Diagrams'},
+  {id:'t9', name:'Stored Procedures', tag:'Advanced', desc:'Saving SQL queries to run them easily later'},
+  {id:'t10', name:'Indexes & Performance', tag:'Advanced', desc:'Making your database search faster with indexes'},
+  {id:'t11', name:'Transactions (COMMIT/ROLLBACK)', tag:'Advanced', desc:'Safely making multiple changes at once'},
+  {id:'t12', name:'Microsoft SQL Server Basics', tag:'Tools', desc:'Using SQL Server Management Studio (SSMS)'},
+];
+
+var doneTopics = JSON.parse(localStorage.getItem('docs_topics') || '[]');
+
+function toggleTopic(id) {
+  if(doneTopics.includes(id)) doneTopics = doneTopics.filter(function(x){return x!==id;});
+  else doneTopics.push(id);
+  localStorage.setItem('docs_topics', JSON.stringify(doneTopics));
+  renderTopics();
+  updateStats();
+}
+
+function tagColor(tag) {
+  if(tag==='SQL') return 'background:rgba(59,130,246,.12);color:#3b82f6';
+  if(tag==='Design') return 'background:rgba(67,217,173,.12);color:#43d9ad';
+  if(tag==='Advanced') return 'background:rgba(255,101,132,.12);color:#ff6584';
+  return '';
+}
+
+function renderTopics() {
+  var list = document.getElementById('topicList');
+  list.innerHTML = DB_TOPICS.map(function(t){
+    var done = doneTopics.includes(t.id);
+    return '<div class="topic-item'+(done?' done':'')+'" onclick="toggleTopic(\''+t.id+'\')">'+
+      '<div class="topic-top">'+
+      '<div class="topic-check">'+(done?'✓':'')+'</div>'+
+      '<span class="topic-name">'+t.name+'</span>'+
+      '<span class="topic-tag" style="'+tagColor(t.tag)+'">'+t.tag+'</span>'+
+      '</div>'+
+      '<div class="topic-desc">'+t.desc+'</div>'+
+      '</div>';
+  }).join('');
+  // update progress bar
+  var pct = Math.round((doneTopics.length / DB_TOPICS.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+/* ── STATS ── */
+function updateStats() {
+  document.getElementById('statFiles').textContent = files.length;
+  document.getElementById('statTopics').textContent = doneTopics.length + '/' + DB_TOPICS.length;
+  var pct = Math.round((doneTopics.length / DB_TOPICS.length) * 100);
+  document.getElementById('statPct').textContent = pct + '%';
+}
+
+/* ── QUOTES ── */
+var quotes = [
+  {text:'"The expert in anything was once a beginner."', author:'— Helen Hayes'},
+  {text:'"Data is the new oil."', author:'— Clive Humby'},
+  {text:'"Every master was once a disaster."', author:'— T. Harv Eker'},
+  {text:'"The best time to plant a tree was 20 years ago. The second best time is now."', author:'— Chinese Proverb'},
+  {text:'"Learning never exhausts the mind."', author:'— Leonardo da Vinci'},
+  {text:'"Code is like humor. When you have to explain it, it\'s bad."', author:'— Cory House'},
+];
+var q = quotes[Math.floor(Math.random() * quotes.length)];
+document.getElementById('quoteText').textContent = q.text;
+document.getElementById('quoteAuthor').textContent = q.author;
+
+/* ── INIT ── */
+renderFiles();
+renderTopics();
+updateStats();
+</script>
+</body>
+</html>
