@@ -4,55 +4,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kgomotso Mamogale — IT Portfolio</title>
-<meta name="description" content="NC(V) ITC Student | Web Developer | Cisco Certified | Ekurhuleni East TVET College | South Africa">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-:root{
-  --bg:#06060f;--surface:#0c0c1d;--card:#10102a;--card2:#14142e;
-  --accent:#7c3aed;--al:#a855f7;--gold:#f59e0b;--green:#10b981;--pink:#ec4899;--cyan:#06b6d4;
-  --text:#eeeeff;--muted:#6b6b9a;--border:rgba(124,58,237,.18);--border2:rgba(255,255,255,.06);
-}
+:root{--bg:#06060f;--card:#10102a;--accent:#7c3aed;--al:#a855f7;--gold:#f59e0b;--green:#10b981;--pink:#ec4899;--cyan:#06b6d4;--text:#eeeeff;--muted:#6b6b9a;--border:rgba(124,58,237,.18);--border2:rgba(255,255,255,.06);}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;min-height:100vh}
-.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 70% 60% at 15% 5%,rgba(124,58,237,.13) 0%,transparent 55%),
-             radial-gradient(ellipse 50% 40% at 85% 85%,rgba(236,72,153,.07) 0%,transparent 55%)}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);
-  background-size:60px 60px}
+.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 15% 5%,rgba(124,58,237,.13) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 85% 85%,rgba(236,72,153,.07) 0%,transparent 55%)}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);background-size:60px 60px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
 .page{display:none;min-height:100vh}.page.active{display:block}
-
-/* ── HAMBURGER SIDEBAR ── */
+/* HAMBURGER */
 .ham-btn{background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;z-index:200;position:relative}
 .ham-btn span{display:block;width:22px;height:2px;background:var(--al);border-radius:2px;transition:all .3s}
 .ham-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
 .ham-btn.open span:nth-child(2){opacity:0}
 .ham-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.sidebar{position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#0a0a1e;border-right:1px solid var(--border);z-index:150;transition:left .3s ease;overflow-y:auto;padding:80px 0 30px}
+/* SIDEBAR */
+.sidebar{position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#0a0a1e;border-right:1px solid var(--border);z-index:150;transition:left .3s;overflow-y:auto;padding:80px 0 30px}
 .sidebar.open{left:0}
-.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:140;display:none;backdrop-filter:blur(4px)}
-.sidebar-overlay.open{display:block}
+.sid-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:140;display:none;backdrop-filter:blur(4px)}
+.sid-overlay.open{display:block}
 .sid-head{padding:0 24px 20px;border-bottom:1px solid var(--border2);margin-bottom:16px}
 .sid-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--al)}
 .sid-role{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px}
 .sid-avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--pink));display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px;border:2px solid var(--border)}
 .sid-contact{padding:16px 24px;background:rgba(124,58,237,.06);margin:0 12px 16px;border-radius:10px;border:1px solid var(--border2)}
-.sid-contact-title{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:2px;margin-bottom:10px}
-.sid-contact-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(238,238,255,.7);margin-bottom:7px;text-decoration:none}
-.sid-contact-item:hover{color:var(--al)}
+.sid-ct-title{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:2px;margin-bottom:10px}
+.sid-ct-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(238,238,255,.7);margin-bottom:7px;text-decoration:none}
+.sid-ct-item:hover{color:var(--al)}
 .sid-links{padding:0 12px}
-.sid-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:rgba(238,238,255,.75);transition:all .2s;border:none;background:none;width:100%;text-align:left;text-decoration:none}
+.sid-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:rgba(238,238,255,.75);transition:all .2s;border:none;background:none;width:100%;text-align:left}
 .sid-link:hover{background:rgba(124,58,237,.12);color:var(--al)}
 .sid-link-ico{font-size:18px;width:24px;flex-shrink:0}
-.sid-divider{height:1px;background:var(--border2);margin:10px 14px}
-.sid-wa{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);color:#25d366;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;margin:10px 12px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none}
+.sid-div{height:1px;background:var(--border2);margin:10px 14px}
+.sid-wa{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);color:#25d366;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;margin:10px 12px;font-size:13px;font-weight:700;text-decoration:none}
 .sid-wa:hover{background:rgba(37,211,102,.2)}
-
-/* ── NAV ── */
+/* NAV */
 nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2)}
 .nav-in{display:flex;justify-content:space-between;align-items:center;height:60px;max-width:1120px;margin:0 auto;padding:0 24px}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:var(--al);cursor:pointer}
@@ -60,25 +50,23 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .ntab{padding:6px 13px;background:none;border:1px solid transparent;border-radius:6px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .ntab:hover{color:var(--text);border-color:var(--border)}
 .ntab.active{background:rgba(124,58,237,.15);border-color:var(--accent);color:var(--al)}
-
-/* ── HERO ── */
+/* HERO */
 .hero{padding:72px 0 56px;display:grid;grid-template-columns:1fr 370px;gap:56px;align-items:start}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:30px;margin-bottom:22px;animation:rise .5s ease both}
 .hero-badge::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8.5vw,100px);line-height:.9;letter-spacing:2px;animation:rise .5s .08s ease both}
-.grad{background:linear-gradient(135deg,var(--al) 0%,var(--pink) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
-.hero-role{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);animation:rise .5s .16s ease both;line-height:1.7}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8.5vw,100px);line-height:.9;letter-spacing:2px;animation:rise .5s .1s ease both}
+.grad{background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.hero-role{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);animation:rise .5s .15s ease both;line-height:1.7}
 .hero-role span{color:var(--al)}
-.hero-bio{margin-top:16px;font-size:15px;line-height:1.75;color:rgba(238,238,255,.65);max-width:500px;animation:rise .5s .24s ease both}
-.hero-ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;animation:rise .5s .32s ease both}
+.hero-bio{margin-top:16px;font-size:15px;line-height:1.75;color:rgba(238,238,255,.65);max-width:500px;animation:rise .5s .2s ease both}
+.hero-ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;animation:rise .5s .25s ease both}
 .btn-v{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .22s;text-decoration:none;border:none}
 .bsolid{background:var(--accent);color:#fff}
 .bsolid:hover{background:var(--al);transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,58,237,.4)}
 .bghost{background:transparent;border:1px solid var(--border);color:var(--text)}
 .bghost:hover{border-color:var(--al);background:rgba(124,58,237,.08);transform:translateY(-2px)}
-
-/* ── QR CARD ── */
+/* QR CARD */
 .qr-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;position:relative;overflow:hidden;animation:rise .5s .2s ease both}
 .qr-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--pink))}
 .qr-head{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;margin-bottom:3px}
@@ -87,31 +75,26 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 #qrcode canvas,#qrcode img{border-radius:12px;border:4px solid rgba(124,58,237,.25);padding:8px;background:#fff}
 .qr-steps{display:flex;flex-direction:column;gap:9px}
 .qr-step{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
-.sn{width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--al);flex-shrink:0;font-family:'JetBrains Mono',monospace}
+.sn{width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--al);flex-shrink:0}
 .qr-note{margin-top:12px;padding:9px 12px;background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.2);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan)}
-
-/* ── TICKER ── */
+/* TICKER */
 .ticker-wrap{border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:16px 0;overflow:hidden}
-.ticker-track{display:flex;gap:32px;animation:ticker 24s linear infinite;width:max-content}
+.ticker-track{display:flex;gap:32px;animation:ticker 26s linear infinite;width:max-content}
 @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.titem{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);white-space:nowrap;padding:5px 12px;border:1px solid var(--border2);border-radius:30px}
+.tk-item{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);white-space:nowrap;padding:5px 12px;border:1px solid var(--border2);border-radius:30px}
 .tdot{width:5px;height:5px;border-radius:50%;background:var(--al);flex-shrink:0}
-
-/* ── SECTIONS ── */
+/* SECTIONS */
 .section{padding:64px 0}
 .slabel{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
 .stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,5vw,50px);letter-spacing:1px;margin-bottom:36px;line-height:1}
 .sdiv{border-top:1px solid var(--border2)}
-
-/* ── ABOUT ── */
+/* ABOUT */
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
 .about-box{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:24px}
 .about-box h3{font-size:15px;font-weight:700;margin-bottom:14px}
 .about-list{display:flex;flex-direction:column;gap:8px}
 .about-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(238,238,255,.75);line-height:1.5}
-.about-ico{font-size:16px;flex-shrink:0;margin-top:1px}
-
-/* ── EDUCATION ── */
+/* EDUCATION */
 .edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
 .edu-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:all .25s;position:relative;overflow:hidden}
 .edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--accent),var(--pink))}
@@ -123,21 +106,19 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .edu-subj{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);color:var(--muted)}
 .edu-subj.hl{background:rgba(124,58,237,.18);border-color:rgba(124,58,237,.35);color:var(--al)}
 .edu-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border-radius:20px;margin:10px 0 0 12px}
-
-/* ── CERTS ── */
+/* CERTS */
 .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
 .cert-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:22px;transition:all .25s;display:flex;gap:16px;align-items:flex-start;cursor:pointer;position:relative}
 .cert-card:hover{border-color:rgba(6,182,212,.5);transform:translateY(-4px);box-shadow:0 16px 40px rgba(6,182,212,.1)}
-.cert-card .view-hint{position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);opacity:0;transition:opacity .2s}
-.cert-card:hover .view-hint{opacity:1}
+.cert-hint{position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);opacity:0;transition:.2s}
+.cert-card:hover .cert-hint{opacity:1}
 .cert-logo{width:48px;height:48px;flex-shrink:0;border-radius:10px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);display:flex;align-items:center;justify-content:center;font-size:22px}
 .cert-issuer{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);margin-bottom:4px}
 .cert-name{font-size:14px;font-weight:700;margin-bottom:4px}
 .cert-date{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
 .cert-tags{display:flex;flex-wrap:wrap;gap:5px}
 .ctag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.15);color:var(--cyan)}
-
-/* ── PROJECTS ── */
+/* PROJECTS */
 .pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
 .pcard{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;transition:all .28s}
 .pcard:hover{border-color:rgba(124,58,237,.45);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
@@ -151,8 +132,7 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .plinks{display:flex;gap:8px}
 .plnk{flex:1;text-align:center;padding:7px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid var(--border2);color:var(--muted);transition:all .2s}
 .plnk:hover{border-color:var(--al);color:var(--al)}
-
-/* ── SKILLS ── */
+/* SKILLS */
 .skgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}
 .skitem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:15px}
 .skrow{display:flex;justify-content:space-between;margin-bottom:9px}
@@ -161,14 +141,11 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .sktrack{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
 .skfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--al));animation:barGrow 1.2s ease both;transform-origin:left}
 @keyframes barGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-
-/* ── CONTACT ── */
+/* CONTACT */
 .crow{display:flex;justify-content:center;gap:12px;margin-top:26px;flex-wrap:wrap}
 .clnk{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;border:1px solid var(--border2);color:var(--text);text-decoration:none;font-size:14px;font-weight:600;background:var(--card);transition:all .22s}
 .clnk:hover{border-color:var(--al);color:var(--al);transform:translateY(-2px)}
-
-/* ── BUSINESS PAGE ── */
-.biz-hero{padding:60px 0 30px;text-align:center}
+/* SERVICES PAGE */
 .biz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:32px}
 .biz-card{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:24px;transition:all .25s;position:relative;overflow:hidden}
 .biz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
@@ -179,116 +156,102 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .biz-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
 .biz-ico{font-size:38px;margin-bottom:14px}
 .biz-title{font-size:17px;font-weight:800;margin-bottom:8px}
-.biz-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px}
-.biz-price{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 12px;border-radius:20px;font-weight:700;margin-bottom:12px}
-.biz-price-note{font-size:10px;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace}
+.biz-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.biz-price{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 12px;border-radius:20px;font-weight:700;margin-bottom:6px}
+.biz-price-note{font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:10px}
 .biz-cta{margin-top:40px;text-align:center;padding:36px;background:linear-gradient(135deg,rgba(37,211,102,.06),rgba(124,58,237,.06));border:1px solid rgba(37,211,102,.2);border-radius:18px}
 .biz-cta h3{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;margin-bottom:10px}
 .biz-cta p{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.6}
-.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;transition:all .22s;border:none;cursor:pointer}
+.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;transition:all .22s}
 .wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.35)}
 .laptop-box{margin-top:24px;padding:20px 24px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center}
-
-/* ── ADD TO CART BUTTON ── */
-.add-cart-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .22s;border:1px solid var(--border);background:rgba(124,58,237,.1);color:var(--al);margin-top:8px;font-family:'Syne',sans-serif}
-.add-cart-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-1px)}
+/* CART BUTTON */
+.add-cart-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .22s;border:1px solid var(--border);background:rgba(124,58,237,.1);color:var(--al);margin-top:10px;font-family:'Syne',sans-serif}
+.add-cart-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
 .add-cart-btn.added{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.4);color:var(--green)}
-.add-cart-btn.added:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.4);color:#ef4444}
-
-/* ── FLOATING CART BUTTON ── */
-.cart-fab{position:fixed;bottom:28px;right:28px;z-index:400;background:var(--accent);color:#fff;border:none;border-radius:50px;padding:14px 20px;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(124,58,237,.55);transition:all .3s;font-family:'Syne',sans-serif}
-.cart-fab:hover{background:var(--al);transform:translateY(-3px);box-shadow:0 14px 40px rgba(124,58,237,.6)}
+.add-cart-btn.added:hover{background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.4);color:#ef4444}
+/* CART FAB */
+.cart-fab{position:fixed;bottom:28px;right:28px;z-index:400;background:var(--accent);color:#fff;border:none;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(124,58,237,.5);transition:all .3s;font-family:'Syne',sans-serif}
+.cart-fab:hover{background:var(--al);transform:translateY(-3px)}
 .cart-fab.hidden{opacity:0;pointer-events:none;transform:translateY(20px)}
-.cart-fab.bounce{animation:cartBounce .4s ease}
-@keyframes cartBounce{0%{transform:scale(1)}30%{transform:scale(1.18)}70%{transform:scale(.94)}100%{transform:scale(1)}}
-.cart-count{background:#fff;color:var(--accent);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
-
-/* ── CART DRAWER ── */
+.cart-fab.bounce{animation:cbounce .4s ease}
+@keyframes cbounce{0%,100%{transform:scale(1)}40%{transform:scale(1.15)}}
+.cbadge{background:#fff;color:var(--accent);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
+/* CART DRAWER */
 .cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:410;display:none;backdrop-filter:blur(6px)}
 .cart-overlay.open{display:block}
-.cart-drawer{position:fixed;right:-420px;top:0;width:400px;max-width:100vw;height:100vh;background:#0d0d22;border-left:1px solid var(--border);z-index:420;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden}
+.cart-drawer{position:fixed;right:-420px;top:0;width:400px;max-width:100vw;height:100vh;background:#0d0d22;border-left:1px solid var(--border);z-index:420;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
 .cart-drawer.open{right:0}
-.cart-head{padding:20px 22px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
-.cart-head-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--al);display:flex;align-items:center;gap:10px}
-.cart-close{background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1;transition:color .2s}
-.cart-close:hover{color:var(--text)}
-.cart-body{flex:1;overflow-y:auto;padding:16px 22px}
-.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:14px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:13px;text-align:center;padding:40px}
-.cart-empty-ico{font-size:52px;opacity:.4}
-.cart-item{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px;animation:slideIn .25s ease both}
-@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-.cart-item-ico{font-size:26px;flex-shrink:0;margin-top:2px}
-.cart-item-body{flex:1}
-.cart-item-name{font-size:14px;font-weight:700;margin-bottom:3px}
-.cart-item-desc{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;line-height:1.5}
-.cart-item-remove{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;flex-shrink:0;transition:color .2s;line-height:1;padding:2px}
-.cart-item-remove:hover{color:#ef4444}
-.cart-note-section{margin-top:16px;border-top:1px solid var(--border2);padding-top:16px}
-.cart-note-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al);letter-spacing:2px;margin-bottom:8px}
-.cart-note-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;color:var(--text);font-size:13px;font-family:'Syne',sans-serif;resize:none;transition:border-color .2s;outline:none}
-.cart-note-input:focus{border-color:var(--accent)}
-.cart-footer{padding:18px 22px;border-top:1px solid var(--border2);flex-shrink:0}
-.cart-summary{background:rgba(124,58,237,.07);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px}
-.cart-summary-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:8px}
-.cart-summary-item{font-size:12px;color:rgba(238,238,255,.7);margin-bottom:4px;display:flex;align-items:center;gap:6px}
-.cart-summary-item::before{content:'•';color:var(--al)}
-.cart-wa-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#25d366;color:#fff;padding:15px;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;border:none;transition:all .22s;font-family:'Syne',sans-serif;text-decoration:none}
-.cart-wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.4)}
-.cart-clear-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--muted);padding:10px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border2);margin-top:8px;transition:all .2s;font-family:'JetBrains Mono',monospace}
-.cart-clear-btn:hover{border-color:#ef4444;color:#ef4444}
-
-/* ── TERMS MODAL ── */
-.terms-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:600;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
-.terms-modal-bg.open{display:flex}
-.terms-modal-box{background:#0d0d22;border:1px solid var(--border);border-radius:18px;max-width:720px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;animation:rise .3s ease both}
-.terms-modal-head{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--border2);flex-shrink:0;background:linear-gradient(90deg,rgba(124,58,237,.12),transparent)}
-.terms-modal-head-left{display:flex;flex-direction:column;gap:4px}
-.terms-modal-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--al)}
-.terms-modal-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
-.terms-modal-close{background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1;transition:color .2s;flex-shrink:0}
-.terms-modal-close:hover{color:var(--text)}
-.terms-modal-body{flex:1;overflow-y:auto;padding:24px 28px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent}
-.terms-modal-body::-webkit-scrollbar{width:4px}
-.terms-modal-body::-webkit-scrollbar-track{background:transparent}
-.terms-modal-body::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
-.terms-section{margin-bottom:28px}
-.terms-section:last-child{margin-bottom:0}
-.terms-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);letter-spacing:2px;margin-bottom:6px}
-.terms-heading{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;margin-bottom:10px;color:var(--text)}
-.terms-body{font-size:13px;color:rgba(238,238,255,.7);line-height:1.75}
-.terms-body ul{padding-left:18px;margin-top:8px;display:flex;flex-direction:column;gap:6px}
-.terms-body li{color:rgba(238,238,255,.65)}
-.terms-body li::marker{color:var(--al)}
-.terms-divider{height:1px;background:var(--border2);margin:20px 0}
-.terms-footer{padding:16px 24px;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;flex-shrink:0;background:rgba(124,58,237,.04)}
-.terms-footer-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
-.terms-wa{display:inline-flex;align-items:center;gap:7px;background:#25d366;color:#fff;padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;transition:all .2s}
-.terms-wa:hover{background:#1db954}
-
-/* ── APP PAGE ── */
+.cart-dhead{padding:20px 22px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.cart-dtitle{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--al)}
+.cart-xbtn{background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;transition:color .2s;line-height:1}
+.cart-xbtn:hover{color:var(--text)}
+.cart-dbody{flex:1;overflow-y:auto;padding:16px 22px}
+.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:200px;gap:12px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:13px;text-align:center}
+.cart-item-row{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:14px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px;animation:slideIn .25s ease}
+@keyframes slideIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+.ci-ico{font-size:24px;flex-shrink:0}
+.ci-info{flex:1}
+.ci-name{font-size:14px;font-weight:700;margin-bottom:3px}
+.ci-desc{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.ci-rm{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;transition:color .2s;flex-shrink:0}
+.ci-rm:hover{color:#ef4444}
+.cart-note-sec{margin-top:16px;padding-top:16px;border-top:1px solid var(--border2)}
+.cart-note-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);letter-spacing:2px;margin-bottom:8px}
+.cart-note-ta{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;color:var(--text);font-size:13px;font-family:'Syne',sans-serif;resize:none;outline:none;transition:border-color .2s}
+.cart-note-ta:focus{border-color:var(--accent)}
+.cart-dfooter{padding:18px 22px;border-top:1px solid var(--border2);flex-shrink:0}
+.cart-sumbox{background:rgba(124,58,237,.07);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px}
+.cart-sum-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:8px}
+.cart-sum-line{font-size:12px;color:rgba(238,238,255,.7);margin-bottom:4px;padding-left:12px;position:relative}
+.cart-sum-line::before{content:'&#8226;';color:var(--al);position:absolute;left:0}
+.send-wa-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#25d366;color:#fff;padding:15px;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;border:none;transition:all .22s;font-family:'Syne',sans-serif;text-decoration:none}
+.send-wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.4)}
+.clear-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--muted);padding:10px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border2);margin-top:8px;transition:all .2s;font-family:'JetBrains Mono',monospace}
+.clear-btn:hover{border-color:#ef4444;color:#ef4444}
+/* TERMS MODAL */
+.tm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+.tm-overlay.open{display:flex}
+.tm-box{background:#0d0d22;border:1px solid var(--border);border-radius:18px;max-width:720px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;animation:rise .3s ease}
+.tm-head{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--border2);flex-shrink:0;background:linear-gradient(90deg,rgba(124,58,237,.12),transparent)}
+.tm-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--al)}
+.tm-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:3px}
+.tm-xbtn{background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;transition:color .2s;line-height:1}
+.tm-xbtn:hover{color:var(--text)}
+.tm-body{flex:1;overflow-y:auto;padding:24px 28px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent}
+.tm-body::-webkit-scrollbar{width:4px}
+.tm-body::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
+.t-sec{margin-bottom:26px}
+.t-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);letter-spacing:2px;margin-bottom:5px}
+.t-h{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;margin-bottom:9px}
+.t-p{font-size:13px;color:rgba(238,238,255,.7);line-height:1.75}
+.t-p ul{padding-left:18px;margin-top:8px;display:flex;flex-direction:column;gap:5px}
+.t-p li{color:rgba(238,238,255,.65)}
+.t-p li::marker{color:var(--al)}
+.t-div{height:1px;background:var(--border2);margin:18px 0}
+.tm-foot{padding:14px 24px;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;flex-shrink:0}
+.tm-fnote{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.tm-wa{display:inline-flex;align-items:center;gap:7px;background:#25d366;color:#fff;padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;transition:all .2s}
+.tm-wa:hover{background:#1db954}
+/* APP PAGE */
 .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:36px 0}
 .fcard{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:all .22s}
 .fcard:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px)}
 .fico{font-size:24px;margin-bottom:10px}
 .ftitle{font-size:14px;font-weight:700;margin-bottom:5px}
 .fdesc{font-size:12px;color:var(--muted);line-height:1.6}
-.vwrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 70px rgba(0,0,0,.55);background:#000;margin-top:26px}
+.vwrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;margin-top:26px}
 .vwrap iframe{width:100%;aspect-ratio:16/9;display:block;border:none}
-.bframe{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.5);margin-top:26px}
-.bbar{background:#12122a;padding:10px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border2)}
-.bdots{display:flex;gap:6px}
-.bdot{width:11px;height:11px;border-radius:50%}
-.burl{flex:1;background:rgba(255,255,255,.04);border-radius:6px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
-.aframe{height:660px}
-.aframe iframe{width:100%;height:100%;border:none;display:block}
 .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:22px}
-
+.titem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:13px 15px;display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;transition:all .2s}
+.titem:hover{border-color:rgba(124,58,237,.4)}
 footer{border-top:1px solid var(--border2);padding:24px 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
 footer span{color:var(--al)}
+.tc-lnk{color:var(--muted);cursor:pointer;text-decoration:underline}
+.tc-lnk:hover{color:var(--al)}
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-
 @media(max-width:860px){.hero{grid-template-columns:1fr;gap:36px;padding:40px 0 30px}.qr-card{max-width:340px}.about-grid{grid-template-columns:1fr}}
-@media(max-width:580px){.hero-ctas{flex-direction:column}.ntab{padding:5px 9px;font-size:10px}.aframe{height:500px}.crow{flex-direction:column;align-items:center}.cart-drawer{width:100vw}}
+@media(max-width:580px){.hero-ctas{flex-direction:column}.ntab{padding:5px 9px;font-size:10px}.crow{flex-direction:column;align-items:center}.cart-drawer{width:100vw}}
 </style>
 </head>
 <body>
@@ -296,204 +259,116 @@ footer span{color:var(--al)}
 <div class="bg-grid"></div>
 
 <!-- SIDEBAR OVERLAY -->
-<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
+<div class="sid-overlay" id="sidOverlay" onclick="closeSidebar()"></div>
 
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
   <div class="sid-head">
-    <div class="sid-avatar">🧑🏾‍💻</div>
+    <div class="sid-avatar">&#129489;&#127998;&#8205;&#128187;</div>
     <div class="sid-name">KM.DEV</div>
-    <div class="sid-role">// Kgomotso Mamogale · ITC Level 4</div>
+    <div class="sid-role">// Kgomotso Mamogale &middot; ITC Level 4</div>
   </div>
   <div class="sid-contact">
-    <div class="sid-contact-title">QUICK CONTACT</div>
-    <a class="sid-contact-item" href="/cdn-cgi/l/email-protection#97fcf0f8faf8e3e4f8e3fff6f5f8a5a7a7a3d7f0faf6fefbb9f4f8fa">✉️ <span class="__cf_email__" data-cfemail="7c171b131113080f1308141d1e134e4c4c483c1b111d1510521f1311">[email&#160;protected]</span></a>
-    <a class="sid-contact-item" href="tel:0601603996">📞 060 160 3996</a>
-    <a class="sid-contact-item" href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank">💼 LinkedIn Profile</a>
-    <a class="sid-contact-item" href="https://github.com/soul-net00" target="_blank">🐙 GitHub · soul-net00</a>
+    <div class="sid-ct-title">QUICK CONTACT</div>
+    <a class="sid-ct-item" href="mailto:kgomotsothabo2004@gmail.com">&#9993;&#65039; kgomotsothabo2004@gmail.com</a>
+    <a class="sid-ct-item" href="tel:0601603996">&#128222; 060 160 3996</a>
+    <a class="sid-ct-item" href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank">&#128188; LinkedIn Profile</a>
+    <a class="sid-ct-item" href="https://github.com/soul-net00" target="_blank">&#128025; GitHub &middot; soul-net00</a>
   </div>
-  <a class="sid-wa" href="https://wa.me/27601603996" target="_blank">
-    <span style="font-size:20px">💬</span> WhatsApp Me
-  </a>
+  <a class="sid-wa" href="https://wa.me/27601603996" target="_blank">&#128172; WhatsApp Me</a>
   <div class="sid-links">
-    <div class="sid-divider"></div>
-    <button class="sid-link" onclick="gotoPage('p1');closeSidebar()"><span class="sid-link-ico">💼</span>Portfolio</button>
-    <button class="sid-link" onclick="scrollToSection('about')"><span class="sid-link-ico">👤</span>About Me</button>
-    <button class="sid-link" onclick="scrollToSection('education')"><span class="sid-link-ico">🎓</span>Education</button>
-    <button class="sid-link" onclick="scrollToSection('certs')"><span class="sid-link-ico">🏆</span>Certifications</button>
-    <button class="sid-link" onclick="scrollToSection('projects')"><span class="sid-link-ico">📁</span>Projects</button>
-    <button class="sid-link" onclick="scrollToSection('skills')"><span class="sid-link-ico">⚡</span>Skills</button>
-    <button class="sid-link" onclick="scrollToSection('contact')"><span class="sid-link-ico">📬</span>Contact</button>
-    <div class="sid-divider"></div>
-    <button class="sid-link" onclick="gotoPage('p3');closeSidebar()"><span class="sid-link-ico">🛠️</span>Business Services</button>
-    <button class="sid-link" onclick="gotoPage('p2');closeSidebar()"><span class="sid-link-ico">📱</span>Shop App</button>
-    <div class="sid-divider"></div>
-    <button class="sid-link" onclick="openTerms();closeSidebar()"><span class="sid-link-ico">📄</span>Terms &amp; Conditions</button>
+    <div class="sid-div"></div>
+    <button class="sid-link" onclick="gotoPage('p1');closeSidebar()"><span class="sid-link-ico">&#128188;</span>Portfolio</button>
+    <button class="sid-link" onclick="navTo('about')"><span class="sid-link-ico">&#128100;</span>About Me</button>
+    <button class="sid-link" onclick="navTo('education')"><span class="sid-link-ico">&#127891;</span>Education</button>
+    <button class="sid-link" onclick="navTo('certs')"><span class="sid-link-ico">&#127942;</span>Certifications</button>
+    <button class="sid-link" onclick="navTo('projects')"><span class="sid-link-ico">&#128193;</span>Projects</button>
+    <button class="sid-link" onclick="navTo('skills')"><span class="sid-link-ico">&#9889;</span>Skills</button>
+    <button class="sid-link" onclick="navTo('contact')"><span class="sid-link-ico">&#128236;</span>Contact</button>
+    <div class="sid-div"></div>
+    <button class="sid-link" onclick="gotoPage('p3');closeSidebar()"><span class="sid-link-ico">&#128736;&#65039;</span>Business Services</button>
+    <button class="sid-link" onclick="gotoPage('p2');closeSidebar()"><span class="sid-link-ico">&#128241;</span>Shop App</button>
+    <div class="sid-div"></div>
+    <button class="sid-link" onclick="openTerms();closeSidebar()"><span class="sid-link-ico">&#128196;</span>Terms &amp; Conditions</button>
   </div>
 </div>
 
-<!-- ══════════════ CART DRAWER ══════════════ -->
+<!-- CART OVERLAY + DRAWER -->
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cartDrawer">
-  <div class="cart-head">
-    <div class="cart-head-title">🛒 My Order</div>
-    <button class="cart-close" onclick="closeCart()">✕</button>
+  <div class="cart-dhead">
+    <div class="cart-dtitle">&#128722; My Order</div>
+    <button class="cart-xbtn" onclick="closeCart()">&#x2715;</button>
   </div>
-  <div class="cart-body" id="cartBody">
+  <div class="cart-dbody" id="cartDbody">
     <div class="cart-empty" id="cartEmpty">
-      <div class="cart-empty-ico">🛒</div>
+      <div style="font-size:46px;opacity:.35">&#128722;</div>
       <div>Your cart is empty</div>
-      <div style="font-size:11px;opacity:.6;margin-top:4px">Click "Add to Order" on any service</div>
+      <div style="font-size:11px;opacity:.5;margin-top:4px">Click "Add to Order" on any service</div>
     </div>
-    <div id="cartItems"></div>
-    <div class="cart-note-section" id="cartNoteSection" style="display:none">
-      <div class="cart-note-label">// ADD A NOTE (optional)</div>
-      <textarea class="cart-note-input" id="cartNote" rows="3" placeholder="Tell me more about what you need, your location, budget, etc..."></textarea>
+    <div id="cartList"></div>
+    <div class="cart-note-sec" id="cartNoteSec" style="display:none">
+      <div class="cart-note-lbl">// ADD A NOTE (optional)</div>
+      <textarea class="cart-note-ta" id="cartNote" rows="3" placeholder="Tell me more — your location, budget, deadline..."></textarea>
     </div>
   </div>
-  <div class="cart-footer" id="cartFooter" style="display:none">
-    <div class="cart-summary" id="cartSummary"></div>
-    <a id="cartWaBtn" href="#" target="_blank" class="cart-wa-btn" onclick="buildWaLink()">
-      💬 Send Order via WhatsApp
-    </a>
-    <button class="cart-clear-btn" onclick="clearCart()">🗑️ Clear Order</button>
+  <div class="cart-dfooter" id="cartDfooter" style="display:none">
+    <div class="cart-sumbox" id="cartSum"></div>
+    <a class="send-wa-btn" id="sendWaBtn" href="#" target="_blank" onclick="buildWa()">&#128172; Send Order via WhatsApp</a>
+    <button class="clear-btn" onclick="clearCart()">&#128465;&#65039; Clear Order</button>
   </div>
 </div>
 
-<!-- FLOATING CART BUTTON -->
+<!-- FLOATING CART FAB -->
 <button class="cart-fab hidden" id="cartFab" onclick="openCart()">
-  🛒 <span id="cartFabLabel">View Order</span>
-  <span class="cart-count" id="cartFabCount">0</span>
+  &#128722; View Order <span class="cbadge" id="cartBadge">0</span>
 </button>
 
-<!-- ══════════════ TERMS & CONDITIONS MODAL ══════════════ -->
-<div class="terms-modal-bg" id="termsModal">
-  <div class="terms-modal-box">
-    <div class="terms-modal-head">
-      <div class="terms-modal-head-left">
-        <div class="terms-modal-title">Terms &amp; Conditions</div>
-        <div class="terms-modal-sub">// KM.DEV SOULNET EXPLORE · Last Updated: 04/03/2026</div>
+<!-- TERMS MODAL -->
+<div class="tm-overlay" id="tmOverlay">
+  <div class="tm-box">
+    <div class="tm-head">
+      <div>
+        <div class="tm-title">Terms &amp; Conditions</div>
+        <div class="tm-sub">// KM.DEV SOULNET EXPLORE &middot; Last Updated: 04/03/2026</div>
       </div>
-      <button class="terms-modal-close" onclick="closeTerms()">✕</button>
+      <button class="tm-xbtn" onclick="closeTerms()">&#x2715;</button>
     </div>
-    <div class="terms-modal-body">
-
-      <div class="terms-section">
-        <div class="terms-num">// 01</div>
-        <div class="terms-heading">Introduction</div>
-        <div class="terms-body">Welcome to <strong style="color:var(--al)">KM.DEV SOULNET EXPLORE</strong>. By accessing this website and using our services, you agree to the following Terms and Conditions.<br><br>If you do not agree, please do not use our website or services.</div>
+    <div class="tm-body">
+      <div class="t-sec"><div class="t-num">// 01</div><div class="t-h">Introduction</div>
+        <div class="t-p">Welcome to <strong style="color:var(--al)">KM.DEV SOULNET EXPLORE</strong>. By accessing this website and using our services, you agree to the following Terms and Conditions.<br><br>If you do not agree, please do not use our website or services.</div>
+      </div><div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 02</div><div class="t-h">Services</div>
+        <div class="t-p">We provide digital services including but not limited to:<ul><li>Website Design</li><li>Logo Design</li><li>Graphic Design</li><li>CV Design</li><li>Digital Marketing Services</li></ul><br>All services are confirmed through WhatsApp at <strong style="color:var(--al)">060 160 3996</strong>.</div>
+      </div><div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 03</div><div class="t-h">Orders &amp; Payments</div>
+        <div class="t-p"><ul><li>Orders are submitted through the website and confirmed via WhatsApp.</li><li>A <strong style="color:var(--gold)">50% non-refundable deposit</strong> is required before work begins.</li><li>Remaining balance must be paid before final delivery.</li><li>Payments accepted via <strong>EFT</strong>.</li></ul></div>
+      </div><div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 04</div><div class="t-h">Turnaround Time</div>
+        <div class="t-p"><ul><li>Small projects: <strong style="color:var(--green)">2&ndash;5 working days</strong></li><li>Websites: <strong style="color:var(--green)">5&ndash;10 working days</strong></li></ul><br>Delays may occur if required information is not provided on time.</div>
+      </div><div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 05</div><div class="t-h">Client Responsibilities</div>
+        <div class="t-p">Clients must:<ul><li>Provide accurate information</li><li>Supply content (text, images, logos) where required</li><li>Respond promptly to approval requests</li></ul></div>
+      </div><div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 06</div><div class="t-h">Revisions</div>
+        <div class="t-p"><ul><li>Up to <strong style="color:var(--al)">2&ndash;3 revisions</strong> included unless otherwise stated.</li><li>Additional revisions may be charged separately.</li></ul></div>
+      </div><div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 07</div><div class="t-h">Intellectual Property</div>
+        <div class="t-p">Final designs remain the property of the client once full payment has been received. We reserve the right to display completed work in our portfolio unless agreed otherwise.</div>
+      </div><div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 08</div><div class="t-h">Limitation of Liability</div>
+        <div class="t-p">We are not responsible for:<ul><li>Third-party platform failures</li><li>Hosting/server issues</li><li>Loss of data caused by external services</li></ul></div>
+      </div><div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 09</div><div class="t-h">Changes to Terms</div>
+        <div class="t-p">We reserve the right to update these Terms at any time. Continued use constitutes acceptance.</div>
+      </div><div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 10</div><div class="t-h">Contact</div>
+        <div class="t-p">&#128222; <strong style="color:var(--al)">WhatsApp: 060 160 3996</strong><br>&#9993;&#65039; kgomotsothabo2004@gmail.com</div>
       </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 02</div>
-        <div class="terms-heading">Services</div>
-        <div class="terms-body">We provide digital services including but not limited to:
-          <ul>
-            <li>Website Design</li>
-            <li>Logo Design</li>
-            <li>Graphic Design</li>
-            <li>CV Design</li>
-            <li>Digital Marketing Services</li>
-          </ul>
-          <br>All services are requested via our website cart system and confirmed through WhatsApp at <strong style="color:var(--al)">060 160 3996</strong>.
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 03</div>
-        <div class="terms-heading">Orders &amp; Payments</div>
-        <div class="terms-body">
-          <ul>
-            <li>Orders are submitted through the website and confirmed via WhatsApp.</li>
-            <li>A <strong style="color:var(--gold)">50% non-refundable deposit</strong> is required before work begins.</li>
-            <li>The remaining balance must be paid before final files or website launch.</li>
-            <li>Payments are accepted via <strong>EFT (Electronic Funds Transfer)</strong>.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 04</div>
-        <div class="terms-heading">Turnaround Time</div>
-        <div class="terms-body">Turnaround times depend on project complexity:
-          <ul>
-            <li>Small projects: <strong style="color:var(--green)">2–5 working days</strong></li>
-            <li>Websites: <strong style="color:var(--green)">5–10 working days</strong></li>
-          </ul>
-          <br>Delays may occur if required information is not provided on time.
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 05</div>
-        <div class="terms-heading">Client Responsibilities</div>
-        <div class="terms-body">Clients must:
-          <ul>
-            <li>Provide accurate information</li>
-            <li>Supply content (text, images, logos) where required</li>
-            <li>Respond promptly to approval requests</li>
-          </ul>
-          <br>Delays in communication may affect delivery timelines.
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 06</div>
-        <div class="terms-heading">Revisions</div>
-        <div class="terms-body">
-          <ul>
-            <li>Up to <strong style="color:var(--al)">2–3 revisions</strong> are included unless otherwise stated.</li>
-            <li>Additional revisions may be charged separately.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 07</div>
-        <div class="terms-heading">Intellectual Property</div>
-        <div class="terms-body">Final designs remain the property of the client once full payment has been received. We reserve the right to display completed work in our portfolio unless agreed otherwise.</div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 08</div>
-        <div class="terms-heading">Limitation of Liability</div>
-        <div class="terms-body">We are not responsible for:
-          <ul>
-            <li>Third-party platform failures</li>
-            <li>Hosting/server issues</li>
-            <li>Loss of data caused by external services</li>
-          </ul>
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 09</div>
-        <div class="terms-heading">Changes to Terms</div>
-        <div class="terms-body">We reserve the right to update these Terms at any time. Continued use of our services after changes constitutes acceptance of the updated terms.</div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 10</div>
-        <div class="terms-heading">Contact</div>
-        <div class="terms-body">For any questions regarding these Terms and Conditions, please contact us:<br><br>
-          📞 <strong style="color:var(--al)">WhatsApp: 060 160 3996</strong><br>
-          📧 kgomotsothabo2004@gmail.com
-        </div>
-      </div>
-
     </div>
-    <div class="terms-footer">
-      <span class="terms-footer-note">© 2026 KM.DEV SOULNET EXPLORE · All rights reserved</span>
-      <a href="https://wa.me/27601603996?text=Hi Kgomotso, I have a question about your Terms and Conditions" target="_blank" class="terms-wa">💬 Contact Us</a>
+    <div class="tm-foot">
+      <span class="tm-fnote">&copy; 2026 KM.DEV SOULNET EXPLORE</span>
+      <a href="https://wa.me/27601603996?text=Hi Kgomotso, question about T%26C" target="_blank" class="tm-wa">&#128172; Contact Us</a>
     </div>
   </div>
 </div>
@@ -508,29 +383,29 @@ footer span{color:var(--al)}
       <div class="nav-logo" onclick="gotoPage('p1')">KM.DEV</div>
     </div>
     <div class="nav-tabs">
-      <button class="ntab active" id="tab-p1" onclick="gotoPage('p1')">💼 Portfolio</button>
-      <button class="ntab" id="tab-p3" onclick="gotoPage('p3')">🛠️ Services</button>
-      <button class="ntab" id="tab-p2" onclick="gotoPage('p2')">📱 The App</button>
+      <button class="ntab active" id="tab-p1" onclick="gotoPage('p1')">&#128188; Portfolio</button>
+      <button class="ntab" id="tab-p3" onclick="gotoPage('p3')">&#128736;&#65039; Services</button>
+      <button class="ntab" id="tab-p2" onclick="gotoPage('p2')">&#128241; The App</button>
     </div>
   </div>
 </nav>
 
-<!-- ===================== PAGE 1: PORTFOLIO ===================== -->
+<!-- ======= PAGE 1: PORTFOLIO ======= -->
 <div class="page active" id="p1">
 <div class="wrap">
   <div class="hero">
     <div>
-      <div class="hero-badge">Final Year · NC(V) Level 4 · 2025</div>
+      <div class="hero-badge">Final Year &middot; NC(V) Level 4 &middot; 2025</div>
       <h1 class="hero-name">KGOMOTSO<br><span class="grad">MAMOGALE</span></h1>
       <div class="hero-role">
-        <span>ITC Student</span> · Ekurhuleni East TVET College<br>
-        <span>Cisco Certified</span> · Web Dev · IT Support · 🇿🇦 Gauteng
+        <span>ITC Student</span> &middot; Ekurhuleni East TVET College<br>
+        <span>Cisco Certified</span> &middot; Web Dev &middot; IT Support &middot; &#127464;&#127462; Gauteng
       </div>
-      <p class="hero-bio">Final-year NC(V) ITC student. I build real software, fix real hardware — from SQL databases to VPS networks. Available for freelance work &amp; internships.</p>
+      <p class="hero-bio">Final-year NC(V) ITC student. I build real software, fix real hardware &mdash; from SQL databases to VPS networks. Available for freelance work &amp; internships.</p>
       <div class="hero-ctas">
-        <button class="btn-v bsolid" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">📁 Projects</button>
-        <button class="btn-v bghost" onclick="gotoPage('p3')">🛠️ My Services</button>
-        <a class="btn-v bghost" href="https://wa.me/27601603996" target="_blank">💬 WhatsApp</a>
+        <button class="btn-v bsolid" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">&#128193; Projects</button>
+        <button class="btn-v bghost" onclick="gotoPage('p3')">&#128736;&#65039; My Services</button>
+        <a class="btn-v bghost" href="https://wa.me/27601603996" target="_blank">&#128172; WhatsApp</a>
       </div>
     </div>
     <div class="qr-card">
@@ -542,82 +417,52 @@ footer span{color:var(--al)}
         <div class="qr-step"><div class="sn">2</div>Portfolio opens instantly</div>
         <div class="qr-step"><div class="sn">3</div>No app needed</div>
       </div>
-      <div class="qr-note">🌐 Public · bmiexplore.netlify.app</div>
+      <div class="qr-note">&#127760; Public &middot; bmiexplore.netlify.app</div>
     </div>
   </div>
 </div>
-
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
-    <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
-    <span class="titem"><span class="tdot"></span>SQL Server</span>
-    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Cisco Networking</span>
-    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>VPS Setup</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>IT Support</span>
-    <span class="titem"><span class="tdot" style="background:var(--green)"></span>Excel</span>
-    <span class="titem"><span class="tdot"></span>Word &amp; PowerPoint</span>
-    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>WiFi &amp; Networking</span>
-    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>Windows Admin</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Systems Analysis</span>
-    <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
-    <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
-    <span class="titem"><span class="tdot"></span>SQL Server</span>
-    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Cisco Networking</span>
-    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>VPS Setup</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>IT Support</span>
-    <span class="titem"><span class="tdot" style="background:var(--green)"></span>Excel</span>
-    <span class="titem"><span class="tdot"></span>Word &amp; PowerPoint</span>
-    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>WiFi &amp; Networking</span>
-    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>Windows Admin</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Systems Analysis</span>
-  </div>
-</div>
-
+<div class="ticker-wrap"><div class="ticker-track" id="tickerTrack"></div></div>
 <div class="wrap">
   <section class="section" id="about">
     <div class="slabel">// who I am</div>
     <div class="stitle">ABOUT ME</div>
     <div class="about-grid">
       <div class="about-box">
-        <h3>🔧 What I Do</h3>
+        <h3>&#128295; What I Do</h3>
         <div class="about-list">
-          <div class="about-item"><span class="about-ico">🌐</span>Build websites &amp; web apps — HTML, CSS, JavaScript, deployed on Netlify</div>
-          <div class="about-item"><span class="about-ico">🖥️</span>Set up VPS servers for fast, secure networks and remote environments</div>
-          <div class="about-item"><span class="about-ico">💻</span>Fix laptops, upgrade drives, clean install Windows, update drivers</div>
-          <div class="about-item"><span class="about-ico">📶</span>Configure WiFi routers, set access restrictions, troubleshoot networks</div>
-          <div class="about-item"><span class="about-ico">📊</span>Advanced Excel, Word, PowerPoint — data, documents, presentations</div>
-          <div class="about-item"><span class="about-ico">🗄️</span>Design and build SQL Server databases with stored procedures</div>
-          <div class="about-item"><span class="about-ico">📋</span>Systems Analysis &amp; Design — requirements, diagrams, documentation</div>
-          <div class="about-item"><span class="about-ico">🖨️</span>Desktop apps in VB.NET with full SQL Server backends</div>
+          <div class="about-item"><span>&#127760;</span>Build websites &amp; web apps &mdash; HTML, CSS, JS, deployed on Netlify</div>
+          <div class="about-item"><span>&#128421;&#65039;</span>Set up VPS servers for fast, secure networks and remote environments</div>
+          <div class="about-item"><span>&#128187;</span>Fix laptops, upgrade drives, clean install Windows, update drivers</div>
+          <div class="about-item"><span>&#128246;</span>Configure WiFi routers, access restrictions, troubleshoot networks</div>
+          <div class="about-item"><span>&#128202;</span>Advanced Excel, Word, PowerPoint &mdash; data, documents, presentations</div>
+          <div class="about-item"><span>&#128452;&#65039;</span>Design and build SQL Server databases with stored procedures</div>
+          <div class="about-item"><span>&#128203;</span>Systems Analysis &amp; Design &mdash; requirements, diagrams, docs</div>
+          <div class="about-item"><span>&#128424;&#65039;</span>Desktop apps in VB.NET with full SQL Server backends</div>
         </div>
       </div>
       <div class="about-box">
-        <h3>📌 Quick Facts</h3>
+        <h3>&#128204; Quick Facts</h3>
         <div class="about-list">
-          <div class="about-item"><span class="about-ico">🏫</span>Ekurhuleni East TVET College · Level 4 final year</div>
-          <div class="about-item"><span class="about-ico">✅</span>Passed NC(V) Level 2 &amp; 3 ITC</div>
-          <div class="about-item"><span class="about-ico">🏆</span>Cisco Networking Academy certified</div>
-          <div class="about-item"><span class="about-ico">📍</span>Gauteng, South Africa</div>
-          <div class="about-item"><span class="about-ico">📞</span>060 160 3996</div>
-          <div class="about-item"><span class="about-ico">📧</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cfc3cbc9cbd0d7cbd0ccc5c6cb96949490e4c3c9c5cdc88ac7cbc9">[email&#160;protected]</a></div>
-          <div class="about-item"><span class="about-ico">💡</span>Self-taught: VPS, AI tools, web deployment</div>
-          <div class="about-item"><span class="about-ico">🔓</span>Available for freelance &amp; internships</div>
+          <div class="about-item"><span>&#127979;</span>Ekurhuleni East TVET College &middot; Level 4 final year</div>
+          <div class="about-item"><span>&#9989;</span>Passed NC(V) Level 2 &amp; 3 ITC</div>
+          <div class="about-item"><span>&#127942;</span>Cisco Networking Academy certified</div>
+          <div class="about-item"><span>&#128205;</span>Gauteng, South Africa</div>
+          <div class="about-item"><span>&#128222;</span>060 160 3996</div>
+          <div class="about-item"><span>&#128231;</span>kgomotsothabo2004@gmail.com</div>
+          <div class="about-item"><span>&#128161;</span>Self-taught: VPS, AI tools, web deployment</div>
+          <div class="about-item"><span>&#128275;</span>Available for freelance &amp; internships</div>
         </div>
       </div>
     </div>
   </section>
-
   <section class="section sdiv" id="education">
     <div class="slabel">// formal qualifications</div>
     <div class="stitle">EDUCATION</div>
     <div class="edu-grid">
       <div class="edu-card">
-        <div class="edu-level">CURRENT · NC(V) LEVEL 4</div>
+        <div class="edu-level">CURRENT &middot; NC(V) LEVEL 4</div>
         <div class="edu-title">Information Technology &amp; Computer Science</div>
-        <div class="edu-place">Ekurhuleni East TVET College · 2025 (Final Year)</div>
+        <div class="edu-place">Ekurhuleni East TVET College &middot; 2025 (Final Year)</div>
         <div class="edu-subjects">
           <span class="edu-subj hl">Computer Programming</span>
           <span class="edu-subj hl">System Analysis &amp; Design</span>
@@ -625,12 +470,12 @@ footer span{color:var(--al)}
           <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
           <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
         </div>
-        <div class="edu-badge">🎯 In Progress</div>
+        <div class="edu-badge">&#127919; In Progress</div>
       </div>
       <div class="edu-card">
-        <div class="edu-level">PASSED · NC(V) LEVEL 3</div>
+        <div class="edu-level">PASSED &middot; NC(V) LEVEL 3</div>
         <div class="edu-title">Information Technology &amp; Computer Science</div>
-        <div class="edu-place">Ekurhuleni East TVET College · 2024</div>
+        <div class="edu-place">Ekurhuleni East TVET College &middot; 2024</div>
         <div class="edu-subjects">
           <span class="edu-subj hl">Principles of Computer Programming</span>
           <span class="edu-subj hl">System Analysis &amp; Design</span>
@@ -638,12 +483,12 @@ footer span{color:var(--al)}
           <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
           <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
         </div>
-        <div class="edu-badge">✅ Completed</div>
+        <div class="edu-badge">&#9989; Completed</div>
       </div>
       <div class="edu-card">
-        <div class="edu-level">PASSED · NC(V) LEVEL 2</div>
+        <div class="edu-level">PASSED &middot; NC(V) LEVEL 2</div>
         <div class="edu-title">Information Technology &amp; Computer Science</div>
-        <div class="edu-place">Ekurhuleni East TVET College · 2023</div>
+        <div class="edu-place">Ekurhuleni East TVET College &middot; 2023</div>
         <div class="edu-subjects">
           <span class="edu-subj hl">Introduction to Systems Development</span>
           <span class="edu-subj hl">Introduction to Information Systems</span>
@@ -651,108 +496,68 @@ footer span{color:var(--al)}
           <span class="edu-subj">Electronics</span>
           <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
         </div>
-        <div class="edu-badge">✅ Completed</div>
+        <div class="edu-badge">&#9989; Completed</div>
       </div>
     </div>
   </section>
-
   <section class="section sdiv" id="certs">
-    <div class="slabel">// verified credentials · click to view</div>
+    <div class="slabel">// verified credentials &middot; click to view</div>
     <div class="stitle">CERTIFICATIONS</div>
     <div class="cert-grid">
       <div class="cert-card" onclick="window.open('https://www.credly.com/badges/b8ab7c11-2b59-45bd-8d85-97b6b6dcb3fc','_blank')">
-        <span class="view-hint">👁 Click to view certificate</span>
-        <div class="cert-logo">🛡️</div>
-        <div>
-          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
-          <div class="cert-name">Introduction to Cybersecurity</div>
-          <div class="cert-date">Issued: 04 Sep 2025 · Ekurhuleni East TVET College</div>
-          <div class="cert-tags">
-            <span class="ctag">Cyber Threats</span><span class="ctag">Online Safety</span>
-            <span class="ctag">Network Security</span><span class="ctag">Verified Badge</span>
-          </div>
-        </div>
+        <span class="cert-hint">&#128065; Click to view</span>
+        <div class="cert-logo">&#128737;&#65039;</div>
+        <div><div class="cert-issuer">CISCO NETWORKING ACADEMY</div><div class="cert-name">Introduction to Cybersecurity</div><div class="cert-date">Issued: 04 Sep 2025</div><div class="cert-tags"><span class="ctag">Cyber Threats</span><span class="ctag">Network Security</span><span class="ctag">Verified Badge</span></div></div>
       </div>
       <div class="cert-card" onclick="window.open('https://www.credly.com/badges/5996b50a-e8f7-421c-b88a-27863505a0aa','_blank')">
-        <span class="view-hint">👁 Click to view certificate</span>
-        <div class="cert-logo">🌐</div>
-        <div>
-          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
-          <div class="cert-name">Get Connected</div>
-          <div class="cert-date">Issued: 12 Aug 2024 · Cisco Global</div>
-          <div class="cert-tags">
-            <span class="ctag">Internet Fundamentals</span><span class="ctag">Digital Literacy</span>
-            <span class="ctag">Connectivity</span>
-          </div>
-        </div>
+        <span class="cert-hint">&#128065; Click to view</span>
+        <div class="cert-logo">&#127760;</div>
+        <div><div class="cert-issuer">CISCO NETWORKING ACADEMY</div><div class="cert-name">Get Connected</div><div class="cert-date">Issued: 12 Aug 2024</div><div class="cert-tags"><span class="ctag">Internet Fundamentals</span><span class="ctag">Digital Literacy</span></div></div>
       </div>
       <div class="cert-card" style="border-color:rgba(245,158,11,.15);cursor:default">
-        <div class="cert-logo" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2)">📜</div>
-        <div>
-          <div class="cert-issuer" style="color:var(--gold)">COMING SOON</div>
-          <div class="cert-name">NC(V) Level 4 Certificate</div>
-          <div class="cert-date">Expected: 2025 · Ekurhuleni East TVET College</div>
-          <div class="cert-tags"><span class="ctag" style="color:var(--gold);border-color:rgba(245,158,11,.2)">In Progress</span></div>
-        </div>
+        <div class="cert-logo" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2)">&#128220;</div>
+        <div><div class="cert-issuer" style="color:var(--gold)">COMING SOON</div><div class="cert-name">NC(V) Level 4 Certificate</div><div class="cert-date">Expected: 2025</div><div class="cert-tags"><span class="ctag" style="color:var(--gold);border-color:rgba(245,158,11,.2)">In Progress</span></div></div>
       </div>
     </div>
   </section>
-
   <section class="section sdiv" id="projects">
     <div class="slabel">// what I've built</div>
     <div class="stitle">PROJECTS</div>
     <div class="pgrid">
       <div class="pcard">
         <img class="pimg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop" alt="MobileFix">
-        <div class="pbody">
-          <div class="pnum">01 / DESKTOP APP</div><div class="ptitle">MobileFix Manager</div>
-          <div class="pdesc">Full cellphone repair shop system in VB.NET — receipt generation, customer database, inventory connected to SQL Server.</div>
+        <div class="pbody"><div class="pnum">01 / DESKTOP APP</div><div class="ptitle">MobileFix Manager</div>
+          <div class="pdesc">Full cellphone repair shop system in VB.NET &mdash; receipt generation, customer database, inventory connected to SQL Server.</div>
           <div class="ptags"><span class="tag">VB.NET</span><span class="tag">SQL Server</span><span class="tag">Desktop</span></div>
-          <div class="plinks">
-            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
-            <a href="#" class="plnk" onclick="gotoPage('p2');return false">↗ Web Version</a>
-          </div>
+          <div class="plinks"><a href="https://github.com/soul-net00" class="plnk" target="_blank">&#8599; GitHub</a><a href="#" class="plnk" onclick="gotoPage('p2');return false">&#8599; Web Version</a></div>
         </div>
       </div>
       <div class="pcard">
         <img class="pimg" src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=400&fit=crop" alt="BMI">
-        <div class="pbody">
-          <div class="pnum">02 / WEB APP</div><div class="ptitle">BMI Explorer</div>
+        <div class="pbody"><div class="pnum">02 / WEB APP</div><div class="ptitle">BMI Explorer</div>
           <div class="pdesc">Interactive BMI calculator with visual feedback and health recommendations. Live on GitHub Pages.</div>
           <div class="ptags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-          <div class="plinks">
-            <a href="https://github.com/soul-net00/bmi_explore" class="plnk" target="_blank">↗ GitHub</a>
-            <a href="https://soul-net00.github.io/bmi_explore/" class="plnk" target="_blank">↗ Live Demo</a>
-          </div>
+          <div class="plinks"><a href="https://github.com/soul-net00/bmi_explore" class="plnk" target="_blank">&#8599; GitHub</a><a href="https://soul-net00.github.io/bmi_explore/" class="plnk" target="_blank">&#8599; Live Demo</a></div>
         </div>
       </div>
       <div class="pcard">
         <img class="pimg" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop" alt="DB">
-        <div class="pbody">
-          <div class="pnum">03 / DATABASE</div><div class="ptitle">CellphoneShopDB</div>
+        <div class="pbody"><div class="pnum">03 / DATABASE</div><div class="ptitle">CellphoneShopDB</div>
           <div class="pdesc">Normalized SQL Server database with FK relationships, stored procedures and indexing for the MobileFix system.</div>
           <div class="ptags"><span class="tag">SQL Server</span><span class="tag">Database Design</span><span class="tag">T-SQL</span></div>
-          <div class="plinks">
-            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
-            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ Schema</a>
-          </div>
+          <div class="plinks"><a href="https://github.com/soul-net00" class="plnk" target="_blank">&#8599; GitHub</a><a href="https://github.com/soul-net00" class="plnk" target="_blank">&#8599; Schema</a></div>
         </div>
       </div>
       <div class="pcard">
         <img class="pimg" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop" alt="VPS">
-        <div class="pbody">
-          <div class="pnum">04 / INFRASTRUCTURE</div><div class="ptitle">VPS Network Setup</div>
+        <div class="pbody"><div class="pnum">04 / INFRASTRUCTURE</div><div class="ptitle">VPS Network Setup</div>
           <div class="pdesc">Configured VPS environments for fast, secure hosting. Server setup, network config, and remote access management.</div>
           <div class="ptags"><span class="tag">VPS</span><span class="tag">Linux</span><span class="tag">Networking</span></div>
-          <div class="plinks">
-            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
-            <a href="/cdn-cgi/l/email-protection#cea5a9a1a3a1babda1baa6afaca1fcfefefa8ea9a3afa7a2e0ada1a3" class="plnk">↗ Ask Me</a>
-          </div>
+          <div class="plinks"><a href="https://github.com/soul-net00" class="plnk" target="_blank">&#8599; GitHub</a><a href="mailto:kgomotsothabo2004@gmail.com" class="plnk">&#8599; Ask Me</a></div>
         </div>
       </div>
     </div>
   </section>
-
   <section class="section sdiv" id="skills">
     <div class="slabel">// proficiency levels</div>
     <div class="stitle">SKILLS</div>
@@ -771,1482 +576,286 @@ footer span{color:var(--al)}
       <div class="skitem"><div class="skrow"><span class="skname">AI Tools</span><span class="skpct">82%</span></div><div class="sktrack"><div class="skfill" style="width:82%"></div></div></div>
     </div>
   </section>
-
   <section class="section sdiv" style="text-align:center" id="contact">
     <div class="slabel" style="text-align:center">// let's connect</div>
     <div class="stitle" style="text-align:center">GET IN TOUCH</div>
     <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto;line-height:1.7">IT support, freelance web work, or collaborating on a project? I'm available.</p>
     <div class="crow">
-      <a href="/cdn-cgi/l/email-protection#640f030b090b10170b100c05060b56545450240309050d084a070b09" class="clnk">✉️ <span class="__cf_email__" data-cfemail="d5beb2bab8baa1a6baa1bdb4b7bae7e5e5e195b2b8b4bcb9fbb6bab8">[email&#160;protected]</span></a>
-      <a href="tel:0601603996" class="clnk">📞 060 160 3996</a>
-      <a href="https://github.com/soul-net00" target="_blank" class="clnk">🐙 GitHub</a>
-      <a href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank" class="clnk">💼 LinkedIn</a>
-      <a href="https://wa.me/27601603996" target="_blank" class="clnk" style="background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.3);color:#25d366">💬 WhatsApp</a>
+      <a href="mailto:kgomotsothabo2004@gmail.com" class="clnk">&#9993;&#65039; kgomotsothabo2004@gmail.com</a>
+      <a href="tel:0601603996" class="clnk">&#128222; 060 160 3996</a>
+      <a href="https://github.com/soul-net00" target="_blank" class="clnk">&#128025; GitHub</a>
+      <a href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank" class="clnk">&#128188; LinkedIn</a>
+      <a href="https://wa.me/27601603996" target="_blank" class="clnk" style="background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.3);color:#25d366">&#128172; WhatsApp</a>
     </div>
   </section>
 </div>
-<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <span>060 160 3996</span> · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ea818d8587859e99859e828b8885d8dadadeaa8d878b8386c4898587">[email&#160;protected]</a> · 2025 · <span style="cursor:pointer;text-decoration:underline;color:var(--muted)" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
-</div><!-- /p1 -->
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> &middot; <span>060 160 3996</span> &middot; kgomotsothabo2004@gmail.com &middot; 2025 &middot; <span class="tc-lnk" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
+</div>
 
-<!-- ===================== PAGE 3: BUSINESS SERVICES ===================== -->
+<!-- ======= PAGE 3: SERVICES ======= -->
 <div class="page" id="p3">
 <div class="wrap">
-  <div class="biz-hero">
+  <div style="padding:60px 0 30px;text-align:center">
     <div class="slabel" style="text-align:center">// available for hire</div>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,72px);letter-spacing:2px;line-height:.95;margin-bottom:16px">
-      IT SERVICES &amp;<br><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">BUSINESS SOLUTIONS</span>
-    </h2>
-    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto;line-height:1.7">Pick the services you need, add them to your order, then send it straight to my WhatsApp. Prices start from R50 and are fully negotiable.</p>
-    <div style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.1);border:1px solid var(--border);border-radius:30px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--al)">
-      🛒 Click <strong style="color:#fff;margin:0 4px">"Add to Order"</strong> on any service below
-    </div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,72px);letter-spacing:2px;line-height:.95;margin-bottom:16px">IT SERVICES &amp;<br><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">BUSINESS SOLUTIONS</span></h2>
+    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 16px;line-height:1.7">Pick the services you need, add them to your order, then send it straight to my WhatsApp.</p>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.1);border:1px solid var(--border);border-radius:30px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--al)">&#128722; Click <strong style="color:#fff;margin:0 4px">"Add to Order"</strong> on any service</div>
   </div>
-
   <div class="biz-grid">
-
     <div class="biz-card web">
-      <div class="biz-ico">🌐</div>
-      <div class="biz-title">Website / Web App</div>
-      <div class="biz-desc">Custom websites built from scratch — portfolio sites, business landing pages, web apps with JavaScript. Deployed on Netlify or GitHub Pages. Mobile-friendly &amp; fast.</div>
-      <div class="biz-price">💰 Price depends on complexity</div>
-      <div class="biz-price-note">Negotiable · Starts from R50</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Website / Web App','🌐','Custom website or web app built from scratch')">
-        🛒 Add to Order
-      </button>
+      <div class="biz-ico">&#127760;</div><div class="biz-title">Website / Web App</div>
+      <div class="biz-desc">Custom websites built from scratch &mdash; portfolio sites, business landing pages, web apps. Deployed on Netlify. Mobile-friendly &amp; fast.</div>
+      <div class="biz-price">&#128176; Price depends on complexity</div><div class="biz-price-note">Negotiable &middot; Starts from R50</div>
+      <button class="add-cart-btn" id="b1" onclick="toggleCart('b1','Website / Web App','&#127760;','Custom website or web app built from scratch')">&#128722; Add to Order</button>
     </div>
-
     <div class="biz-card hw">
-      <div class="biz-ico">💻</div>
-      <div class="biz-title">Laptop Repair &amp; Setup</div>
-      <div class="biz-desc">Windows clean install, driver updates, virus removal, SSD/HDD upgrades, speed optimization. Slow laptop? I can fix it. Available in Gauteng area.</div>
-      <div class="biz-price">💰 Price per job</div>
-      <div class="biz-price-note">Negotiable · Available in Gauteng</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Laptop Repair &amp; Setup','💻','Laptop repair, Windows install, hardware upgrade')">
-        🛒 Add to Order
-      </button>
+      <div class="biz-ico">&#128187;</div><div class="biz-title">Laptop Repair &amp; Setup</div>
+      <div class="biz-desc">Windows clean install, driver updates, virus removal, SSD/HDD upgrades, speed optimization. Available in Gauteng area.</div>
+      <div class="biz-price">&#128176; Price per job</div><div class="biz-price-note">Negotiable &middot; Gauteng area</div>
+      <button class="add-cart-btn" id="b2" onclick="toggleCart('b2','Laptop Repair and Setup','&#128187;','Laptop repair, Windows install, hardware upgrade')">&#128722; Add to Order</button>
     </div>
-
     <div class="biz-card net">
-      <div class="biz-ico">📶</div>
-      <div class="biz-title">WiFi &amp; Network Setup</div>
-      <div class="biz-desc">Router configuration, WiFi password &amp; access restrictions, network troubleshooting, VPS setup for fast &amp; secure remote access. Home or small business.</div>
-      <div class="biz-price">💰 Price depends on complexity</div>
-      <div class="biz-price-note">Negotiable · Home or business</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'WiFi &amp; Network Setup','📶','WiFi / router setup and network configuration')">
-        🛒 Add to Order
-      </button>
+      <div class="biz-ico">&#128246;</div><div class="biz-title">WiFi &amp; Network Setup</div>
+      <div class="biz-desc">Router configuration, WiFi password &amp; access restrictions, network troubleshooting, VPS setup. Home or small business.</div>
+      <div class="biz-price">&#128176; Price depends on complexity</div><div class="biz-price-note">Negotiable &middot; Home or business</div>
+      <button class="add-cart-btn" id="b3" onclick="toggleCart('b3','WiFi and Network Setup','&#128246;','WiFi router setup and network configuration')">&#128722; Add to Order</button>
     </div>
-
     <div class="biz-card doc">
-      <div class="biz-ico">📊</div>
-      <div class="biz-title">Excel, Word &amp; PowerPoint</div>
-      <div class="biz-desc">Spreadsheets with formulas &amp; automation, professional Word documents, PowerPoint presentations. Data analysis, reports, any document you need.</div>
-      <div class="biz-price">💰 Per document / project</div>
-      <div class="biz-price-note">Negotiable · Quick turnaround</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Excel / Word / PowerPoint','📊','Spreadsheets, Word docs, or PowerPoint presentations')">
-        🛒 Add to Order
-      </button>
+      <div class="biz-ico">&#128202;</div><div class="biz-title">Excel, Word &amp; PowerPoint</div>
+      <div class="biz-desc">Spreadsheets with formulas &amp; automation, professional Word documents, PowerPoint presentations. Any document you need.</div>
+      <div class="biz-price">&#128176; Per document / project</div><div class="biz-price-note">Negotiable &middot; Quick turnaround</div>
+      <button class="add-cart-btn" id="b4" onclick="toggleCart('b4','Excel / Word / PowerPoint','&#128202;','Spreadsheets, Word docs, or PowerPoint presentations')">&#128722; Add to Order</button>
     </div>
-
     <div class="biz-card web">
-      <div class="biz-ico">🗄️</div>
-      <div class="biz-title">Database Design</div>
-      <div class="biz-desc">SQL Server database design, table relationships, stored procedures, data management. Perfect for small businesses needing structured data storage.</div>
-      <div class="biz-price">💰 Price by project scope</div>
-      <div class="biz-price-note">Negotiable · Full documentation included</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Database Design','🗄️','SQL Server database design and stored procedures')">
-        🛒 Add to Order
-      </button>
+      <div class="biz-ico">&#128452;&#65039;</div><div class="biz-title">Database Design</div>
+      <div class="biz-desc">SQL Server database design, table relationships, stored procedures, data management. Perfect for small businesses.</div>
+      <div class="biz-price">&#128176; Price by project scope</div><div class="biz-price-note">Negotiable &middot; Full documentation</div>
+      <button class="add-cart-btn" id="b5" onclick="toggleCart('b5','Database Design','&#128452;','SQL Server database design and stored procedures')">&#128722; Add to Order</button>
     </div>
-
     <div class="biz-card hw">
-      <div class="biz-ico">📋</div>
-      <div class="biz-title">Systems Analysis &amp; Design</div>
-      <div class="biz-desc">Requirements gathering, system diagrams (DFD, ERD, flowcharts), documentation. Students and small businesses needing IT analysis help.</div>
-      <div class="biz-price">💰 From R50</div>
-      <div class="biz-price-note">Negotiable · Great for students</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Systems Analysis &amp; Design','📋','DFD, ERD, flowcharts and system documentation')">
-        🛒 Add to Order
-      </button>
+      <div class="biz-ico">&#128203;</div><div class="biz-title">Systems Analysis &amp; Design</div>
+      <div class="biz-desc">Requirements gathering, system diagrams (DFD, ERD, flowcharts), documentation. Students and small businesses.</div>
+      <div class="biz-price">&#128176; From R50</div><div class="biz-price-note">Negotiable &middot; Great for students</div>
+      <button class="add-cart-btn" id="b6" onclick="toggleCart('b6','Systems Analysis and Design','&#128203;','DFD, ERD, flowcharts and system documentation')">&#128722; Add to Order</button>
     </div>
-
   </div>
-
   <div class="laptop-box" style="margin-top:30px">
-    <p style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px">🖥️ Need a Laptop?</p>
-    <p>I can help source and set up laptops. Text me on WhatsApp to discuss what you need and your budget.</p>
-    <button class="add-cart-btn" style="max-width:320px;margin:14px auto 0" onclick="cartToggle(this,'Laptop Sourcing &amp; Setup','🖥️','Help sourcing and setting up a laptop')">
-      🛒 Add Laptop Help to Order
-    </button>
+    <p style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px">&#128421;&#65039; Need a Laptop?</p>
+    <p style="font-size:13px;color:rgba(238,238,255,.75);margin-bottom:14px">I can help source and set up laptops. Text me on WhatsApp to discuss what you need and your budget.</p>
+    <button class="add-cart-btn" id="b7" style="max-width:320px;margin:0 auto" onclick="toggleCart('b7','Laptop Sourcing and Setup','&#128421;','Help sourcing and setting up a laptop')">&#128722; Add Laptop Help to Order</button>
   </div>
-
   <div class="biz-cta" style="margin-top:40px">
     <h3>READY TO GET STARTED?</h3>
-    <p>Add services above to your order, then send it directly to my WhatsApp. I usually reply fast and prices are always negotiable.</p>
-    <a href="https://wa.me/27601603996?text=Hi Kgomotso, I need your IT services" target="_blank" class="wa-btn">
-      💬 WhatsApp · 060 160 3996
-    </a>
-    <div style="margin-top:16px;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace">
-      📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="503b373f3d3f24233f243831323f6260606410373d31393c7e333f3d">[email&#160;protected]</a> &nbsp;·&nbsp; 📞 060 160 3996
-    </div>
+    <p>Add services above to your order, then send it directly to my WhatsApp. I reply fast and prices are always negotiable.</p>
+    <a href="https://wa.me/27601603996?text=Hi Kgomotso, I need your IT services" target="_blank" class="wa-btn">&#128172; WhatsApp &middot; 060 160 3996</a>
+    <div style="margin-top:16px;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace">&#128231; kgomotsothabo2004@gmail.com &nbsp;&middot;&nbsp; &#128222; 060 160 3996</div>
   </div>
 </div>
-<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <span>060 160 3996</span> · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e289858d8f8d96918d968a83808dd0d2d2d6a2858f838b8ecc818d8f">[email&#160;protected]</a> · 2025 · <span style="cursor:pointer;text-decoration:underline;color:var(--muted)" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
-</div><!-- /p3 -->
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> &middot; <span>060 160 3996</span> &middot; kgomotsothabo2004@gmail.com &middot; 2025 &middot; <span class="tc-lnk" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
+</div>
 
-
-<!-- ===================== PAGE 2: THE APP ===================== -->
+<!-- ======= PAGE 2: THE APP ======= -->
 <div class="page" id="p2">
 <div class="wrap">
   <div style="padding:60px 0 20px;text-align:center">
     <div class="slabel" style="text-align:center">// featured project</div>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,7vw,76px);letter-spacing:2px;line-height:.95;margin-bottom:18px">
-      CELLPHONE SHOP<br><span style="background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">MANAGEMENT SYSTEM</span>
-    </h2>
-    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 22px;line-height:1.7">Fully functional browser-based shop management. No install needed — runs in your browser with local data and print-ready receipts.</p>
-    <button class="btn-v bsolid" onclick="document.getElementById('liveapp').scrollIntoView({behavior:'smooth'})" style="margin:0 auto">🚀 Try It Live</button>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,7vw,76px);letter-spacing:2px;line-height:.95;margin-bottom:18px">CELLPHONE SHOP<br><span style="background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">MANAGEMENT SYSTEM</span></h2>
+    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 22px;line-height:1.7">Fully functional browser-based shop management. No install needed &mdash; runs in your browser with local data and print-ready receipts.</p>
+    <button class="btn-v bsolid" onclick="document.getElementById('liveapp').scrollIntoView({behavior:'smooth'})" style="margin:0 auto">&#128640; Try It Live</button>
   </div>
-
   <div class="fgrid">
-    <div class="fcard"><div class="fico">🧾</div><div class="ftitle">Receipt Generation</div><div class="fdesc">Auto codes, print-ready HTML with watermarks, signature lines and legal disclaimer.</div></div>
-    <div class="fcard"><div class="fico">👥</div><div class="ftitle">Customer Database</div><div class="fdesc">Save details. Instant search by phone, receipt ID or code.</div></div>
-    <div class="fcard"><div class="fico">📦</div><div class="ftitle">11 Categories</div><div class="fdesc">Repairs, accessories, software — with optional per-item discounts.</div></div>
-    <div class="fcard"><div class="fico">💾</div><div class="ftitle">Export &amp; Backup</div><div class="fdesc">Full JSON export/import. Restore database on any device instantly.</div></div>
-    <div class="fcard"><div class="fico">🖨️</div><div class="ftitle">Print Ready</div><div class="fdesc">Professional print page with company logo and full legal terms.</div></div>
-    <div class="fcard"><div class="fico">🔒</div><div class="ftitle">Password Protected</div><div class="fdesc">Settings locked. You control company info and branding.</div></div>
+    <div class="fcard"><div class="fico">&#129534;</div><div class="ftitle">Receipt Generation</div><div class="fdesc">Auto codes, print-ready HTML with watermarks and signature lines.</div></div>
+    <div class="fcard"><div class="fico">&#128101;</div><div class="ftitle">Customer Database</div><div class="fdesc">Save details. Instant search by phone, receipt ID or code.</div></div>
+    <div class="fcard"><div class="fico">&#128230;</div><div class="ftitle">11 Categories</div><div class="fdesc">Repairs, accessories, software &mdash; with per-item discounts.</div></div>
+    <div class="fcard"><div class="fico">&#128190;</div><div class="ftitle">Export &amp; Backup</div><div class="fdesc">Full JSON export/import. Restore on any device instantly.</div></div>
+    <div class="fcard"><div class="fico">&#128424;&#65039;</div><div class="ftitle">Print Ready</div><div class="fdesc">Professional print page with logo and full legal terms.</div></div>
+    <div class="fcard"><div class="fico">&#128274;</div><div class="ftitle">Password Protected</div><div class="fdesc">Settings locked. You control company info and branding.</div></div>
   </div>
-
   <section class="section sdiv">
     <div class="slabel">// watch it in action</div>
     <div class="stitle">VIDEO DEMO</div>
     <div class="vwrap">
-      <iframe src="https://www.youtube.com/embed/L99lApSNXuo?si=2OmKCjXUdDPmnkMX" title="Shop System Demo"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <iframe src="https://www.youtube.com/embed/L99lApSNXuo?si=2OmKCjXUdDPmnkMX" title="Shop System Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
   </section>
-
   <section class="section sdiv">
-    <div class="slabel">// built with</div>
-    <div class="stitle">TECH STACK</div>
+    <div class="slabel">// built with</div><div class="stitle">TECH STACK</div>
     <div class="tgrid">
-      <div class="titem"><span style="font-size:20px">🌐</span>HTML5 &amp; CSS3</div>
-      <div class="titem"><span style="font-size:20px">⚡</span>Vanilla JavaScript</div>
-      <div class="titem"><span style="font-size:20px">💾</span>localStorage API</div>
-      <div class="titem"><span style="font-size:20px">🖨️</span>Browser Print API</div>
-      <div class="titem"><span style="font-size:20px">📄</span>Blob / File API</div>
-      <div class="titem"><span style="font-size:20px">🚀</span>Netlify Hosting</div>
+      <div class="titem"><span style="font-size:20px">&#127760;</span>HTML5 &amp; CSS3</div>
+      <div class="titem"><span style="font-size:20px">&#9889;</span>Vanilla JavaScript</div>
+      <div class="titem"><span style="font-size:20px">&#128190;</span>localStorage API</div>
+      <div class="titem"><span style="font-size:20px">&#128424;&#65039;</span>Browser Print API</div>
+      <div class="titem"><span style="font-size:20px">&#128196;</span>Blob / File API</div>
+      <div class="titem"><span style="font-size:20px">&#128640;</span>Netlify Hosting</div>
     </div>
   </section>
-
   <section class="section sdiv" id="liveapp">
-    <div class="slabel">// try it yourself</div>
-    <div class="stitle">LIVE APPLICATION</div>
-    <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Fully interactive. Data stays in your browser — nothing sent to any server.</p>
+    <div class="slabel">// try it yourself</div><div class="stitle">LIVE APPLICATION</div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:40px;text-align:center;max-width:500px;margin:0 auto">
-      <div style="font-size:64px;margin-bottom:16px">📱</div>
+      <div style="font-size:64px;margin-bottom:16px">&#128241;</div>
       <h3 style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:10px">CELLPHONE SHOP APP</h3>
-      <p style="color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:24px">Create receipts, manage customers, track revenue. Opens in a new tab — works on any device.</p>
-      <a href="shop.html" target="_blank" class="btn-v bsolid" style="margin:0 auto;display:inline-flex">🚀 Open App</a>
+      <p style="color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:24px">Create receipts, manage customers, track revenue. Opens in a new tab.</p>
+      <a href="shop.html" target="_blank" class="btn-v bsolid" style="margin:0 auto;display:inline-flex">&#128640; Open App</a>
       <div style="margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)">soul-net00.github.io/bmi_explore/shop.html</div>
     </div>
   </section>
 </div>
-<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb909c9496948f88948f939a9994c9cbcbcfbb9c969a9297d5989496">[email&#160;protected]</a> · <span>soul-net00</span></div></footer>
-</div><!-- /p2 -->
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> &middot; kgomotsothabo2004@gmail.com &middot; <span>soul-net00</span> &middot; <span class="tc-lnk" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
+</div>
 
+<script>
+/* ======= CART ======= */
+var cart = [];
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ══════════════ CART SYSTEM ══════════════ */
-let cart = []; // [{id, name, ico, desc}]
-
-function cartToggle(btn, name, ico, desc) {
-  // Decode HTML entities for matching
-  const cleanName = name.replace(/&amp;/g,'&');
-  const idx = cart.findIndex(i => i.name === cleanName);
-
+function toggleCart(btnId, name, ico, desc) {
+  var idx = -1;
+  for (var i = 0; i < cart.length; i++) { if (cart[i].id === btnId) { idx = i; break; } }
+  var btn = document.getElementById(btnId);
   if (idx === -1) {
-    // Add to cart
-    cart.push({ id: Date.now(), name: cleanName, ico, desc });
+    cart.push({ id: btnId, name: name, ico: ico, desc: desc });
     btn.classList.add('added');
-    btn.innerHTML = '✅ Added — Click to Remove';
+    btn.innerHTML = '&#9989; Added &mdash; Click to Remove';
   } else {
-    // Remove from cart
     cart.splice(idx, 1);
     btn.classList.remove('added');
-    btn.innerHTML = '🛒 Add to Order';
+    btn.innerHTML = '&#128722; Add to Order';
   }
-  updateCartUI();
-  // Bounce the FAB
-  const fab = document.getElementById('cartFab');
+  renderCart();
+  var fab = document.getElementById('cartFab');
   fab.classList.remove('bounce');
   void fab.offsetWidth;
   fab.classList.add('bounce');
 }
 
-function updateCartUI() {
-  const fab = document.getElementById('cartFab');
-  const count = cart.length;
-
-  // FAB visibility
-  if (count > 0) {
-    fab.classList.remove('hidden');
-  } else {
-    fab.classList.add('hidden');
-  }
-  document.getElementById('cartFabCount').textContent = count;
-  document.getElementById('cartFabLabel').textContent = count === 1 ? 'View Order' : 'View Order';
-
-  // Drawer content
-  const emptyEl = document.getElementById('cartEmpty');
-  const itemsEl = document.getElementById('cartItems');
-  const noteSection = document.getElementById('cartNoteSection');
-  const footer = document.getElementById('cartFooter');
-  const summary = document.getElementById('cartSummary');
-
-  if (count === 0) {
-    emptyEl.style.display = 'flex';
-    itemsEl.innerHTML = '';
-    noteSection.style.display = 'none';
-    footer.style.display = 'none';
-  } else {
-    emptyEl.style.display = 'none';
-    noteSection.style.display = 'block';
-    footer.style.display = 'block';
-
-    // Render items
-    itemsEl.innerHTML = cart.map(item => `
-      <div class="cart-item" id="ci-${item.id}">
-        <div class="cart-item-ico">${item.ico}</div>
-        <div class="cart-item-body">
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-desc">${item.desc}</div>
-        </div>
-        <button class="cart-item-remove" title="Remove" onclick="removeCartItem(${item.id})">✕</button>
-      </div>
-    `).join('');
-
-    // Summary
-    summary.innerHTML = `
-      <div class="cart-summary-title">// YOUR ORDER (${count} service${count>1?'s':''})</div>
-      ${cart.map(i => `<div class="cart-summary-item">${i.ico} ${i.name}</div>`).join('')}
-    `;
-  }
-}
-
-function removeCartItem(id) {
-  const item = cart.find(i => i.id === id);
-  if (!item) return;
-  // Un-toggle the button in the services grid
-  document.querySelectorAll('.add-cart-btn').forEach(btn => {
-    const btnText = btn.getAttribute('onclick') || '';
-    if (btnText.includes(item.name.replace(/&/g,'&amp;')) || btnText.includes(item.name)) {
-      btn.classList.remove('added');
-      btn.innerHTML = '🛒 Add to Order';
-    }
-  });
-  cart = cart.filter(i => i.id !== id);
-  updateCartUI();
+function removeItem(btnId) {
+  cart = cart.filter(function(i) { return i.id !== btnId; });
+  var btn = document.getElementById(btnId);
+  if (btn) { btn.classList.remove('added'); btn.innerHTML = '&#128722; Add to Order'; }
+  renderCart();
 }
 
 function clearCart() {
-  cart = [];
-  document.querySelectorAll('.add-cart-btn').forEach(btn => {
-    btn.classList.remove('added');
-    btn.innerHTML = '🛒 Add to Order';
+  cart.forEach(function(item) {
+    var btn = document.getElementById(item.id);
+    if (btn) { btn.classList.remove('added'); btn.innerHTML = '&#128722; Add to Order'; }
   });
-  updateCartUI();
+  cart = [];
+  renderCart();
 }
 
-function openTerms(){
-  document.getElementById('termsModal').classList.add('open');
-  document.body.style.overflow='hidden';
+function renderCart() {
+  var fab = document.getElementById('cartFab');
+  var badge = document.getElementById('cartBadge');
+  var empty = document.getElementById('cartEmpty');
+  var list = document.getElementById('cartList');
+  var noteSec = document.getElementById('cartNoteSec');
+  var footer = document.getElementById('cartDfooter');
+  var sum = document.getElementById('cartSum');
+  badge.textContent = cart.length;
+  if (cart.length === 0) {
+    fab.classList.add('hidden');
+    empty.style.display = 'flex';
+    list.innerHTML = '';
+    noteSec.style.display = 'none';
+    footer.style.display = 'none';
+  } else {
+    fab.classList.remove('hidden');
+    empty.style.display = 'none';
+    noteSec.style.display = 'block';
+    footer.style.display = 'block';
+    list.innerHTML = cart.map(function(item) {
+      return '<div class="cart-item-row">' +
+        '<div class="ci-ico">' + item.ico + '</div>' +
+        '<div class="ci-info"><div class="ci-name">' + item.name + '</div><div class="ci-desc">' + item.desc + '</div></div>' +
+        '<button class="ci-rm" onclick="removeItem(\'' + item.id + '\')">&#x2715;</button>' +
+        '</div>';
+    }).join('');
+    sum.innerHTML = '<div class="cart-sum-title">// YOUR ORDER (' + cart.length + ' service' + (cart.length > 1 ? 's' : '') + ')</div>' +
+      cart.map(function(i) { return '<div class="cart-sum-line">' + i.ico + ' ' + i.name + '</div>'; }).join('');
+  }
 }
-function closeTerms(){
-  document.getElementById('termsModal').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.getElementById('termsModal').addEventListener('click',function(e){
-  if(e.target===this) closeTerms();
-});
 
 function openCart() {
   document.getElementById('cartDrawer').classList.add('open');
   document.getElementById('cartOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
 function closeCart() {
   document.getElementById('cartDrawer').classList.remove('open');
   document.getElementById('cartOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
-
-function buildWaLink() {
-  const note = document.getElementById('cartNote').value.trim();
-  const serviceList = cart.map((i,idx) => `${idx+1}. ${i.ico} ${i.name}`).join('\n');
-  let msg = `Hi Kgomotso! 👋\n\nI'm interested in the following IT service${cart.length>1?'s':''}:\n\n${serviceList}`;
-  if (note) msg += `\n\n📝 Notes:\n${note}`;
-  msg += `\n\nPlease let me know more details and pricing. Thank you!`;
-  document.getElementById('cartWaBtn').href = `https://wa.me/27601603996?text=${encodeURIComponent(msg)}`;
+function buildWa() {
+  var note = document.getElementById('cartNote').value.trim();
+  var lines = cart.map(function(i, n) { return (n + 1) + '. ' + i.ico + ' ' + i.name; }).join('\n');
+  var msg = 'Hi Kgomotso! \xf0\x9f\x91\x8b\n\nI am interested in the following IT service' + (cart.length > 1 ? 's' : '') + ':\n\n' + lines;
+  if (note) msg += '\n\n\xf0\x9f\x93\x9d Notes:\n' + note;
+  msg += '\n\nPlease let me know pricing and details. Thank you!';
+  document.getElementById('sendWaBtn').href = 'https://wa.me/27601603996?text=' + encodeURIComponent(msg);
 }
 
-/* ══════════════ SIDEBAR ══════════════ */
-function toggleSidebar(){
-  const s=document.getElementById('sidebar'),o=document.getElementById('overlay'),b=document.getElementById('hamBtn');
-  s.classList.toggle('open');o.classList.toggle('open');b.classList.toggle('open');
+/* ======= SIDEBAR ======= */
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidOverlay').classList.toggle('open');
+  document.getElementById('hamBtn').classList.toggle('open');
 }
-function closeSidebar(){
+function closeSidebar() {
   document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('open');
+  document.getElementById('sidOverlay').classList.remove('open');
   document.getElementById('hamBtn').classList.remove('open');
 }
 
-/* ══════════════ PAGE SWITCHING ══════════════ */
-function gotoPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
+/* ======= PAGE NAVIGATION ======= */
+function gotoPage(id) {
+  document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.ntab').forEach(function(t) { t.classList.remove('active'); });
   document.getElementById(id).classList.add('active');
-  document.getElementById('tab-'+id).classList.add('active');
-  window.scrollTo(0,0);
+  document.getElementById('tab-' + id).classList.add('active');
+  window.scrollTo(0, 0);
 }
-function scrollToSection(id){
+function navTo(id) {
   closeSidebar();
   gotoPage('p1');
-  setTimeout(()=>{
-    const el=document.getElementById(id);
-    if(el)el.scrollIntoView({behavior:'smooth'});
-  },100);
-}
-!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kgomotso Mamogale — IT Portfolio</title>
-<meta name="description" content="NC(V) ITC Student | Web Developer | Cisco Certified | Ekurhuleni East TVET College | South Africa">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-<style>
-:root{
-  --bg:#06060f;--surface:#0c0c1d;--card:#10102a;--card2:#14142e;
-  --accent:#7c3aed;--al:#a855f7;--gold:#f59e0b;--green:#10b981;--pink:#ec4899;--cyan:#06b6d4;
-  --text:#eeeeff;--muted:#6b6b9a;--border:rgba(124,58,237,.18);--border2:rgba(255,255,255,.06);
-}
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;min-height:100vh}
-.bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:radial-gradient(ellipse 70% 60% at 15% 5%,rgba(124,58,237,.13) 0%,transparent 55%),
-             radial-gradient(ellipse 50% 40% at 85% 85%,rgba(236,72,153,.07) 0%,transparent 55%)}
-.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);
-  background-size:60px 60px}
-.wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
-.page{display:none;min-height:100vh}.page.active{display:block}
-
-/* ── HAMBURGER SIDEBAR ── */
-.ham-btn{background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;z-index:200;position:relative}
-.ham-btn span{display:block;width:22px;height:2px;background:var(--al);border-radius:2px;transition:all .3s}
-.ham-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
-.ham-btn.open span:nth-child(2){opacity:0}
-.ham-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
-.sidebar{position:fixed;top:0;left:-300px;width:280px;height:100vh;background:#0a0a1e;border-right:1px solid var(--border);z-index:150;transition:left .3s ease;overflow-y:auto;padding:80px 0 30px}
-.sidebar.open{left:0}
-.sidebar-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:140;display:none;backdrop-filter:blur(4px)}
-.sidebar-overlay.open{display:block}
-.sid-head{padding:0 24px 20px;border-bottom:1px solid var(--border2);margin-bottom:16px}
-.sid-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--al)}
-.sid-role{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-top:4px}
-.sid-avatar{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--pink));display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:12px;border:2px solid var(--border)}
-.sid-contact{padding:16px 24px;background:rgba(124,58,237,.06);margin:0 12px 16px;border-radius:10px;border:1px solid var(--border2)}
-.sid-contact-title{font-size:10px;font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:2px;margin-bottom:10px}
-.sid-contact-item{display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(238,238,255,.7);margin-bottom:7px;text-decoration:none}
-.sid-contact-item:hover{color:var(--al)}
-.sid-links{padding:0 12px}
-.sid-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;color:rgba(238,238,255,.75);transition:all .2s;border:none;background:none;width:100%;text-align:left;text-decoration:none}
-.sid-link:hover{background:rgba(124,58,237,.12);color:var(--al)}
-.sid-link-ico{font-size:18px;width:24px;flex-shrink:0}
-.sid-divider{height:1px;background:var(--border2);margin:10px 14px}
-.sid-wa{background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.25);color:#25d366;display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;margin:10px 12px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none}
-.sid-wa:hover{background:rgba(37,211,102,.2)}
-
-/* ── NAV ── */
-nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2)}
-.nav-in{display:flex;justify-content:space-between;align-items:center;height:60px;max-width:1120px;margin:0 auto;padding:0 24px}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:var(--al);cursor:pointer}
-.nav-tabs{display:flex;gap:4px}
-.ntab{padding:6px 13px;background:none;border:1px solid transparent;border-radius:6px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:all .2s;white-space:nowrap}
-.ntab:hover{color:var(--text);border-color:var(--border)}
-.ntab.active{background:rgba(124,58,237,.15);border-color:var(--accent);color:var(--al)}
-
-/* ── HERO ── */
-.hero{padding:72px 0 56px;display:grid;grid-template-columns:1fr 370px;gap:56px;align-items:start}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 14px;border-radius:30px;margin-bottom:22px;animation:rise .5s ease both}
-.hero-badge::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
-@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
-.hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8.5vw,100px);line-height:.9;letter-spacing:2px;animation:rise .5s .08s ease both}
-.grad{background:linear-gradient(135deg,var(--al) 0%,var(--pink) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
-.hero-role{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);animation:rise .5s .16s ease both;line-height:1.7}
-.hero-role span{color:var(--al)}
-.hero-bio{margin-top:16px;font-size:15px;line-height:1.75;color:rgba(238,238,255,.65);max-width:500px;animation:rise .5s .24s ease both}
-.hero-ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;animation:rise .5s .32s ease both}
-.btn-v{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .22s;text-decoration:none;border:none}
-.bsolid{background:var(--accent);color:#fff}
-.bsolid:hover{background:var(--al);transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,58,237,.4)}
-.bghost{background:transparent;border:1px solid var(--border);color:var(--text)}
-.bghost:hover{border-color:var(--al);background:rgba(124,58,237,.08);transform:translateY(-2px)}
-
-/* ── QR CARD ── */
-.qr-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:26px;position:relative;overflow:hidden;animation:rise .5s .2s ease both}
-.qr-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--pink))}
-.qr-head{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:3px;margin-bottom:3px}
-.qr-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:18px}
-#qrcode{display:flex;justify-content:center;margin-bottom:16px}
-#qrcode canvas,#qrcode img{border-radius:12px;border:4px solid rgba(124,58,237,.25);padding:8px;background:#fff}
-.qr-steps{display:flex;flex-direction:column;gap:9px}
-.qr-step{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted)}
-.sn{width:20px;height:20px;border-radius:50%;background:rgba(124,58,237,.2);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--al);flex-shrink:0;font-family:'JetBrains Mono',monospace}
-.qr-note{margin-top:12px;padding:9px 12px;background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.2);border-radius:8px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan)}
-
-/* ── TICKER ── */
-.ticker-wrap{border-top:1px solid var(--border2);border-bottom:1px solid var(--border2);padding:16px 0;overflow:hidden}
-.ticker-track{display:flex;gap:32px;animation:ticker 24s linear infinite;width:max-content}
-@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.titem{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);white-space:nowrap;padding:5px 12px;border:1px solid var(--border2);border-radius:30px}
-.tdot{width:5px;height:5px;border-radius:50%;background:var(--al);flex-shrink:0}
-
-/* ── SECTIONS ── */
-.section{padding:64px 0}
-.slabel{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
-.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(30px,5vw,50px);letter-spacing:1px;margin-bottom:36px;line-height:1}
-.sdiv{border-top:1px solid var(--border2)}
-
-/* ── ABOUT ── */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
-.about-box{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:24px}
-.about-box h3{font-size:15px;font-weight:700;margin-bottom:14px}
-.about-list{display:flex;flex-direction:column;gap:8px}
-.about-item{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:rgba(238,238,255,.75);line-height:1.5}
-.about-ico{font-size:16px;flex-shrink:0;margin-top:1px}
-
-/* ── EDUCATION ── */
-.edu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.edu-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:all .25s;position:relative;overflow:hidden}
-.edu-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--accent),var(--pink))}
-.edu-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px)}
-.edu-level{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);margin-bottom:6px;padding-left:12px}
-.edu-title{font-size:14px;font-weight:700;margin-bottom:4px;padding-left:12px}
-.edu-place{font-size:12px;color:var(--muted);margin-bottom:12px;padding-left:12px}
-.edu-subjects{display:flex;flex-wrap:wrap;gap:5px;padding-left:12px}
-.edu-subj{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(124,58,237,.08);border:1px solid rgba(124,58,237,.15);color:var(--muted)}
-.edu-subj.hl{background:rgba(124,58,237,.18);border-color:rgba(124,58,237,.35);color:var(--al)}
-.edu-badge{display:inline-flex;align-items:center;gap:5px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border-radius:20px;margin:10px 0 0 12px}
-
-/* ── CERTS ── */
-.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
-.cert-card{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:22px;transition:all .25s;display:flex;gap:16px;align-items:flex-start;cursor:pointer;position:relative}
-.cert-card:hover{border-color:rgba(6,182,212,.5);transform:translateY(-4px);box-shadow:0 16px 40px rgba(6,182,212,.1)}
-.cert-card .view-hint{position:absolute;top:10px;right:10px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--cyan);opacity:0;transition:opacity .2s}
-.cert-card:hover .view-hint{opacity:1}
-.cert-logo{width:48px;height:48px;flex-shrink:0;border-radius:10px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.2);display:flex;align-items:center;justify-content:center;font-size:22px}
-.cert-issuer{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cyan);margin-bottom:4px}
-.cert-name{font-size:14px;font-weight:700;margin-bottom:4px}
-.cert-date{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:8px}
-.cert-tags{display:flex;flex-wrap:wrap;gap:5px}
-.ctag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 8px;border-radius:4px;background:rgba(6,182,212,.08);border:1px solid rgba(6,182,212,.15);color:var(--cyan)}
-
-/* ── PROJECTS ── */
-.pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
-.pcard{background:var(--card);border:1px solid var(--border2);border-radius:16px;overflow:hidden;transition:all .28s}
-.pcard:hover{border-color:rgba(124,58,237,.45);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-.pimg{width:100%;height:155px;object-fit:cover;display:block}
-.pbody{padding:18px}
-.pnum{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);margin-bottom:7px}
-.ptitle{font-size:16px;font-weight:700;margin-bottom:7px}
-.pdesc{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:13px}
-.ptags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:13px}
-.tag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 9px;border-radius:20px;background:rgba(124,58,237,.1);border:1px solid rgba(124,58,237,.2);color:var(--al)}
-.plinks{display:flex;gap:8px}
-.plnk{flex:1;text-align:center;padding:7px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid var(--border2);color:var(--muted);transition:all .2s}
-.plnk:hover{border-color:var(--al);color:var(--al)}
-
-/* ── SKILLS ── */
-.skgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}
-.skitem{background:var(--card);border:1px solid var(--border2);border-radius:10px;padding:15px}
-.skrow{display:flex;justify-content:space-between;margin-bottom:9px}
-.skname{font-size:13px;font-weight:600}
-.skpct{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al)}
-.sktrack{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden}
-.skfill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--al));animation:barGrow 1.2s ease both;transform-origin:left}
-@keyframes barGrow{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-
-/* ── CONTACT ── */
-.crow{display:flex;justify-content:center;gap:12px;margin-top:26px;flex-wrap:wrap}
-.clnk{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;border:1px solid var(--border2);color:var(--text);text-decoration:none;font-size:14px;font-weight:600;background:var(--card);transition:all .22s}
-.clnk:hover{border-color:var(--al);color:var(--al);transform:translateY(-2px)}
-
-/* ── BUSINESS PAGE ── */
-.biz-hero{padding:60px 0 30px;text-align:center}
-.biz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:32px}
-.biz-card{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:24px;transition:all .25s;position:relative;overflow:hidden}
-.biz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-.biz-card.web::before{background:linear-gradient(90deg,var(--accent),var(--al))}
-.biz-card.hw::before{background:linear-gradient(90deg,var(--green),var(--cyan))}
-.biz-card.net::before{background:linear-gradient(90deg,var(--cyan),var(--al))}
-.biz-card.doc::before{background:linear-gradient(90deg,var(--gold),var(--pink))}
-.biz-card:hover{border-color:rgba(124,58,237,.4);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,.4)}
-.biz-ico{font-size:38px;margin-bottom:14px}
-.biz-title{font-size:17px;font-weight:800;margin-bottom:8px}
-.biz-desc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:16px}
-.biz-price{display:inline-flex;align-items:center;gap:6px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.25);color:var(--green);font-family:'JetBrains Mono',monospace;font-size:12px;padding:5px 12px;border-radius:20px;font-weight:700;margin-bottom:12px}
-.biz-price-note{font-size:10px;color:var(--muted);margin-top:6px;font-family:'JetBrains Mono',monospace}
-.biz-cta{margin-top:40px;text-align:center;padding:36px;background:linear-gradient(135deg,rgba(37,211,102,.06),rgba(124,58,237,.06));border:1px solid rgba(37,211,102,.2);border-radius:18px}
-.biz-cta h3{font-family:'Bebas Neue',sans-serif;font-size:32px;letter-spacing:2px;margin-bottom:10px}
-.biz-cta p{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.6}
-.wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;transition:all .22s;border:none;cursor:pointer}
-.wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.35)}
-.laptop-box{margin-top:24px;padding:20px 24px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center}
-
-/* ── ADD TO CART BUTTON ── */
-.add-cart-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .22s;border:1px solid var(--border);background:rgba(124,58,237,.1);color:var(--al);margin-top:8px;font-family:'Syne',sans-serif}
-.add-cart-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent);transform:translateY(-1px)}
-.add-cart-btn.added{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.4);color:var(--green)}
-.add-cart-btn.added:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.4);color:#ef4444}
-
-/* ── FLOATING CART BUTTON ── */
-.cart-fab{position:fixed;bottom:28px;right:28px;z-index:400;background:var(--accent);color:#fff;border:none;border-radius:50px;padding:14px 20px;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(124,58,237,.55);transition:all .3s;font-family:'Syne',sans-serif}
-.cart-fab:hover{background:var(--al);transform:translateY(-3px);box-shadow:0 14px 40px rgba(124,58,237,.6)}
-.cart-fab.hidden{opacity:0;pointer-events:none;transform:translateY(20px)}
-.cart-fab.bounce{animation:cartBounce .4s ease}
-@keyframes cartBounce{0%{transform:scale(1)}30%{transform:scale(1.18)}70%{transform:scale(.94)}100%{transform:scale(1)}}
-.cart-count{background:#fff;color:var(--accent);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
-
-/* ── CART DRAWER ── */
-.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:410;display:none;backdrop-filter:blur(6px)}
-.cart-overlay.open{display:block}
-.cart-drawer{position:fixed;right:-420px;top:0;width:400px;max-width:100vw;height:100vh;background:#0d0d22;border-left:1px solid var(--border);z-index:420;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;overflow:hidden}
-.cart-drawer.open{right:0}
-.cart-head{padding:20px 22px;border-bottom:1px solid var(--border2);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
-.cart-head-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--al);display:flex;align-items:center;gap:10px}
-.cart-close{background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1;transition:color .2s}
-.cart-close:hover{color:var(--text)}
-.cart-body{flex:1;overflow-y:auto;padding:16px 22px}
-.cart-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:14px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:13px;text-align:center;padding:40px}
-.cart-empty-ico{font-size:52px;opacity:.4}
-.cart-item{background:var(--card);border:1px solid var(--border2);border-radius:12px;padding:14px 16px;margin-bottom:10px;display:flex;align-items:flex-start;gap:12px;animation:slideIn .25s ease both}
-@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
-.cart-item-ico{font-size:26px;flex-shrink:0;margin-top:2px}
-.cart-item-body{flex:1}
-.cart-item-name{font-size:14px;font-weight:700;margin-bottom:3px}
-.cart-item-desc{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;line-height:1.5}
-.cart-item-remove{background:none;border:none;color:var(--muted);font-size:18px;cursor:pointer;flex-shrink:0;transition:color .2s;line-height:1;padding:2px}
-.cart-item-remove:hover{color:#ef4444}
-.cart-note-section{margin-top:16px;border-top:1px solid var(--border2);padding-top:16px}
-.cart-note-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al);letter-spacing:2px;margin-bottom:8px}
-.cart-note-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--border2);border-radius:10px;padding:12px 14px;color:var(--text);font-size:13px;font-family:'Syne',sans-serif;resize:none;transition:border-color .2s;outline:none}
-.cart-note-input:focus{border-color:var(--accent)}
-.cart-footer{padding:18px 22px;border-top:1px solid var(--border2);flex-shrink:0}
-.cart-summary{background:rgba(124,58,237,.07);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px}
-.cart-summary-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:8px}
-.cart-summary-item{font-size:12px;color:rgba(238,238,255,.7);margin-bottom:4px;display:flex;align-items:center;gap:6px}
-.cart-summary-item::before{content:'•';color:var(--al)}
-.cart-wa-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#25d366;color:#fff;padding:15px;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;border:none;transition:all .22s;font-family:'Syne',sans-serif;text-decoration:none}
-.cart-wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.4)}
-.cart-clear-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--muted);padding:10px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border2);margin-top:8px;transition:all .2s;font-family:'JetBrains Mono',monospace}
-.cart-clear-btn:hover{border-color:#ef4444;color:#ef4444}
-
-/* ── TERMS MODAL ── */
-.terms-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:600;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
-.terms-modal-bg.open{display:flex}
-.terms-modal-box{background:#0d0d22;border:1px solid var(--border);border-radius:18px;max-width:720px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;animation:rise .3s ease both}
-.terms-modal-head{display:flex;justify-content:space-between;align-items:center;padding:18px 24px;border-bottom:1px solid var(--border2);flex-shrink:0;background:linear-gradient(90deg,rgba(124,58,237,.12),transparent)}
-.terms-modal-head-left{display:flex;flex-direction:column;gap:4px}
-.terms-modal-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:3px;color:var(--al)}
-.terms-modal-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
-.terms-modal-close{background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1;transition:color .2s;flex-shrink:0}
-.terms-modal-close:hover{color:var(--text)}
-.terms-modal-body{flex:1;overflow-y:auto;padding:24px 28px;scrollbar-width:thin;scrollbar-color:var(--accent) transparent}
-.terms-modal-body::-webkit-scrollbar{width:4px}
-.terms-modal-body::-webkit-scrollbar-track{background:transparent}
-.terms-modal-body::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}
-.terms-section{margin-bottom:28px}
-.terms-section:last-child{margin-bottom:0}
-.terms-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--al);letter-spacing:2px;margin-bottom:6px}
-.terms-heading{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;margin-bottom:10px;color:var(--text)}
-.terms-body{font-size:13px;color:rgba(238,238,255,.7);line-height:1.75}
-.terms-body ul{padding-left:18px;margin-top:8px;display:flex;flex-direction:column;gap:6px}
-.terms-body li{color:rgba(238,238,255,.65)}
-.terms-body li::marker{color:var(--al)}
-.terms-divider{height:1px;background:var(--border2);margin:20px 0}
-.terms-footer{padding:16px 24px;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;flex-shrink:0;background:rgba(124,58,237,.04)}
-.terms-footer-note{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
-.terms-wa{display:inline-flex;align-items:center;gap:7px;background:#25d366;color:#fff;padding:9px 16px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;transition:all .2s}
-.terms-wa:hover{background:#1db954}
-
-/* ── APP PAGE ── */
-.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin:36px 0}
-.fcard{background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:20px;transition:all .22s}
-.fcard:hover{border-color:rgba(124,58,237,.4);transform:translateY(-3px)}
-.fico{font-size:24px;margin-bottom:10px}
-.ftitle{font-size:14px;font-weight:700;margin-bottom:5px}
-.fdesc{font-size:12px;color:var(--muted);line-height:1.6}
-.vwrap{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 24px 70px rgba(0,0,0,.55);background:#000;margin-top:26px}
-.vwrap iframe{width:100%;aspect-ratio:16/9;display:block;border:none}
-.bframe{border-radius:16px;overflow:hidden;border:1px solid var(--border);box-shadow:0 30px 80px rgba(0,0,0,.5);margin-top:26px}
-.bbar{background:#12122a;padding:10px 18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border2)}
-.bdots{display:flex;gap:6px}
-.bdot{width:11px;height:11px;border-radius:50%}
-.burl{flex:1;background:rgba(255,255,255,.04);border-radius:6px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
-.aframe{height:660px}
-.aframe iframe{width:100%;height:100%;border:none;display:block}
-.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:22px}
-
-footer{border-top:1px solid var(--border2);padding:24px 0;text-align:center;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted)}
-footer span{color:var(--al)}
-@keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-
-@media(max-width:860px){.hero{grid-template-columns:1fr;gap:36px;padding:40px 0 30px}.qr-card{max-width:340px}.about-grid{grid-template-columns:1fr}}
-@media(max-width:580px){.hero-ctas{flex-direction:column}.ntab{padding:5px 9px;font-size:10px}.aframe{height:500px}.crow{flex-direction:column;align-items:center}.cart-drawer{width:100vw}}
-</style>
-</head>
-<body>
-<div class="bg-mesh"></div>
-<div class="bg-grid"></div>
-
-<!-- SIDEBAR OVERLAY -->
-<div class="sidebar-overlay" id="overlay" onclick="closeSidebar()"></div>
-
-<!-- SIDEBAR -->
-<div class="sidebar" id="sidebar">
-  <div class="sid-head">
-    <div class="sid-avatar">🧑🏾‍💻</div>
-    <div class="sid-name">KM.DEV</div>
-    <div class="sid-role">// Kgomotso Mamogale · ITC Level 4</div>
-  </div>
-  <div class="sid-contact">
-    <div class="sid-contact-title">QUICK CONTACT</div>
-    <a class="sid-contact-item" href="/cdn-cgi/l/email-protection#97fcf0f8faf8e3e4f8e3fff6f5f8a5a7a7a3d7f0faf6fefbb9f4f8fa">✉️ <span class="__cf_email__" data-cfemail="7c171b131113080f1308141d1e134e4c4c483c1b111d1510521f1311">[email&#160;protected]</span></a>
-    <a class="sid-contact-item" href="tel:0601603996">📞 060 160 3996</a>
-    <a class="sid-contact-item" href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank">💼 LinkedIn Profile</a>
-    <a class="sid-contact-item" href="https://github.com/soul-net00" target="_blank">🐙 GitHub · soul-net00</a>
-  </div>
-  <a class="sid-wa" href="https://wa.me/27601603996" target="_blank">
-    <span style="font-size:20px">💬</span> WhatsApp Me
-  </a>
-  <div class="sid-links">
-    <div class="sid-divider"></div>
-    <button class="sid-link" onclick="gotoPage('p1');closeSidebar()"><span class="sid-link-ico">💼</span>Portfolio</button>
-    <button class="sid-link" onclick="scrollToSection('about')"><span class="sid-link-ico">👤</span>About Me</button>
-    <button class="sid-link" onclick="scrollToSection('education')"><span class="sid-link-ico">🎓</span>Education</button>
-    <button class="sid-link" onclick="scrollToSection('certs')"><span class="sid-link-ico">🏆</span>Certifications</button>
-    <button class="sid-link" onclick="scrollToSection('projects')"><span class="sid-link-ico">📁</span>Projects</button>
-    <button class="sid-link" onclick="scrollToSection('skills')"><span class="sid-link-ico">⚡</span>Skills</button>
-    <button class="sid-link" onclick="scrollToSection('contact')"><span class="sid-link-ico">📬</span>Contact</button>
-    <div class="sid-divider"></div>
-    <button class="sid-link" onclick="gotoPage('p3');closeSidebar()"><span class="sid-link-ico">🛠️</span>Business Services</button>
-    <button class="sid-link" onclick="gotoPage('p2');closeSidebar()"><span class="sid-link-ico">📱</span>Shop App</button>
-    <div class="sid-divider"></div>
-    <button class="sid-link" onclick="openTerms();closeSidebar()"><span class="sid-link-ico">📄</span>Terms &amp; Conditions</button>
-  </div>
-</div>
-
-<!-- ══════════════ CART DRAWER ══════════════ -->
-<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-<div class="cart-drawer" id="cartDrawer">
-  <div class="cart-head">
-    <div class="cart-head-title">🛒 My Order</div>
-    <button class="cart-close" onclick="closeCart()">✕</button>
-  </div>
-  <div class="cart-body" id="cartBody">
-    <div class="cart-empty" id="cartEmpty">
-      <div class="cart-empty-ico">🛒</div>
-      <div>Your cart is empty</div>
-      <div style="font-size:11px;opacity:.6;margin-top:4px">Click "Add to Order" on any service</div>
-    </div>
-    <div id="cartItems"></div>
-    <div class="cart-note-section" id="cartNoteSection" style="display:none">
-      <div class="cart-note-label">// ADD A NOTE (optional)</div>
-      <textarea class="cart-note-input" id="cartNote" rows="3" placeholder="Tell me more about what you need, your location, budget, etc..."></textarea>
-    </div>
-  </div>
-  <div class="cart-footer" id="cartFooter" style="display:none">
-    <div class="cart-summary" id="cartSummary"></div>
-    <a id="cartWaBtn" href="#" target="_blank" class="cart-wa-btn" onclick="buildWaLink()">
-      💬 Send Order via WhatsApp
-    </a>
-    <button class="cart-clear-btn" onclick="clearCart()">🗑️ Clear Order</button>
-  </div>
-</div>
-
-<!-- FLOATING CART BUTTON -->
-<button class="cart-fab hidden" id="cartFab" onclick="openCart()">
-  🛒 <span id="cartFabLabel">View Order</span>
-  <span class="cart-count" id="cartFabCount">0</span>
-</button>
-
-<!-- ══════════════ TERMS & CONDITIONS MODAL ══════════════ -->
-<div class="terms-modal-bg" id="termsModal">
-  <div class="terms-modal-box">
-    <div class="terms-modal-head">
-      <div class="terms-modal-head-left">
-        <div class="terms-modal-title">Terms &amp; Conditions</div>
-        <div class="terms-modal-sub">// KM.DEV SOULNET EXPLORE · Last Updated: 04/03/2026</div>
-      </div>
-      <button class="terms-modal-close" onclick="closeTerms()">✕</button>
-    </div>
-    <div class="terms-modal-body">
-
-      <div class="terms-section">
-        <div class="terms-num">// 01</div>
-        <div class="terms-heading">Introduction</div>
-        <div class="terms-body">Welcome to <strong style="color:var(--al)">KM.DEV SOULNET EXPLORE</strong>. By accessing this website and using our services, you agree to the following Terms and Conditions.<br><br>If you do not agree, please do not use our website or services.</div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 02</div>
-        <div class="terms-heading">Services</div>
-        <div class="terms-body">We provide digital services including but not limited to:
-          <ul>
-            <li>Website Design</li>
-            <li>Logo Design</li>
-            <li>Graphic Design</li>
-            <li>CV Design</li>
-            <li>Digital Marketing Services</li>
-          </ul>
-          <br>All services are requested via our website cart system and confirmed through WhatsApp at <strong style="color:var(--al)">060 160 3996</strong>.
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 03</div>
-        <div class="terms-heading">Orders &amp; Payments</div>
-        <div class="terms-body">
-          <ul>
-            <li>Orders are submitted through the website and confirmed via WhatsApp.</li>
-            <li>A <strong style="color:var(--gold)">50% non-refundable deposit</strong> is required before work begins.</li>
-            <li>The remaining balance must be paid before final files or website launch.</li>
-            <li>Payments are accepted via <strong>EFT (Electronic Funds Transfer)</strong>.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 04</div>
-        <div class="terms-heading">Turnaround Time</div>
-        <div class="terms-body">Turnaround times depend on project complexity:
-          <ul>
-            <li>Small projects: <strong style="color:var(--green)">2–5 working days</strong></li>
-            <li>Websites: <strong style="color:var(--green)">5–10 working days</strong></li>
-          </ul>
-          <br>Delays may occur if required information is not provided on time.
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 05</div>
-        <div class="terms-heading">Client Responsibilities</div>
-        <div class="terms-body">Clients must:
-          <ul>
-            <li>Provide accurate information</li>
-            <li>Supply content (text, images, logos) where required</li>
-            <li>Respond promptly to approval requests</li>
-          </ul>
-          <br>Delays in communication may affect delivery timelines.
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 06</div>
-        <div class="terms-heading">Revisions</div>
-        <div class="terms-body">
-          <ul>
-            <li>Up to <strong style="color:var(--al)">2–3 revisions</strong> are included unless otherwise stated.</li>
-            <li>Additional revisions may be charged separately.</li>
-          </ul>
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 07</div>
-        <div class="terms-heading">Intellectual Property</div>
-        <div class="terms-body">Final designs remain the property of the client once full payment has been received. We reserve the right to display completed work in our portfolio unless agreed otherwise.</div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 08</div>
-        <div class="terms-heading">Limitation of Liability</div>
-        <div class="terms-body">We are not responsible for:
-          <ul>
-            <li>Third-party platform failures</li>
-            <li>Hosting/server issues</li>
-            <li>Loss of data caused by external services</li>
-          </ul>
-        </div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 09</div>
-        <div class="terms-heading">Changes to Terms</div>
-        <div class="terms-body">We reserve the right to update these Terms at any time. Continued use of our services after changes constitutes acceptance of the updated terms.</div>
-      </div>
-      <div class="terms-divider"></div>
-
-      <div class="terms-section">
-        <div class="terms-num">// 10</div>
-        <div class="terms-heading">Contact</div>
-        <div class="terms-body">For any questions regarding these Terms and Conditions, please contact us:<br><br>
-          📞 <strong style="color:var(--al)">WhatsApp: 060 160 3996</strong><br>
-          📧 kgomotsothabo2004@gmail.com
-        </div>
-      </div>
-
-    </div>
-    <div class="terms-footer">
-      <span class="terms-footer-note">© 2026 KM.DEV SOULNET EXPLORE · All rights reserved</span>
-      <a href="https://wa.me/27601603996?text=Hi Kgomotso, I have a question about your Terms and Conditions" target="_blank" class="terms-wa">💬 Contact Us</a>
-    </div>
-  </div>
-</div>
-
-<!-- NAV -->
-<nav>
-  <div class="nav-in">
-    <div style="display:flex;align-items:center;gap:14px">
-      <button class="ham-btn" id="hamBtn" onclick="toggleSidebar()">
-        <span></span><span></span><span></span>
-      </button>
-      <div class="nav-logo" onclick="gotoPage('p1')">KM.DEV</div>
-    </div>
-    <div class="nav-tabs">
-      <button class="ntab active" id="tab-p1" onclick="gotoPage('p1')">💼 Portfolio</button>
-      <button class="ntab" id="tab-p3" onclick="gotoPage('p3')">🛠️ Services</button>
-      <button class="ntab" id="tab-p2" onclick="gotoPage('p2')">📱 The App</button>
-    </div>
-  </div>
-</nav>
-
-<!-- ===================== PAGE 1: PORTFOLIO ===================== -->
-<div class="page active" id="p1">
-<div class="wrap">
-  <div class="hero">
-    <div>
-      <div class="hero-badge">Final Year · NC(V) Level 4 · 2025</div>
-      <h1 class="hero-name">KGOMOTSO<br><span class="grad">MAMOGALE</span></h1>
-      <div class="hero-role">
-        <span>ITC Student</span> · Ekurhuleni East TVET College<br>
-        <span>Cisco Certified</span> · Web Dev · IT Support · 🇿🇦 Gauteng
-      </div>
-      <p class="hero-bio">Final-year NC(V) ITC student. I build real software, fix real hardware — from SQL databases to VPS networks. Available for freelance work &amp; internships.</p>
-      <div class="hero-ctas">
-        <button class="btn-v bsolid" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">📁 Projects</button>
-        <button class="btn-v bghost" onclick="gotoPage('p3')">🛠️ My Services</button>
-        <a class="btn-v bghost" href="https://wa.me/27601603996" target="_blank">💬 WhatsApp</a>
-      </div>
-    </div>
-    <div class="qr-card">
-      <div class="qr-head">SHARE PORTFOLIO</div>
-      <div class="qr-sub">// scan to open on any device</div>
-      <div id="qrcode"></div>
-      <div class="qr-steps">
-        <div class="qr-step"><div class="sn">1</div>Scan with any phone camera</div>
-        <div class="qr-step"><div class="sn">2</div>Portfolio opens instantly</div>
-        <div class="qr-step"><div class="sn">3</div>No app needed</div>
-      </div>
-      <div class="qr-note">🌐 Public · bmiexplore.netlify.app</div>
-    </div>
-  </div>
-</div>
-
-<div class="ticker-wrap">
-  <div class="ticker-track">
-    <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
-    <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
-    <span class="titem"><span class="tdot"></span>SQL Server</span>
-    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Cisco Networking</span>
-    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>VPS Setup</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>IT Support</span>
-    <span class="titem"><span class="tdot" style="background:var(--green)"></span>Excel</span>
-    <span class="titem"><span class="tdot"></span>Word &amp; PowerPoint</span>
-    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>WiFi &amp; Networking</span>
-    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>Windows Admin</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Systems Analysis</span>
-    <span class="titem"><span class="tdot"></span>HTML &amp; CSS</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>JavaScript</span>
-    <span class="titem"><span class="tdot" style="background:var(--green)"></span>VB.NET</span>
-    <span class="titem"><span class="tdot"></span>SQL Server</span>
-    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>Cisco Networking</span>
-    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>VPS Setup</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>IT Support</span>
-    <span class="titem"><span class="tdot" style="background:var(--green)"></span>Excel</span>
-    <span class="titem"><span class="tdot"></span>Word &amp; PowerPoint</span>
-    <span class="titem"><span class="tdot" style="background:var(--gold)"></span>WiFi &amp; Networking</span>
-    <span class="titem"><span class="tdot" style="background:var(--cyan)"></span>Windows Admin</span>
-    <span class="titem"><span class="tdot" style="background:var(--pink)"></span>Systems Analysis</span>
-  </div>
-</div>
-
-<div class="wrap">
-  <section class="section" id="about">
-    <div class="slabel">// who I am</div>
-    <div class="stitle">ABOUT ME</div>
-    <div class="about-grid">
-      <div class="about-box">
-        <h3>🔧 What I Do</h3>
-        <div class="about-list">
-          <div class="about-item"><span class="about-ico">🌐</span>Build websites &amp; web apps — HTML, CSS, JavaScript, deployed on Netlify</div>
-          <div class="about-item"><span class="about-ico">🖥️</span>Set up VPS servers for fast, secure networks and remote environments</div>
-          <div class="about-item"><span class="about-ico">💻</span>Fix laptops, upgrade drives, clean install Windows, update drivers</div>
-          <div class="about-item"><span class="about-ico">📶</span>Configure WiFi routers, set access restrictions, troubleshoot networks</div>
-          <div class="about-item"><span class="about-ico">📊</span>Advanced Excel, Word, PowerPoint — data, documents, presentations</div>
-          <div class="about-item"><span class="about-ico">🗄️</span>Design and build SQL Server databases with stored procedures</div>
-          <div class="about-item"><span class="about-ico">📋</span>Systems Analysis &amp; Design — requirements, diagrams, documentation</div>
-          <div class="about-item"><span class="about-ico">🖨️</span>Desktop apps in VB.NET with full SQL Server backends</div>
-        </div>
-      </div>
-      <div class="about-box">
-        <h3>📌 Quick Facts</h3>
-        <div class="about-list">
-          <div class="about-item"><span class="about-ico">🏫</span>Ekurhuleni East TVET College · Level 4 final year</div>
-          <div class="about-item"><span class="about-ico">✅</span>Passed NC(V) Level 2 &amp; 3 ITC</div>
-          <div class="about-item"><span class="about-ico">🏆</span>Cisco Networking Academy certified</div>
-          <div class="about-item"><span class="about-ico">📍</span>Gauteng, South Africa</div>
-          <div class="about-item"><span class="about-ico">📞</span>060 160 3996</div>
-          <div class="about-item"><span class="about-ico">📧</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="a4cfc3cbc9cbd0d7cbd0ccc5c6cb96949490e4c3c9c5cdc88ac7cbc9">[email&#160;protected]</a></div>
-          <div class="about-item"><span class="about-ico">💡</span>Self-taught: VPS, AI tools, web deployment</div>
-          <div class="about-item"><span class="about-ico">🔓</span>Available for freelance &amp; internships</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section sdiv" id="education">
-    <div class="slabel">// formal qualifications</div>
-    <div class="stitle">EDUCATION</div>
-    <div class="edu-grid">
-      <div class="edu-card">
-        <div class="edu-level">CURRENT · NC(V) LEVEL 4</div>
-        <div class="edu-title">Information Technology &amp; Computer Science</div>
-        <div class="edu-place">Ekurhuleni East TVET College · 2025 (Final Year)</div>
-        <div class="edu-subjects">
-          <span class="edu-subj hl">Computer Programming</span>
-          <span class="edu-subj hl">System Analysis &amp; Design</span>
-          <span class="edu-subj hl">Data Communication &amp; Networking</span>
-          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
-          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
-        </div>
-        <div class="edu-badge">🎯 In Progress</div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-level">PASSED · NC(V) LEVEL 3</div>
-        <div class="edu-title">Information Technology &amp; Computer Science</div>
-        <div class="edu-place">Ekurhuleni East TVET College · 2024</div>
-        <div class="edu-subjects">
-          <span class="edu-subj hl">Principles of Computer Programming</span>
-          <span class="edu-subj hl">System Analysis &amp; Design</span>
-          <span class="edu-subj">Computer Hardware &amp; Software</span>
-          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
-          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
-        </div>
-        <div class="edu-badge">✅ Completed</div>
-      </div>
-      <div class="edu-card">
-        <div class="edu-level">PASSED · NC(V) LEVEL 2</div>
-        <div class="edu-title">Information Technology &amp; Computer Science</div>
-        <div class="edu-place">Ekurhuleni East TVET College · 2023</div>
-        <div class="edu-subjects">
-          <span class="edu-subj hl">Introduction to Systems Development</span>
-          <span class="edu-subj hl">Introduction to Information Systems</span>
-          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
-          <span class="edu-subj">Electronics</span>
-          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
-        </div>
-        <div class="edu-badge">✅ Completed</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section sdiv" id="certs">
-    <div class="slabel">// verified credentials · click to view</div>
-    <div class="stitle">CERTIFICATIONS</div>
-    <div class="cert-grid">
-      <div class="cert-card" onclick="window.open('https://www.credly.com/badges/b8ab7c11-2b59-45bd-8d85-97b6b6dcb3fc','_blank')">
-        <span class="view-hint">👁 Click to view certificate</span>
-        <div class="cert-logo">🛡️</div>
-        <div>
-          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
-          <div class="cert-name">Introduction to Cybersecurity</div>
-          <div class="cert-date">Issued: 04 Sep 2025 · Ekurhuleni East TVET College</div>
-          <div class="cert-tags">
-            <span class="ctag">Cyber Threats</span><span class="ctag">Online Safety</span>
-            <span class="ctag">Network Security</span><span class="ctag">Verified Badge</span>
-          </div>
-        </div>
-      </div>
-      <div class="cert-card" onclick="window.open('https://www.credly.com/badges/5996b50a-e8f7-421c-b88a-27863505a0aa','_blank')">
-        <span class="view-hint">👁 Click to view certificate</span>
-        <div class="cert-logo">🌐</div>
-        <div>
-          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
-          <div class="cert-name">Get Connected</div>
-          <div class="cert-date">Issued: 12 Aug 2024 · Cisco Global</div>
-          <div class="cert-tags">
-            <span class="ctag">Internet Fundamentals</span><span class="ctag">Digital Literacy</span>
-            <span class="ctag">Connectivity</span>
-          </div>
-        </div>
-      </div>
-      <div class="cert-card" style="border-color:rgba(245,158,11,.15);cursor:default">
-        <div class="cert-logo" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2)">📜</div>
-        <div>
-          <div class="cert-issuer" style="color:var(--gold)">COMING SOON</div>
-          <div class="cert-name">NC(V) Level 4 Certificate</div>
-          <div class="cert-date">Expected: 2025 · Ekurhuleni East TVET College</div>
-          <div class="cert-tags"><span class="ctag" style="color:var(--gold);border-color:rgba(245,158,11,.2)">In Progress</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section sdiv" id="projects">
-    <div class="slabel">// what I've built</div>
-    <div class="stitle">PROJECTS</div>
-    <div class="pgrid">
-      <div class="pcard">
-        <img class="pimg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop" alt="MobileFix">
-        <div class="pbody">
-          <div class="pnum">01 / DESKTOP APP</div><div class="ptitle">MobileFix Manager</div>
-          <div class="pdesc">Full cellphone repair shop system in VB.NET — receipt generation, customer database, inventory connected to SQL Server.</div>
-          <div class="ptags"><span class="tag">VB.NET</span><span class="tag">SQL Server</span><span class="tag">Desktop</span></div>
-          <div class="plinks">
-            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
-            <a href="#" class="plnk" onclick="gotoPage('p2');return false">↗ Web Version</a>
-          </div>
-        </div>
-      </div>
-      <div class="pcard">
-        <img class="pimg" src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=400&fit=crop" alt="BMI">
-        <div class="pbody">
-          <div class="pnum">02 / WEB APP</div><div class="ptitle">BMI Explorer</div>
-          <div class="pdesc">Interactive BMI calculator with visual feedback and health recommendations. Live on GitHub Pages.</div>
-          <div class="ptags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-          <div class="plinks">
-            <a href="https://github.com/soul-net00/bmi_explore" class="plnk" target="_blank">↗ GitHub</a>
-            <a href="https://soul-net00.github.io/bmi_explore/" class="plnk" target="_blank">↗ Live Demo</a>
-          </div>
-        </div>
-      </div>
-      <div class="pcard">
-        <img class="pimg" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop" alt="DB">
-        <div class="pbody">
-          <div class="pnum">03 / DATABASE</div><div class="ptitle">CellphoneShopDB</div>
-          <div class="pdesc">Normalized SQL Server database with FK relationships, stored procedures and indexing for the MobileFix system.</div>
-          <div class="ptags"><span class="tag">SQL Server</span><span class="tag">Database Design</span><span class="tag">T-SQL</span></div>
-          <div class="plinks">
-            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
-            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ Schema</a>
-          </div>
-        </div>
-      </div>
-      <div class="pcard">
-        <img class="pimg" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop" alt="VPS">
-        <div class="pbody">
-          <div class="pnum">04 / INFRASTRUCTURE</div><div class="ptitle">VPS Network Setup</div>
-          <div class="pdesc">Configured VPS environments for fast, secure hosting. Server setup, network config, and remote access management.</div>
-          <div class="ptags"><span class="tag">VPS</span><span class="tag">Linux</span><span class="tag">Networking</span></div>
-          <div class="plinks">
-            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
-            <a href="/cdn-cgi/l/email-protection#cea5a9a1a3a1babda1baa6afaca1fcfefefa8ea9a3afa7a2e0ada1a3" class="plnk">↗ Ask Me</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section sdiv" id="skills">
-    <div class="slabel">// proficiency levels</div>
-    <div class="stitle">SKILLS</div>
-    <div class="skgrid">
-      <div class="skitem"><div class="skrow"><span class="skname">HTML &amp; CSS</span><span class="skpct">85%</span></div><div class="sktrack"><div class="skfill" style="width:85%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">JavaScript</span><span class="skpct">68%</span></div><div class="sktrack"><div class="skfill" style="width:68%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">VB.NET</span><span class="skpct">78%</span></div><div class="sktrack"><div class="skfill" style="width:78%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">SQL Server / Database</span><span class="skpct">75%</span></div><div class="sktrack"><div class="skfill" style="width:75%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">Systems Analysis</span><span class="skpct">72%</span></div><div class="sktrack"><div class="skfill" style="width:72%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">Cisco / Networking</span><span class="skpct">65%</span></div><div class="sktrack"><div class="skfill" style="width:65%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">VPS / Linux Basics</span><span class="skpct">60%</span></div><div class="sktrack"><div class="skfill" style="width:60%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">IT Support / Hardware</span><span class="skpct">80%</span></div><div class="sktrack"><div class="skfill" style="width:80%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">Excel / Word / PowerPoint</span><span class="skpct">78%</span></div><div class="sktrack"><div class="skfill" style="width:78%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">WiFi &amp; Router Config</span><span class="skpct">72%</span></div><div class="sktrack"><div class="skfill" style="width:72%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">Windows Administration</span><span class="skpct">80%</span></div><div class="sktrack"><div class="skfill" style="width:80%"></div></div></div>
-      <div class="skitem"><div class="skrow"><span class="skname">AI Tools</span><span class="skpct">82%</span></div><div class="sktrack"><div class="skfill" style="width:82%"></div></div></div>
-    </div>
-  </section>
-
-  <section class="section sdiv" style="text-align:center" id="contact">
-    <div class="slabel" style="text-align:center">// let's connect</div>
-    <div class="stitle" style="text-align:center">GET IN TOUCH</div>
-    <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto;line-height:1.7">IT support, freelance web work, or collaborating on a project? I'm available.</p>
-    <div class="crow">
-      <a href="/cdn-cgi/l/email-protection#640f030b090b10170b100c05060b56545450240309050d084a070b09" class="clnk">✉️ <span class="__cf_email__" data-cfemail="d5beb2bab8baa1a6baa1bdb4b7bae7e5e5e195b2b8b4bcb9fbb6bab8">[email&#160;protected]</span></a>
-      <a href="tel:0601603996" class="clnk">📞 060 160 3996</a>
-      <a href="https://github.com/soul-net00" target="_blank" class="clnk">🐙 GitHub</a>
-      <a href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank" class="clnk">💼 LinkedIn</a>
-      <a href="https://wa.me/27601603996" target="_blank" class="clnk" style="background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.3);color:#25d366">💬 WhatsApp</a>
-    </div>
-  </section>
-</div>
-<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <span>060 160 3996</span> · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ea818d8587859e99859e828b8885d8dadadeaa8d878b8386c4898587">[email&#160;protected]</a> · 2025 · <span style="cursor:pointer;text-decoration:underline;color:var(--muted)" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
-</div><!-- /p1 -->
-
-<!-- ===================== PAGE 3: BUSINESS SERVICES ===================== -->
-<div class="page" id="p3">
-<div class="wrap">
-  <div class="biz-hero">
-    <div class="slabel" style="text-align:center">// available for hire</div>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,72px);letter-spacing:2px;line-height:.95;margin-bottom:16px">
-      IT SERVICES &amp;<br><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">BUSINESS SOLUTIONS</span>
-    </h2>
-    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto;line-height:1.7">Pick the services you need, add them to your order, then send it straight to my WhatsApp. Prices start from R50 and are fully negotiable.</p>
-    <div style="margin-top:16px;display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.1);border:1px solid var(--border);border-radius:30px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--al)">
-      🛒 Click <strong style="color:#fff;margin:0 4px">"Add to Order"</strong> on any service below
-    </div>
-  </div>
-
-  <div class="biz-grid">
-
-    <div class="biz-card web">
-      <div class="biz-ico">🌐</div>
-      <div class="biz-title">Website / Web App</div>
-      <div class="biz-desc">Custom websites built from scratch — portfolio sites, business landing pages, web apps with JavaScript. Deployed on Netlify or GitHub Pages. Mobile-friendly &amp; fast.</div>
-      <div class="biz-price">💰 Price depends on complexity</div>
-      <div class="biz-price-note">Negotiable · Starts from R50</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Website / Web App','🌐','Custom website or web app built from scratch')">
-        🛒 Add to Order
-      </button>
-    </div>
-
-    <div class="biz-card hw">
-      <div class="biz-ico">💻</div>
-      <div class="biz-title">Laptop Repair &amp; Setup</div>
-      <div class="biz-desc">Windows clean install, driver updates, virus removal, SSD/HDD upgrades, speed optimization. Slow laptop? I can fix it. Available in Gauteng area.</div>
-      <div class="biz-price">💰 Price per job</div>
-      <div class="biz-price-note">Negotiable · Available in Gauteng</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Laptop Repair &amp; Setup','💻','Laptop repair, Windows install, hardware upgrade')">
-        🛒 Add to Order
-      </button>
-    </div>
-
-    <div class="biz-card net">
-      <div class="biz-ico">📶</div>
-      <div class="biz-title">WiFi &amp; Network Setup</div>
-      <div class="biz-desc">Router configuration, WiFi password &amp; access restrictions, network troubleshooting, VPS setup for fast &amp; secure remote access. Home or small business.</div>
-      <div class="biz-price">💰 Price depends on complexity</div>
-      <div class="biz-price-note">Negotiable · Home or business</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'WiFi &amp; Network Setup','📶','WiFi / router setup and network configuration')">
-        🛒 Add to Order
-      </button>
-    </div>
-
-    <div class="biz-card doc">
-      <div class="biz-ico">📊</div>
-      <div class="biz-title">Excel, Word &amp; PowerPoint</div>
-      <div class="biz-desc">Spreadsheets with formulas &amp; automation, professional Word documents, PowerPoint presentations. Data analysis, reports, any document you need.</div>
-      <div class="biz-price">💰 Per document / project</div>
-      <div class="biz-price-note">Negotiable · Quick turnaround</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Excel / Word / PowerPoint','📊','Spreadsheets, Word docs, or PowerPoint presentations')">
-        🛒 Add to Order
-      </button>
-    </div>
-
-    <div class="biz-card web">
-      <div class="biz-ico">🗄️</div>
-      <div class="biz-title">Database Design</div>
-      <div class="biz-desc">SQL Server database design, table relationships, stored procedures, data management. Perfect for small businesses needing structured data storage.</div>
-      <div class="biz-price">💰 Price by project scope</div>
-      <div class="biz-price-note">Negotiable · Full documentation included</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Database Design','🗄️','SQL Server database design and stored procedures')">
-        🛒 Add to Order
-      </button>
-    </div>
-
-    <div class="biz-card hw">
-      <div class="biz-ico">📋</div>
-      <div class="biz-title">Systems Analysis &amp; Design</div>
-      <div class="biz-desc">Requirements gathering, system diagrams (DFD, ERD, flowcharts), documentation. Students and small businesses needing IT analysis help.</div>
-      <div class="biz-price">💰 From R50</div>
-      <div class="biz-price-note">Negotiable · Great for students</div>
-      <button class="add-cart-btn" onclick="cartToggle(this,'Systems Analysis &amp; Design','📋','DFD, ERD, flowcharts and system documentation')">
-        🛒 Add to Order
-      </button>
-    </div>
-
-  </div>
-
-  <div class="laptop-box" style="margin-top:30px">
-    <p style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px">🖥️ Need a Laptop?</p>
-    <p>I can help source and set up laptops. Text me on WhatsApp to discuss what you need and your budget.</p>
-    <button class="add-cart-btn" style="max-width:320px;margin:14px auto 0" onclick="cartToggle(this,'Laptop Sourcing &amp; Setup','🖥️','Help sourcing and setting up a laptop')">
-      🛒 Add Laptop Help to Order
-    </button>
-  </div>
-
-  <div class="biz-cta" style="margin-top:40px">
-    <h3>READY TO GET STARTED?</h3>
-    <p>Add services above to your order, then send it directly to my WhatsApp. I usually reply fast and prices are always negotiable.</p>
-    <a href="https://wa.me/27601603996?text=Hi Kgomotso, I need your IT services" target="_blank" class="wa-btn">
-      💬 WhatsApp · 060 160 3996
-    </a>
-    <div style="margin-top:16px;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace">
-      📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="503b373f3d3f24233f243831323f6260606410373d31393c7e333f3d">[email&#160;protected]</a> &nbsp;·&nbsp; 📞 060 160 3996
-    </div>
-  </div>
-</div>
-<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <span>060 160 3996</span> · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e289858d8f8d96918d968a83808dd0d2d2d6a2858f838b8ecc818d8f">[email&#160;protected]</a> · 2025 · <span style="cursor:pointer;text-decoration:underline;color:var(--muted)" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
-</div><!-- /p3 -->
-
-
-<!-- ===================== PAGE 2: THE APP ===================== -->
-<div class="page" id="p2">
-<div class="wrap">
-  <div style="padding:60px 0 20px;text-align:center">
-    <div class="slabel" style="text-align:center">// featured project</div>
-    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,7vw,76px);letter-spacing:2px;line-height:.95;margin-bottom:18px">
-      CELLPHONE SHOP<br><span style="background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">MANAGEMENT SYSTEM</span>
-    </h2>
-    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 22px;line-height:1.7">Fully functional browser-based shop management. No install needed — runs in your browser with local data and print-ready receipts.</p>
-    <button class="btn-v bsolid" onclick="document.getElementById('liveapp').scrollIntoView({behavior:'smooth'})" style="margin:0 auto">🚀 Try It Live</button>
-  </div>
-
-  <div class="fgrid">
-    <div class="fcard"><div class="fico">🧾</div><div class="ftitle">Receipt Generation</div><div class="fdesc">Auto codes, print-ready HTML with watermarks, signature lines and legal disclaimer.</div></div>
-    <div class="fcard"><div class="fico">👥</div><div class="ftitle">Customer Database</div><div class="fdesc">Save details. Instant search by phone, receipt ID or code.</div></div>
-    <div class="fcard"><div class="fico">📦</div><div class="ftitle">11 Categories</div><div class="fdesc">Repairs, accessories, software — with optional per-item discounts.</div></div>
-    <div class="fcard"><div class="fico">💾</div><div class="ftitle">Export &amp; Backup</div><div class="fdesc">Full JSON export/import. Restore database on any device instantly.</div></div>
-    <div class="fcard"><div class="fico">🖨️</div><div class="ftitle">Print Ready</div><div class="fdesc">Professional print page with company logo and full legal terms.</div></div>
-    <div class="fcard"><div class="fico">🔒</div><div class="ftitle">Password Protected</div><div class="fdesc">Settings locked. You control company info and branding.</div></div>
-  </div>
-
-  <section class="section sdiv">
-    <div class="slabel">// watch it in action</div>
-    <div class="stitle">VIDEO DEMO</div>
-    <div class="vwrap">
-      <iframe src="https://www.youtube.com/embed/L99lApSNXuo?si=2OmKCjXUdDPmnkMX" title="Shop System Demo"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    </div>
-  </section>
-
-  <section class="section sdiv">
-    <div class="slabel">// built with</div>
-    <div class="stitle">TECH STACK</div>
-    <div class="tgrid">
-      <div class="titem"><span style="font-size:20px">🌐</span>HTML5 &amp; CSS3</div>
-      <div class="titem"><span style="font-size:20px">⚡</span>Vanilla JavaScript</div>
-      <div class="titem"><span style="font-size:20px">💾</span>localStorage API</div>
-      <div class="titem"><span style="font-size:20px">🖨️</span>Browser Print API</div>
-      <div class="titem"><span style="font-size:20px">📄</span>Blob / File API</div>
-      <div class="titem"><span style="font-size:20px">🚀</span>Netlify Hosting</div>
-    </div>
-  </section>
-
-  <section class="section sdiv" id="liveapp">
-    <div class="slabel">// try it yourself</div>
-    <div class="stitle">LIVE APPLICATION</div>
-    <p style="color:var(--muted);font-size:14px;margin-bottom:24px">Fully interactive. Data stays in your browser — nothing sent to any server.</p>
-    <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:40px;text-align:center;max-width:500px;margin:0 auto">
-      <div style="font-size:64px;margin-bottom:16px">📱</div>
-      <h3 style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:10px">CELLPHONE SHOP APP</h3>
-      <p style="color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:24px">Create receipts, manage customers, track revenue. Opens in a new tab — works on any device.</p>
-      <a href="shop.html" target="_blank" class="btn-v bsolid" style="margin:0 auto;display:inline-flex">🚀 Open App</a>
-      <div style="margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)">soul-net00.github.io/bmi_explore/shop.html</div>
-    </div>
-  </section>
-</div>
-<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="fb909c9496948f88948f939a9994c9cbcbcfbb9c969a9297d5989496">[email&#160;protected]</a> · <span>soul-net00</span></div></footer>
-</div><!-- /p2 -->
-
-
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ══════════════ CART SYSTEM ══════════════ */
-let cart = []; // [{id, name, ico, desc}]
-
-function cartToggle(btn, name, ico, desc) {
-  // Decode HTML entities for matching
-  const cleanName = name.replace(/&amp;/g,'&');
-  const idx = cart.findIndex(i => i.name === cleanName);
-
-  if (idx === -1) {
-    // Add to cart
-    cart.push({ id: Date.now(), name: cleanName, ico, desc });
-    btn.classList.add('added');
-    btn.innerHTML = '✅ Added — Click to Remove';
-  } else {
-    // Remove from cart
-    cart.splice(idx, 1);
-    btn.classList.remove('added');
-    btn.innerHTML = '🛒 Add to Order';
-  }
-  updateCartUI();
-  // Bounce the FAB
-  const fab = document.getElementById('cartFab');
-  fab.classList.remove('bounce');
-  void fab.offsetWidth;
-  fab.classList.add('bounce');
+  setTimeout(function() {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 120);
 }
 
-function updateCartUI() {
-  const fab = document.getElementById('cartFab');
-  const count = cart.length;
-
-  // FAB visibility
-  if (count > 0) {
-    fab.classList.remove('hidden');
-  } else {
-    fab.classList.add('hidden');
-  }
-  document.getElementById('cartFabCount').textContent = count;
-  document.getElementById('cartFabLabel').textContent = count === 1 ? 'View Order' : 'View Order';
-
-  // Drawer content
-  const emptyEl = document.getElementById('cartEmpty');
-  const itemsEl = document.getElementById('cartItems');
-  const noteSection = document.getElementById('cartNoteSection');
-  const footer = document.getElementById('cartFooter');
-  const summary = document.getElementById('cartSummary');
-
-  if (count === 0) {
-    emptyEl.style.display = 'flex';
-    itemsEl.innerHTML = '';
-    noteSection.style.display = 'none';
-    footer.style.display = 'none';
-  } else {
-    emptyEl.style.display = 'none';
-    noteSection.style.display = 'block';
-    footer.style.display = 'block';
-
-    // Render items
-    itemsEl.innerHTML = cart.map(item => `
-      <div class="cart-item" id="ci-${item.id}">
-        <div class="cart-item-ico">${item.ico}</div>
-        <div class="cart-item-body">
-          <div class="cart-item-name">${item.name}</div>
-          <div class="cart-item-desc">${item.desc}</div>
-        </div>
-        <button class="cart-item-remove" title="Remove" onclick="removeCartItem(${item.id})">✕</button>
-      </div>
-    `).join('');
-
-    // Summary
-    summary.innerHTML = `
-      <div class="cart-summary-title">// YOUR ORDER (${count} service${count>1?'s':''})</div>
-      ${cart.map(i => `<div class="cart-summary-item">${i.ico} ${i.name}</div>`).join('')}
-    `;
-  }
-}
-
-function removeCartItem(id) {
-  const item = cart.find(i => i.id === id);
-  if (!item) return;
-  // Un-toggle the button in the services grid
-  document.querySelectorAll('.add-cart-btn').forEach(btn => {
-    const btnText = btn.getAttribute('onclick') || '';
-    if (btnText.includes(item.name.replace(/&/g,'&amp;')) || btnText.includes(item.name)) {
-      btn.classList.remove('added');
-      btn.innerHTML = '🛒 Add to Order';
-    }
-  });
-  cart = cart.filter(i => i.id !== id);
-  updateCartUI();
-}
-
-function clearCart() {
-  cart = [];
-  document.querySelectorAll('.add-cart-btn').forEach(btn => {
-    btn.classList.remove('added');
-    btn.innerHTML = '🛒 Add to Order';
-  });
-  updateCartUI();
-}
-
-function openTerms(){
-  document.getElementById('termsModal').classList.add('open');
-  document.body.style.overflow='hidden';
-}
-function closeTerms(){
-  document.getElementById('termsModal').classList.remove('open');
-  document.body.style.overflow='';
-}
-document.getElementById('termsModal').addEventListener('click',function(e){
-  if(e.target===this) closeTerms();
-});
-
-function openCart() {
-  document.getElementById('cartDrawer').classList.add('open');
-  document.getElementById('cartOverlay').classList.add('open');
+/* ======= TERMS ======= */
+function openTerms() {
+  document.getElementById('tmOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-
-function closeCart() {
-  document.getElementById('cartDrawer').classList.remove('open');
-  document.getElementById('cartOverlay').classList.remove('open');
+function closeTerms() {
+  document.getElementById('tmOverlay').classList.remove('open');
   document.body.style.overflow = '';
 }
-
-function buildWaLink() {
-  const note = document.getElementById('cartNote').value.trim();
-  const serviceList = cart.map((i,idx) => `${idx+1}. ${i.ico} ${i.name}`).join('\n');
-  let msg = `Hi Kgomotso! 👋\n\nI'm interested in the following IT service${cart.length>1?'s':''}:\n\n${serviceList}`;
-  if (note) msg += `\n\n📝 Notes:\n${note}`;
-  msg += `\n\nPlease let me know more details and pricing. Thank you!`;
-  document.getElementById('cartWaBtn').href = `https://wa.me/27601603996?text=${encodeURIComponent(msg)}`;
-}
-
-/* ══════════════ SIDEBAR ══════════════ */
-function toggleSidebar(){
-  const s=document.getElementById('sidebar'),o=document.getElementById('overlay'),b=document.getElementById('hamBtn');
-  s.classList.toggle('open');o.classList.toggle('open');b.classList.toggle('open');
-}
-function closeSidebar(){
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('overlay').classList.remove('open');
-  document.getElementById('hamBtn').classList.remove('open');
-}
-
-/* ══════════════ PAGE SWITCHING ══════════════ */
-function gotoPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.ntab').forEach(t=>t.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  document.getElementById('tab-'+id).classList.add('active');
-  window.scrollTo(0,0);
-}
-function scrollToSection(id){
-  closeSidebar();
-  gotoPage('p1');
-  setTimeout(()=>{
-    const el=document.getElementById(id);
-    if(el)el.scrollIntoView({behavior:'smooth'});
-  },100);
-}
+document.getElementById('tmOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeTerms();
 });
 
-/* ══════════════ QR CODE ══════════════ */
-window.addEventListener('DOMContentLoaded',function(){
-  const url=window.location.origin+window.location.pathname;
-  new QRCode(document.getElementById('qrcode'),{
-    text:url,width:190,height:190,
-    colorDark:'#7c3aed',colorLight:'#ffffff',
-    correctLevel:QRCode.CorrectLevel.H
+/* ======= TICKER ======= */
+(function() {
+  var items = ['HTML & CSS','JavaScript','VB.NET','SQL Server','Cisco Networking','VPS Setup','IT Support','Excel','Word & PowerPoint','WiFi & Networking','Windows Admin','Systems Analysis'];
+  var colors = ['var(--al)','var(--pink)','var(--green)','var(--gold)','var(--cyan)'];
+  var html = '';
+  for (var r = 0; r < 2; r++) {
+    items.forEach(function(txt, i) {
+      html += '<span class="tk-item"><span class="tdot" style="background:' + colors[i % colors.length] + '"></span>' + txt + '</span>';
+    });
+  }
+  document.getElementById('tickerTrack').innerHTML = html;
+})();
+
+/* ======= QR CODE ======= */
+window.addEventListener('DOMContentLoaded', function() {
+  new QRCode(document.getElementById('qrcode'), {
+    text: window.location.href,
+    width: 190, height: 190,
+    colorDark: '#7c3aed', colorLight: '#ffffff',
+    correctLevel: QRCode.CorrectLevel.H
   });
 });
 </script>
