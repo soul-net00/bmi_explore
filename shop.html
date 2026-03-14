@@ -204,7 +204,7 @@ textarea.na::placeholder{color:rgba(255,255,255,.45)}
     <span>Problem?</span>
     <span>&#128222; <a href="tel:0601603996">060 160 3996</a></span>
     <span><a href="https://wa.me/27601603996" target="_blank">WhatsApp</a></span>
-    <span><a href="mailto:kgomotsothabo2004@gmail.com">kgomotsothabo2004@gmail.com</a></span>
+    <span><a href="/cdn-cgi/l/email-protection#452e222a282a31362a312d24272a77757571052228242c296b262a28"><span class="__cf_email__" data-cfemail="29424e4644465d5a465d41484b461b19191d694e44484045074a4644">[email&#160;protected]</span></a></span>
   </div>
 </div>
 
@@ -363,7 +363,7 @@ textarea.na::placeholder{color:rgba(255,255,255,.45)}
 
 <div id="toast"></div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // GLOBALS
 var K   = {r:'km_rec', c:'km_cus', s:'km_cfg'};
 var its = [];
@@ -474,22 +474,48 @@ async function syncDown() {
   document.getElementById('sdot').className='sdot sd-sy';
   document.getElementById('slbl').textContent='Syncing...';
   try {
-    var r=await cloudLoad(K.r), c=await cloudLoad(K.c), s=await cloudLoad(K.s);
-    if (r) sv(K.r,r); if (c) sv(K.c,c);
+    // Pull receipts from dedicated receipts table
+    var rres = await sb.from('receipts').select('*').eq('user_id', CU.id).order('date', {ascending:false});
+    if (!rres.error && rres.data) {
+      var recs = rres.data.map(function(r) {
+        return {id:r.id, receiptCode:r.receipt_code, customerPhone:r.customer_phone,
+          customerName:r.customer_name, customerEmail:r.customer_email||'',
+          date:r.date, items:r.items||[], total:parseFloat(r.total||0), notes:r.notes||''};
+      });
+      sv(K.r, recs);
+    }
+    // Pull customers and settings from key-value store
+    var c2=await cloudLoad(K.c), s=await cloudLoad(K.s);
+    if (c2) sv(K.c, c2);
     if (s) { cfg=Object.assign({},cfg,s); sv(K.s,cfg); }
     document.getElementById('sdot').className='sdot sd-ok';
     document.getElementById('slbl').textContent='Cloud sync on';
-    showToast('Synced from cloud!'); ldAll();
+    showToast('Synced from cloud!');
+    ldAll();
   } catch(e) {
     document.getElementById('sdot').className='sdot sd-off';
     showToast('Sync failed - using local data');
   }
 }
 async function pushAll() {
-  if (!CU) return;
-  await cloudSave(K.r,ld(K.r)); await cloudSave(K.c,ld(K.c));
-  await cloudSave(K.s,Object.assign({},cfg,{password:undefined}));
-  showToast('All data pushed to cloud!');
+  if (!CU || !sb) return;
+  showToast('Pushing all data to cloud...');
+  var recs = ld(K.r);
+  for (var i = 0; i < recs.length; i++) {
+    var rec = recs[i];
+    await sb.from('receipts').upsert({
+      id: rec.id, user_id: CU.id,
+      receipt_code: rec.receiptCode,
+      customer_phone: rec.customerPhone,
+      customer_name: rec.customerName,
+      customer_email: rec.customerEmail || null,
+      date: rec.date, items: rec.items,
+      total: rec.total, notes: rec.notes || null
+    }, {onConflict: 'id'});
+  }
+  await cloudSave(K.c, ld(K.c));
+  await cloudSave(K.s, Object.assign({}, cfg, {password: undefined}));
+  showToast('All '+recs.length+' receipts pushed to cloud!');
 }
 
 // AUTH
@@ -640,16 +666,87 @@ async function saveR() {
   var rec={id:Date.now(),receiptCode:code,customerPhone:ph,customerName:nm||'Walk-in Customer',
     customerEmail:em,date:new Date().toISOString(),items:its.slice(),total:tot,notes:nt};
   try {
+    // Save locally first
     var recs=ld(K.r); recs.push(rec); sv(K.r,recs);
     var custs=ld(K.c), ex=custs.find(function(c){ return c.phone===ph; });
     if (ex) { ex.name=nm||ex.name; ex.email=em||ex.email; ex.lastVisit=rec.date; ex.visits=(ex.visits||0)+1; }
     else custs.push({phone:ph,name:nm||'Walk-in Customer',email:em,firstVisit:rec.date,lastVisit:rec.date,visits:1});
     sv(K.c,custs);
-    if (CU) { await cloudSave(K.r,recs); await cloudSave(K.c,custs); showToast('Receipt saved to cloud!'); }
-    else showToast('Receipt saved locally!');
+    // Save to Supabase receipts table (each receipt = its own row)
+    if (CU && sb) {
+      document.getElementById('sdot').className='sdot sd-sy';
+      var res = await sb.from('receipts').insert({
+        id: rec.id,
+        user_id: CU.id,
+        receipt_code: rec.receiptCode,
+        customer_phone: rec.customerPhone,
+        customer_name: rec.customerName,
+        customer_email: rec.customerEmail || null,
+        date: rec.date,
+        items: rec.items,
+        total: rec.total,
+        notes: rec.notes || null
+      });
+      await cloudSave(K.c, custs);
+      document.getElementById('sdot').className = res.error ? 'sdot sd-off' : 'sdot sd-ok';
+      if (res.error) { showToast('Saved locally (cloud error: '+res.error.message+')'); }
+      else showToast('Receipt saved to cloud database!');
+    } else {
+      showToast('Receipt saved locally! (Log in to sync to cloud)');
+    }
     if (confirm('Print this receipt now?')) prtR(rec);
     clearR();
   } catch(e) { alert('Could not save: '+e.message); }
+}
+
+async function dbSaveReceipt(rec) {
+  if (!sb||!CU) return;
+  try {
+    document.getElementById('sdot').className='sdot sd-sy';
+    var res = await sb.from('receipts').upsert({
+      id: rec.id,
+      user_id: CU.id,
+      receipt_code: rec.receiptCode,
+      customer_phone: rec.customerPhone,
+      customer_name: rec.customerName,
+      customer_email: rec.customerEmail || null,
+      receipt_date: rec.date,
+      items: rec.items,
+      total: rec.total,
+      notes: rec.notes || null
+    });
+    document.getElementById('sdot').className = res.error ? 'sdot sd-off' : 'sdot sd-ok';
+    if (res.error) console.warn('DB save error:', res.error.message);
+  } catch(e) { document.getElementById('sdot').className='sdot sd-off'; console.warn('DB save failed:', e.message); }
+}
+
+async function dbDeleteReceipt(id) {
+  if (!sb||!CU) return;
+  try { await sb.from('receipts').delete().eq('id', id).eq('user_id', CU.id); }
+  catch(e) { console.warn('DB delete failed:', e.message); }
+}
+
+async function syncReceiptsFromDB() {
+  if (!sb||!CU) return;
+  try {
+    document.getElementById('sdot').className='sdot sd-sy';
+    document.getElementById('slbl').textContent='Syncing...';
+    var res = await sb.from('receipts')
+      .select('*')
+      .eq('user_id', CU.id)
+      .order('receipt_date', {ascending: false});
+    if (res.error) { console.warn('Sync error:', res.error.message); return; }
+    var recs = (res.data||[]).map(function(r){
+      return {id:r.id,receiptCode:r.receipt_code,customerPhone:r.customer_phone,
+        customerName:r.customer_name,customerEmail:r.customer_email||'',
+        date:r.receipt_date,items:r.items||[],total:parseFloat(r.total),notes:r.notes||''};
+    });
+    sv(K.r, recs);
+    document.getElementById('sdot').className='sdot sd-ok';
+    document.getElementById('slbl').textContent='Cloud sync on';
+    showToast('Synced '+recs.length+' receipt(s) from database!');
+    ldAll();
+  } catch(e) { document.getElementById('sdot').className='sdot sd-off'; }
 }
 
 // HISTORY
@@ -660,7 +757,26 @@ function srch() {
     return r.customerPhone.includes(t)||(r.customerName||'').toLowerCase().includes(t)||r.receiptCode.toLowerCase().includes(t);
   }).slice().reverse());
 }
-function ldAll() { shRecs(ld(K.r).slice().reverse()); }
+async function ldAll() {
+  if (CU && sb) {
+    try {
+      var res = await sb.from('receipts').select('*').eq('user_id', CU.id).order('date', {ascending: false});
+      if (!res.error && res.data && res.data.length > 0) {
+        // Map Supabase columns back to local format
+        var recs = res.data.map(function(r) {
+          return {id:r.id, receiptCode:r.receipt_code, customerPhone:r.customer_phone,
+            customerName:r.customer_name, customerEmail:r.customer_email,
+            date:r.date, items:r.items||[], total:r.total, notes:r.notes||''};
+        });
+        // Also update local cache
+        sv(K.r, recs);
+        shRecs(recs);
+        return;
+      }
+    } catch(e) { console.warn('Cloud load failed, using local'); }
+  }
+  shRecs(ld(K.r).slice().reverse());
+}
 function shRecs(recs) {
   var el=document.getElementById('sR');
   if (!recs.length) { el.innerHTML='<div class="empty"><div class="eico">&#128203;</div><p>No receipts found</p></div>'; return; }
@@ -712,7 +828,9 @@ function prtById(id) { var r=ld(K.r).find(function(r){ return r.id===id; }); if 
 async function delRec(id) {
   if (!confirm('Delete this receipt permanently?')) return;
   var recs=ld(K.r).filter(function(r){ return r.id!==id; }); sv(K.r,recs);
-  if (CU) await cloudSave(K.r,recs);
+  if (CU && sb) {
+    await sb.from('receipts').delete().eq('id', id).eq('user_id', CU.id);
+  }
   closM(); ldAll();
 }
 function closM() { document.getElementById('rMod').classList.remove('on'); }
@@ -961,7 +1079,7 @@ window.addEventListener('load', async function() {
       setBanner(ses.data.session.user);
       await syncDown();
     } else {
-      setBanner(null);
+         setBanner(null);
     }
     sb.auth.onAuthStateChange(function(ev, session) {
       if (ev==='SIGNED_IN' && session) setBanner(session.user);
