@@ -470,38 +470,41 @@ async function cloudLoad(key) {
 }
 async function syncDown() {
   if (!CU) return;
-  showToast('Syncing from cloud...', 1800);
+  showToast('Syncing from cloud...', 2000);
   document.getElementById('sdot').className='sdot sd-sy';
   document.getElementById('slbl').textContent='Syncing...';
   try {
-    // Pull receipts from dedicated receipts table
-    var rres = await sb.from('receipts').select('*').eq('user_id', CU.id).order('date', {ascending:false});
+    // Pull receipts from dedicated table (one row per receipt)
+    var rres = await sb.from('receipts')
+      .select('*').eq('user_id', CU.id).order('date', {ascending:false});
     if (!rres.error && rres.data) {
-      var recs = rres.data.map(function(r) {
-        return {id:r.id, receiptCode:r.receipt_code, customerPhone:r.customer_phone,
-          customerName:r.customer_name, customerEmail:r.customer_email||'',
-          date:r.date, items:r.items||[], total:parseFloat(r.total||0), notes:r.notes||''};
+      var recs = rres.data.map(function(r){
+        return {id:r.id, receiptCode:r.receipt_code,
+          customerPhone:r.customer_phone, customerName:r.customer_name,
+          customerEmail:r.customer_email||'', date:r.date,
+          items:r.items||[], total:parseFloat(r.total||0), notes:r.notes||''};
       });
       sv(K.r, recs);
     }
-    // Pull customers and settings from key-value store
+    // Pull customers + settings from key-value store
     var c2=await cloudLoad(K.c), s=await cloudLoad(K.s);
     if (c2) sv(K.c, c2);
     if (s) { cfg=Object.assign({},cfg,s); sv(K.s,cfg); }
     document.getElementById('sdot').className='sdot sd-ok';
     document.getElementById('slbl').textContent='Cloud sync on';
-    showToast('Synced from cloud!');
+    showToast('Synced! '+((rres.data||[]).length)+' receipts loaded.');
     ldAll();
   } catch(e) {
     document.getElementById('sdot').className='sdot sd-off';
-    showToast('Sync failed - using local data');
+    showToast('Sync failed - check connection');
+    console.error('syncDown error:', e);
   }
 }
 async function pushAll() {
   if (!CU || !sb) return;
   showToast('Pushing all data to cloud...');
   var recs = ld(K.r);
-  for (var i = 0; i < recs.length; i++) {
+  for (var i=0; i<recs.length; i++) {
     var rec = recs[i];
     await sb.from('receipts').upsert({
       id: rec.id, user_id: CU.id,
@@ -511,13 +514,12 @@ async function pushAll() {
       customer_email: rec.customerEmail || null,
       date: rec.date, items: rec.items,
       total: rec.total, notes: rec.notes || null
-    }, {onConflict: 'id'});
+    }, {onConflict:'id'});
   }
   await cloudSave(K.c, ld(K.c));
-  await cloudSave(K.s, Object.assign({}, cfg, {password: undefined}));
-  showToast('All '+recs.length+' receipts pushed to cloud!');
+  await cloudSave(K.s, Object.assign({},cfg,{password:undefined}));
+  showToast('Done! '+recs.length+' receipts pushed to cloud.');
 }
-
 // AUTH
 function openAuth() {
   document.getElementById('am').classList.add('on');
@@ -666,13 +668,13 @@ async function saveR() {
   var rec={id:Date.now(),receiptCode:code,customerPhone:ph,customerName:nm||'Walk-in Customer',
     customerEmail:em,date:new Date().toISOString(),items:its.slice(),total:tot,notes:nt};
   try {
-    // Save locally first
+    // Always save locally first
     var recs=ld(K.r); recs.push(rec); sv(K.r,recs);
     var custs=ld(K.c), ex=custs.find(function(c){ return c.phone===ph; });
     if (ex) { ex.name=nm||ex.name; ex.email=em||ex.email; ex.lastVisit=rec.date; ex.visits=(ex.visits||0)+1; }
     else custs.push({phone:ph,name:nm||'Walk-in Customer',email:em,firstVisit:rec.date,lastVisit:rec.date,visits:1});
     sv(K.c,custs);
-    // Save to Supabase receipts table (each receipt = its own row)
+    // If logged in, save to Supabase receipts table (one row per receipt)
     if (CU && sb) {
       document.getElementById('sdot').className='sdot sd-sy';
       var res = await sb.from('receipts').insert({
@@ -689,70 +691,38 @@ async function saveR() {
       });
       await cloudSave(K.c, custs);
       document.getElementById('sdot').className = res.error ? 'sdot sd-off' : 'sdot sd-ok';
-      if (res.error) { showToast('Saved locally (cloud error: '+res.error.message+')'); }
-      else showToast('Receipt saved to cloud database!');
+      if (res.error) showToast('Saved locally (cloud: '+res.error.message+')');
+      else showToast('Receipt saved to cloud!');
     } else {
-      showToast('Receipt saved locally! (Log in to sync to cloud)');
+      showToast('Receipt saved locally! (Log in to sync across devices)');
     }
     if (confirm('Print this receipt now?')) prtR(rec);
     clearR();
   } catch(e) { alert('Could not save: '+e.message); }
 }
 
-async function dbSaveReceipt(rec) {
-  if (!sb||!CU) return;
-  try {
-    document.getElementById('sdot').className='sdot sd-sy';
-    var res = await sb.from('receipts').upsert({
-      id: rec.id,
-      user_id: CU.id,
-      receipt_code: rec.receiptCode,
-      customer_phone: rec.customerPhone,
-      customer_name: rec.customerName,
-      customer_email: rec.customerEmail || null,
-      receipt_date: rec.date,
-      items: rec.items,
-      total: rec.total,
-      notes: rec.notes || null
-    });
-    document.getElementById('sdot').className = res.error ? 'sdot sd-off' : 'sdot sd-ok';
-    if (res.error) console.warn('DB save error:', res.error.message);
-  } catch(e) { document.getElementById('sdot').className='sdot sd-off'; console.warn('DB save failed:', e.message); }
-}
-
-async function dbDeleteReceipt(id) {
-  if (!sb||!CU) return;
-  try { await sb.from('receipts').delete().eq('id', id).eq('user_id', CU.id); }
-  catch(e) { console.warn('DB delete failed:', e.message); }
-}
-
-async function syncReceiptsFromDB() {
-  if (!sb||!CU) return;
-  try {
-    document.getElementById('sdot').className='sdot sd-sy';
-    document.getElementById('slbl').textContent='Syncing...';
-    var res = await sb.from('receipts')
-      .select('*')
-      .eq('user_id', CU.id)
-      .order('receipt_date', {ascending: false});
-    if (res.error) { console.warn('Sync error:', res.error.message); return; }
-    var recs = (res.data||[]).map(function(r){
-      return {id:r.id,receiptCode:r.receipt_code,customerPhone:r.customer_phone,
-        customerName:r.customer_name,customerEmail:r.customer_email||'',
-        date:r.receipt_date,items:r.items||[],total:parseFloat(r.total),notes:r.notes||''};
-    });
-    sv(K.r, recs);
-    document.getElementById('sdot').className='sdot sd-ok';
-    document.getElementById('slbl').textContent='Cloud sync on';
-    showToast('Synced '+recs.length+' receipt(s) from database!');
-    ldAll();
-  } catch(e) { document.getElementById('sdot').className='sdot sd-off'; }
-}
-
 // HISTORY
-function srch() {
+async function srch() {
   var t=document.getElementById('sT').value.trim().toLowerCase();
   if (!t) { ldAll(); return; }
+  // Search cloud if logged in
+  if (CU && sb) {
+    try {
+      var res = await sb.from('receipts').select('*').eq('user_id',CU.id)
+        .or('customer_phone.ilike.%'+t+'%,customer_name.ilike.%'+t+'%,receipt_code.ilike.%'+t+'%')
+        .order('date',{ascending:false});
+      if (!res.error && res.data) {
+        var recs = res.data.map(function(r){
+          return {id:r.id, receiptCode:r.receipt_code,
+            customerPhone:r.customer_phone, customerName:r.customer_name,
+            customerEmail:r.customer_email||'', date:r.date,
+            items:r.items||[], total:parseFloat(r.total||0), notes:r.notes||''};
+        });
+        shRecs(recs); return;
+      }
+    } catch(e) {}
+  }
+  // Fallback to local search
   shRecs(ld(K.r).filter(function(r){
     return r.customerPhone.includes(t)||(r.customerName||'').toLowerCase().includes(t)||r.receiptCode.toLowerCase().includes(t);
   }).slice().reverse());
@@ -796,8 +766,19 @@ function shRecs(recs) {
 }
 
 // VIEW RECEIPT MODAL
-function vRec(id) {
-  var rec=ld(K.r).find(function(r){ return r.id===id; }); if (!rec) return;
+async function vRec(id) {
+  var rec=ld(K.r).find(function(r){ return r.id===id; });
+  // If not in local cache, try fetching from cloud
+  if (!rec && CU && sb) {
+    var res = await sb.from('receipts').select('*').eq('id',id).eq('user_id',CU.id).maybeSingle();
+    if (res.data) {
+      rec={id:res.data.id, receiptCode:res.data.receipt_code,
+        customerPhone:res.data.customer_phone, customerName:res.data.customer_name,
+        customerEmail:res.data.customer_email||'', date:res.data.date,
+        items:res.data.items||[], total:parseFloat(res.data.total||0), notes:res.data.notes||''};
+    }
+  }
+  if (!rec) return;
   var rows='';
   for (var i=0;i<rec.items.length;i++) {
     var it=rec.items[i];
@@ -829,7 +810,7 @@ async function delRec(id) {
   if (!confirm('Delete this receipt permanently?')) return;
   var recs=ld(K.r).filter(function(r){ return r.id!==id; }); sv(K.r,recs);
   if (CU && sb) {
-    await sb.from('receipts').delete().eq('id', id).eq('user_id', CU.id);
+    await sb.from('receipts').delete().eq('id',id).eq('user_id',CU.id);
   }
   closM(); ldAll();
 }
