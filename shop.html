@@ -123,6 +123,8 @@ textarea.na::placeholder{color:rgba(255,255,255,.45)}
 .adv::before,.adv::after{content:"";flex:1;height:1px;background:var(--bd)}
 .agu{width:100%;padding:11px;border:1.5px solid var(--bd);border-radius:var(--r);background:transparent;color:var(--tx2);font-weight:600;font-size:13px;cursor:pointer;font-family:var(--fn);transition:var(--tr)}
 .agu:hover{border-color:var(--acc);color:var(--acc)}
+.oauth-btn{width:100%;padding:11px 13px;border:1.5px solid var(--bd);border-radius:var(--r);background:var(--card2);color:var(--tx);font-weight:600;font-size:13px;cursor:pointer;font-family:var(--fn);transition:var(--tr);margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:9px}
+.oauth-btn:hover{border-color:var(--acc);background:var(--card3);transform:translateY(-1px)}
 .amsg{font-size:12px;padding:9px 13px;border-radius:var(--r);margin-top:8px;display:none}
 .amsg.err{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
 .amsg.ok{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.3)}
@@ -160,6 +162,10 @@ textarea.na::placeholder{color:rgba(255,255,255,.45)}
 .rtot{background:linear-gradient(135deg,var(--acc),#a855f7);color:#fff;padding:13px 17px;border-radius:var(--r);text-align:right;margin-top:11px}
 .rtl{font-size:10px;opacity:.8;margin-bottom:2px}
 .rta{font-size:26px;font-weight:800;font-family:var(--mo)}
+/* OAUTH BUTTONS */
+.oauth-btn{width:100%;padding:11px 13px;border:1.5px solid var(--bd);border-radius:var(--r);background:var(--card2);color:var(--tx);font-weight:600;font-size:13px;cursor:pointer;font-family:var(--fn);transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:8px}
+.oauth-btn:hover{border-color:var(--acc);background:var(--card3);transform:translateY(-1px)}
+[data-theme="light"] .oauth-btn{background:#fff;color:#333}
 /* TOAST */
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(70px);background:#111827;color:#fff;padding:10px 20px;border-radius:var(--r);font-size:13px;font-weight:600;z-index:9999;transition:transform .28s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 28px rgba(0,0,0,.5);white-space:nowrap;font-family:var(--fn);border:1px solid rgba(255,255,255,.08)}
 [data-theme="light"] #toast{background:#1a1a2e}
@@ -349,18 +355,38 @@ textarea.na::placeholder{color:rgba(255,255,255,.45)}
     <div class="ats">
       <button class="at on" id="atL" onclick="swAuth('login')">Login</button>
       <button class="at" id="atS" onclick="swAuth('signup')">Sign Up</button>
+      <button class="at" id="atR" onclick="swAuth('reset')">Reset</button>
     </div>
-    <input class="ain" type="email" id="aEm" placeholder="Email address">
-    <input class="ain" type="password" id="aPw" placeholder="Password" onkeyup="if(event.key==='Enter')doAuth()">
-    <input class="ain" type="password" id="aPw2" placeholder="Confirm password" style="display:none" onkeyup="if(event.key==='Enter')doAuth()">
-    <button class="asub" id="aSub" onclick="doAuth()">Login</button>
+    <!-- OAuth buttons -->
+    <button class="oauth-btn" id="gglBtn" onclick="oauthLogin('google')">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+      Continue with Google
+    </button>
+    <button class="oauth-btn" id="ghBtn" onclick="oauthLogin('github')">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      Continue with GitHub
+    </button>
+    <div class="adv">or use email</div>
+    <div id="aEmailSec">
+      <input class="ain" type="email" id="aEm" placeholder="Email address">
+      <input class="ain" type="password" id="aPw" placeholder="Password" onkeyup="if(event.key==='Enter')doAuth()">
+      <input class="ain" type="password" id="aPw2" placeholder="Confirm password" style="display:none" onkeyup="if(event.key==='Enter')doAuth()">
+      <button class="asub" id="aSub" onclick="doAuth()">Login</button>
+      <p id="aForgot" style="text-align:center;margin-top:8px;font-size:12px;color:var(--tx2)">
+        Forgot password? <span onclick="swAuth('reset')" style="color:var(--acc2);cursor:pointer;font-weight:600">Reset it</span>
+      </p>
+    </div>
+    <div id="aResetSec" style="display:none">
+      <p style="font-size:12px;color:var(--tx2);margin-bottom:10px;text-align:center">Enter your email to receive a reset link</p>
+      <input class="ain" type="email" id="aRstEm" placeholder="Email address" onkeyup="if(event.key==='Enter')doReset()">
+      <button class="asub" onclick="doReset()">Send Reset Link</button>
+    </div>
     <div class="amsg" id="amsg"></div>
     <div class="adv">or</div>
     <button class="agu" onclick="asGuest()">Continue as Guest (local only)</button>
     <p style="margin-top:11px;font-size:10px;color:var(--tx3);text-align:center">Secured with row-level security.</p>
   </div>
 </div>
-
 <div id="toast"></div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
@@ -533,8 +559,17 @@ function swAuth(m) {
   AM = m;
   document.getElementById('atL').classList.toggle('on', m==='login');
   document.getElementById('atS').classList.toggle('on', m==='signup');
-  document.getElementById('aPw2').style.display = m==='signup'?'block':'none';
-  document.getElementById('aSub').textContent   = m==='login'?'Login':'Create Account';
+  document.getElementById('atR').classList.toggle('on', m==='reset');
+  var isReset = m === 'reset';
+  document.getElementById('aEmailSec').style.display = isReset ? 'none' : 'block';
+  document.getElementById('aResetSec').style.display = isReset ? 'block' : 'none';
+  document.getElementById('gglBtn').style.display    = isReset ? 'none' : 'flex';
+  document.getElementById('ghBtn').style.display     = isReset ? 'none' : 'flex';
+  if (!isReset) {
+    document.getElementById('aPw2').style.display    = m==='signup' ? 'block' : 'none';
+    document.getElementById('aSub').textContent      = m==='login'  ? 'Login' : 'Create Account';
+    document.getElementById('aForgot').style.display = m==='login'  ? 'block' : 'none';
+  }
   document.getElementById('amsg').style.display = 'none';
 }
 function showAuthMsg(msg, type) {
@@ -576,6 +611,32 @@ async function doLogout() {
   if (sb) await sb.auth.signOut();
   setBanner(null); showToast('Signed out. Local data still available.');
 }
+
+// OAUTH LOGIN (Google / GitHub)
+async function oauthLogin(provider) {
+  if (!sb) { showAuthMsg('Connection error.','err'); return; }
+  try {
+    var res = await sb.auth.signInWithOAuth({
+      provider: provider,
+      options: { redirectTo: 'https://soulnet.co.za/shop.html' }
+    });
+    if (res.error) showAuthMsg(res.error.message, 'err');
+    // Browser will redirect to provider - no further action needed here
+  } catch(e) { showAuthMsg('OAuth error: '+e.message,'err'); }
+}
+
+// PASSWORD RESET
+async function doReset() {
+  if (!sb) return;
+  var email = document.getElementById('aEm').value.trim();
+  if (!email) { showAuthMsg('Enter your email address first.','err'); return; }
+  var res = await sb.auth.resetPasswordForEmail(email, {
+    redirectTo: 'https://soulnet.co.za/shop.html'
+  });
+  if (res.error) showAuthMsg(res.error.message,'err');
+  else showAuthMsg('Password reset email sent! Check your inbox.','ok');
+}
+
 
 // TABS
 function gto(id, btn) {
