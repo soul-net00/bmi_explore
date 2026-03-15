@@ -8,14 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
-:root{--bg:#06060f;--card:#10102a;--accent:#7c3aed;--al:#a855f7;--gold:#f59e0b;--green:#10b981;--pink:#ec4899;--cyan:#06b6d4;--text:#eeeeff;--muted:#6b6b9a;--border:rgba(124,58,237,.18);--border2:rgba(255,255,255,.06);}
+:root{--bg:#06060f;--card:#10102a;--accent:#7c3aed;--al:#a855f7;--gold:#f59e0b;--green:#10b981;--pink:#ec4899;--cyan:#06b6d4;--text:#eeeeff;--muted:#6b6b9a;--border:rgba(124,58,237,.18);--border2:rgba(255,255,255,.06)}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden;min-height:100vh}
 .bg-mesh{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 70% 60% at 15% 5%,rgba(124,58,237,.13) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 85% 85%,rgba(236,72,153,.07) 0%,transparent 55%)}
 .bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(124,58,237,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.04) 1px,transparent 1px);background-size:60px 60px}
 .wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:2}
-.page{display:none;min-height:100vh}.page.active{display:block}
+.page{display:none;min-height:100vh}
+.page.active{display:block}
 /* HAMBURGER */
 .ham-btn{background:none;border:none;cursor:pointer;padding:8px;display:flex;flex-direction:column;gap:5px;z-index:200;position:relative}
 .ham-btn span{display:block;width:22px;height:2px;background:var(--al);border-radius:2px;transition:all .3s}
@@ -46,7 +47,7 @@ body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overfl
 nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2)}
 .nav-in{display:flex;justify-content:space-between;align-items:center;height:60px;max-width:1120px;margin:0 auto;padding:0 24px}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;color:var(--al);cursor:pointer}
-.nav-tabs{display:flex;gap:4px}
+.nav-tabs{display:flex;gap:4px;align-items:center}
 .ntab{padding:6px 13px;background:none;border:1px solid transparent;border-radius:6px;color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;cursor:pointer;transition:all .2s;white-space:nowrap}
 .ntab:hover{color:var(--text);border-color:var(--border)}
 .ntab.active{background:rgba(124,58,237,.15);border-color:var(--accent);color:var(--al)}
@@ -58,7 +59,6 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .hero-name{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8.5vw,100px);line-height:.9;letter-spacing:2px;animation:rise .5s .1s ease both}
 .grad{background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
 .hero-role{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);animation:rise .5s .15s ease both;line-height:1.7}
-.hero-role span{color:var(--al)}
 .hero-bio{margin-top:16px;font-size:15px;line-height:1.75;color:var(--text);opacity:.7;max-width:500px;animation:rise .5s .2s ease both}
 .hero-ctas{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap;animation:rise .5s .25s ease both}
 .btn-v{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:8px;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all .22s;text-decoration:none;border:none}
@@ -145,7 +145,7 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .crow{display:flex;justify-content:center;gap:12px;margin-top:26px;flex-wrap:wrap}
 .clnk{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;border:1px solid var(--border2);color:var(--text);text-decoration:none;font-size:14px;font-weight:600;background:var(--card);transition:all .22s}
 .clnk:hover{border-color:var(--al);color:var(--al);transform:translateY(-2px)}
-/* SERVICES PAGE */
+/* SERVICES */
 .biz-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px;margin-top:32px}
 .biz-card{background:var(--card);border:1px solid var(--border2);border-radius:16px;padding:24px;transition:all .25s;position:relative;overflow:hidden}
 .biz-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
@@ -165,7 +165,7 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .wa-btn{display:inline-flex;align-items:center;gap:10px;background:#25d366;color:#fff;padding:14px 28px;border-radius:10px;font-size:15px;font-weight:800;text-decoration:none;transition:all .22s}
 .wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.35)}
 .laptop-box{margin-top:24px;padding:20px 24px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.2);border-radius:12px;text-align:center}
-/* CART BUTTON */
+/* CART BTN */
 .add-cart-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;transition:all .22s;border:1px solid var(--border);background:rgba(124,58,237,.1);color:var(--al);margin-top:10px;font-family:'Syne',sans-serif}
 .add-cart-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
 .add-cart-btn.added{background:rgba(16,185,129,.15);border-color:rgba(16,185,129,.4);color:var(--green)}
@@ -204,12 +204,12 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .cart-sumbox{background:rgba(124,58,237,.07);border:1px solid var(--border);border-radius:10px;padding:12px 14px;margin-bottom:14px}
 .cart-sum-title{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:8px}
 .cart-sum-line{font-size:12px;color:var(--text);opacity:.75;margin-bottom:4px;padding-left:12px;position:relative}
-.cart-sum-line::before{content:'&#8226;';color:var(--al);position:absolute;left:0}
+.cart-sum-line::before{content:'•';color:var(--al);position:absolute;left:0}
 .send-wa-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;background:#25d366;color:#fff;padding:15px;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;border:none;transition:all .22s;font-family:'Syne',sans-serif;text-decoration:none}
 .send-wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 12px 30px rgba(37,211,102,.4)}
 .clear-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:8px;background:transparent;color:var(--muted);padding:10px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;border:1px solid var(--border2);margin-top:8px;transition:all .2s;font-family:'JetBrains Mono',monospace}
 .clear-btn:hover{border-color:#ef4444;color:#ef4444}
-/* TERMS MODAL */
+/* TERMS */
 .tm-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:500;display:none;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
 .tm-overlay.open{display:flex}
 .tm-box{background:#0d0d22;border:1px solid var(--border);border-radius:18px;max-width:720px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;animation:rise .3s ease}
@@ -226,7 +226,6 @@ nav{position:sticky;top:0;z-index:130;background:rgba(6,6,15,.92);backdrop-filte
 .t-h{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:2px;margin-bottom:9px}
 .t-p{font-size:13px;color:var(--text);opacity:.75;line-height:1.75}
 .t-p ul{padding-left:18px;margin-top:8px;display:flex;flex-direction:column;gap:5px}
-.t-p li{color:var(--text);opacity:.7}
 .t-p li::marker{color:var(--al)}
 .t-div{height:1px;background:var(--border2);margin:18px 0}
 .tm-foot{padding:14px 24px;border-top:1px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;flex-shrink:0}
@@ -252,165 +251,119 @@ footer span{color:var(--al)}
 @keyframes rise{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:860px){.hero{grid-template-columns:1fr;gap:36px;padding:40px 0 30px}.qr-card{max-width:340px}.about-grid{grid-template-columns:1fr}}
 @media(max-width:580px){.hero-ctas{flex-direction:column}.ntab{padding:5px 9px;font-size:10px}.crow{flex-direction:column;align-items:center}.cart-drawer{width:100vw}}
-
-/* ========== TERMINAL INTRO ========== */
+/* TERMINAL */
 #terminal-intro{position:fixed;inset:0;background:#020208;z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .8s ease}
 #terminal-intro.done{opacity:0;pointer-events:none}
 .term-box{width:min(680px,92vw);background:#0a0a12;border:1px solid rgba(124,58,237,.45);border-radius:14px;overflow:hidden;box-shadow:0 0 80px rgba(124,58,237,.3)}
 .term-bar{background:#13132a;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.06)}
-.tdot{width:12px;height:12px;border-radius:50%}
+.term-dot{width:12px;height:12px;border-radius:50%}
 .term-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:#555;margin-left:8px;letter-spacing:1px}
-.term-body{padding:24px 26px;min-height:220px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2}
-.tl{display:block;white-space:pre;overflow:hidden;max-width:0;animation:none}
-.tl.typed{max-width:100%}
-.tl.c-prompt{color:rgba(238,238,255,.8)}
-.tl.c-prompt::before{content:'> ';color:var(--al)}
-.tl.c-ok{color:var(--green)}
-.tl.c-dim{color:#3a3a5a}
-.tl.c-hi{color:var(--al)}
-.tl.c-warn{color:var(--gold)}
-.term-cursor{display:inline-block;width:9px;height:14px;background:var(--al);animation:tcursor .75s infinite;vertical-align:middle;margin-left:3px;border-radius:1px}
-@keyframes tcursor{0%,100%{opacity:1}50%{opacity:0}}
-.term-prog-wrap{height:3px;background:rgba(124,58,237,.15);border-radius:2px;overflow:hidden;margin-top:4px;padding:0 26px}
+.term-body{padding:24px 26px;min-height:220px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:2;overflow:hidden}
+.tl{display:block;white-space:pre}
+.c-prompt{color:rgba(238,238,255,.8)}
+.c-prompt::before{content:'> ';color:var(--al)}
+.c-ok{color:var(--green)}
+.c-dim{color:#3a3a5a}
+.c-hi{color:var(--al)}
+.c-warn{color:var(--gold)}
+.term-prog-wrap{height:3px;background:rgba(124,58,237,.15);border-radius:2px;overflow:hidden;padding:0 26px}
 .term-prog{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--al));border-radius:2px;transition:width .06s linear}
 .term-skip-btn{position:absolute;bottom:28px;right:28px;background:rgba(124,58,237,.12);border:1px solid rgba(124,58,237,.3);color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:11px;padding:7px 14px;border-radius:6px;cursor:pointer;transition:all .2s;letter-spacing:1px}
 .term-skip-btn:hover{background:rgba(124,58,237,.3);color:var(--al)}
-
-/* ========== LIGHT MODE ========== */
+/* LIGHT MODE */
 body.light{--bg:#f5f5ff;--card:#ffffff;--text:#0c0c1e;--muted:#6b6b9a;--border:rgba(124,58,237,.2);--border2:rgba(124,58,237,.1)}
-body.light .bg-mesh{background:radial-gradient(ellipse 70% 60% at 15% 5%,rgba(124,58,237,.07) 0%,transparent 55%),radial-gradient(ellipse 50% 40% at 85% 85%,rgba(168,85,247,.04) 0%,transparent 55%)}
-body.light .bg-grid{background-image:linear-gradient(rgba(124,58,237,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(124,58,237,.05) 1px,transparent 1px)}
-body.light nav{background:rgba(245,245,255,.96);border-bottom-color:rgba(124,58,237,.12)}
+body.light .bg-mesh{background:radial-gradient(ellipse 70% 60% at 15% 5%,rgba(124,58,237,.07) 0%,transparent 55%)}
+body.light nav{background:rgba(245,245,255,.96)}
 body.light .sidebar{background:#eeeeff}
 body.light .about-box,body.light .edu-card,body.light .cert-card,body.light .pcard,body.light .skitem,body.light .fcard,body.light .titem,body.light .biz-card,body.light .qr-card{background:#fff;box-shadow:0 2px 16px rgba(124,58,237,.07)}
 body.light .cart-drawer,body.light .tm-box{background:#f5f5ff}
-body.light .cart-item-row,body.light .cart-sumbox{background:#eeeeff;border-color:rgba(124,58,237,.15)}
-body.light .cart-dhead,body.light .tm-head{border-color:rgba(124,58,237,.12)}
+body.light .cart-item-row,body.light .cart-sumbox{background:#eeeeff}
 body.light .cart-note-ta{background:#eeeeff;color:var(--text)}
-body.light footer,body.light .tm-foot{background:#eeeeff}
+body.light footer{background:#eeeeff}
 body.light .clnk,body.light .biz-cta{background:#fff}
 body.light .ntab.active{background:rgba(124,58,237,.1)}
-body.light .add-cart-btn{background:rgba(124,58,237,.08)}
-body.light .sktrack{background:rgba(124,58,237,.08)}
-body.light .sid-contact{background:rgba(124,58,237,.05)}
 body.light .hero-bio{color:#0c0c1e;opacity:1}
 body.light .about-item{color:#0c0c1e;opacity:1}
-body.light .sid-ct-item{color:#2a2a4a;opacity:1}
-body.light .sid-link{color:#2a2a4a;opacity:1}
-body.light .cart-sum-line{color:#0c0c1e;opacity:1}
-body.light .t-p{color:#2a2a4a;opacity:1}
-body.light .t-p li{color:#2a2a4a;opacity:1}
-body.light .cert-issuer{color:var(--cyan)}
-body.light .edu-level{color:var(--accent)}
-body.light .pnum{color:var(--accent)}
-body.light .slabel{color:var(--accent)}
-body.light .hero-role{color:#4a4a7a}
-body.light .hero-role span{color:var(--accent)}
-body.light .biz-cta{background:#f0f0ff;border-color:rgba(37,211,102,.3)}
-body.light .biz-cta p{color:#3a3a5a}
-body.light .laptop-box p{color:#2a2a4a}
-body.light .qr-step{color:#4a4a7a}
-body.light .qr-sub{color:#6b6b9a}
-body.light .sid-role{color:#6b6b9a}
-body.light .hero-badge{background:rgba(16,185,129,.12);color:var(--green)}
-body.light .tick-item{color:#3a3a5a;border-color:rgba(124,58,237,.15)}
-body.light .term-body{color:#0c0c1e}
-body.light .cart-dtitle{color:var(--accent)}
-body.light .tm-title{color:var(--accent)}
-body.light .t-h{color:#0c0c1e}
-body.light .t-num{color:var(--accent)}
-body.light .tm-fnote{color:#6b6b9a}
-body.light .cart-empty{color:#6b6b9a}
-body.light .ci-desc{color:#6b6b9a}
-body.light .cart-note-lbl{color:var(--accent)}
-body.light .biz-price-note{color:#6b6b9a}
-body.light .skname{color:#0c0c1e}
-body.light .edu-subj{color:#4a4a7a;background:rgba(124,58,237,.06);border-color:rgba(124,58,237,.15)}
-body.light .edu-subj.hl{color:var(--accent);background:rgba(124,58,237,.1)}
-body.light .plnk{color:#4a4a7a;border-color:rgba(124,58,237,.2)}
-body.light .plnk:hover{color:var(--accent);border-color:var(--accent)}
-body.light .tag{color:var(--accent)}
-body.light .cert-date{color:#6b6b9a}
-
-/* THEME TOGGLE */
+/* THEME BTN */
 .theme-btn{background:none;border:1px solid var(--border2);border-radius:8px;width:36px;height:34px;cursor:pointer;font-size:16px;color:var(--muted);transition:all .25s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .theme-btn:hover{border-color:var(--al);color:var(--al);background:rgba(124,58,237,.08)}
-
-/* ========== CURSOR GLOW ========== */
-/* ── CUSTOM CROSSHAIR CURSOR ── */
-*{cursor:none!important}
-@media(pointer:coarse){*{cursor:auto!important}#xhair-dot,#xhair-ring{display:none!important}}
-
-#xhair-dot{position:fixed;width:8px;height:8px;background:var(--al);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:transform .08s ease,background .2s;box-shadow:0 0 10px var(--al),0 0 20px rgba(124,58,237,.5);left:-99px;top:-99px}
-#xhair-ring{position:fixed;width:38px;height:38px;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);left:-99px;top:-99px;transition:left .09s ease,top .09s ease,transform .15s ease,width .15s ease,height .15s ease}
-#xhair-ring svg{width:100%;height:100%;animation:xspin 6s linear infinite}
-@keyframes xspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-
-/* click burst */
-.xhair-burst{position:fixed;width:50px;height:50px;border-radius:50%;border:2px solid var(--al);pointer-events:none;z-index:9996;transform:translate(-50%,-50%) scale(0);animation:xburst .4s ease-out forwards}
-@keyframes xburst{0%{transform:translate(-50%,-50%) scale(0);opacity:1}100%{transform:translate(-50%,-50%) scale(2.2);opacity:0}}
-
-/* hover state */
-body.xh-hover #xhair-dot{transform:translate(-50%,-50%) scale(2.2);background:var(--pink);box-shadow:0 0 14px var(--pink),0 0 28px rgba(236,72,153,.5)}
-body.xh-hover #xhair-ring{width:52px;height:52px}
-
-/* ========== SCROLL REVEAL ========== */
+/* WELCOME MODAL */
+#welcome-overlay{position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:9990;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(12px);opacity:0;transition:opacity .5s ease}
+#welcome-overlay.visible{opacity:1}
+#welcome-overlay.hiding{opacity:0;pointer-events:none}
+.wlc-box{background:linear-gradient(145deg,#0d0d22 0%,#12102e 100%);border:1px solid rgba(124,58,237,.4);border-radius:24px;max-width:480px;width:100%;padding:40px 36px;text-align:center;position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.7),0 0 60px rgba(124,58,237,.2);transform:translateY(20px);transition:transform .5s ease}
+#welcome-overlay.visible .wlc-box{transform:translateY(0)}
+.wlc-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7c3aed,#ec4899,#06b6d4)}
+.wlc-box::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% -10%,rgba(124,58,237,.12),transparent 70%);pointer-events:none}
+.wlc-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,#7c3aed,#ec4899);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 16px;border:3px solid rgba(124,58,237,.4);box-shadow:0 0 30px rgba(124,58,237,.35)}
+.wlc-hi{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--al);letter-spacing:3px;text-transform:uppercase;margin-bottom:10px}
+.wlc-name{font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:2px;line-height:1;margin-bottom:6px}
+.wlc-name span{background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.wlc-msg{font-size:15px;color:rgba(238,238,255,.75);line-height:1.65;margin-bottom:8px}
+.wlc-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:28px}
+.wlc-dot{display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--green);margin-right:6px;animation:blink 2s infinite;vertical-align:middle}
+.wlc-enter-btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;background:var(--accent);color:#fff;padding:14px 32px;border-radius:10px;font-family:'Syne',sans-serif;font-size:15px;font-weight:700;border:none;cursor:pointer;transition:all .22s;width:100%;margin-bottom:10px}
+.wlc-enter-btn:hover{background:var(--al);transform:translateY(-2px);box-shadow:0 10px 28px rgba(124,58,237,.5)}
+.wlc-wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:rgba(37,211,102,.1);border:1px solid rgba(37,211,102,.3);color:#25d366;padding:11px 24px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none;transition:all .22s;width:100%}
+.wlc-wa:hover{background:rgba(37,211,102,.2)}
+.wlc-footer{margin-top:18px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+/* sparkle particles */
+.wlc-spark{position:absolute;width:3px;height:3px;border-radius:50%;animation:spark-float 3s ease-in-out infinite;pointer-events:none}
+@keyframes spark-float{0%,100%{opacity:0;transform:translateY(0) scale(0)}50%{opacity:1;transform:translateY(-24px) scale(1)}}
+/* REVEAL */
 .reveal{opacity:0;transform:translateY(20px);transition:opacity .3s ease,transform .3s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-d1{transition-delay:.05s}
 .reveal-d2{transition-delay:.1s}
 .reveal-d3{transition-delay:.15s}
 .reveal-d4{transition-delay:.2s}
-
-/* ========== PAGE TRANSITION ========== */
+/* PAGE FLASH */
 #page-flash{position:fixed;inset:0;background:var(--accent);z-index:599;opacity:0;pointer-events:none;transition:opacity .12s ease}
 #page-flash.flash{opacity:.1}
-
-/* ========== TYPING CURSOR ========== */
+/* TYPING CURSOR */
 .typing-cursor{display:inline-block;width:2px;height:1em;background:var(--al);vertical-align:middle;margin-left:2px;animation:tcursor .75s infinite;border-radius:1px}
+@keyframes tcursor{0%,100%{opacity:1}50%{opacity:0}}
 </style>
 </head>
 <body>
-<!-- CURSOR GLOW -->
-<!-- CROSSHAIR CURSOR -->
-<div id="xhair-dot"></div>
-<div id="xhair-ring">
-  <svg viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <!-- outer ring -->
-    <circle cx="19" cy="19" r="17" stroke="#a855f7" stroke-width="1" stroke-dasharray="4 3" opacity="0.7"/>
-    <!-- cross lines -->
-    <line x1="19" y1="2" x2="19" y2="9" stroke="#a855f7" stroke-width="1.5" opacity="0.9"/>
-    <line x1="19" y1="29" x2="19" y2="36" stroke="#a855f7" stroke-width="1.5" opacity="0.9"/>
-    <line x1="2" y1="19" x2="9" y2="19" stroke="#a855f7" stroke-width="1.5" opacity="0.9"/>
-    <line x1="29" y1="19" x2="36" y2="19" stroke="#a855f7" stroke-width="1.5" opacity="0.9"/>
-    <!-- corner brackets -->
-    <path d="M6 11 L6 6 L11 6" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
-    <path d="M27 6 L32 6 L32 11" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
-    <path d="M6 27 L6 32 L11 32" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
-    <path d="M32 27 L32 32 L27 32" stroke="#7c3aed" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
-    <!-- center dot ring -->
-    <circle cx="19" cy="19" r="3" stroke="#a855f7" stroke-width="1" fill="none" opacity="0.6"/>
-  </svg>
-</div>
-<!-- PAGE FLASH -->
+
 <div id="page-flash"></div>
+
+<!-- WELCOME MODAL -->
+<div id="welcome-overlay">
+  <div class="wlc-box" id="wlcBox">
+    <!-- sparkles -->
+    <div class="wlc-spark" style="left:12%;top:60%;background:#a855f7;animation-delay:0s;animation-duration:2.8s"></div>
+    <div class="wlc-spark" style="left:88%;top:55%;background:#ec4899;animation-delay:.6s;animation-duration:3.2s"></div>
+    <div class="wlc-spark" style="left:20%;top:40%;background:#06b6d4;animation-delay:1.1s;animation-duration:2.5s"></div>
+    <div class="wlc-spark" style="left:75%;top:70%;background:#f59e0b;animation-delay:1.8s;animation-duration:3s"></div>
+    <div class="wlc-spark" style="left:50%;top:80%;background:#10b981;animation-delay:.4s;animation-duration:2.6s"></div>
+    <div class="wlc-avatar">🧑🏾‍💻</div>
+    <div class="wlc-hi">// KM.DEV PORTFOLIO</div>
+    <div class="wlc-name">WELCOME<br><span>VISITOR</span></div>
+    <p class="wlc-msg">Hey there! I'm <strong style="color:#fff">Kgomotso Mamogale</strong> — an IT student from Gauteng, South Africa. Thanks for stopping by my portfolio!</p>
+    <div class="wlc-sub"><span class="wlc-dot"></span>Available for freelance &amp; internships · 060 160 3996</div>
+    <button class="wlc-enter-btn" onclick="closeWelcome()">🚀 Enter Portfolio</button>
+    <a class="wlc-wa" href="https://wa.me/27601603996?text=Hi Kgomotso, I just visited your portfolio!" target="_blank">💬 Say Hi on WhatsApp</a>
+    <div class="wlc-footer">&copy; 2025 KM.DEV SOULNET EXPLORE · bmiexplore.netlify.app</div>
+  </div>
+</div>
 
 <!-- TERMINAL INTRO -->
 <div id="terminal-intro">
   <div class="term-box">
     <div class="term-bar">
-      <div class="tdot" style="background:#ff5f57"></div>
-      <div class="tdot" style="background:#febc2e"></div>
-      <div class="tdot" style="background:#28c840"></div>
+      <div class="term-dot" style="background:#ff5f57"></div>
+      <div class="term-dot" style="background:#febc2e"></div>
+      <div class="term-dot" style="background:#28c840"></div>
       <div class="term-label">km.dev — portfolio v2.0 — zsh</div>
     </div>
-    <div class="term-body" id="termBody">
-      <span class="tl c-dim">// initializing KM.DEV SOULNET EXPLORE...</span><br>
-    </div>
+    <div class="term-body" id="termBody"><span class="tl c-dim">// initializing KM.DEV SOULNET EXPLORE...</span><br></div>
     <div class="term-prog-wrap"><div class="term-prog" id="termProg"></div></div>
   </div>
   <button class="term-skip-btn" onclick="skipIntro()">skip [esc]</button>
 </div>
+
 <div class="bg-mesh"></div>
 <div class="bg-grid"></div>
 
@@ -420,32 +373,32 @@ body.xh-hover #xhair-ring{width:52px;height:52px}
 <!-- SIDEBAR -->
 <div class="sidebar" id="sidebar">
   <div class="sid-head">
-    <div class="sid-avatar">&#129489;&#127998;&#8205;&#128187;</div>
+    <div class="sid-avatar">🧑🏾‍💻</div>
     <div class="sid-name">KM.DEV</div>
-    <div class="sid-role">// Kgomotso Mamogale &middot; ITC Level 4</div>
+    <div class="sid-role">// Kgomotso Mamogale · ITC Level 4</div>
   </div>
   <div class="sid-contact">
     <div class="sid-ct-title">QUICK CONTACT</div>
-    <a class="sid-ct-item" href="/cdn-cgi/l/email-protection#1b707c7476746f68746f737a7974292b2b2f5b7c767a727735787476">&#9993;&#65039; <span class="__cf_email__" data-cfemail="503b373f3d3f24233f243831323f6260606410373d31393c7e333f3d">[email&#160;protected]</span></a>
-    <a class="sid-ct-item" href="tel:0601603996">&#128222; 060 160 3996</a>
-    <a class="sid-ct-item" href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank">&#128188; LinkedIn Profile</a>
-    <a class="sid-ct-item" href="https://github.com/soul-net00" target="_blank">&#128025; GitHub &middot; soul-net00</a>
+    <a class="sid-ct-item" href="/cdn-cgi/l/email-protection#aac1cdc5c7c5ded9c5dec2cbc8c5989a9a9eeacdc7cbc3c684c9c5c7">✉️ <span class="__cf_email__" data-cfemail="d1bab6bebcbea5a2bea5b9b0b3bee3e1e1e591b6bcb0b8bdffb2bebc">[email&#160;protected]</span></a>
+    <a class="sid-ct-item" href="tel:0601603996">📞 060 160 3996</a>
+    <a class="sid-ct-item" href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank">💼 LinkedIn Profile</a>
+    <a class="sid-ct-item" href="https://github.com/soul-net00" target="_blank">🐙 GitHub · soul-net00</a>
   </div>
-  <a class="sid-wa" href="https://wa.me/27601603996" target="_blank">&#128172; WhatsApp Me</a>
+  <a class="sid-wa" href="https://wa.me/27601603996" target="_blank">💬 WhatsApp Me</a>
   <div class="sid-links">
     <div class="sid-div"></div>
-    <button class="sid-link" onclick="gotoPage('p1');closeSidebar()"><span class="sid-link-ico">&#128188;</span>Portfolio</button>
-    <button class="sid-link" onclick="navTo('about')"><span class="sid-link-ico">&#128100;</span>About Me</button>
-    <button class="sid-link" onclick="navTo('education')"><span class="sid-link-ico">&#127891;</span>Education</button>
-    <button class="sid-link" onclick="navTo('certs')"><span class="sid-link-ico">&#127942;</span>Certifications</button>
-    <button class="sid-link" onclick="navTo('projects')"><span class="sid-link-ico">&#128193;</span>Projects</button>
-    <button class="sid-link" onclick="navTo('skills')"><span class="sid-link-ico">&#9889;</span>Skills</button>
-    <button class="sid-link" onclick="navTo('contact')"><span class="sid-link-ico">&#128236;</span>Contact</button>
+    <button class="sid-link" onclick="gotoPage('p1');closeSidebar()"><span class="sid-link-ico">💼</span>Portfolio</button>
+    <button class="sid-link" onclick="navTo('about')"><span class="sid-link-ico">👤</span>About Me</button>
+    <button class="sid-link" onclick="navTo('education')"><span class="sid-link-ico">🎓</span>Education</button>
+    <button class="sid-link" onclick="navTo('certs')"><span class="sid-link-ico">🏆</span>Certifications</button>
+    <button class="sid-link" onclick="navTo('projects')"><span class="sid-link-ico">📁</span>Projects</button>
+    <button class="sid-link" onclick="navTo('skills')"><span class="sid-link-ico">⚡</span>Skills</button>
+    <button class="sid-link" onclick="navTo('contact')"><span class="sid-link-ico">📬</span>Contact</button>
     <div class="sid-div"></div>
-    <button class="sid-link" onclick="gotoPage('p3');closeSidebar()"><span class="sid-link-ico">&#128736;&#65039;</span>Business Services</button>
-    <button class="sid-link" onclick="gotoPage('p2');closeSidebar()"><span class="sid-link-ico">&#128241;</span>Shop App</button>
+    <button class="sid-link" onclick="gotoPage('p3');closeSidebar()"><span class="sid-link-ico">🔧</span>Business Services</button>
+    <button class="sid-link" onclick="gotoPage('p2');closeSidebar()"><span class="sid-link-ico">📱</span>Shop App</button>
     <div class="sid-div"></div>
-    <button class="sid-link" onclick="openTerms();closeSidebar()"><span class="sid-link-ico">&#128196;</span>Terms &amp; Conditions</button>
+    <button class="sid-link" onclick="openTerms();closeSidebar()"><span class="sid-link-ico">📄</span>Terms &amp; Conditions</button>
   </div>
 </div>
 
@@ -453,12 +406,12 @@ body.xh-hover #xhair-ring{width:52px;height:52px}
 <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
 <div class="cart-drawer" id="cartDrawer">
   <div class="cart-dhead">
-    <div class="cart-dtitle">&#128722; My Order</div>
-    <button class="cart-xbtn" onclick="closeCart()">&#x2715;</button>
+    <div class="cart-dtitle">🛒 My Order</div>
+    <button class="cart-xbtn" onclick="closeCart()">✕</button>
   </div>
-  <div class="cart-dbody" id="cartDbody">
+  <div class="cart-dbody">
     <div class="cart-empty" id="cartEmpty">
-      <div style="font-size:46px;opacity:.35">&#128722;</div>
+      <div style="font-size:46px;opacity:.35">🛒</div>
       <div>Your cart is empty</div>
       <div style="font-size:11px;opacity:.5;margin-top:4px">Click "Add to Order" on any service</div>
     </div>
@@ -470,14 +423,14 @@ body.xh-hover #xhair-ring{width:52px;height:52px}
   </div>
   <div class="cart-dfooter" id="cartDfooter" style="display:none">
     <div class="cart-sumbox" id="cartSum"></div>
-    <a class="send-wa-btn" id="sendWaBtn" href="#" target="_blank" onclick="buildWa()">&#128172; Send Order via WhatsApp</a>
-    <button class="clear-btn" onclick="clearCart()">&#128465;&#65039; Clear Order</button>
+    <a class="send-wa-btn" id="sendWaBtn" href="#" target="_blank" onclick="buildWa()">💬 Send Order via WhatsApp</a>
+    <button class="clear-btn" onclick="clearCart()">🗑️ Clear Order</button>
   </div>
 </div>
 
-<!-- FLOATING CART FAB -->
+<!-- CART FAB -->
 <button class="cart-fab hidden" id="cartFab" onclick="openCart()">
-  &#128722; View Order <span class="cbadge" id="cartBadge">0</span>
+  🛒 View Order <span class="cbadge" id="cartBadge">0</span>
 </button>
 
 <!-- TERMS MODAL -->
@@ -486,45 +439,24 @@ body.xh-hover #xhair-ring{width:52px;height:52px}
     <div class="tm-head">
       <div>
         <div class="tm-title">Terms &amp; Conditions</div>
-        <div class="tm-sub">// KM.DEV SOULNET EXPLORE &middot; Last Updated: 04/03/2026</div>
+        <div class="tm-sub">// KM.DEV SOULNET EXPLORE · Last Updated: 04/03/2026</div>
       </div>
-      <button class="tm-xbtn" onclick="closeTerms()">&#x2715;</button>
+      <button class="tm-xbtn" onclick="closeTerms()">✕</button>
     </div>
     <div class="tm-body">
-      <div class="t-sec"><div class="t-num">// 01</div><div class="t-h">Introduction</div>
-        <div class="t-p">Welcome to <strong style="color:var(--al)">KM.DEV SOULNET EXPLORE</strong>. By accessing this website and using our services, you agree to the following Terms and Conditions.<br><br>If you do not agree, please do not use our website or services.</div>
-      </div><div class="t-div"></div>
-      <div class="t-sec"><div class="t-num">// 02</div><div class="t-h">Services</div>
-        <div class="t-p">We provide digital services including but not limited to:<ul><li>Website Design</li><li>Logo Design</li><li>Graphic Design</li><li>CV Design</li><li>Digital Marketing Services</li></ul><br>All services are confirmed through WhatsApp at <strong style="color:var(--al)">060 160 3996</strong>.</div>
-      </div><div class="t-div"></div>
-      <div class="t-sec"><div class="t-num">// 03</div><div class="t-h">Orders &amp; Payments</div>
-        <div class="t-p"><ul><li>Orders are submitted through the website and confirmed via WhatsApp.</li><li>A <strong style="color:var(--gold)">50% non-refundable deposit</strong> is required before work begins.</li><li>Remaining balance must be paid before final delivery.</li><li>Payments accepted via <strong>EFT</strong>.</li></ul></div>
-      </div><div class="t-div"></div>
-      <div class="t-sec"><div class="t-num">// 04</div><div class="t-h">Turnaround Time</div>
-        <div class="t-p"><ul><li>Small projects: <strong style="color:var(--green)">2&ndash;5 working days</strong></li><li>Websites: <strong style="color:var(--green)">5&ndash;10 working days</strong></li></ul><br>Delays may occur if required information is not provided on time.</div>
-      </div><div class="t-div"></div>
-      <div class="t-sec"><div class="t-num">// 05</div><div class="t-h">Client Responsibilities</div>
-        <div class="t-p">Clients must:<ul><li>Provide accurate information</li><li>Supply content (text, images, logos) where required</li><li>Respond promptly to approval requests</li></ul></div>
-      </div><div class="t-div"></div>
-      <div class="t-sec"><div class="t-num">// 06</div><div class="t-h">Revisions</div>
-        <div class="t-p"><ul><li>Up to <strong style="color:var(--al)">2&ndash;3 revisions</strong> included unless otherwise stated.</li><li>Additional revisions may be charged separately.</li></ul></div>
-      </div><div class="t-div"></div>
-      <div class="t-sec"><div class="t-num">// 07</div><div class="t-h">Intellectual Property</div>
-        <div class="t-p">Final designs remain the property of the client once full payment has been received. We reserve the right to display completed work in our portfolio unless agreed otherwise.</div>
-      </div><div class="t-div"></div>
-      <div class="t-sec"><div class="t-num">// 08</div><div class="t-h">Limitation of Liability</div>
-        <div class="t-p">We are not responsible for:<ul><li>Third-party platform failures</li><li>Hosting/server issues</li><li>Loss of data caused by external services</li></ul></div>
-      </div><div class="t-div"></div>
-      <div class="t-sec"><div class="t-num">// 09</div><div class="t-h">Changes to Terms</div>
-        <div class="t-p">We reserve the right to update these Terms at any time. Continued use constitutes acceptance.</div>
-      </div><div class="t-div"></div>
-      <div class="t-sec"><div class="t-num">// 10</div><div class="t-h">Contact</div>
-        <div class="t-p">&#128222; <strong style="color:var(--al)">WhatsApp: 060 160 3996</strong><br>&#9993;&#65039; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c3a8a4acaeacb7b0acb7aba2a1acf1f3f3f783a4aea2aaafeda0acae">[email&#160;protected]</a></div>
-      </div>
+      <div class="t-sec"><div class="t-num">// 01</div><div class="t-h">Introduction</div><div class="t-p">Welcome to <strong style="color:var(--al)">KM.DEV SOULNET EXPLORE</strong>. By accessing this website and using our services, you agree to the following Terms and Conditions.</div></div>
+      <div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 02</div><div class="t-h">Services</div><div class="t-p">We provide: Website Design, Logo Design, Graphic Design, CV Design, Digital Marketing. All confirmed via WhatsApp <strong style="color:var(--al)">060 160 3996</strong>.</div></div>
+      <div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 03</div><div class="t-h">Orders &amp; Payments</div><div class="t-p"><ul><li>A <strong style="color:var(--gold)">50% non-refundable deposit</strong> is required before work begins.</li><li>Balance paid before final delivery.</li><li>Payments via EFT.</li></ul></div></div>
+      <div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 04</div><div class="t-h">Turnaround Time</div><div class="t-p"><ul><li>Small projects: <strong style="color:var(--green)">2–5 working days</strong></li><li>Websites: <strong style="color:var(--green)">5–10 working days</strong></li></ul></div></div>
+      <div class="t-div"></div>
+      <div class="t-sec"><div class="t-num">// 05–10</div><div class="t-h">Other Terms</div><div class="t-p">Up to 2–3 revisions included. Final designs belong to the client after full payment. We are not liable for third-party platform failures. We reserve the right to update these Terms at any time.<br><br>📞 <strong style="color:var(--al)">060 160 3996</strong> · ✉️ <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="016a666e6c6e75726e756960636e3331313541666c60686d2f626e6c">[email&#160;protected]</a></div></div>
     </div>
     <div class="tm-foot">
       <span class="tm-fnote">&copy; 2026 KM.DEV SOULNET EXPLORE</span>
-      <a href="https://wa.me/27601603996?text=Hi Kgomotso, question about T%26C" target="_blank" class="tm-wa">&#128172; Contact Us</a>
+      <a href="https://wa.me/27601603996?text=Hi, question about T%26C" target="_blank" class="tm-wa">💬 Contact Us</a>
     </div>
   </div>
 </div>
@@ -533,35 +465,33 @@ body.xh-hover #xhair-ring{width:52px;height:52px}
 <nav>
   <div class="nav-in">
     <div style="display:flex;align-items:center;gap:14px">
-      <button class="ham-btn" id="hamBtn" onclick="toggleSidebar()">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="ham-btn" id="hamBtn" onclick="toggleSidebar()"><span></span><span></span><span></span></button>
       <div class="nav-logo" onclick="gotoPage('p1')">KM.DEV</div>
     </div>
     <div class="nav-tabs">
-      <button class="ntab active" id="tab-p1" onclick="gotoPage('p1')">&#128188; Portfolio</button>
-      <button class="ntab" id="tab-p3" onclick="gotoPage('p3')">&#128736;&#65039; Services</button>
-      <button class="ntab" id="tab-p2" onclick="gotoPage('p2')">&#128241; The App</button>
-      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle light/dark mode">&#9790;&#65039;</button>
+      <button class="ntab active" id="tab-p1" onclick="gotoPage('p1')">💼 Portfolio</button>
+      <button class="ntab" id="tab-p3" onclick="gotoPage('p3')">🔧 Services</button>
+      <button class="ntab" id="tab-p2" onclick="gotoPage('p2')">📱 The App</button>
+      <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
     </div>
   </div>
 </nav>
 
-<!-- ======= PAGE 1: PORTFOLIO ======= -->
+<!-- ═══ PAGE 1: PORTFOLIO ═══ -->
 <div class="page active" id="p1">
 <div class="wrap">
   <div class="hero">
     <div>
-      <div class="hero-badge">Final Year &middot; NC(V) Level 4 &middot; 2025</div>
+      <div class="hero-badge">Final Year · NC(V) Level 4 · 2025</div>
       <h1 class="hero-name">KGOMOTSO<br><span class="grad">MAMOGALE</span></h1>
-      <div class="hero-role" id="heroRole">
-        <span id="typingText"></span><span class="typing-cursor" id="typingCursor"></span>
+      <div class="hero-role">
+        <span id="typingText"></span><span class="typing-cursor"></span>
       </div>
-      <p class="hero-bio">Final-year NC(V) ITC student. I build real software, fix real hardware &mdash; from SQL databases to VPS networks. Available for freelance work &amp; internships.</p>
+      <p class="hero-bio">Final-year NC(V) ITC student. I build real software, fix real hardware — from SQL databases to VPS networks. Available for freelance work &amp; internships.</p>
       <div class="hero-ctas">
-        <button class="btn-v bsolid" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">&#128193; Projects</button>
-        <button class="btn-v bghost" onclick="gotoPage('p3')">&#128736;&#65039; My Services</button>
-        <a class="btn-v bghost" href="https://wa.me/27601603996" target="_blank">&#128172; WhatsApp</a>
+        <button class="btn-v bsolid" onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})">📁 Projects</button>
+        <button class="btn-v bghost" onclick="gotoPage('p3')">🔧 My Services</button>
+        <a class="btn-v bghost" href="https://wa.me/27601603996" target="_blank">💬 WhatsApp</a>
       </div>
     </div>
     <div class="qr-card">
@@ -573,52 +503,57 @@ body.xh-hover #xhair-ring{width:52px;height:52px}
         <div class="qr-step"><div class="sn">2</div>Portfolio opens instantly</div>
         <div class="qr-step"><div class="sn">3</div>No app needed</div>
       </div>
-      <div class="qr-note">&#127760; Public &middot; bmiexplore.netlify.app</div>
+      <div class="qr-note">🌐 Public · bmiexplore.netlify.app</div>
     </div>
   </div>
 </div>
+
 <div class="ticker-wrap"><div class="ticker-track" id="tickerTrack"></div></div>
+
 <div class="wrap">
+  <!-- ABOUT -->
   <section class="section reveal" id="about">
     <div class="slabel">// who I am</div>
     <div class="stitle">ABOUT ME</div>
     <div class="about-grid">
       <div class="about-box reveal reveal-d1">
-        <h3>&#128295; What I Do</h3>
+        <h3>🔧 What I Do</h3>
         <div class="about-list">
-          <div class="about-item"><span>&#127760;</span>Build websites &amp; web apps &mdash; HTML, CSS, JS, deployed on Netlify</div>
-          <div class="about-item"><span>&#128421;&#65039;</span>Set up VPS servers for fast, secure networks and remote environments</div>
-          <div class="about-item"><span>&#128187;</span>Fix laptops, upgrade drives, clean install Windows, update drivers</div>
-          <div class="about-item"><span>&#128246;</span>Configure WiFi routers, access restrictions, troubleshoot networks</div>
-          <div class="about-item"><span>&#128202;</span>Advanced Excel, Word, PowerPoint &mdash; data, documents, presentations</div>
-          <div class="about-item"><span>&#128452;&#65039;</span>Design and build SQL Server databases with stored procedures</div>
-          <div class="about-item"><span>&#128203;</span>Systems Analysis &amp; Design &mdash; requirements, diagrams, docs</div>
-          <div class="about-item"><span>&#128424;&#65039;</span>Desktop apps in VB.NET with full SQL Server backends</div>
+          <div class="about-item"><span>🌐</span>Build websites &amp; web apps — HTML, CSS, JS, deployed on Netlify</div>
+          <div class="about-item"><span>🖥️</span>Set up VPS servers for fast, secure networks</div>
+          <div class="about-item"><span>💻</span>Fix laptops, upgrade drives, clean install Windows</div>
+          <div class="about-item"><span>📡</span>Configure WiFi routers, troubleshoot networks</div>
+          <div class="about-item"><span>📊</span>Advanced Excel, Word, PowerPoint</div>
+          <div class="about-item"><span>🗄️</span>SQL Server databases with stored procedures</div>
+          <div class="about-item"><span>📋</span>Systems Analysis &amp; Design — requirements, diagrams</div>
+          <div class="about-item"><span>🖨️</span>Desktop apps in VB.NET with SQL Server backends</div>
         </div>
       </div>
       <div class="about-box reveal reveal-d2">
-        <h3>&#128204; Quick Facts</h3>
+        <h3>📌 Quick Facts</h3>
         <div class="about-list">
-          <div class="about-item"><span>&#127979;</span>Ekurhuleni East TVET College &middot; Level 4 final year</div>
-          <div class="about-item"><span>&#9989;</span>Passed NC(V) Level 2 &amp; 3 ITC</div>
-          <div class="about-item"><span>&#127942;</span>Cisco Networking Academy certified</div>
-          <div class="about-item"><span>&#128205;</span>Gauteng, South Africa</div>
-          <div class="about-item"><span>&#128222;</span>060 160 3996</div>
-          <div class="about-item"><span>&#128231;</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="4328242c2e2c37302c372b22212c7173737703242e222a2f6d202c2e">[email&#160;protected]</a></div>
-          <div class="about-item"><span>&#128161;</span>Self-taught: VPS, AI tools, web deployment</div>
-          <div class="about-item"><span>&#128275;</span>Available for freelance &amp; internships</div>
+          <div class="about-item"><span>🏫</span>Ekurhuleni East TVET College · Level 4 final year</div>
+          <div class="about-item"><span>✅</span>Passed NC(V) Level 2 &amp; 3 ITC</div>
+          <div class="about-item"><span>🏆</span>Cisco Networking Academy certified</div>
+          <div class="about-item"><span>📍</span>Gauteng, South Africa</div>
+          <div class="about-item"><span>📞</span>060 160 3996</div>
+          <div class="about-item"><span>📧</span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3c575b535153484f5348545d5e530e0c0c087c5b515d5550125f5351">[email&#160;protected]</a></div>
+          <div class="about-item"><span>💡</span>Self-taught: VPS, AI tools, web deployment</div>
+          <div class="about-item"><span>🔓</span>Available for freelance &amp; internships</div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- EDUCATION -->
   <section class="section sdiv reveal" id="education">
     <div class="slabel">// formal qualifications</div>
     <div class="stitle">EDUCATION</div>
     <div class="edu-grid">
       <div class="edu-card reveal reveal-d1">
-        <div class="edu-level">CURRENT &middot; NC(V) LEVEL 4</div>
+        <div class="edu-level">CURRENT · NC(V) LEVEL 4</div>
         <div class="edu-title">Information Technology &amp; Computer Science</div>
-        <div class="edu-place">Ekurhuleni East TVET College &middot; 2025 (Final Year)</div>
+        <div class="edu-place">Ekurhuleni East TVET College · 2025 (Final Year)</div>
         <div class="edu-subjects">
           <span class="edu-subj hl">Computer Programming</span>
           <span class="edu-subj hl">System Analysis &amp; Design</span>
@@ -626,91 +561,138 @@ body.xh-hover #xhair-ring{width:52px;height:52px}
           <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
           <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
         </div>
-        <div class="edu-badge">&#127919; In Progress</div>
+        <div class="edu-badge">🎯 In Progress</div>
       </div>
       <div class="edu-card reveal reveal-d2">
-        <div class="edu-level">PASSED &middot; NC(V) LEVEL 3</div>
+        <div class="edu-level">PASSED · NC(V) LEVEL 3</div>
         <div class="edu-title">Information Technology &amp; Computer Science</div>
-        <div class="edu-place">Ekurhuleni East TVET College &middot; 2024</div>
+        <div class="edu-place">Ekurhuleni East TVET College · 2024</div>
         <div class="edu-subjects">
           <span class="edu-subj hl">Principles of Computer Programming</span>
           <span class="edu-subj hl">System Analysis &amp; Design</span>
           <span class="edu-subj">Computer Hardware &amp; Software</span>
-          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
-          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
+          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span>
         </div>
-        <div class="edu-badge">&#9989; Completed</div>
+        <div class="edu-badge">✅ Completed</div>
       </div>
       <div class="edu-card reveal reveal-d3">
-        <div class="edu-level">PASSED &middot; NC(V) LEVEL 2</div>
+        <div class="edu-level">PASSED · NC(V) LEVEL 2</div>
         <div class="edu-title">Information Technology &amp; Computer Science</div>
-        <div class="edu-place">Ekurhuleni East TVET College &middot; 2023</div>
+        <div class="edu-place">Ekurhuleni East TVET College · 2023</div>
         <div class="edu-subjects">
           <span class="edu-subj hl">Introduction to Systems Development</span>
           <span class="edu-subj hl">Introduction to Information Systems</span>
-          <span class="edu-subj">Electronic Control &amp; Digital Electronics</span>
           <span class="edu-subj">Electronics</span>
-          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span><span class="edu-subj">Life Skills</span>
+          <span class="edu-subj">Mathematics</span><span class="edu-subj">English FAL</span>
         </div>
-        <div class="edu-badge">&#9989; Completed</div>
+        <div class="edu-badge">✅ Completed</div>
       </div>
     </div>
   </section>
+
+  <!-- CERTS -->
   <section class="section sdiv reveal" id="certs">
-    <div class="slabel">// verified credentials &middot; click to view</div>
+    <div class="slabel">// verified credentials · click to view</div>
     <div class="stitle">CERTIFICATIONS</div>
     <div class="cert-grid">
       <div class="cert-card" onclick="window.open('https://www.credly.com/badges/b8ab7c11-2b59-45bd-8d85-97b6b6dcb3fc','_blank')">
-        <span class="cert-hint">&#128065; Click to view</span>
-        <div class="cert-logo">&#128737;&#65039;</div>
-        <div><div class="cert-issuer">CISCO NETWORKING ACADEMY</div><div class="cert-name">Introduction to Cybersecurity</div><div class="cert-date">Issued: 04 Sep 2025</div><div class="cert-tags"><span class="ctag">Cyber Threats</span><span class="ctag">Network Security</span><span class="ctag">Verified Badge</span></div></div>
+        <span class="cert-hint">👁 Click to view</span>
+        <div class="cert-logo">🛡️</div>
+        <div>
+          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
+          <div class="cert-name">Introduction to Cybersecurity</div>
+          <div class="cert-date">Issued: 04 Sep 2025</div>
+          <div class="cert-tags"><span class="ctag">Cyber Threats</span><span class="ctag">Network Security</span><span class="ctag">Verified</span></div>
+        </div>
       </div>
       <div class="cert-card" onclick="window.open('https://www.credly.com/badges/5996b50a-e8f7-421c-b88a-27863505a0aa','_blank')">
-        <span class="cert-hint">&#128065; Click to view</span>
-        <div class="cert-logo">&#127760;</div>
-        <div><div class="cert-issuer">CISCO NETWORKING ACADEMY</div><div class="cert-name">Get Connected</div><div class="cert-date">Issued: 12 Aug 2024</div><div class="cert-tags"><span class="ctag">Internet Fundamentals</span><span class="ctag">Digital Literacy</span></div></div>
+        <span class="cert-hint">👁 Click to view</span>
+        <div class="cert-logo">🌐</div>
+        <div>
+          <div class="cert-issuer">CISCO NETWORKING ACADEMY</div>
+          <div class="cert-name">Get Connected</div>
+          <div class="cert-date">Issued: 12 Aug 2024</div>
+          <div class="cert-tags"><span class="ctag">Internet Fundamentals</span><span class="ctag">Digital Literacy</span></div>
+        </div>
       </div>
       <div class="cert-card" style="border-color:rgba(245,158,11,.15);cursor:default">
-        <div class="cert-logo" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2)">&#128220;</div>
-        <div><div class="cert-issuer" style="color:var(--gold)">COMING SOON</div><div class="cert-name">NC(V) Level 4 Certificate</div><div class="cert-date">Expected: 2025</div><div class="cert-tags"><span class="ctag" style="color:var(--gold);border-color:rgba(245,158,11,.2)">In Progress</span></div></div>
+        <div class="cert-logo" style="background:rgba(245,158,11,.1);border-color:rgba(245,158,11,.2)">📜</div>
+        <div>
+          <div class="cert-issuer" style="color:var(--gold)">COMING SOON</div>
+          <div class="cert-name">NC(V) Level 4 Certificate</div>
+          <div class="cert-date">Expected: 2025</div>
+          <div class="cert-tags"><span class="ctag" style="color:var(--gold);border-color:rgba(245,158,11,.2)">In Progress</span></div>
+        </div>
       </div>
     </div>
   </section>
+
+  <!-- PROJECTS — ALL 4 CARDS PROPERLY CLOSED -->
   <section class="section sdiv reveal" id="projects">
     <div class="slabel">// what I've built</div>
     <div class="stitle">PROJECTS</div>
     <div class="pgrid">
+
       <div class="pcard reveal reveal-d1">
         <img class="pimg" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop" alt="MobileFix">
-        <div class="pbody"><div class="pnum">01 / DESKTOP APP</div><div class="ptitle">MobileFix Manager</div>
-          <div class="pdesc">Full cellphone repair shop system in VB.NET &mdash; receipt generation, customer database, inventory connected to SQL Server.</div>
+        <div class="pbody">
+          <div class="pnum">01 / DESKTOP APP</div>
+          <div class="ptitle">MobileFix Manager</div>
+          <div class="pdesc">Full cellphone repair shop system in VB.NET — receipt generation, customer database, inventory connected to SQL Server.</div>
           <div class="ptags"><span class="tag">VB.NET</span><span class="tag">SQL Server</span><span class="tag">Desktop</span></div>
-          <div class="plinks"><a href="https://github.com/soul-net00" class="plnk" target="_blank">&#8599; GitHub</a><a href="#" class="plnk" onclick="gotoPage('p2');return false">&#8599; Web Version</a></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="shop.html" class="plnk" target="_blank">↗ Web Version</a>
+          </div>
         </div>
-  <div class="pcard reveal reveal-d2">iv class="pcard">
+      </div>
+
+      <div class="pcard reveal reveal-d2">
         <img class="pimg" src="https://images.unsplash.com/photo-1571171637578-41bc2dd41cd2?w=800&h=400&fit=crop" alt="BMI">
-        <div class="pbody"><div class="pnum">02 / WEB APP</div><div class="ptitle">BMI Explorer</div>
+        <div class="pbody">
+          <div class="pnum">02 / WEB APP</div>
+          <div class="ptitle">BMI Explorer</div>
           <div class="pdesc">Interactive BMI calculator with visual feedback and health recommendations. Live on GitHub Pages.</div>
           <div class="ptags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
-          <div class="plinks"><a href="https://github.com/soul-net00/bmi_explore" class="plnk" target="_blank">&#8599; GitHub</a><a href="https://soul-net00.github.io/bmi_explore/" class="plnk" target="_blank">&#8599; Live Demo</a></div>
-<div class="pcard reveal reveal-d3">  </div>
-      <div class="pcard">
-        <img class="pimg" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop" alt="DB">
-        <div class="pbody"><div class="pnum">03 / DATABASE</div><div class="ptitle">CellphoneShopDB</div>
-          <div class="pdesc">Normalized SQL Server database with FK relationships, stored procedures and indexing for the MobileFix system.</div>
-          <div class="ptags"><span class="tag">SQL Server</span><span class="tag">Database Design</span><span class="tag">T-SQL</span></div>
-          <div class="plinks"><a href="https://github.com/soul-net00" class="plnk" target="_blank">&#8599; GitHub</a><a href="https://github.com/soul-net00" class="plnk" target="_blank">&#8599; <div class="pcard reveal reveal-d4">      </div>
-      </div>
-      <div class="pcard">
-        <img class="pimg" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop" alt="VPS">
-        <div class="pbody"><div class="pnum">04 / INFRASTRUCTURE</div><div class="ptitle">VPS Network Setup</div>
-          <div class="pdesc">Configured VPS environments for fast, secure hosting. Server setup, network config, and remote access management.</div>
-          <div class="ptags"><span class="tag">VPS</span><span class="tag">Linux</span><span class="tag">Networking</span></div>
-          <div class="plinks"><a href="https://github.com/soul-net00" class="plnk" target="_blank">&#8599; GitHub</a><a href="/cdn-cgi/l/email-protection#8de6eae2e0e2f9fee2f9e5ecefe2bfbdbdb9cdeae0ece4e1a3eee2e0" class="plnk">&#8599; Ask Me</a></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00/bmi_explore" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="https://soul-net00.github.io/bmi_explore/" class="plnk" target="_blank">↗ Live Demo</a>
+          </div>
         </div>
       </div>
+
+      <div class="pcard reveal reveal-d3">
+        <img class="pimg" src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=800&h=400&fit=crop" alt="DB">
+        <div class="pbody">
+          <div class="pnum">03 / DATABASE</div>
+          <div class="ptitle">CellphoneShopDB</div>
+          <div class="pdesc">Normalized SQL Server database with FK relationships, stored procedures and indexing for the MobileFix system.</div>
+          <div class="ptags"><span class="tag">SQL Server</span><span class="tag">Database Design</span><span class="tag">T-SQL</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ Docs</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pcard reveal reveal-d4">
+        <img class="pimg" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop" alt="VPS">
+        <div class="pbody">
+          <div class="pnum">04 / INFRASTRUCTURE</div>
+          <div class="ptitle">VPS Network Setup</div>
+          <div class="pdesc">Configured VPS environments for fast, secure hosting. Server setup, network config, and remote access management.</div>
+          <div class="ptags"><span class="tag">VPS</span><span class="tag">Linux</span><span class="tag">Networking</span></div>
+          <div class="plinks">
+            <a href="https://github.com/soul-net00" class="plnk" target="_blank">↗ GitHub</a>
+            <a href="/cdn-cgi/l/email-protection#214a464e4c4e55524e554940434e1311111561464c40484d0f424e4c" class="plnk">↗ Ask Me</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
+
+  <!-- SKILLS -->
   <section class="section sdiv reveal" id="skills">
     <div class="slabel">// proficiency levels</div>
     <div class="stitle">SKILLS</div>
@@ -729,100 +711,102 @@ body.xh-hover #xhair-ring{width:52px;height:52px}
       <div class="skitem"><div class="skrow"><span class="skname">AI Tools</span><span class="skpct">82%</span></div><div class="sktrack"><div class="skfill" style="width:82%"></div></div></div>
     </div>
   </section>
+
+  <!-- CONTACT -->
   <section class="section sdiv" style="text-align:center" id="contact">
     <div class="slabel" style="text-align:center">// let's connect</div>
     <div class="stitle" style="text-align:center">GET IN TOUCH</div>
     <p style="color:var(--muted);font-size:15px;max-width:440px;margin:0 auto;line-height:1.7">IT support, freelance web work, or collaborating on a project? I'm available.</p>
     <div class="crow">
-      <a href="/cdn-cgi/l/email-protection#bfd4d8d0d2d0cbccd0cbd7deddd08d8f8f8bffd8d2ded6d391dcd0d2" class="clnk">&#9993;&#65039; <span class="__cf_email__" data-cfemail="4d262a222022393e2239252c2f227f7d7d790d2a202c2421632e2220">[email&#160;protected]</span></a>
-      <a href="tel:0601603996" class="clnk">&#128222; 060 160 3996</a>
-      <a href="https://github.com/soul-net00" target="_blank" class="clnk">&#128025; GitHub</a>
-      <a href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank" class="clnk">&#128188; LinkedIn</a>
-      <a href="https://wa.me/27601603996" target="_blank" class="clnk" style="background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.3);color:#25d366">&#128172; WhatsApp</a>
+      <a href="/cdn-cgi/l/email-protection#89e2eee6e4e6fdfae6fde1e8ebe6bbb9b9bdc9eee4e8e0e5a7eae6e4" class="clnk">✉️ <span class="__cf_email__" data-cfemail="dbb0bcb4b6b4afa8b4afb3bab9b4e9ebebef9bbcb6bab2b7f5b8b4b6">[email&#160;protected]</span></a>
+      <a href="tel:0601603996" class="clnk">📞 060 160 3996</a>
+      <a href="https://github.com/soul-net00" target="_blank" class="clnk">🐙 GitHub</a>
+      <a href="https://linkedin.com/in/kgomotso-thabo-a18219262" target="_blank" class="clnk">💼 LinkedIn</a>
+      <a href="https://wa.me/27601603996" target="_blank" class="clnk" style="background:rgba(37,211,102,.1);border-color:rgba(37,211,102,.3);color:#25d366">💬 WhatsApp</a>
     </div>
   </section>
 </div>
-<footer><div class="wrap">built by <span>kgomotso mamogale</span> &middot; <span>060 160 3996</span> &middot; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3b505c5456544f48544f535a5954090b0b0f7b5c565a525715585456">[email&#160;protected]</a> &middot; 2025 &middot; <span class="tc-lnk" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <span>060 160 3996</span> · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="117a767e7c7e65627e657970737e2321212551767c70787d3f727e7c">[email&#160;protected]</a> · 2025 · <span class="tc-lnk" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
 </div>
 
-<!-- ======= PAGE 3: SERVICES ======= -->
+<!-- ═══ PAGE 3: SERVICES ═══ -->
 <div class="page" id="p3">
 <div class="wrap">
   <div style="padding:60px 0 30px;text-align:center">
     <div class="slabel" style="text-align:center">// available for hire</div>
     <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,72px);letter-spacing:2px;line-height:.95;margin-bottom:16px">IT SERVICES &amp;<br><span style="background:linear-gradient(135deg,var(--green),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">BUSINESS SOLUTIONS</span></h2>
     <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 16px;line-height:1.7">Pick the services you need, add them to your order, then send it straight to my WhatsApp.</p>
-    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.1);border:1px solid var(--border);border-radius:30px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--al)">&#128722; Click <strong style="color:#fff;margin:0 4px">"Add to Order"</strong> on any service</div>
+    <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(124,58,237,.1);border:1px solid var(--border);border-radius:30px;padding:8px 16px;font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--al)">🛒 Click <strong style="color:#fff;margin:0 4px">"Add to Order"</strong> on any service</div>
   </div>
   <div class="biz-grid">
     <div class="biz-card web reveal reveal-d1">
-      <div class="biz-ico">&#127760;</div><div class="biz-title">Website / Web App</div>
-      <div class="biz-desc">Custom websites built from scratch &mdash; portfolio sites, business landing pages, web apps. Deployed on Netlify. Mobile-friendly &amp; fast.</div>
-      <div class="biz-price">&#128176; Price depends on complexity</div><div class="biz-price-note">Negotiable &middot; Starts from R50</div>
-      <button class="add-cart-btn" id="b1" onclick="toggleCart('b1','Website / Web App','&#127760;','Custom website or web app built from scratch')">&#128722; Add to Order</button>
+      <div class="biz-ico">🌐</div><div class="biz-title">Website / Web App</div>
+      <div class="biz-desc">Custom websites built from scratch — portfolio sites, business landing pages, web apps. Deployed on Netlify.</div>
+      <div class="biz-price">💰 Price depends on complexity</div><div class="biz-price-note">Negotiable · Starts from R50</div>
+      <button class="add-cart-btn" id="b1" onclick="toggleCart('b1','Website / Web App','🌐','Custom website or web app built from scratch')">🛒 Add to Order</button>
     </div>
     <div class="biz-card hw reveal reveal-d1">
-      <div class="biz-ico">&#128187;</div><div class="biz-title">Laptop Repair &amp; Setup</div>
-      <div class="biz-desc">Windows clean install, driver updates, virus removal, SSD/HDD upgrades, speed optimization. Available in Gauteng area.</div>
-      <div class="biz-price">&#128176; Price per job</div><div class="biz-price-note">Negotiable &middot; Gauteng area</div>
-      <button class="add-cart-btn" id="b2" onclick="toggleCart('b2','Laptop Repair and Setup','&#128187;','Laptop repair, Windows install, hardware upgrade')">&#128722; Add to Order</button>
+      <div class="biz-ico">💻</div><div class="biz-title">Laptop Repair &amp; Setup</div>
+      <div class="biz-desc">Windows clean install, driver updates, virus removal, SSD/HDD upgrades, speed optimization. Gauteng area.</div>
+      <div class="biz-price">💰 Price per job</div><div class="biz-price-note">Negotiable · Gauteng area</div>
+      <button class="add-cart-btn" id="b2" onclick="toggleCart('b2','Laptop Repair and Setup','💻','Laptop repair, Windows install, hardware upgrade')">🛒 Add to Order</button>
     </div>
     <div class="biz-card net reveal reveal-d1">
-      <div class="biz-ico">&#128246;</div><div class="biz-title">WiFi &amp; Network Setup</div>
-      <div class="biz-desc">Router configuration, WiFi password &amp; access restrictions, network troubleshooting, VPS setup. Home or small business.</div>
-      <div class="biz-price">&#128176; Price depends on complexity</div><div class="biz-price-note">Negotiable &middot; Home or business</div>
-      <button class="add-cart-btn" id="b3" onclick="toggleCart('b3','WiFi and Network Setup','&#128246;','WiFi router setup and network configuration')">&#128722; Add to Order</button>
+      <div class="biz-ico">📡</div><div class="biz-title">WiFi &amp; Network Setup</div>
+      <div class="biz-desc">Router configuration, WiFi password &amp; access restrictions, network troubleshooting, VPS setup.</div>
+      <div class="biz-price">💰 Price depends on complexity</div><div class="biz-price-note">Negotiable · Home or business</div>
+      <button class="add-cart-btn" id="b3" onclick="toggleCart('b3','WiFi and Network Setup','📡','WiFi router setup and network configuration')">🛒 Add to Order</button>
     </div>
     <div class="biz-card doc reveal reveal-d1">
-      <div class="biz-ico">&#128202;</div><div class="biz-title">Excel, Word &amp; PowerPoint</div>
-      <div class="biz-desc">Spreadsheets with formulas &amp; automation, professional Word documents, PowerPoint presentations. Any document you need.</div>
-      <div class="biz-price">&#128176; Per document / project</div><div class="biz-price-note">Negotiable &middot; Quick turnaround</div>
-      <button class="add-cart-btn" id="b4" onclick="toggleCart('b4','Excel / Word / PowerPoint','&#128202;','Spreadsheets, Word docs, or PowerPoint presentations')">&#128722; Add to Order</button>
+      <div class="biz-ico">📊</div><div class="biz-title">Excel, Word &amp; PowerPoint</div>
+      <div class="biz-desc">Spreadsheets with formulas &amp; automation, professional Word documents, PowerPoint presentations.</div>
+      <div class="biz-price">💰 Per document / project</div><div class="biz-price-note">Negotiable · Quick turnaround</div>
+      <button class="add-cart-btn" id="b4" onclick="toggleCart('b4','Excel / Word / PowerPoint','📊','Spreadsheets, Word docs, or PowerPoint')">🛒 Add to Order</button>
     </div>
     <div class="biz-card web reveal reveal-d1">
-      <div class="biz-ico">&#128452;&#65039;</div><div class="biz-title">Database Design</div>
-      <div class="biz-desc">SQL Server database design, table relationships, stored procedures, data management. Perfect for small businesses.</div>
-      <div class="biz-price">&#128176; Price by project scope</div><div class="biz-price-note">Negotiable &middot; Full documentation</div>
-      <button class="add-cart-btn" id="b5" onclick="toggleCart('b5','Database Design','&#128452;','SQL Server database design and stored procedures')">&#128722; Add to Order</button>
+      <div class="biz-ico">🗄️</div><div class="biz-title">Database Design</div>
+      <div class="biz-desc">SQL Server database design, table relationships, stored procedures. Perfect for small businesses.</div>
+      <div class="biz-price">💰 Price by project scope</div><div class="biz-price-note">Negotiable · Full documentation</div>
+      <button class="add-cart-btn" id="b5" onclick="toggleCart('b5','Database Design','🗄️','SQL Server database design and stored procedures')">🛒 Add to Order</button>
     </div>
     <div class="biz-card hw reveal reveal-d1">
-      <div class="biz-ico">&#128203;</div><div class="biz-title">Systems Analysis &amp; Design</div>
-      <div class="biz-desc">Requirements gathering, system diagrams (DFD, ERD, flowcharts), documentation. Students and small businesses.</div>
-      <div class="biz-price">&#128176; From R50</div><div class="biz-price-note">Negotiable &middot; Great for students</div>
-      <button class="add-cart-btn" id="b6" onclick="toggleCart('b6','Systems Analysis and Design','&#128203;','DFD, ERD, flowcharts and system documentation')">&#128722; Add to Order</button>
+      <div class="biz-ico">📋</div><div class="biz-title">Systems Analysis &amp; Design</div>
+      <div class="biz-desc">Requirements gathering, DFD, ERD, flowcharts, documentation. Students and small businesses.</div>
+      <div class="biz-price">💰 From R50</div><div class="biz-price-note">Negotiable · Great for students</div>
+      <button class="add-cart-btn" id="b6" onclick="toggleCart('b6','Systems Analysis and Design','📋','DFD, ERD, flowcharts and system documentation')">🛒 Add to Order</button>
     </div>
   </div>
-  <div class="laptop-box" style="margin-top:30px">
-    <p style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px">&#128421;&#65039; Need a Laptop?</p>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">I can help source and set up laptops. Text me on WhatsApp to discuss what you need and your budget.</p>
-    <button class="add-cart-btn" id="b7" style="max-width:320px;margin:0 auto" onclick="toggleCart('b7','Laptop Sourcing and Setup','&#128421;','Help sourcing and setting up a laptop')">&#128722; Add Laptop Help to Order</button>
+  <div class="laptop-box">
+    <p style="font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px">🖥️ Need a Laptop?</p>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">I can help source and set up laptops. Text me on WhatsApp.</p>
+    <button class="add-cart-btn" id="b7" style="max-width:320px;margin:0 auto" onclick="toggleCart('b7','Laptop Sourcing and Setup','🖥️','Help sourcing and setting up a laptop')">🛒 Add Laptop Help to Order</button>
   </div>
-  <div class="biz-cta" style="margin-top:40px">
+  <div class="biz-cta">
     <h3>READY TO GET STARTED?</h3>
-    <p>Add services above to your order, then send it directly to my WhatsApp. I reply fast and prices are always negotiable.</p>
-    <a href="https://wa.me/27601603996?text=Hi Kgomotso, I need your IT services" target="_blank" class="wa-btn">&#128172; WhatsApp &middot; 060 160 3996</a>
-    <div style="margin-top:16px;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace">&#128231; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="107b777f7d7f64637f647871727f2220202450777d71797c3e737f7d">[email&#160;protected]</a> &nbsp;&middot;&nbsp; &#128222; 060 160 3996</div>
+    <p>Add services above to your order, then send it directly to my WhatsApp. Prices are always negotiable.</p>
+    <a href="https://wa.me/27601603996?text=Hi Kgomotso, I need your IT services" target="_blank" class="wa-btn">💬 WhatsApp · 060 160 3996</a>
+    <div style="margin-top:16px;font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace">✉️ kgomotsothabo2004@gmail.com &nbsp;·&nbsp; 📞 060 160 3996</div>
   </div>
 </div>
-<footer><div class="wrap">built by <span>kgomotso mamogale</span> &middot; <span>060 160 3996</span> &middot; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="711a161e1c1e05021e051910131e4341414531161c10181d5f121e1c">[email&#160;protected]</a> &middot; 2025 &middot; <span class="tc-lnk" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> · <span>060 160 3996</span> · 2025 · <span class="tc-lnk" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
 </div>
 
-<!-- ======= PAGE 2: THE APP ======= -->
+<!-- ═══ PAGE 2: THE APP ═══ -->
 <div class="page" id="p2">
 <div class="wrap">
   <div style="padding:60px 0 20px;text-align:center">
     <div class="slabel" style="text-align:center">// featured project</div>
     <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,7vw,76px);letter-spacing:2px;line-height:.95;margin-bottom:18px">CELLPHONE SHOP<br><span style="background:linear-gradient(135deg,var(--al),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">MANAGEMENT SYSTEM</span></h2>
-    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 22px;line-height:1.7">Fully functional browser-based shop management. No install needed &mdash; runs in your browser with local data and print-ready receipts.</p>
-    <button class="btn-v bsolid" onclick="document.getElementById('liveapp').scrollIntoView({behavior:'smooth'})" style="margin:0 auto">&#128640; Try It Live</button>
+    <p style="color:var(--muted);font-size:15px;max-width:560px;margin:0 auto 22px;line-height:1.7">Fully functional browser-based shop management. No install needed — runs in your browser with local data and print-ready receipts.</p>
+    <button class="btn-v bsolid" onclick="document.getElementById('liveapp').scrollIntoView({behavior:'smooth'})" style="margin:0 auto">🚀 Try It Live</button>
   </div>
   <div class="fgrid">
-    <div class="fcard"><div class="fico">&#129534;</div><div class="ftitle">Receipt Generation</div><div class="fdesc">Auto codes, print-ready HTML with watermarks and signature lines.</div></div>
-    <div class="fcard"><div class="fico">&#128101;</div><div class="ftitle">Customer Database</div><div class="fdesc">Save details. Instant search by phone, receipt ID or code.</div></div>
-    <div class="fcard"><div class="fico">&#128230;</div><div class="ftitle">11 Categories</div><div class="fdesc">Repairs, accessories, software &mdash; with per-item discounts.</div></div>
-    <div class="fcard"><div class="fico">&#128190;</div><div class="ftitle">Export &amp; Backup</div><div class="fdesc">Full JSON export/import. Restore on any device instantly.</div></div>
-    <div class="fcard"><div class="fico">&#128424;&#65039;</div><div class="ftitle">Print Ready</div><div class="fdesc">Professional print page with logo and full legal terms.</div></div>
-    <div class="fcard"><div class="fico">&#128274;</div><div class="ftitle">Password Protected</div><div class="fdesc">Settings locked. You control company info and branding.</div></div>
+    <div class="fcard"><div class="fico">🧾</div><div class="ftitle">Receipt Generation</div><div class="fdesc">Auto codes, print-ready HTML with watermarks and signature lines.</div></div>
+    <div class="fcard"><div class="fico">👥</div><div class="ftitle">Customer Database</div><div class="fdesc">Save details. Instant search by phone, receipt ID or code.</div></div>
+    <div class="fcard"><div class="fico">📦</div><div class="ftitle">11 Categories</div><div class="fdesc">Repairs, accessories, software — with per-item discounts.</div></div>
+    <div class="fcard"><div class="fico">💾</div><div class="ftitle">Export &amp; Backup</div><div class="fdesc">Full JSON export/import. Restore on any device instantly.</div></div>
+    <div class="fcard"><div class="fico">🖨️</div><div class="ftitle">Print Ready</div><div class="fdesc">Professional print page with logo and full legal terms.</div></div>
+    <div class="fcard"><div class="fico">🔒</div><div class="ftitle">Password Protected</div><div class="fdesc">Settings locked. You control company info and branding.</div></div>
   </div>
   <section class="section sdiv">
     <div class="slabel">// watch it in action</div>
@@ -832,392 +816,223 @@ body.xh-hover #xhair-ring{width:52px;height:52px}
     </div>
   </section>
   <section class="section sdiv">
-    <div class="slabel">// built with</div><div class="stitle">TECH STACK</div>
+    <div class="slabel">// built with</div>
+    <div class="stitle">TECH STACK</div>
     <div class="tgrid">
-      <div class="titem"><span style="font-size:20px">&#127760;</span>HTML5 &amp; CSS3</div>
-      <div class="titem"><span style="font-size:20px">&#9889;</span>Vanilla JavaScript</div>
-      <div class="titem"><span style="font-size:20px">&#128190;</span>localStorage API</div>
-      <div class="titem"><span style="font-size:20px">&#128424;&#65039;</span>Browser Print API</div>
-      <div class="titem"><span style="font-size:20px">&#128196;</span>Blob / File API</div>
-      <div class="titem"><span style="font-size:20px">&#128640;</span>Netlify Hosting</div>
+      <div class="titem"><span style="font-size:20px">🌐</span>HTML5 &amp; CSS3</div>
+      <div class="titem"><span style="font-size:20px">⚡</span>Vanilla JavaScript</div>
+      <div class="titem"><span style="font-size:20px">💾</span>localStorage API</div>
+      <div class="titem"><span style="font-size:20px">🖨️</span>Browser Print API</div>
+      <div class="titem"><span style="font-size:20px">📄</span>Blob / File API</div>
+      <div class="titem"><span style="font-size:20px">🚀</span>Netlify Hosting</div>
     </div>
   </section>
   <section class="section sdiv" id="liveapp">
-    <div class="slabel">// try it yourself</div><div class="stitle">LIVE APPLICATION</div>
+    <div class="slabel">// try it yourself</div>
+    <div class="stitle">LIVE APPLICATION</div>
     <div style="background:var(--card);border:1px solid var(--border);border-radius:18px;padding:40px;text-align:center;max-width:500px;margin:0 auto">
-      <div style="font-size:64px;margin-bottom:16px">&#128241;</div>
+      <div style="font-size:64px;margin-bottom:16px">📱</div>
       <h3 style="font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;margin-bottom:10px">CELLPHONE SHOP APP</h3>
       <p style="color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:24px">Create receipts, manage customers, track revenue. Opens in a new tab.</p>
-      <a href="shop.html" target="_blank" class="btn-v bsolid" style="margin:0 auto;display:inline-flex">&#128640; Open App</a>
-      <div style="margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)">soul-net00.github.io/bmi_explore/shop.html</div>
+      <a href="shop.html" target="_blank" class="btn-v bsolid" style="margin:0 auto;display:inline-flex">🚀 Open App</a>
+      <div style="margin-top:16px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)">bmiexplore.netlify.app/shop.html</div>
     </div>
   </section>
 </div>
-<footer><div class="wrap">built by <span>kgomotso mamogale</span> &middot; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="553e323a383a21263a213d34373a67656561153238343c397b363a38">[email&#160;protected]</a> &middot; <span>soul-net00</span> &middot; <span class="tc-lnk" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
+<footer><div class="wrap">built by <span>kgomotso mamogale</span> · kgomotsothabo2004@gmail.com · <span>soul-net00</span> · <span class="tc-lnk" onclick="openTerms()">Terms &amp; Conditions</span></div></footer>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+
 <script>
-/* =====================================================
-   TERMINAL INTRO
-===================================================== */
-var termLines = [
-  {text: 'booting KM.DEV SOULNET EXPLORE v2.0...', cls: 'c-dim'},
-  {text: 'loading portfolio engine', cls: 'c-prompt'},
-  {text: '[OK] fonts loaded — Bebas Neue, Syne, JetBrains Mono', cls: 'c-ok'},
-  {text: '[OK] assets ready — 4 projects, 2 certs, 12 skills', cls: 'c-ok'},
-  {text: '[OK] services module initialized — cart system active', cls: 'c-ok'},
-  {text: 'connecting to github.com/soul-net00', cls: 'c-prompt'},
-  {text: '[OK] repository found — bmi_explore, shop, portfolio', cls: 'c-ok'},
-  {text: 'authenticating user — Kgomotso Mamogale', cls: 'c-prompt'},
-  {text: '[ACCESS GRANTED] ITC Student · Cisco Certified · Gauteng ZA', cls: 'c-hi'},
-  {text: 'launching portfolio...', cls: 'c-warn'},
-];
+/* ── ALL FUNCTIONS DEFINED FIRST so onclick handlers always work ── */
 
-var termIdx = 0;
-var termBody = document.getElementById('termBody');
-var termProg = document.getElementById('termProg');
-
-function typeNextLine() {
-  if (termIdx >= termLines.length) {
-    termProg.style.width = '100%';
-    setTimeout(function() { skipIntro(); }, 600);
-    return;
-  }
-  var line = termLines[termIdx];
-  var span = document.createElement('span');
-  span.className = 'tl ' + line.cls;
-  termBody.appendChild(span);
-  termBody.appendChild(document.createElement('br'));
-  termBody.scrollTop = termBody.scrollHeight;
-
-  var txt = line.text;
-  var charIdx = 0;
-  var speed = line.cls === 'c-ok' ? 7 : line.cls === 'c-dim' ? 5 : 10;
-  var timer = setInterval(function() {
-    span.textContent = txt.slice(0, charIdx + 1);
-    charIdx++;
-    if (charIdx >= txt.length) {
-      clearInterval(timer);
-      termIdx++;
-      termProg.style.width = Math.round((termIdx / termLines.length) * 100) + '%';
-      var delay = line.cls === 'c-hi' ? 200 : line.cls === 'c-warn' ? 150 : 60;
-      setTimeout(typeNextLine, delay);
-    }
-  }, speed);
+/* WELCOME */
+function showWelcome(){
+  var ov=document.getElementById('welcome-overlay');
+  if(!ov)return;
+  ov.style.display='flex';
+  document.body.style.overflow='hidden';
+  requestAnimationFrame(function(){requestAnimationFrame(function(){ov.classList.add('visible');});});
+}
+function closeWelcome(){
+  var ov=document.getElementById('welcome-overlay');
+  if(!ov)return;
+  ov.classList.remove('visible');
+  setTimeout(function(){ov.style.display='none';document.body.style.overflow='';},500);
 }
 
-function skipIntro() {
-  var intro = document.getElementById('terminal-intro');
-  intro.classList.add('done');
-  document.body.style.overflow = '';
-  setTimeout(function() { intro.style.display = 'none'; startTypingEffect(); }, 800);
+/* TERMINAL */
+function skipIntro(){
+  var el=document.getElementById('terminal-intro');
+  if(!el)return;
+  el.classList.add('done');
+  document.body.style.overflow='';
+  setTimeout(function(){
+    el.style.display='none';
+    startTyping();
+    showWelcome();
+  },500);
 }
 
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') skipIntro();
-});
-
-window.addEventListener('load', function() {
-  document.body.style.overflow = 'hidden';
-  setTimeout(typeNextLine, 200);
-});
-
-/* =====================================================
-   TYPING EFFECT (hero subtitle)
-===================================================== */
-function startTypingEffect() {
-  var phrases = [
-    'ITC Student · Ekurhuleni East TVET College',
-    'Cisco Certified · Web Developer',
-    'IT Support · Gauteng, South Africa',
-    'Available for freelance & internships'
-  ];
-  var el = document.getElementById('typingText');
-  var cursor = document.getElementById('typingCursor');
-  if (!el) return;
-  var pi = 0, ci = 0, deleting = false;
-
-  function tick() {
-    var phrase = phrases[pi];
-    if (!deleting) {
-      el.textContent = phrase.slice(0, ci + 1);
-      ci++;
-      if (ci >= phrase.length) { deleting = true; setTimeout(tick, 1600); return; }
-    } else {
-      el.textContent = phrase.slice(0, ci - 1);
-      ci--;
-      if (ci <= 0) { deleting = false; pi = (pi + 1) % phrases.length; setTimeout(tick, 280); return; }
-    }
-    setTimeout(tick, deleting ? 22 : 38);
-  }
-  tick();
+/* TYPING EFFECT */
+function startTyping(){
+  var phrases=['ITC Student · Ekurhuleni East TVET College','Cisco Certified · Web Developer','IT Support · Gauteng, South Africa','Available for freelance & internships'];
+  var el=document.getElementById('typingText');if(!el)return;
+  var pi=0,ci=0,del=false;
+  function tick(){
+    var p=phrases[pi];
+    if(!del){el.textContent=p.slice(0,ci+1);ci++;if(ci>=p.length){del=true;setTimeout(tick,1600);return;}}
+    else{el.textContent=p.slice(0,ci-1);ci--;if(ci<=0){del=false;pi=(pi+1)%phrases.length;setTimeout(tick,280);return;}}
+    setTimeout(tick,del?22:38);
+  }tick();
 }
 
-/* =====================================================
-   LIGHT / DARK MODE
-===================================================== */
-var isLight = localStorage.getItem('km-theme') === 'light';
-
-function applyTheme() {
-  var btn = document.getElementById('themeBtn');
-  if (isLight) {
-    document.body.classList.add('light');
-    if (btn) btn.innerHTML = '&#9728;&#65039;';
-  } else {
-    document.body.classList.remove('light');
-    if (btn) btn.innerHTML = '&#9790;&#65039;';
-  }
-}
-
-function toggleTheme() {
-  isLight = !isLight;
-  localStorage.setItem('km-theme', isLight ? 'light' : 'dark');
-  applyTheme();
-}
-
+/* THEME */
+var isLight=localStorage.getItem('km-theme')==='light';
+function applyTheme(){var b=document.getElementById('themeBtn');if(isLight){document.body.classList.add('light');if(b)b.textContent='☀️';}else{document.body.classList.remove('light');if(b)b.textContent='🌙';}}
+function toggleTheme(){isLight=!isLight;localStorage.setItem('km-theme',isLight?'light':'dark');applyTheme();}
 applyTheme();
 
-/* =====================================================
-   CROSSHAIR CURSOR
-===================================================== */
-var xDot = document.getElementById('xhair-dot');
-var xRing = document.getElementById('xhair-ring');
-var mx = -99, my = -99, rx = -99, ry = -99;
-var rafRunning = false;
 
-document.addEventListener('mousemove', function(e) {
-  mx = e.clientX; my = e.clientY;
-  xDot.style.left = mx + 'px';
-  xDot.style.top = my + 'px';
-  if (!rafRunning) { rafRunning = true; moveRing(); }
-});
+/* SCROLL REVEAL */
+var ro=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+function initReveal(){document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});}
 
-function moveRing() {
-  rx += (mx - rx) * 0.18;
-  ry += (my - ry) * 0.18;
-  xRing.style.left = rx + 'px';
-  xRing.style.top  = ry + 'px';
-  if (Math.abs(mx - rx) > 0.3 || Math.abs(my - ry) > 0.3) {
-    requestAnimationFrame(moveRing);
-  } else {
-    xRing.style.left = mx + 'px';
-    xRing.style.top  = my + 'px';
-    rafRunning = false;
-  }
-}
-
-document.addEventListener('click', function(e) {
-  var b = document.createElement('div');
-  b.className = 'xhair-burst';
-  b.style.left = e.clientX + 'px';
-  b.style.top  = e.clientY + 'px';
-  document.body.appendChild(b);
-  setTimeout(function() { b.remove(); }, 400);
-});
-
-var hoverEls = 'a,button,.ntab,.pcard,.cert-card,.biz-card,.sid-link,.plnk,.clnk,.add-cart-btn,.wa-btn,.send-wa-btn,.theme-btn,.tc-lnk';
-document.addEventListener('mouseover', function(e) {
-  if (e.target.closest(hoverEls)) document.body.classList.add('xh-hover');
-});
-document.addEventListener('mouseout', function(e) {
-  if (e.target.closest(hoverEls)) document.body.classList.remove('xh-hover');
-});
-
-/* =====================================================
-   SCROLL REVEAL
-===================================================== */
-var revealObserver = new IntersectionObserver(function(entries) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-function initReveal() {
-  document.querySelectorAll('.reveal').forEach(function(el) {
-    revealObserver.observe(el);
-  });
-}
-
-/* =====================================================
-   PAGE TRANSITION FLASH
-===================================================== */
-var flashEl = document.getElementById('page-flash');
-
-function gotoPage(id) {
-  flashEl.classList.add('flash');
-  setTimeout(function() {
-    document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
-    document.querySelectorAll('.ntab').forEach(function(t) { t.classList.remove('active'); });
+/* PAGE TRANSITION */
+var fl=document.getElementById('page-flash');
+function gotoPage(id){
+  fl.classList.add('flash');
+  setTimeout(function(){
+    document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active');});
+    document.querySelectorAll('.ntab').forEach(function(t){t.classList.remove('active');});
     document.getElementById(id).classList.add('active');
-    document.getElementById('tab-' + id).classList.add('active');
-    window.scrollTo(0, 0);
-    initReveal();
-    flashEl.classList.remove('flash');
-  }, 120);
+    var t=document.getElementById('tab-'+id);if(t)t.classList.add('active');
+    window.scrollTo(0,0);initReveal();fl.classList.remove('flash');
+  },120);
 }
 
-/* =====================================================
-   CART
-===================================================== */
-var cart = [];
-
-function toggleCart(btnId, name, ico, desc) {
-  var idx = -1;
-  for (var i = 0; i < cart.length; i++) { if (cart[i].id === btnId) { idx = i; break; } }
-  var btn = document.getElementById(btnId);
-  if (idx === -1) {
-    cart.push({ id: btnId, name: name, ico: ico, desc: desc });
-    btn.classList.add('added');
-    btn.innerHTML = '&#9989; Added \u2014 Click to Remove';
-  } else {
-    cart.splice(idx, 1);
-    btn.classList.remove('added');
-    btn.innerHTML = '&#128722; Add to Order';
-  }
-  renderCart();
-  var fab = document.getElementById('cartFab');
-  fab.classList.remove('bounce');
-  void fab.offsetWidth;
-  fab.classList.add('bounce');
+/* CART */
+var cart=[];
+function toggleCart(id,name,ico,desc){
+  var i=cart.findIndex(function(x){return x.id===id;}),btn=document.getElementById(id);
+  if(i===-1){cart.push({id:id,name:name,ico:ico,desc:desc});btn.classList.add('added');btn.innerHTML='✅ Added — Click to Remove';}
+  else{cart.splice(i,1);btn.classList.remove('added');btn.innerHTML='🛒 Add to Order';}
+  renderCart();var fab=document.getElementById('cartFab');fab.classList.remove('bounce');void fab.offsetWidth;fab.classList.add('bounce');
 }
-
-function removeItem(btnId) {
-  cart = cart.filter(function(i) { return i.id !== btnId; });
-  var btn = document.getElementById(btnId);
-  if (btn) { btn.classList.remove('added'); btn.innerHTML = '&#128722; Add to Order'; }
+function removeItem(id){
+  cart=cart.filter(function(x){return x.id!==id;});
+  var btn=document.getElementById(id);if(btn){btn.classList.remove('added');btn.innerHTML='🛒 Add to Order';}
   renderCart();
 }
-
-function clearCart() {
-  cart.forEach(function(item) {
-    var btn = document.getElementById(item.id);
-    if (btn) { btn.classList.remove('added'); btn.innerHTML = '&#128722; Add to Order'; }
-  });
-  cart = [];
-  renderCart();
-}
-
-function renderCart() {
-  var fab = document.getElementById('cartFab');
-  var badge = document.getElementById('cartBadge');
-  var empty = document.getElementById('cartEmpty');
-  var list = document.getElementById('cartList');
-  var noteSec = document.getElementById('cartNoteSec');
-  var footer = document.getElementById('cartDfooter');
-  var sum = document.getElementById('cartSum');
-  badge.textContent = cart.length;
-  if (cart.length === 0) {
-    fab.classList.add('hidden');
-    empty.style.display = 'flex';
-    list.innerHTML = '';
-    noteSec.style.display = 'none';
-    footer.style.display = 'none';
-  } else {
-    fab.classList.remove('hidden');
-    empty.style.display = 'none';
-    noteSec.style.display = 'block';
-    footer.style.display = 'block';
-    list.innerHTML = cart.map(function(item) {
-      return '<div class="cart-item-row">' +
-        '<div class="ci-ico">' + item.ico + '</div>' +
-        '<div class="ci-info"><div class="ci-name">' + item.name + '</div><div class="ci-desc">' + item.desc + '</div></div>' +
-        '<button class="ci-rm" onclick="removeItem(\'' + item.id + '\')">&#x2715;</button>' +
-        '</div>';
-    }).join('');
-    sum.innerHTML = '<div class="cart-sum-title">// YOUR ORDER (' + cart.length + ' service' + (cart.length > 1 ? 's' : '') + ')</div>' +
-      cart.map(function(i) { return '<div class="cart-sum-line">' + i.ico + ' ' + i.name + '</div>'; }).join('');
+function clearCart(){cart.forEach(function(x){var b=document.getElementById(x.id);if(b){b.classList.remove('added');b.innerHTML='🛒 Add to Order';}});cart=[];renderCart();}
+function renderCart(){
+  var fab=document.getElementById('cartFab'),badge=document.getElementById('cartBadge'),empty=document.getElementById('cartEmpty');
+  var list=document.getElementById('cartList'),note=document.getElementById('cartNoteSec'),foot=document.getElementById('cartDfooter'),sum=document.getElementById('cartSum');
+  badge.textContent=cart.length;
+  if(!cart.length){fab.classList.add('hidden');empty.style.display='flex';list.innerHTML='';note.style.display='none';foot.style.display='none';}
+  else{
+    fab.classList.remove('hidden');empty.style.display='none';note.style.display='block';foot.style.display='block';
+    list.innerHTML=cart.map(function(x){return '<div class="cart-item-row"><div class="ci-ico">'+x.ico+'</div><div class="ci-info"><div class="ci-name">'+x.name+'</div><div class="ci-desc">'+x.desc+'</div></div><button class="ci-rm" onclick="removeItem(\''+x.id+'\')">✕</button></div>';}).join('');
+    sum.innerHTML='<div class="cart-sum-title">// YOUR ORDER ('+cart.length+' service'+(cart.length>1?'s':'')+')</div>'+cart.map(function(x){return '<div class="cart-sum-line">'+x.ico+' '+x.name+'</div>';}).join('');
   }
 }
-
-function openCart() {
-  document.getElementById('cartDrawer').classList.add('open');
-  document.getElementById('cartOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeCart() {
-  document.getElementById('cartDrawer').classList.remove('open');
-  document.getElementById('cartOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function buildWa() {
-  var note = document.getElementById('cartNote').value.trim();
-  var lines = cart.map(function(i, n) { return (n + 1) + '. ' + i.ico + ' ' + i.name; }).join('\n');
-  var msg = 'Hi Kgomotso! \u{1F44B}\n\nInterested in:\n\n' + lines;
-  if (note) msg += '\n\nNotes:\n' + note;
-  msg += '\n\nPlease send pricing. Thank you!';
-  document.getElementById('sendWaBtn').href = 'https://wa.me/27601603996?text=' + encodeURIComponent(msg);
+function openCart(){document.getElementById('cartDrawer').classList.add('open');document.getElementById('cartOverlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeCart(){document.getElementById('cartDrawer').classList.remove('open');document.getElementById('cartOverlay').classList.remove('open');document.body.style.overflow='';}
+function buildWa(){
+  var note=document.getElementById('cartNote').value.trim();
+  var msg='Hi Kgomotso! 👋\n\nInterested in:\n\n'+cart.map(function(x,n){return (n+1)+'. '+x.ico+' '+x.name;}).join('\n');
+  if(note)msg+='\n\nNotes:\n'+note;
+  msg+='\n\nPlease send pricing. Thank you!';
+  document.getElementById('sendWaBtn').href='https://wa.me/27601603996?text='+encodeURIComponent(msg);
 }
 
-/* =====================================================
-   SIDEBAR
-===================================================== */
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-  document.getElementById('sidOverlay').classList.toggle('open');
-  document.getElementById('hamBtn').classList.toggle('open');
-}
-function closeSidebar() {
-  document.getElementById('sidebar').classList.remove('open');
-  document.getElementById('sidOverlay').classList.remove('open');
-  document.getElementById('hamBtn').classList.remove('open');
-}
+/* SIDEBAR */
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');document.getElementById('sidOverlay').classList.toggle('open');document.getElementById('hamBtn').classList.toggle('open');}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open');document.getElementById('sidOverlay').classList.remove('open');document.getElementById('hamBtn').classList.remove('open');}
 
-/* =====================================================
-   NAV
-===================================================== */
-function navTo(id) {
-  closeSidebar();
-  gotoPage('p1');
-  setTimeout(function() {
-    var el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }, 200);
-}
+/* NAV */
+function navTo(id){closeSidebar();gotoPage('p1');setTimeout(function(){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});},200);}
 
-/* =====================================================
-   TERMS
-===================================================== */
-function openTerms() {
-  document.getElementById('tmOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeTerms() {
-  document.getElementById('tmOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.getElementById('tmOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeTerms();
-});
+/* TERMS */
+function openTerms(){document.getElementById('tmOverlay').classList.add('open');document.body.style.overflow='hidden';}
+function closeTerms(){document.getElementById('tmOverlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('tmOverlay').addEventListener('click',function(e){if(e.target===this)closeTerms();});
 
-/* =====================================================
-   TICKER
-===================================================== */
-(function() {
-  var items = ['HTML & CSS','JavaScript','VB.NET','SQL Server','Cisco Networking','VPS Setup','IT Support','Excel','Word & PowerPoint','WiFi & Networking','Windows Admin','Systems Analysis'];
-  var colors = ['var(--al)','var(--pink)','var(--green)','var(--gold)','var(--cyan)'];
-  var html = '';
-  for (var r = 0; r < 2; r++) {
-    items.forEach(function(txt, i) {
-      html += '<span class="tk-item"><span class="tdot" style="background:' + colors[i % colors.length] + '"></span>' + txt + '</span>';
+/* TICKER */
+(function(){
+  var items=['HTML & CSS','JavaScript','VB.NET','SQL Server','Cisco Networking','VPS Setup','IT Support','Excel','Word & PowerPoint','WiFi & Networking','Windows Admin','Systems Analysis'];
+  var colors=['var(--al)','var(--pink)','var(--green)','var(--gold)','var(--cyan)'];
+  var h='';
+  for(var r=0;r<2;r++){
+    items.forEach(function(t,i){
+      h+='<span class="tk-item"><span class="tdot" style="background:'+colors[i%colors.length]+'"></span>'+t+'</span>';
     });
   }
-  document.getElementById('tickerTrack').innerHTML = html;
+  var el=document.getElementById('tickerTrack');
+  if(el)el.innerHTML=h;
 })();
 
-/* =====================================================
-   QR CODE + INIT
-===================================================== */
-window.addEventListener('DOMContentLoaded', function() {
-  new QRCode(document.getElementById('qrcode'), {
-    text: window.location.href,
-    width: 190, height: 190,
-    colorDark: '#7c3aed', colorLight: '#ffffff',
-    correctLevel: QRCode.CorrectLevel.H
-  });
+/* TERMINAL TYPING ENGINE */
+var tLines=[
+  {t:'booting KM.DEV SOULNET EXPLORE v2.0...',c:'c-dim'},
+  {t:'loading portfolio engine',c:'c-prompt'},
+  {t:'[OK] fonts ready — Bebas Neue, Syne, JetBrains Mono',c:'c-ok'},
+  {t:'[OK] 4 projects · 2 certs · 12 skills loaded',c:'c-ok'},
+  {t:'[OK] services module · cart system active',c:'c-ok'},
+  {t:'connecting to github.com/soul-net00',c:'c-prompt'},
+  {t:'[OK] repos found — bmi_explore, shop, portfolio',c:'c-ok'},
+  {t:'authenticating — Kgomotso Mamogale',c:'c-prompt'},
+  {t:'[ACCESS GRANTED] ITC Student · Cisco Certified · ZA',c:'c-hi'},
+  {t:'launching portfolio...',c:'c-warn'},
+];
+var tIdx=0;
+function typeNext(){
+  var tBody=document.getElementById('termBody');
+  var tProg=document.getElementById('termProg');
+  if(!tBody||!tProg){skipIntro();return;}
+  if(tIdx>=tLines.length){tProg.style.width='100%';setTimeout(skipIntro,600);return;}
+  var l=tLines[tIdx];
+  var sp=document.createElement('span');
+  sp.className='tl '+l.c;
+  tBody.appendChild(sp);
+  tBody.appendChild(document.createElement('br'));
+  tBody.scrollTop=tBody.scrollHeight;
+  var ci=0,spd=l.c==='c-ok'?6:l.c==='c-dim'?4:9;
+  var ti=setInterval(function(){
+    sp.textContent=l.t.slice(0,ci+1);
+    ci++;
+    if(ci>=l.t.length){
+      clearInterval(ti);
+      tIdx++;
+      if(tProg)tProg.style.width=Math.round(tIdx/tLines.length*100)+'%';
+      setTimeout(typeNext, l.c==='c-hi'?200:l.c==='c-warn'?150:60);
+    }
+  },spd);
+}
+
+/* QR CODE */
+window.addEventListener('DOMContentLoaded',function(){
+  try{
+    new QRCode(document.getElementById('qrcode'),{
+      text:window.location.href,
+      width:190,height:190,
+      colorDark:'#7c3aed',colorLight:'#ffffff',
+      correctLevel:QRCode.CorrectLevel.H
+    });
+  }catch(e){}
   initReveal();
+});
+
+/* INIT */
+document.addEventListener('keydown',function(e){if(e.key==='Escape')skipIntro();});
+window.addEventListener('load',function(){
+  document.body.style.overflow='hidden';
+  setTimeout(typeNext,300);
+  /* Safety net — auto-skip after 15s if still stuck */
+  setTimeout(function(){
+    var intro=document.getElementById('terminal-intro');
+    if(intro&&!intro.classList.contains('done'))skipIntro();
+  },15000);
 });
 </script>
 </body>
